@@ -1,4 +1,5 @@
 var defPadding = 10;
+var defCentralMarginTop = 50;
 
 function initiate() {
     console.log('Initiation of UI');
@@ -12,13 +13,13 @@ function initiate() {
 
     console.log('Setting up all .user-space-support');
     $('.user-space-support').each(function () {
-        $(this).css('height', $(this).parent().height())
+        $(this).css('height', $(this).parent().height());
     });
 
     console.log('Setting up .footer');
-
     $('.footer').each(function () {
-        $(this).css('height', 1.5 * $('.header').height());
-        $(this).css('margin-top', $(document).height() - 3.3 * $(this).height());
+        if ($('.central').height() + $('.header').height() + $(this).height() + defCentralMarginTop < $(window).height()) {
+            $('.footer').css('margin-top', $(window).height() - ($('.central').height() + $('.header').height() + $(this).height() + defCentralMarginTop));
+        }
     });
 }
