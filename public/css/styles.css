@@ -1,0 +1,24 @@
+html,
+body {
+    background-color: rgb(238, 238, 238);
+    height: 100%;
+}
+
+small {
+    line-height: 15px;
+}
+.header {
+    background-color: rgb(218, 218, 218);
+}
+.user-space-support {
+    background-color: rgb(222, 70, 73);
+    color: white;
+}
+.central {
+    margin-top: 50px;
+}
+
+.footer {
+    background-color: rgb(53, 57, 60);
+    color: white;
+}
