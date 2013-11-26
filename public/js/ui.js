@@ -1,8 +1,25 @@
+function setLocalTexts() {
+    $('.multilang').each(function () {
+        $(this).html(getTextForId($(this).attr('id')));
+    });
+}
+
 var defPadding = 10;
 var defCentralMarginTop = 50;
+var defHeaderHeight = 150;
+var defHeaderMobileHeight = 100;
+var newLang;
 
 function initiate() {
     console.log('Initiation of UI');
+    if (current_lang === 'fr') {
+        newLang = 'en';
+    } else if (current_lang === 'en') {
+        newLang = 'fr';
+    }
+    
+    console.log('Setting up .link');
+    $('.link').css('cursor', 'pointer');
 
     console.log('Setting up all .bottom-aligned');
     if ($(window).width() > 970) {
@@ -14,6 +31,11 @@ function initiate() {
     console.log('Setting up all .user-space-support');
     $('.user-space-support').each(function () {
         $(this).css('height', $(this).parent().height());
+    });
+
+    console.log('Setting up .mobile_login');
+    $('.mobile_login').each(function () {
+        $(this).css('height', defHeaderMobileHeight);
     });
 
     console.log('Setting up .footer');

@@ -14,76 +14,68 @@
 <body>
     <div class="container-fluid">
         <div class="header row">
-            <div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-12">
-                <img src="img/WKlogo.png" id="logo" />
+            <div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-8">
+                <a href="/?lang=<%=lang%>">
+                    <img src="img/WKlogo.png" id="logo" />
+                </a>
+            </div>
+            <div class="mobile_login user-space-support visible-xs col-xs-4">
+                <h3 id="text_Login" class="multilang link"></h3>
             </div>
 
-            <div class="bottom-aligned col-lg-7 col-md-9 col-sm-9 col-xs-12">
+            <div class="bottom-aligned header_menu col-lg-7 col-md-9 col-sm-9 col-xs-11 col-xs-offset-0">
                 <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-12">
-                    <h3 id="text_Label">Label</h3>
+                    <h3 id="text_Label" class="multilang link"></h3>
                     <small>
                         <ul class="list-unstyled">
-                            <li id="text_description">description</li>
-                            <li id="text_reconnaissance">reconnaissance</li>
+                            <li id="text_description" class="multilang link"></li>
+                            <li id="text_reconnaissance" class="multilang link"></li>
                         </ul>
                     </small>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <h3 id="text_Examen">Examen</h3>
+                <div class="header_menu_item col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <h3 id="text_Examen" class="multilang link"></h3>
                     <small>
                         <ul class="list-unstyled">
-                            <li id="text_inscription_etc">inscription,
-                                <br/>date, lieu & prix</li>
+                            <li id="text_inscription_etc" class="multilang link"></li>
                         </ul>
                     </small>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <h3 id="text_Indexation">Indexation</h3>
+                <div class="header_menu_item col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <h3 id="text_Indexation" class="multilang link"></h3>
                     <small>
                         <ul class="list-unstyled">
-                            <li id="text_comment">comment?</li>
-                            <li id="text_pour_qui">pour qui?</li>
+                            <li id="text_comment" class="multilang link"></li>
+                            <li id="text_pour_qui" class="multilang link"></li>
                         </ul>
                     </small>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <h3 id="text_Witken">Witken</h3>
+                <div class="header_menu_item col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <h3 id="text_Witken" class="multilang link"></h3>
                     <small>
                         <ul class="list-unstyled">
-                            <li id="text_nous">nous</li>
-                            <li id="text_nos partenaires">nos partenaires</li>
+                            <li id="text_nous" class="multilang link"></li>
+                            <li id="text_nos_partenaires" class="multilang link"></li>
                         </ul>
                     </small>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <h3 id="text_Language_switch">English</h3>
+                <div class="header_menu_item col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <h3 id="text_Language_switch" class="multilang link"></h3>
                     <small>
                         <ul class="list-unstyled">
-                            <li id="text_Language_current">francais</li>
+                            <li id="text_Language_current" class="multilang link"></li>
                         </ul>
                     </small>
                 </div>
             </div>
-            <div class="user-space-support col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                <h3>Login</h3>
+            <div class="user-space-support col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                <h3 id="text_Login" class="multilang link">Login</h3>
             </div>
         </div>
 
         <div class="central row">
-            <div class="col-lg-8 col-lg-offset-1 col-md-10 col-sm-10 col-xs-12" id="content">
-                <div class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" id="">
-                        <div class="carousel-slide item active">
-                            <h1>First Slide</h1>
-                        </div>
-                        <div class="carousel-slide item">
-                            <h1>Second Slide</h1>
-                        </div>
-                        <div class="carousel-slide item">
-                            <h1>Third Slide</h1>
-                        </div>
-                    </div>
-                </div>
+            <div id="content" class="col-lg-8 col-lg-offset-1 col-md-10 col-sm-10 col-xs-12">
+                <h1>Index Content</h1>
             </div>
 
             <div class="user-space-support col-lg-2 col-md-2 col-sm-2 hidden-xs">
@@ -104,10 +96,18 @@
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/ui.js"></script>
-
+<script src="js/lang/<%= lang %>.js"></script>
+<script src="js/comm.js"></script>
+    
 <script>
+    var current_lang = "<%= lang %>"
     $(document).ready(function() {
+        setLocalTexts();
+        $(window).resize(function() {
+            initiate();
+        });
         initiate();
+        setupOnClickEvents();
     });
 </script>
 

@@ -21,6 +21,9 @@ app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/views');
 
 app.get('/', routes.index);
+app.get('/label', routes.label.index);
+app.get('/label/description', routes.label.description);
+app.get('/label/reconnaissance', routes.label.reconnaissance);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function () {
