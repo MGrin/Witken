@@ -1,0 +1,58 @@
+§; if(render=='full') { ;§
+
+<!doctype html>
+<html>
+
+§;- include unique/head.html ;§
+
+<body>
+    <div class="container-fluid">
+
+        §;- include unique/header.html ;§
+
+        <div class="central row">
+            <div id="content" class="col-lg-8 col-lg-offset-1 col-md-10 col-sm-10 col-xs-12">
+§; } ;§
+                
+§; if(content=='index'){ ;§
+    §;- include content/index_content.html ;§
+§; }else if(content=='label_index'){ ;§
+    §;- include content/label_index_content.html ;§
+§; }else if(content=='label_description'){ ;§
+    §;- include content/label_description_content.html ;§
+§; }else if(content=='label_reconnaissance'){ ;§
+    §;- include content/label_reconnaissance_content.html ;§
+§; }else if(content=='examen_index'){ ;§
+    §;- include content/examen_index_content.html ;§
+§; }else if(content=='examen_inscription'){ ;§
+    §;- include content/examen_inscription_content.html ;§
+§; }else if(content=='indexation_index'){ ;§
+    §;- include content/indexation_index_content.html ;§
+§; }else if(content=='indexation_comment'){ ;§
+    §;- include content/indexation_comment_content.html ;§
+§; }else if(content=='indexation_pour_qui'){ ;§
+    §;- include content/indexation_pour_qui_content.html ;§
+§; }else if(content=='witken_index'){ ;§
+    §;- include content/witken_index_content.html ;§
+§; }else if(content=='witken_nous'){ ;§
+    §;- include content/witken_nous_content.html ;§
+§; }else if(content=='witken_partenaires'){ ;§
+    §;- include content/witken_partenaires_content.html ;§
+§; } ;§
+                
+§; if(render=='full') { ;§
+            </div>
+
+            <div class="user-space-support col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                §;- include unique/user_side.html ;§
+            </div>
+        </div>
+        §;- include unique/footer.html ;§
+    </div>
+</body>
+
+ §;- include unique/scripts.html ;§
+
+</html>
+
+§; } ;§

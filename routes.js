@@ -1,34 +1,74 @@
-exports.index = function(req, res){
+function generateParams(req, content){
     var par = {};
+    
+    par.content=content;
+    
     if(!req.param('lang')){
         par.lang='fr';
-    }else{
+    }else if(req.param('lang')==='fr' || req.param('lang')==='en'){
         par.lang=req.param('lang');
-    }
-    res.render('index.html', par);
-}
-
-exports.label = {};
-
-exports.label.index = function(req, res){
-    var par = {};
-    if(!req.param('lang')){
+    }else{
         par.lang='fr';
-    }else{
-        par.lang=req.param('lang');
     }
     
     if(!req.param('ajax')){
-        res.render('label_index_full.html', par);
+        par.render='full';
     }else{
-        res.render('label_index.html', par);
-    }    
+        par.render='part';
+    }
+    
+    return par;
+}
+
+exports.index = function(req, res){    
+    res.render('template.html', generateParams(req, 'index'));
+}
+
+exports.label = {};
+exports.examen = {};
+exports.indexation = {};
+exports.witken = {};
+
+exports.label.index = function(req, res){
+    res.render('template.html', generateParams(req, 'label_index'));    
 }
 
 exports.label.description = function(req, res){
-    
+    res.render('template.html', generateParams(req, 'label_description'));
 }
 
 exports.label.reconnaissance = function(req, res){
-    
+    res.render('template.html', generateParams(req, 'label_reconnaissance'));
+}
+
+exports.examen.index = function(req, res){
+    res.render('template.html', generateParams(req, 'examen_index'));
+}
+
+exports.examen.inscription = function(req, res){
+    res.render('template.html', generateParams(req, 'examen_inscription'));
+}
+
+exports.indexation.index = function(req, res){
+    res.render('template.html', generateParams(req, 'indexation_index'));
+}
+
+exports.indexation.comment = function(req, res){
+    res.render('template.html', generateParams(req, 'indexation_comment'));
+}
+
+exports.indexation.pour_qui = function(req, res){
+    res.render('template.html', generateParams(req, 'indexation_pour_qui'));
+}
+
+exports.witken.index = function(req, res){
+    res.render('template.html', generateParams(req, 'witken_index'));
+}
+
+exports.witken.nous = function(req, res){
+    res.render('template.html', generateParams(req, 'witken_nous'));
+}
+
+exports.witken.partenaires = function(req, res){
+    res.render('template.html', generateParams(req, 'witken_partenaires'));
 }

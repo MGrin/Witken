@@ -8,16 +8,10 @@ var defPadding = 10;
 var defCentralMarginTop = 50;
 var defHeaderHeight = 150;
 var defHeaderMobileHeight = 100;
-var newLang;
 
 function initiate() {
     console.log('Initiation of UI');
-    if (current_lang === 'fr') {
-        newLang = 'en';
-    } else if (current_lang === 'en') {
-        newLang = 'fr';
-    }
-    
+
     console.log('Setting up .link');
     $('.link').css('cursor', 'pointer');
 
@@ -38,10 +32,18 @@ function initiate() {
         $(this).css('height', defHeaderMobileHeight);
     });
 
+    setupFooter();
+}
+
+function setupFooter() {
     console.log('Setting up .footer');
+    var centralMarginTop = defCentralMarginTop;
+    if ($(window).width() < 1170) {
+        centralMarginTop = 0;
+    }
     $('.footer').each(function () {
-        if ($('.central').height() + $('.header').height() + $(this).height() + defCentralMarginTop < $(window).height()) {
-            $('.footer').css('margin-top', $(window).height() - ($('.central').height() + $('.header').height() + $(this).height() + defCentralMarginTop));
+        if ($('.central').height() + $('.header').height() + $(this).height() + centralMarginTop < $(window).height()) {
+            $('.footer').css('margin-top', $(window).height() - ($('.central').height() + $('.header').height() + $(this).height() + centralMarginTop));
         }
     });
 }
