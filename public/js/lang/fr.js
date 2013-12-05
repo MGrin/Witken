@@ -20,14 +20,19 @@ function getTextForId(id) {
         return "Witken";
     case 'text_nous':
         return "nous";
-    case 'text_nos_partenaires':
-        return "nos partenaires";
+    case 'text_Nos_partenaires':
+        return "Nos partenaires";
     case 'text_Language_switch':
         return "English";
     case 'text_Language_current':
         return "francais";
     case 'text_Login':
         return "Login";
-            
+    case 'text_SignIn':
+        return "SignIn";
+    case 'text_Submit':
+        return 'Submit';
+    case 'text_logout':
+        return 'logout';
     }
 }

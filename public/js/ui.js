@@ -1,6 +1,7 @@
 function setLocalTexts() {
+    console.log('Updating text');
     $('.multilang').each(function () {
-        $(this).html(getTextForId($(this).attr('id')));
+        $(this).html(getTextForId($(this).attr('text')));
     });
 }
 

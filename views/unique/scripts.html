@@ -1,18 +1,10 @@
+§;if(connected=='YES'){;§
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+§;}else if(connected=='NO'){;§
+<script src="/js/jquery-2.0.3.min.js"></script>
+§;};§
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/ui.js"></script>
 <script src="/js/lang/§;= lang ;§.js"></script>
 <script src="/js/comm.js"></script>
-
-<script>
-    var current_lang = "§;= lang ;§"
-    $(document).ready(function() {
-        setLocalTexts();
-        $(window).resize(function() {
-            initiate();
-        });
-        initiate();
-        setupOnClickEvents();
-    });
-</script>

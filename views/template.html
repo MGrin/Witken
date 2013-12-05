@@ -3,8 +3,9 @@
 <!doctype html>
 <html>
 
+<head>
 §;- include unique/head.html ;§
-
+</head>
 <body>
     <div class="container-fluid">
 
@@ -38,6 +39,8 @@
     §;- include content/witken_nous_content.html ;§
 §; }else if(content=='witken_partenaires'){ ;§
     §;- include content/witken_partenaires_content.html ;§
+§; }else if(content=='auth'){ ;§
+    §;- include content/auth_content.html ;§
 §; } ;§
                 
 §; if(render=='full') { ;§
@@ -53,6 +56,18 @@
 
  §;- include unique/scripts.html ;§
 
+    <script>
+    var current_lang = "§;= lang ;§"
+    $(document).ready(function() {
+        setLocalTexts();
+        $(window).resize(function() {
+            initiate();
+        });
+        initiate();
+        setupOnClickEvents();
+        //onDataLoaded();
+    });
+    </script>
 </html>
 
 §; } ;§
