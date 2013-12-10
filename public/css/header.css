@@ -1,0 +1,26 @@
+.header {
+    background-color: rgb(218, 218, 218);
+}
+.header #logo {
+    width: 150px;
+}
+.header .user-space-support {
+    background-color: rgb(222, 70, 73);
+    color: white;
+}
+
+@media (max-width: 750px) {
+    .header #logo {
+        width: 100px;
+    }
+    .header .menu_item {
+        border-bottom-style: groove;
+        border-bottom-width: 2px;
+    }
+}
+
+@media (max-width: 970px) {
+    .header #logo {
+        width: 100px;
+    }
+}

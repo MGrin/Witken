@@ -1,0 +1,19 @@
+.link {
+    cursor: pointer;
+}
+.link:hover {
+    text-decoration: overline;
+}
+.witken_button {
+    font-size: 25px;
+}
+.right_border {
+    border-right-style: solid;
+    border-right-color: grey;
+    border-right-width: 1px;
+}
+.left_border {
+    border-left-style: solid;
+    border-left-color: grey;
+    border-left-width: 1px;
+}

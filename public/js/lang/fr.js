@@ -1,38 +1,52 @@
-function getTextForId(id) {
-    switch (id) {
-    case 'text_Label':
-        return "Label";
-    case 'text_description':
-        return "description";
-    case 'text_reconnaissance':
-        return "reconnaissance";
-    case 'text_Examen':
-        return "Examen";
-    case 'text_inscription_etc':
-        return "inscription, <br/>date, lieu & prix";
-    case 'text_Indexation':
-        return "Indexation";
-    case 'text_comment':
-        return "comment?";
-    case 'text_pour_qui':
-        return "pour qui?";
-    case 'text_Witken':
-        return "Witken";
-    case 'text_nous':
-        return "nous";
-    case 'text_Nos_partenaires':
-        return "Nos partenaires";
-    case 'text_Language_switch':
-        return "English";
-    case 'text_Language_current':
-        return "francais";
-    case 'text_Login':
-        return "Login";
-    case 'text_SignIn':
-        return "SignIn";
-    case 'text_Submit':
-        return 'Submit';
-    case 'text_logout':
-        return 'logout';
+function getTextForId(text) {
+    var spl = text.split('_');
+    switch (spl[0]) {
+    case 'general':
+        return general[text];
+        break;
+    case 'header':
+        return header[text];
+        break;
+    case 'footer':
+        return footer[text];
+        break;
+    case 'index':
+        return index[text];
+        break;
+    default:
+        console.log('problem with texts: ' + spl[0]);
+        return "";
     }
 }
+var general = {
+    general_decouvrez: "Découvrez",
+    general_registration: "Votre profil",
+    general_logout: "Logout",
+    general_label: "Label",
+    general_examen: "Examen",
+    general_indexation: "Indexation",
+    general_witken: "Witken",
+    general_language_switch: "Francais",
+    general_language_current: "English"
+}; //9
+
+var header = {
+    header_label_description_text: "description",
+    header_label_reconnaissance_text: "reconnaissance",
+    header_examen_text: "inscription, <br/>date, lieu & prix",
+    header_indexation_comment_text: "comment",
+    header_indexation_pour_qui_text: "pour qui",
+    header_witken_nous_text: "we are",
+    header_witken_partenaires_text: "nos partenaires"
+}; //7
+
+var footer = {
+    footer_partenaires_title: "Nos partenaires"
+}; //1
+
+var index = {
+    index_slide1_title: "Label de haut potentiel",
+    index_slide1_text: "Boostez vos neurones en passant l'examen<br />et obtenez un label certificat...",
+    index_footer1_title: "Verifier un label",
+    index_footer1_text: "Vous etes une enterprise qui souhaite engager un nouveau collaborateur? <br /><br /> Verifiez son numero d'authencite"
+}; //4

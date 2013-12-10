@@ -1,0 +1,9 @@
+.central {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+@media (max-width: 1170px) {
+    .central {
+        margin-top: 0px;
+    }
+}

@@ -1,0 +1,9 @@
+.carousel-inner .item {
+    background-color: rgb(48, 49, 53);
+}
+.index_footer {
+    background-color: rgb(223, 223, 223);
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,95 +1,71 @@
-<div class="row-fluid">
-    <div class="col-lg-4 col-lg-offset-5 text-center panel panel-defaul">
-        <h2 text="text_SignIn" class="multilang"></h2>
-        <div class="form-horizontal" role="form">
-            <div class="form-group" id="inputEmailFormGroup">
-                <div class="col-lg-12">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    <div class="help-block" id="emailHelpBlock"></div>
-                </div>
-            </div>
-            <div class="form-group" id="inputPasswordFormGroup">
-                <div class="col-lg-12">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                    <div class="help-block" id="passHelpBlock"></div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <button text="text_Submit" class="btn btn-default multilang"></button>
-                </div>
-            </div>
-        </div>
-        <script>
-            var onDataLoaded = function() {
-                console.log('onDataLoaded of auth content called');
-                $('[text=text_Submit]').click(function() {
-                    var verifyInput = function(e, p, callback) {
-                        var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                        var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+<script>
+    var onDataLoaded = function() {
+        console.log('auth content loaded');
+        $('[text=text_Submit]').click(function() {
+            var verifyInput = function(e, p, callback) {
+                var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
 
-                        var err = [];
-                        if (!emailRE.test(e)) {
-                            var emailError = {
-                                field: 'email',
-                                error: 'Wrong email'
-                            };
-                            err.push(emailError);
-                        }
+                var err = [];
+                if (!emailRE.test(e)) {
+                    var emailError = {
+                        field: 'email',
+                        error: 'Wrong email'
+                    };
+                    err.push(emailError);
+                }
 
-                        if (!passRE.test(p)) {
-                            var passError = {
-                                field: 'pass',
-                                error: 'Wrong password'
-                            };
-                            err.push(passError);
-                        }
+                if (!passRE.test(p)) {
+                    var passError = {
+                        field: 'pass',
+                        error: 'Wrong password'
+                    };
+                    err.push(passError);
+                }
 
-                        callback(err);
+                callback(err);
+            }
+
+            var handleLoginError = function(err) {
+                for (var i = 0; i < err.length; i++) {
+                    switch (err[i].field) {
+                        case 'email':
+                            $('#inputEmailFormGroup').addClass('has-error');
+                            $('#emailHelpBlock').text(err[i].error);
+                            break;
+                        case 'pass':
+                            $('#inputPasswordFormGroup').addClass('has-error');
+                            $('#passHelpBlock').text(err[i].error);
+                            break;
+                        case 'general':
+                            alert(err[i].error);
+                            break;
                     }
-
-                    var handleLoginError = function(err) {
-                        for (var i = 0; i < err.length; i++) {
-                            switch (err[i].field) {
-                                case 'email':
-                                    $('#inputEmailFormGroup').addClass('has-error');
-                                    $('#emailHelpBlock').text(err[i].error);
-                                    break;
-                                case 'pass':
-                                    $('#inputPasswordFormGroup').addClass('has-error');
-                                    $('#passHelpBlock').text(err[i].error);
-                                    break;
-                                case 'general':
-                                    alert(err[i].error);
-                                    break;
-                            }
-                        }
-                    }
-                    var email = $('#inputEmail').val();
-                    var pass = $('#inputPassword').val();
-                    verifyInput(email, pass, function(err) {
-                        $('#inputEmailFormGroup').removeClass('has-error');
-                        $('#inputPasswordFormGroup').removeClass('has-error');
-                        $('#emailHelpBlock').text('');
-                        $('#passHelpBlock').text('');
-                        if (err && err.length > 0) {
-                            handleLoginError(err);
+                }
+            }
+            var email = $('#inputEmail').val();
+            var pass = $('#inputPassword').val();
+            verifyInput(email, pass, function(err) {
+                $('#inputEmailFormGroup').removeClass('has-error');
+                $('#inputPasswordFormGroup').removeClass('has-error');
+                $('#emailHelpBlock').text('');
+                $('#passHelpBlock').text('');
+                if (err && err.length > 0) {
+                    handleLoginError(err);
+                } else {
+                    $.post('/auth', {
+                        username: email,
+                        password: pass
+                    }, function(data) {
+                        if (data.err && data.err.length > 0) {
+                            handleLoginError(data.err);
                         } else {
-                            $.post('/auth', {
-                                username: email,
-                                password: pass
-                            }, function(data) {
-                                if (data.err && data.err.length > 0) {
-                                    handleLoginError(data.err);
-                                } else {
-                                    console.log(JSON.stringify(data));
-                                    document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
-                                }
-                            });
+                            console.log(JSON.stringify(data));
+                            document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
                         }
                     });
-                });
-            };
-        </script>
-    </div>
-</div>
+                }
+            });
+        });
+    };
+</script>

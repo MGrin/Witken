@@ -78,19 +78,10 @@ app.get('/auth', routes.auth);
 app.get('/logout', routes.logout);
 
 app.get('/label', routes.label.index);
-app.get('/label/description', routes.label.description);
-app.get('/label/reconnaissance', routes.label.reconnaissance);
 
 app.get('/examen', routes.examen.index);
-app.get('/examen/inscription', routes.examen.inscription);
-
-app.get('/indexation', routes.indexation.index);
-app.get('/indexation/comment', routes.indexation.comment);
-app.get('/indexation/pour_qui', routes.indexation.pour_qui);
 
 app.get('/witken', routes.witken.index);
-app.get('/witken/nous', routes.witken.nous);
-app.get('/witken/partenaires', routes.witken.partenaires);
 
 app.post('/auth', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {

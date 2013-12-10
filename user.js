@@ -6,7 +6,8 @@ mongoose.connect(witken_users);
 var db = mongoose.connection;
 db.on('error', function () {
     console.log('Failed to connect to DB');
-    process.exit(1);
+    if (require('./server.js').connected === 'YES')
+        process.exit(1);
 });
 db.once('open', function callback() {
     console.log('Connected to DB');
@@ -17,7 +18,9 @@ var userSchema = mongoose.Schema({
     password: String,
     human_data: {
         name: String,
-        familly_name: String
+        familly_name: String,
+        birthday: Date,
+        state: String
     },
     meta: {
         email_verified: {
@@ -27,6 +30,15 @@ var userSchema = mongoose.Schema({
         registration: {
             type: Date,
             default: Date.now
+        }
+    },
+    exam: {
+        date: Date,
+        city: String,
+        payed: Boolean,
+        payement: {
+            method: String,
+            price: String
         }
     },
     labels: {
