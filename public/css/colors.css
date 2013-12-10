@@ -4,6 +4,9 @@
 .grey_color {
     color: grey;
 }
+.black_color{
+    color: #343434;   
+}
 .yellow_color {
     color: rgb(199, 134, 39);
 }
