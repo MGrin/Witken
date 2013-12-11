@@ -4,61 +4,48 @@
 <html>
 
 <head>
-§;- include unique/head.html ;§
+    §;- include unique/head.html ;§
 </head>
+
 <body>
     <div class="container-fluid">
 
-        §;- include unique/header.html ;§
-
-        §;if(user!='None'){;§
+        §;- include unique/header.html ;§ §;if(user!='None'){;§
         <div class="central row">
             <div id="content" class="col-lg-6 col-lg-offset-2 col-md-10 col-sm-10 col-xs-12">
-        §;}else{;§
-        <div class="central row">
-            <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
-        §;};§
-§; } ;§
-                
-§; if(content=='index'){ ;§
-    §;- include content/index_content.html ;§
-§; }else if(content=='label_index'){ ;§
-    §;- include content/label_index_content.html ;§
-§; }else if(content=='examen_index'){ ;§
-    §;- include content/examen_index_content.html ;§
-§; }else if(content=='witken_index'){ ;§
-    §;- include content/witken_index_content.html ;§
-§; }else if(content=='auth'){ ;§
-    §;- include content/auth_content.html ;§
-§; } ;§
-                
-§; if(render=='full') { ;§
-            </div>
+                §;}else{;§
+                <div class="central row">
+                    <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
+                        §;};§ §; } ;§ §; if(content=='index'){ ;§ §;- include content/index_content.html ;§ §; }else if(content=='label_index'){ ;§ §;- include content/label_index_content.html ;§ §; }else if(content=='examen_index'){ ;§ §;- include content/examen_index_content.html ;§ §; }else if(content=='witken_index'){ ;§ §;- include content/witken_index_content.html ;§ §; }else if(content=='auth'){ ;§ §;- include content/auth_content.html ;§ §; } ;§ §; if(render=='full') { ;§
+                    </div>
 
-            §;if(user!='None'){;§
-            <div class="user-space-support col-lg-2 col-md-2 col-sm-2 hidden-xs">
-                §;- include unique/user_side.html ;§
+                    §;if(user!='None'){;§
+                    <div class="user-space-support col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                        §;- include unique/user_side.html ;§
+                    </div>
+                    §;};§
+                </div>
+                §;- include unique/footer.html ;§
             </div>
-            §;};§
-        </div>
-        §;- include unique/footer.html ;§
-    </div>
 </body>
 
- §;- include unique/scripts.html ;§
+§;- include unique/scripts.html ;§
 
-    <script>
+<script>
     var current_lang = "§;= lang ;§"
-    $(document).ready(function() {
-        setLocalTexts();
+    $(document).ready(function(){
+        setLocalTexts();        
+        setupOnClickEvents();
+    });
+    window.onload = function() {
         $(window).resize(function() {
             initiate();
         });
         initiate();
-        setupOnClickEvents();
         onDataLoaded();
-    });
-    </script>
+    };
+</script>
+
 </html>
 
 §; } ;§

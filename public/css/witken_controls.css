@@ -17,3 +17,15 @@
     border-left-color: grey;
     border-left-width: 1px;
 }
+.card {
+    border-style: solid;
+    border-color: rgb(226, 225, 225);
+    border-width: 1px;
+    padding: 10px;
+}
+.light {
+    background-color: rgb(240, 240, 240);
+}
+.dark {
+    background-color: rgb(226, 225, 225);
+}

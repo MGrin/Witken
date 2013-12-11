@@ -54,7 +54,7 @@ function setupOnClickEvents() {
             bindOnContentReceiveEvent(data, 'Witken - Login', href);
         });
     });
-    
+
     $('.js_redirect_logout').click(function () {
         document.location.href = document.location.origin + '/logout' + '?lang=' + current_lang;
     });
@@ -65,7 +65,6 @@ function setupOnClickEvents() {
         newLang = 'fr';
     }
 
-    console.log('Setting up .text_Language_switch onClick event');
     $('.js_redirect_language').click(function () {
         document.location.href = document.location.origin + document.location.pathname + '?lang=' + newLang;
     });
@@ -77,11 +76,15 @@ if (!onDataLoaded) {
 
 function bindOnContentReceiveEvent(content, name, pathname) {
     $('#content').html(content);
+
     window.history.pushState(content, name, pathname);
-    setLocalTexts();
-    onDataLoaded();
-    setupFooter();
-    
+
+    $(document).ready(function () {
+        onDataLoaded();
+        setLocalTexts();
+        setupFooter();
+    });
+
     if ($(window).width() < 970) {
         $(window).scrollTop($('#content').position().top)
     }

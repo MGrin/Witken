@@ -18,7 +18,6 @@
         border-bottom-width: 2px;
     }
 }
-
 @media (max-width: 970px) {
     .header #logo {
         width: 100px;

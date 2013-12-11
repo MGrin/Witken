@@ -1,14 +1,41 @@
+@font-face {
+    font-family: HelveticaUltraLight;
+    src: url(/fonts/HelveticaNeue/HelveticaNeue-UltraLight.ttf);
+}
+@font-face {
+    font-family: HelveticaNeueLight;
+    src: url(/fonts/HelveticaNeue/HelveticaNeue-Light.ttf);
+}
+@font-face {
+    font-family: HelveticaNeue;
+    src: url(/fonts/HelveticaNeue/HelveticaNeue.ttf);
+}
+@font-face {
+    font-family: HelveticaNeueUltraLightItalic;
+    src: url(/fonts/HelveticaNeue/HelveticaNeue-UltraLightItalic.ttf);
+}
 html,
 body {
     background-color: rgb(238, 238, 238);
-    height: 100%;
     color: #343434;
+    font-family: HelveticaNeueLight;
 }
 small {
+    font-family: HelveticaUltraLight;
     line-height: 15px;
 }
-h3 {
+p {
     font-size: 18px;
+}
+h1 {
+    font-family: HelveticaNeueLight;
+}
+h3 {
+    font-family: HelveticaNeue;
+}
+
+.italic {
+    font-family: HelveticaNeueUltraLightItalic;
 }
 /*@media (min-width: 750px) and (max-width: 970px) {
     h3 {

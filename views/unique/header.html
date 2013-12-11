@@ -1,7 +1,8 @@
-<div class="header row">
+<div class="bottom-aligned header row">
     <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-8">
         <img src="/img/WKlogo.png" id="logo" class="link" />
     </div>
+    <!--
     <div class="mobile_login user-space-support visible-xs col-xs-4">
         §;if(user==='None'){;§
         <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
@@ -10,49 +11,49 @@
         <p text="general_logout" class="multilang link js_redirect_logout"></p>
         §;};§
     </div>
+-->
 
-    
-    <div class="bottom-aligned col-lg-5 col-md-9 col-sm-9 col-xs-11 col-xs-offset-0">
-<!--    col-lg-7/2  -->
-        <div class="menu_item col-lg-3 col-lg-offset-1 col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-12">
-            <h3 text="general_label" class="multilang link js_redirect_label"></h3>
-            <small>
-                <ul class="list-unstyled">
-                    <li text="header_label_description_text" class="multilang"></li>
-                    <li text="header_label_reconnaissance_text" class="multilang"></li>
-                </ul>
-            </small>
-        </div>
-        <div class="menu_item col-lg-3 col-md-2 col-sm-2 col-xs-12">
-            <h3 text="general_examen" class="multilang link js_redirect_examen"></h3>
-            <small>
-                <ul class="list-unstyled">
-                    <li text="header_examen_text" class="multilang"></li>
-                </ul>
-            </small>
-        </div>
-        <div class="menu_item col-lg-3 col-md-2 col-sm-2 col-xs-12">
-            <h3 text="general_witken" class="multilang link js_redirect_witken"></h3>
-            <small>
-                <ul class="list-unstyled">
-                    <li text="header_witken_nous_text" class="multilang"></li>
-                    <li text="header_witken_partenaires_text" class="multilang"></li>
-                </ul>
-            </small>
-        </div>
-        <div class="menu_item col-lg-2 col-md-2 col-sm-2 hidden-xs">
-            <h3 text="general_language_switch" class="multilang link js_redirect_language"></h3>
-            <small>
-                <ul class="list-unstyled">
-                    <li text="general_language_current" class="multilang"></li>
-                </ul>
-            </small>
-        </div>
+    <div class="bottom-aligned menu_item col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1 col-xs-12">
+        <h3 text="general_label" class="multilang link js_redirect_label"></h3>
+        <small>
+            <ul class="list-unstyled">
+                <li text="header_label_description_text" class="multilang"></li>
+                <li text="header_label_reconnaissance_text" class="multilang"></li>
+            </ul>
+        </small>
     </div>
-    <!--    Smaller (col-lg-3/2)    -->
+    <div class=" bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 col-xs-12">
+        <h3 text="general_examen" class="multilang link js_redirect_examen"></h3>
+        <small>
+            <ul class="list-unstyled">
+                <li text="header_examen_text" class="multilang"></li>
+            </ul>
+        </small>
+    </div>
+    <div class="bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 col-xs-12">
+        <h3 text="general_witken" class="multilang link js_redirect_witken"></h3>
+        <small>
+            <ul class="list-unstyled">
+                <li text="header_witken_nous_text" class="multilang"></li>
+                <li text="header_witken_partenaires_text" class="multilang"></li>
+            </ul>
+        </small>
+    </div>
+    <div class="bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 hidden-xs">
+        <h3 text="general_language_switch" class="multilang link js_redirect_language"></h3>
+        <small>
+            <ul class="list-unstyled">
+                <li text="general_language_current" class="multilang"></li>
+                <li>
+                    <br/>
+                </li>
+            </ul>
+        </small>
+    </div>
+
     <div class="user-space-support col-lg-2 col-md-2 col-sm-2 hidden-xs">
         §;if(user==='None'){;§
-        <h3 text="general_registration" class="multilang link"></h3>
+        <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
         §;}else{;§
         <h3>§;= user.human_data.name ;§ §;= user.human_data.familly_name;§</h3>
         <p text="general_registration" class="multilang link js_redirect_register"></p>

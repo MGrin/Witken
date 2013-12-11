@@ -13,6 +13,8 @@ function getTextForId(text) {
     case 'index':
         return index[text];
         break;
+    case 'label':
+        return label[text];
     default:
         console.log('problem with texts: ' + spl[0]);
         return "";
@@ -20,14 +22,14 @@ function getTextForId(text) {
 }
 var general = {
     general_decouvrez: "Learn more",
-    general_registration: "Registration",
+    general_registration: "Your profile",
     general_logout: "Logout",
     general_label: "Label",
     general_examen: "Examen",
     general_indexation: "Indexation",
     general_witken: "Witken",
-    general_language_switch: "English",
-    general_language_current: "Francais"
+    general_language_switch: "Francais",
+    general_language_current: "English"
 }; //9
 
 var header = {
@@ -50,3 +52,7 @@ var index = {
     index_footer1_title: "Verifier un label",
     index_footer1_text: "Vous etes une enterprise qui souhaite engager un nouveau collaborateur? <br /><br /> Verifiez son numero d'authencite"
 }; //4
+
+var label = {
+    label_description: "Notre label vous permet d'ajouter un plus à votre image professionnelle, il vous permets d'améliorer votre employabilitée et de saisir de nouvelles opportunités en participant à différentes projets novateurs..."
+}
