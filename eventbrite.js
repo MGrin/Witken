@@ -83,7 +83,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
 }
 
 exports.getValidEvents = function (callback) {
-    updateEventsData(function () {
+    exports.updateEventsData(function () {
         callback(events);
     });
 }
