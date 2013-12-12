@@ -9,14 +9,12 @@
 }
 .right_border {
     border-right-style: solid;
-    border-right-color: rgb(218, 218, 218);
-    ;
+    border-right-color: rgb(48, 49, 53);
     border-right-width: 1px;
 }
 .left_border {
     border-left-style: solid;
-    border-left-color: rgb(218, 218, 218);
-    ;
+    border-left-color: rgb(48, 49, 53);
     border-left-width: 1px;
 }
 .card {

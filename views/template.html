@@ -10,13 +10,29 @@
 <body class="black_text grey_light_bg">
     <div class="container-fluid">
 
-        §;- include unique/header.html ;§ §;if(user!='None'){;§
+        §;- include unique/header.html ;§
+        
+        §;if(user!='None'){;§
         <div class="central row">
             <div id="content" class="col-lg-6 col-lg-offset-2 col-md-10 col-sm-10 col-xs-12">
-                §;}else{;§
-                <div class="central row">
-                    <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
-                        §;};§ §; } ;§ §; if(content=='index'){ ;§ §;- include content/index_content.html ;§ §; }else if(content=='label_index'){ ;§ §;- include content/label_index_content.html ;§ §; }else if(content=='examen_index'){ ;§ §;- include content/examen_index_content.html ;§ §; }else if(content=='witken_index'){ ;§ §;- include content/witken_index_content.html ;§ §; }else if(content=='auth'){ ;§ §;- include content/auth_content.html ;§ §; } ;§ §; if(render=='full') { ;§
+        §;}else{;§
+        <div class="central row">
+            <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
+        §;};§
+§; } ;§
+§; if(content=='index'){ ;§
+                §;- include content/index_content.html ;§
+§; }else if(content=='label_index'){ ;§
+                §;- include content/label_index_content.html ;§
+§; }else if(content=='examen_index'){ ;§
+                §;- include content/examen_index_content.html ;§
+§; }else if(content=='witken_index'){ ;§
+                §;- include content/witken_index_content.html ;§
+§; }else if(content=='inscription'){ ;§
+                §;- include content/inscription_content.html ;§        
+§;};§
+
+§; if(render=='full') { ;§
                     </div>
 
                     §;if(user!='None'){;§
@@ -33,8 +49,8 @@
 
 <script>
     var current_lang = "§;= lang ;§"
-    $(document).ready(function(){
-        setLocalTexts();        
+    $(document).ready(function() {
+        setLocalTexts();
         setupOnClickEvents();
     });
     window.onload = function() {

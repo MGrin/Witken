@@ -1,17 +1,19 @@
+var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'
 var mongoose = require('mongoose');
 
-var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'
+exports.init = function () {
+    mongoose.connect(witken_users);
+    var db = mongoose.connection;
 
-mongoose.connect(witken_users);
-var db = mongoose.connection;
-db.on('error', function () {
-    console.log('Failed to connect to DB');
-    if (require('./server.js').connected === 'YES')
-        process.exit(1);
-});
-db.once('open', function callback() {
-    console.log('Connected to DB');
-});
+    db.on('error', function () {
+        console.log('Failed to connect to UsersDB');
+        if (require('./server.js').connected === 'YES')
+            process.exit(1);
+    });
+    db.once('open', function callback() {
+        console.log('Connected to UsersDB');
+    });
+}
 
 var userSchema = mongoose.Schema({
     email: String,
@@ -55,30 +57,40 @@ userSchema.methods.validPassword = function (p) {
 
 var User = mongoose.model('User', userSchema);
 
-exports.createNewUser = function (email, pass, callback) {
-    User.find({
-        email: email,
-        password: pass
-    }, function (err, results) {
-        if (err) {
-            return callback(err);
-        }
-        if (results.length == 0) {
-            var u = new User({
-                email: email,
-                password: pass,
-                human_data: {
-                    name: 'Test',
-                    familly_name: 'User'
-                }
-            });
-            u.save(function (err, us) {
-                return callback(err, us);
-            });
-        } else {
-            return callback(null, false);
+exports.confirmOrder = function (eb_data, callback) {
+
+    return callback(null, {
+        email: "balbal",
+        password: "asasd",
+        human_data: {
+            name: 'Test',
+            familly_name: 'User'
         }
     });
+    
+    //    User.find({
+    //        email: email,
+    //        password: pass
+    //    }, function (err, results) {
+    //        if (err) {
+    //            return callback(err);
+    //        }
+    //        if (results.length == 0) {
+    //            var u = new User({
+    //                email: email,
+    //                password: pass,
+    //                human_data: {
+    //                    name: 'Test',
+    //                    familly_name: 'User'
+    //                }
+    //            });
+    //            u.save(function (err, us) {
+    //                return callback(err, us);
+    //            });
+    //        } else {
+    //            return callback(null, false);
+    //        }
+    //    });
 
 }
 
@@ -99,17 +111,17 @@ exports.findOne = function (query, callback) {
     });
 }
 
-if (require('./server.js').mode === 'DEV') {
-    var testUser = exports.createNewUser('test@test.com', '123qweQWE', function (err, u) {
-        if (err) {
-            return console.log('Failed to create user ' + 'test@test.com');
-        }
-        if (!u) {
-            return console.log('User ' + 'test@test.com' + ' exists');
-        }
-
-        if (u) {
-            return console.log('User ' + u.email + ' created!');
-        }
-    });
-}
+//if (require('./server.js').mode === 'DEV') {
+//    var testUser = exports.createNewUser('test@test.com', '123qweQWE', function (err, u) {
+//        if (err) {
+//            return console.log('Failed to create user ' + 'test@test.com');
+//        }
+//        if (!u) {
+//            return console.log('User ' + 'test@test.com' + ' exists');
+//        }
+//
+//        if (u) {
+//            return console.log('User ' + u.email + ' created!');
+//        }
+//    });
+//}

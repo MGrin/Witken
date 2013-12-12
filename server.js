@@ -1,5 +1,6 @@
 var routes = require('./routes.js');
 var User = require('./user.js');
+var eventbrite = require('./eventbrite.js');
 
 var express = require('express');
 var app = express();
@@ -11,50 +12,56 @@ ejs.close = ';§';
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy(
-    function (username, password, done) {
-        console.log('Using Passport local strategy with credentials: ' + username + '/' + password);
-        User.findOne({
-            email: username
-        }, function (err, user) {
-            if (err) {
-                console.log('Error whiel calling User.findOne(): ' + err)
-                return done(err);
-            }
-            if (!user) {
-                console.log('Error: Incorent username');
-                return done(null, false, {
-                    field: 'email',
-                    message: 'Incorrect username.'
-                });
-            }
-            if (!user.validPassword(password)) {
-                console.log('Error: Incorrect password');
-                return done(null, false, {
-                    field: 'pass',
-                    message: 'Incorrect password.'
-                });
-            }
-            console.log('Using Passport local strategy with credentials: ' + username + '/' + password + ' success!');
-            return done(null, user);
-        });
-    }
-));
+var passportInit = function () {
+    passport.use(new LocalStrategy(
+        function (username, password, done) {
+            console.log('Using Passport local strategy with credentials: ' + username + '/' + password);
+            User.findOne({
+                email: username
+            }, function (err, user) {
+                if (err) {
+                    console.log('Error whiel calling User.findOne(): ' + err)
+                    return done(err);
+                }
+                if (!user) {
+                    console.log('Error: Incorent username');
+                    return done(null, false, {
+                        field: 'email',
+                        message: 'Incorrect username.'
+                    });
+                }
+                if (!user.validPassword(password)) {
+                    console.log('Error: Incorrect password');
+                    return done(null, false, {
+                        field: 'pass',
+                        message: 'Incorrect password.'
+                    });
+                }
+                console.log('Using Passport local strategy with credentials: ' + username + '/' + password + ' success!');
+                return done(null, user);
+            });
+        }
+    ));
 
-passport.serializeUser(function (user, done) {
-    console.log('Serializing user '+JSON.stringify(user));
-    done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-    console.log('Deserializing of '+id);
-    User.findOne({
-        _id: id
-    }, function (err, user) {
-        console.log('Obtaining '+JSON.stringify(user));
-        done(err, user);
+    passport.serializeUser(function (user, done) {
+        console.log('Serializing user ' + JSON.stringify(user));
+        done(null, user.id);
     });
-});
+
+    passport.deserializeUser(function (id, done) {
+        console.log('Deserializing of ' + id);
+        User.findOne({
+            _id: id
+        }, function (err, user) {
+            console.log('Obtaining ' + JSON.stringify(user));
+            done(err, user);
+        });
+    });
+}
+
+passportInit();
+User.init();
+eventbrite.init();
 
 app.configure(function () {
     app.use(express.favicon()); // отдаем стандартную фавиконку, можем здесь же свою задать
@@ -74,7 +81,10 @@ app.configure(function () {
 
 app.get('/', routes.index);
 
-app.get('/auth', routes.auth);
+app.get('/inscription', routes.inscription);
+
+app.get('/order_confirm', routes.confirm_order);
+
 app.get('/logout', routes.logout);
 
 app.get('/label', routes.label.index);
@@ -123,4 +133,4 @@ app.listen(port, function () {
 });
 
 exports.mode = process.env.MODE || 'DEV';
-exports.connected = process.env.CONNECTED || "NO"
+exports.connected = process.env.CONNECTED || "YES"

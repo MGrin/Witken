@@ -11,7 +11,6 @@ var defFooterHeight = 150;
 var defHeaderMobileHeight = 100;
 
 function initiate() {
-    console.log('Initiation of UI');
     if ($(window).width() > 970) {
         var val = undefined;
         $('.bottom-aligned').each(function () {
@@ -41,8 +40,6 @@ function initiate() {
 }
 
 function setupFooter() {
-    console.log('Setting up .footer');
-
     var centralMarginTop = defCentralMarginTop;
     if ($(window).width() < 1200) {
         centralMarginTop = 0;
@@ -52,8 +49,6 @@ function setupFooter() {
         if (margin_top < 0) {
             margin_top = 0;
         }
-        console.log($(window).height() + ' - (' + $('#content').height() + '+' + $('.header').height() + '+' + $(this).height() + '+' + centralMarginTop + '-' + 10 + ')');
-        console.log('margin-top: ' + margin_top);
         $('.footer').css('margin-top', margin_top);
     });
 }

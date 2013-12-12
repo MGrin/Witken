@@ -47,11 +47,11 @@ function setupOnClickEvents() {
     });
 
     $('.js_redirect_register').click(function () {
-        var href = '/auth?lang=' + current_lang;
+        var href = '/inscription?lang=' + current_lang;
         $.get(href, {
             ajax: true
         }, function (data) {
-            bindOnContentReceiveEvent(data, 'Witken - Login', href);
+            bindOnContentReceiveEvent(data, 'Witken - Inscription', href);
         });
     });
 
