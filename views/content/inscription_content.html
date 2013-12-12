@@ -1,0 +1,178 @@
+<div class="card grey_dark_bg row">
+    <h1>Inscription</h1>
+    <div class="col-lg-4">
+        <div id="location_form" class="form-group">
+            <label>Location:</label>
+            <select id="location_selection" class="form-control">
+
+            </select>
+        </div>
+        <div id="date_form" class="form-group hide">
+            <label>Date:</label>
+            <select id="date_selection" class="form-control">
+
+            </select>
+        </div>
+
+        <div id="time_form" class="form-group hide">
+            <label>Time:</label>
+            <select id="time_selection" class="form-control">
+
+            </select>
+        </div>
+        <button id="proceed_btn" class="btn btn-default hide">Proceed</button>
+    </div>
+    <div id="eventbrite">
+
+    </div>
+</div>
+
+<script>
+    var events = §;- JSON.stringify(events);§;
+
+    var location_selected;
+    var date_selected;
+    var time_selected;
+    var choosenEvent;
+
+    var onDataLoaded = function() {
+        console.log('Inscription content loaded');
+        $('#location_selection').change(onLocationChanged);
+        $('#date_selection').change(onDateChanged);
+        $('#time_selection').change(onTimeChanged);
+
+        $('#proceed_btn').click(function() {
+            console.log('Choosen event: ' + choosenEvent.url);
+            //            
+            //            $.get('/eventbrite', {
+            //                id: eventID
+            //            }, function(res) {
+            //                $('#eventbrite').html(res.data);
+            //                console.log(JSON.stringify(res));
+            //            });
+
+            window.open(
+                choosenEvent.url,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+        });
+        constructLocations();
+    }
+
+    var constructLocations = function() {
+        var locations = [];
+        var locations_html = '<option></option>';
+
+
+        for (var i = 0; i < events.length; i++) {
+            var venue = events[i].venue.city + ", " + events[i].venue.country;
+            var id = events[i].venue.id;
+            if (locations.indexOf(id) < 0 && hasPlace(events[i])) {
+                locations.push(id);
+                locations_html += '<option data-location-id="' + id + '">' + venue + '</option>';
+            }
+        };
+        $('#location_selection').html(locations_html);
+    }
+
+    var onLocationChanged = function() {
+        location_selected = $('#location_selection').val();
+        console.log('Location: ' + location_selected);
+
+        $('#date_form').removeClass('hide');
+        $('#time_form').addClass('hide');
+        $('#proceed_btn').addClass('hide');
+        constructDates();
+    }
+
+    var constructDates = function() {
+        var dates = [];
+        var dates_html = '<option></option>';
+
+        if (location_selected) {
+            for (var i = 0; i < events.length; i++) {
+                var d = new Date(events[i].start_date);
+                var startDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+                var location = events[i].venue.city + ", " + events[i].venue.country;
+
+                if (dates.indexOf(startDate) < 0 && location_selected === location && hasPlace(events[i])) {
+                    dates.push(startDate);
+                    dates_html += '<option>' + startDate + '</option>';
+                }
+            };
+            $('#date_selection').html(dates_html);
+        } else {
+            $('#date_form').addClass('hide');
+            $('#time_form').addClass('hide');
+            $('#proceed_btn').addClass('hide');
+        }
+    }
+
+    var onDateChanged = function() {
+        date_selected = $('#date_selection').val();
+        console.log('Date: ' + date_selected);
+
+        $('#time_form').removeClass('hide');
+        $('#proceed_btn').addClass('hide');
+        constructTimes();
+    }
+
+    var constructTimes = function() {
+        var times = [];
+        var times_html = '<option></option>';
+
+        if (location_selected && date_selected) {
+            for (var i = 0; i < events.length; i++) {
+                var d = new Date(events[i].start_date);
+                var startTime = d.getHours() < 12 ? "Morning" : "Afternoon";
+                var startDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+                var location = events[i].venue.city + ", " + events[i].venue.country;
+
+                if (times.indexOf(startTime) < 0 && date_selected === startDate && location_selected === location && hasPlace(events[i])) {
+                    times.push(startTime);
+                    times_html += '<option>' + startTime + '</option>';
+                }
+            };
+            $('#time_selection').html(times_html);
+        } else {
+            $('#time_form').addClass('hide');
+            $('#proceed_btn').addClass('hide');
+        }
+    }
+
+    var onTimeChanged = function() {
+        time_selected = $('#time_selection').val();
+        console.log('Time: ' + time_selected);
+
+        choosenEvent = getChoosenEvent();
+        if (!choosenEvent) {
+            return console.log('FUCKING SHIT!');
+        }
+
+        $('#proceed_btn').removeClass('hide');
+    }
+
+    var hasPlace = function(event) {
+        var available = 0;
+        for (var i = 0; i < event.tickets.length; i++) {
+            var ticket = event.tickets[i];
+            available += parseInt(ticket.quantity_available) - parseInt(ticket.quantity_sold);
+        }
+        return available != 0;
+    }
+
+        var getChoosenEvent = function() {
+            for (var i = 0; i < events.length; i++) {
+                var d = new Date(events[i].start_date);
+                var startTime = d.getHours() < 12 ? "Morning" : "Afternoon";
+                var startDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+                var location = events[i].venue.city + ", " + events[i].venue.country;
+    
+                if (startTime === time_selected && startDate === date_selected && location === location_selected) {
+                    return events[i];
+                }
+            }
+    
+            return undefined;
+        }
+</script>
