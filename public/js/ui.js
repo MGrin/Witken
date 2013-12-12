@@ -37,6 +37,7 @@ function initiate() {
     });
 
     setupFooter();
+    
 }
 
 function setupFooter() {

@@ -54,5 +54,11 @@ var index = {
 }; //4
 
 var label = {
-    label_description: "Notre label vous permet d'ajouter un plus à votre image professionnelle, il vous permets d'améliorer votre employabilitée et de saisir de nouvelles opportunités en participant à différentes projets novateurs..."
+    label_description: "Notre label vous permet d'ajouter un plus à votre image professionnelle, il vous permets d'améliorer votre employabilitée et de saisir de nouvelles opportunités en participant à différentes projets novateurs...",
+    label_label_or: "Label d'or",
+    label_label_or_description: "Avec plus de 98% de réussite aux 3 tests, nous vous decernerons un label d'or. Ce label szmbolisera votre haut potentiel intellectuel, émotionelle et votre capacité élevé à communiquer autout de vous.",
+    label_label_silver: "Label d'argent",
+    label_label_silver_description: "Blablabla argent blablabla",
+    label_label_bronze: "Label de bronze",
+    label_label_bronze_description: "Blablabla bronze blablabla"
 }

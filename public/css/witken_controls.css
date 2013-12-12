@@ -9,23 +9,25 @@
 }
 .right_border {
     border-right-style: solid;
-    border-right-color: grey;
+    border-right-color: rgb(218, 218, 218);
+    ;
     border-right-width: 1px;
 }
 .left_border {
     border-left-style: solid;
-    border-left-color: grey;
+    border-left-color: rgb(218, 218, 218);
+    ;
     border-left-width: 1px;
 }
 .card {
     border-style: solid;
-    border-color: rgb(226, 225, 225);
+    border-color: rgb(218, 218, 218);
     border-width: 1px;
     padding: 10px;
 }
-.light {
-    background-color: rgb(240, 240, 240);
-}
-.dark {
-    background-color: rgb(226, 225, 225);
+.card_black_border {
+    border-style: solid;
+    border-color: rgb(48, 49, 53);
+    border-width: 2px;
+    padding: 10px;
 }

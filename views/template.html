@@ -7,7 +7,7 @@
     §;- include unique/head.html ;§
 </head>
 
-<body>
+<body class="black_text grey_light_bg">
     <div class="container-fluid">
 
         §;- include unique/header.html ;§ §;if(user!='None'){;§
@@ -40,6 +40,7 @@
     window.onload = function() {
         $(window).resize(function() {
             initiate();
+            onDataLoaded();
         });
         initiate();
         onDataLoaded();

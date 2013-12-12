@@ -123,4 +123,4 @@ app.listen(port, function () {
 });
 
 exports.mode = process.env.MODE || 'DEV';
-exports.connected = process.env.CONNECTED || "YES"
+exports.connected = process.env.CONNECTED || "NO"

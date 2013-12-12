@@ -1,21 +1,76 @@
 <link rel="stylesheet" href="/css/label.css" />
 
 
-<div class="card dark row">
-    <h1 class="multilang col-lg-12" text="general_label"></h1>    
+<div class="card grey_dark_bg row">
+    <h1 class="multilang col-lg-12" text="general_label"></h1>
     <br />
-    <p class="multilang col-lg-6" text="label_description"></p> 
-    <img src="/img/label_tablette.png" class="col-lg-4 col-lg-offset-1" onload="setupFooter"/>
+    <p class="multilang col-lg-6" text="label_description"></p>
+    <img src="/img/label_tablette.png" class="col-lg-4 col-lg-offset-1" onload="setupFooter" />
 </div>
-<div class="card light row">
-    <h1 class="multilang col-lg-12" text="general_label"></h1>    
-    <br />
-    <p class="multilang col-lg-6" text="label_description"></p> 
-    <img src="/img/label_tablette.png" class="col-lg-4 col-lg-offset-1" onload="setupFooter"/>
+
+<div class="card grey_light_bg row">
+    <div class="col-lg-2 col-lg-offset-1 text-center">
+        <img id="label_area" src="/img/wk_white_label.png" class="gold_bg img-circle label_border" style="margin-top: 30px; width: 100%; padding: 10px;" onload="setupFooter" />
+        <div class="btn-group" style="margin-top: 30px;">
+            <img id="gold_label_small" class="gold_bg img-circle card_black_border js_label" style="width: 30px; height: 30px; margin: 0px 5px;" />
+            <img id="silver_label_small" class="silver_bg img-circle js_label" style="width: 30px; height: 30px; margin: 0px 5px;" />
+            <img id="bronze_label_small" class="bronze_bg img-circle js_label" style="width: 30px; height: 30px; margin: 0px 5px;" />
+        </div>
+    </div>
+    <div class="col-lg-8 text-right" id="label_or_text">
+        <h1 class="multilang col-lg-12" text="label_label_or"></h1>
+        <br />
+        <p class="multilang col-lg-10 col-lg-offset-2" text="label_label_or_description"></p>
+    </div>
+    <div class="col-lg-8 text-right hide" id="label_silver_text">
+        <h1 class="multilang col-lg-12" text="label_label_silver"></h1>
+        <br />
+        <p class="multilang col-lg-10 col-lg-offset-2" text="label_label_silver_description"></p>
+    </div>
+    <div class="col-lg-8 text-right hide" id="label_bronze_text">
+        <h1 class="multilang col-lg-12" text="label_label_bronze"></h1>
+        <br />
+        <p class="multilang col-lg-10 col-lg-offset-2" text="label_label_bronze_description"></p>
+    </div>
 </div>
 
 <script>
     var onDataLoaded = function() {
         console.log('Label content loaded');
+        $('#label_silver_text').removeClass('hide');
+        $('#label_bronze_text').removeClass('hide');
+
+        $('#label_silver_text').hide();
+        $('#label_bronze_text').hide();
+        $('.js_label').each(function() {
+            $(this).mouseenter(function() {
+                $('.js_label').each(function() {
+                    $(this).removeClass('card_black_border');
+                });
+                $(this).addClass('card_black_border');
+                $('#label_area').removeClass('gold_bg');
+                $('#label_area').removeClass('silver_bg');
+                $('#label_area').removeClass('bronze_bg');
+
+                $('#label_or_text').hide();
+                $('#label_silver_text').hide();
+                $('#label_bronze_text').hide();
+
+                switch ($(this).attr('id')) {
+                    case "gold_label_small":
+                        $('#label_area').addClass('gold_bg');
+                        $('#label_or_text').show();
+                        break;
+                    case "silver_label_small":
+                        $('#label_area').addClass('silver_bg');
+                        $('#label_silver_text').show();
+                        break;
+                    case "bronze_label_small":
+                        $('#label_area').addClass('bronze_bg');
+                        $('#label_bronze_text').show();
+                        break;
+                }
+            })
+        });
     };
 </script>

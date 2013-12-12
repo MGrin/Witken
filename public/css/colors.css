@@ -1,12 +1,43 @@
-.white_color {
+.white_text {
     color: white;
 }
-.grey_color {
+
+.grey_text {
     color: grey;
 }
-.black_color{
-    color: #343434;   
+
+.black_text {
+    color: #343434;
 }
-.yellow_color {
+
+.gold_text {
     color: rgb(199, 134, 39);
+}
+
+.red_bg {
+    background-color: rgb(222, 70, 73);
+}
+
+.grey_light_bg {
+    background-color: rgb(238, 238, 238);
+}
+
+.grey_dark_bg {
+    background-color: rgb(218, 218, 218);
+}
+
+.black_light_bg {
+    background-color: rgb(48, 49, 53);
+}
+
+.gold_bg {
+    background-color: rgb(194, 168, 91);
+}
+
+.silver_bg {
+    background-color: rgb(172, 172, 172);
+}
+
+.bronze_bg {
+    background-color: rgb(210, 132, 110);
 }
