@@ -7,7 +7,9 @@ var eb_client = Eventbrite({
 });
 
 exports.init = function () {
-    exports.updateEventsData();
+    exports.updateEventsData(function(){
+        
+    });
 }
 
 exports.ORGANIZATION = "MGSDD";
