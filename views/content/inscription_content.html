@@ -51,10 +51,7 @@
             //                console.log(JSON.stringify(res));
             //            });
 
-            window.open(
-                choosenEvent.url,
-                '_blank' // <- This is what makes it open in a new window.
-            );
+             document.location.href = choosenEvent.url;
         });
         constructLocations();
     }

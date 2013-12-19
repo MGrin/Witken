@@ -7,8 +7,8 @@ var eb_client = Eventbrite({
 });
 
 exports.init = function () {
-    exports.updateEventsData(function(){
-        
+    exports.updateEventsData(function () {
+
     });
 }
 
@@ -69,10 +69,24 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         count: exports.MAX_NUMBER_OF_PARTICIPANTS,
     }, function (err, data) {
         if (err) {
-            console.log('Error from eventbrite: ' + err);
-            return callback('Error from eventbrite: ' + err);
+            console.log('Error from eventbrite: ' + JSON.stringify(err));
+            return callback('Error from eventbrite: ' + JSON.stringify(err));
         }
-        User.confirmOrder(data, function (err, user) {
+        var attendees = data.attendees;
+        var user;
+
+        for (var i = 0; i < attendees.length; i++) {
+            if (attendees[i].attendee.order_id === parseInt(orderID)) {
+                user = attendees[i].attendee;
+                break;
+            }
+        }
+        
+        if (!user) {
+            console.log('Error while verifing order');
+            return callback('Error while verifing order');
+        }
+        User.confirmOrder(user, function (err, user) {
             if (err) {
                 console.log('Error from userDB: ' + err);
                 return callback('Error from userDB: ' + err);

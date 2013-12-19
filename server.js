@@ -93,6 +93,8 @@ app.get('/examen', routes.examen.index);
 
 app.get('/witken', routes.witken.index);
 
+app.get('/auth', routes.auth);
+
 app.post('/auth', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         var data = new Object();
@@ -132,5 +134,6 @@ app.listen(port, function () {
     console.log("Listening on " + port);
 });
 
+console.log(process.env);
 exports.mode = process.env.MODE || 'DEV';
 exports.connected = process.env.CONNECTED || "YES"

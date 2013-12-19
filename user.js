@@ -1,3 +1,5 @@
+var randomstring = require("randomstring");
+
 var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'
 var mongoose = require('mongoose');
 
@@ -17,81 +19,137 @@ exports.init = function () {
 
 var userSchema = mongoose.Schema({
     email: String,
-    password: String,
+    password: {
+        type: String,
+        default: randomstring.generate()
+    },
+    hasPassword: {
+        type: Boolean,
+        default: false
+    },
     human_data: {
-        name: String,
-        familly_name: String,
-        birthday: Date,
-        state: String
+        prefix: String,
+        first_name: String,
+        last_name: String,
+        gender: String,
+        birth_date: Date,
     },
-    meta: {
-        email_verified: {
-            type: Boolean,
-            default: false
-        },
-        registration: {
-            type: Date,
-            default: Date.now
-        }
+    contact: {
+        home_phone: String,
+        cell_phone: String,
+        home_address: String,
+        home_postal_code: String,
+        home_country_code: String,
+        home_city: String,
     },
-    exam: {
-        date: Date,
-        city: String,
-        payed: Boolean,
-        payement: {
-            method: String,
-            price: String
-        }
+    job: {
+        job_title: String,
+        work_address: String
     },
-    labels: {
-        obtained: {
-            type: Boolean,
-            default: false
+    eventbrite: [
+        {
+            event_id: Number,
+            ticket_id: Number
+            }
+        ],
+    witken: {
+        results: {
+            type: Array,
+            default: [],
         }
     }
 });
 
 userSchema.methods.validPassword = function (p) {
-    return p === this.password;
+    if (this.hasPassword) {
+        return p === this.password;
+    } else {
+        return false;
+    }
 }
 
 var User = mongoose.model('User', userSchema);
 
 exports.confirmOrder = function (eb_data, callback) {
-
-    return callback(null, {
-        email: "balbal",
-        password: "asasd",
+    var user = new User({
+        email: eb_data.email,
         human_data: {
-            name: 'Test',
-            familly_name: 'User'
+            prefix: eb_data.prefix,
+            first_name: eb_data.first_name,
+            last_name: eb_data.last_name,
+            gender: eb_data.gender,
+            birth_date: new Date(eb_data.birth_date),
+        },
+        contact: {
+            home_phone: eb_data.home_phone,
+            cell_phone: eb_data.cell_phone,
+            home_address: eb_data.home_address,
+            home_postal_code: eb_data.home_postal_code,
+            home_country_code: eb_data.home_country_code,
+            home_city: eb_data.home_city,
+        },
+        job: {
+            job_title: eb_data.job_title,
+            work_address: eb_data.work_address
+        },
+        eventbrite: [
+            {
+                event_id: eb_data.event_id,
+                ticket_id: eb_data.ticket_id
+            }
+        ]
+    });
+
+    var query = generateQuery(user);
+    User.find(query, function (err, results) {
+        if (err) {
+            return callback(err);
+        }
+        if (results.length === 0) {
+            //No such user!
+            user.save(function (err, u) {
+                return callback(err, getPublicObject(u));
+            })
+        } else {
+            if (results.length > 1) {
+                console.log('OH SHIT!');
+                return callback('Server problems!');
+            }
+
+            return callback(null, getPublicObject(results[0]));
         }
     });
-    
-    //    User.find({
-    //        email: email,
-    //        password: pass
-    //    }, function (err, results) {
-    //        if (err) {
-    //            return callback(err);
-    //        }
-    //        if (results.length == 0) {
-    //            var u = new User({
-    //                email: email,
-    //                password: pass,
-    //                human_data: {
-    //                    name: 'Test',
-    //                    familly_name: 'User'
-    //                }
-    //            });
-    //            u.save(function (err, us) {
-    //                return callback(err, us);
-    //            });
-    //        } else {
-    //            return callback(null, false);
-    //        }
-    //    });
+}
 
+var generateQuery = function (user) {
+    return {
+        email: user.email
+    }
+}
+
+var getPublicObject = function (user) {
+    return {
+        email: user.email,
+        human_data: {
+            prefix: user.human_data.prefix,
+            first_name: user.human_data.first_name,
+            last_name: user.human_data.last_name,
+            gender: user.human_data.gender,
+            birth_date: new Date(user.human_data.birth_date),
+        },
+        contact: {
+            home_phone: user.contact.home_phone,
+            cell_phone: user.contact.cell_phone,
+            home_address: user.contact.home_address,
+            home_postal_code: user.contact.home_postal_code,
+            home_country_code: user.contact.home_country_code,
+            home_city: user.contact.home_city,
+        },
+        job: {
+            job_title: user.contact.job_title,
+            work_address: user.contact.work_address
+        }
+    };
 }
 
 exports.findOne = function (query, callback) {
@@ -110,18 +168,3 @@ exports.findOne = function (query, callback) {
         return callback(null, users[0]);
     });
 }
-
-//if (require('./server.js').mode === 'DEV') {
-//    var testUser = exports.createNewUser('test@test.com', '123qweQWE', function (err, u) {
-//        if (err) {
-//            return console.log('Failed to create user ' + 'test@test.com');
-//        }
-//        if (!u) {
-//            return console.log('User ' + 'test@test.com' + ' exists');
-//        }
-//
-//        if (u) {
-//            return console.log('User ' + u.email + ' created!');
-//        }
-//    });
-//}

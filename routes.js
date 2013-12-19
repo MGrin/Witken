@@ -42,8 +42,8 @@ exports.confirm_order = function (req, res) {
     var orderID = req.query.oid;
     events.confirmOrder(eventID, orderID, function (err, user) {
         var params = generateParams(req, 'inscription');
-        params.err='None';
-        params.user='None';
+        params.err = 'None';
+        params.user = 'None';
         if (err) {
             params.err = err;
         } else {
@@ -67,12 +67,17 @@ exports.index = function (req, res) {
     res.render('template.html', generateParams(req, 'index'));
 }
 
+exports.auth = function (req, res) {
+    res.render('template.html', generateParams(req, 'auth'));
+}
 exports.label = {};
 exports.examen = {};
 exports.witken = {};
 
 exports.label.index = function (req, res) {
-    res.render('template.html', generateParams(req, 'label_index'));
+    var params = generateParams(req, 'label_index');
+    params.user = req.param('user');
+    res.render('template.html', params);
 }
 
 exports.examen.index = function (req, res) {

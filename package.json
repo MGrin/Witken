@@ -9,6 +9,7 @@
         "passport": "*",
         "passport-local": "*",
         "mongoose": "*",
-        "eventbrite": "*"
+        "eventbrite": "*",
+        "randomstring": "*"
     }
 }

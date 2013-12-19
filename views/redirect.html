@@ -1,5 +1,11 @@
 <!doctype html>
 <html>
+§;if(connected=='YES'){;§
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+§;}else if(connected=='NO'){;§
+<script src="/js/jquery-2.0.3.min.js"></script>
+§;};§
 
 <body>
     <h1>Redirect page</h1>
@@ -7,7 +13,14 @@
     <p>Error: §;=err;§</p>
     §;};§
     §;if(user!='None'){;§
-    <p>User: §;=JSON.stringify(user);§</p>
+    <script>
+        $.get('/auth', {            
+            user: §;- JSON.stringify(user);§
+        },function(data) {
+            console.log(data);
+            $('html').html(data);
+        });
+    </script>
     §;};§
 </body>
 
