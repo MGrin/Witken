@@ -48,6 +48,7 @@ exports.inscription = function (req, res) {
 exports.confirm_order = function (req, res) {
     var eventID = req.query.eid;
     var orderID = req.query.oid;
+    
     events.confirmOrder(eventID, orderID, function (err, user) {
         var params = generateParams(req, 'sign_up');
         params.err = 'None';
