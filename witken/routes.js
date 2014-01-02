@@ -1,13 +1,14 @@
 var events = process.env.APP_COV
   ? require(__dirname + '/../cov/eventbrite.js') 
   : require(__dirname + '/eventbrite.js')
+var server = require('../server');
 
 function generateParams(req, content) {
     var par = {};
 
     par.content = content;
 
-    par.connected = require('./server.js').connected;
+    par.connected = server.connected;
     if (!req.param('lang')) {
         par.lang = 'fr';
     } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {
