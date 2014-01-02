@@ -7,9 +7,7 @@ var eb_client = Eventbrite({
 });
 
 exports.init = function () {
-    exports.updateEventsData(function () {
-
-    });
+    exports.updateEventsData(function () {});
 }
 
 exports.ORGANIZATION = "MGSDD";
@@ -81,7 +79,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
                 break;
             }
         }
-        
+
         if (!user) {
             console.log('Error while verifing order');
             return callback('Error while verifing order');
