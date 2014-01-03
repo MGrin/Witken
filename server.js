@@ -53,10 +53,10 @@ app.get('/examen', routes.examen);
 
 app.get('/witken', routes.witken);
 
-app.get('/auth', routes.auth);
-
 //POST stuff
 app.post('/auth', auth.authenticate);
+
+app.post('/signup', auth.signup);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function () {

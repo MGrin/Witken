@@ -1,6 +1,4 @@
-var events = process.env.APP_COV
-  ? require(__dirname + '/../cov/eventbrite.js') 
-  : require(__dirname + '/eventbrite.js')
+var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') : require(__dirname + '/eventbrite.js')
 var server = require('../server');
 
 function generateParams(req, content) {
@@ -32,11 +30,6 @@ function generateParams(req, content) {
     return par;
 }
 
-exports.auth = function (req, res) {
-    res.render('template.html', generateParams(req, 'auth'));
-}
-
-
 exports.inscription = function (req, res) {
     var params = generateParams(req, 'inscription');
     events.getValidEvents(function (events) {
@@ -48,7 +41,7 @@ exports.inscription = function (req, res) {
 exports.confirm_order = function (req, res) {
     var eventID = req.query.eid;
     var orderID = req.query.oid;
-    
+
     events.confirmOrder(eventID, orderID, function (err, user) {
         var params = generateParams(req, 'sign_up');
         params.err = 'None';
@@ -58,7 +51,12 @@ exports.confirm_order = function (req, res) {
         } else {
             params.user = user;
         }
-        res.render('template.html', params);
+        console.log('Confirmation order for user '+JSON.stringify(params.user)+', hasPassword='+params.user.hasPassword);
+        if (params.user && params.user.hasPassword) {
+            res.redirect('/inscription');
+        } else {
+            res.render('template.html', params);
+        }
     })
 }
 

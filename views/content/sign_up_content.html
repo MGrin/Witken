@@ -1,14 +1,59 @@
-<h1>Sign up</h1>
-<div>
-<p>Data: </p>
 §;if(err!='None'){;§
-    <p>Error: §;=err;§</p>
+<p class="text-danger">Error: §;=err;§</p>
 §;}else if(user!='None'){;§
-    <p>User: §;=JSON.stringify(user);§</p>
-§;};§
+<div class="card grey_dark_bg">
+    <h1>
+        <span class="multilang" text="general_hello">Hi,</span>§;=user.human_data.prefix;§ §;=user.human_data.last_name;§!
+    </h1>
+    <div class="row">
+        <div class="form col-lg-4">
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label>Repeat password</label>
+                <input type="password" class="form-control" id="password_repeat" placeholder="Repeat password">
+            </div>
+            <button class="btn btn-default" id="sign_up_submit_btn">Submit</button>
+        </div>
+    </div>
 </div>
+§;};§
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
 <script>
     var onDataLoaded = function() {
-        console.log('Sign up content loaded');
+        var passwd_chk = function(pwd, pwd_rpt) {
+            if (!pwd || pwd === '' || !pwd_rpt || pwd_rpt === '') {
+                return {
+                    field: 'passwd',
+                    err: 'Empty fields'
+                };
+            }
+        }
+
+        $('#sign_up_submit_btn').click(function() {
+            var passwd = $('#password').val();
+            var passwd_rpt = $('#password_repeat').val();
+
+            var test_res = passwd_chk(passwd, passwd_rpt);
+            
+            if (test_res) {
+                alert(JSON.stringify(test_res));
+            } else {
+                var params = {};
+                params.user_email = '§;=user.email;§';
+                params.pass = CryptoJS.MD5(passwd).toString();
+                
+                $.post('/signup', params, function(data) {
+                    alert('Success');
+                    if (data.err) {
+                        alert('Error: ' + data.err);
+                    } else if (data.redirect) {
+                        document.location.href = document.location.origin + data.redirect + '?lang=' + current_lang;
+                    }
+                })
+            }
+        });
     };
 </script>

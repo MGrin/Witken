@@ -1,4 +1,5 @@
 var randomstring = require("randomstring");
+var crypto = require('crypto');
 
 var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'
 var mongoose = require('mongoose');
@@ -9,7 +10,7 @@ exports.init = function () {
 
     db.on('error', function () {
         console.log('Failed to connect to UsersDB');
-        if (require('./server.js').connected === 'YES')
+        if (require('../server.js').connected === 'YES')
             process.exit(1);
     });
     db.once('open', function callback() {
@@ -19,6 +20,10 @@ exports.init = function () {
 
 var userSchema = mongoose.Schema({
     email: String,
+    password_sel: {
+        type: String,
+        default: randomstring.generate(3)
+    },
     password: {
         type: String,
         default: randomstring.generate()
@@ -62,7 +67,8 @@ var userSchema = mongoose.Schema({
 
 userSchema.methods.validPassword = function (p) {
     if (this.hasPassword) {
-        return p === this.password;
+        var selled_hash = crypto.createHash('md5').update(this.password_sel + p).digest('base64');
+        return selled_hash === this.password;
     } else {
         return false;
     }
@@ -130,6 +136,7 @@ var generateQuery = function (user) {
 var getPublicObject = function (user) {
     return {
         email: user.email,
+        hasPassword: user.hasPassword,
         human_data: {
             prefix: user.human_data.prefix,
             first_name: user.human_data.first_name,
@@ -166,5 +173,32 @@ exports.findOne = function (query, callback) {
             return callback('More than one user with the same ' + JSON.stringify(query));
         }
         return callback(null, users[0]);
+    });
+}
+
+exports.setPassword = function (email, passwd, callback) {
+    User.find({
+        email: email
+    }, function (err, users) {
+        if(err){
+            return callback(err);
+        }
+        
+        if(users.length === 0){
+            return callback('No user found');
+        }
+        
+        if(users.length > 1){
+            return callback('More than one user with email '+email+', please contact us');
+        }
+        
+        users[0].password = crypto.createHash('md5').update(users[0].password_sel + passwd).digest('base64');
+        users[0].hasPassword = true;
+        users[0].save(function(err, u){
+            if(err){
+                return callback(err);
+            }
+            return callback();
+        })
     });
 }
