@@ -54,6 +54,15 @@ function setupOnClickEvents() {
             bindOnContentReceiveEvent(data, 'Witken - Inscription', href);
         });
     });
+    
+    $('.js_redirect_profile').click(function () {
+        var href = '/profile?lang=' + current_lang;
+        $.get(href, {
+            ajax: true
+        }, function (data) {
+            bindOnContentReceiveEvent(data, 'Witken - Profile', href);
+        });
+    });
 
     $('.js_redirect_logout').click(function () {
         document.location.href = document.location.origin + '/logout' + '?lang=' + current_lang;

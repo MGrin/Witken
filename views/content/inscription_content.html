@@ -1,6 +1,7 @@
 <div class="card grey_dark_bg row">
-    <h1>Inscription</h1>
+
     <div class="col-lg-4">
+        <h1>Inscription</h1>
         <div id="location_form" class="form-group">
             <label>Location:</label>
             <select id="location_selection" class="form-control">
@@ -22,11 +23,20 @@
         </div>
         <button id="proceed_btn" class="btn btn-default hide">Proceed</button>
     </div>
-    <div id="eventbrite">
-
+    <div class="col-lg-4 col-lg-offset-4">
+        <h1>Login</h1>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <button class="btn btn-default" id="login_submit_btn">Submit</button>
     </div>
 </div>
-
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
 <script>
     var events = §;- JSON.stringify(events);§;
 
@@ -36,6 +46,28 @@
     var choosenEvent;
 
     var onDataLoaded = function() {
+        $('#login_submit_btn').click(function() {
+            var testInputData = function(email, passwd) {
+                return undefined;
+            }
+
+            var email = $('#email').val();
+            var pwd = $('#password').val();
+
+            var test_res = testInputData(email, pwd);
+            if (test_res) {
+
+            } else {
+                pwd = CryptoJS.MD5(pwd).toString();
+                $.post('/auth', {
+                    username: email,
+                    password: pwd
+                }, function(data) {
+                    alert(JSON.stringify(data));
+                });
+            }
+        });
+
         console.log('Inscription content loaded');
         $('#location_selection').change(onLocationChanged);
         $('#date_selection').change(onDateChanged);
