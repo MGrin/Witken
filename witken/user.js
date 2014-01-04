@@ -4,6 +4,13 @@ var crypto = require('crypto');
 var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'
 var mongoose = require('mongoose');
 
+var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+
+exports.setDB = function (url) {
+    witken_users = url;
+}
+
 exports.init = function () {
     mongoose.connect(witken_users);
     var db = mongoose.connection;
@@ -75,57 +82,7 @@ userSchema.methods.validPassword = function (p) {
 }
 
 var User = mongoose.model('User', userSchema);
-
-exports.confirmOrder = function (eb_data, callback) {
-    var user = new User({
-        email: eb_data.email,
-        human_data: {
-            prefix: eb_data.prefix,
-            first_name: eb_data.first_name,
-            last_name: eb_data.last_name,
-            gender: eb_data.gender,
-            birth_date: new Date(eb_data.birth_date),
-        },
-        contact: {
-            home_phone: eb_data.home_phone,
-            cell_phone: eb_data.cell_phone,
-            home_address: eb_data.home_address,
-            home_postal_code: eb_data.home_postal_code,
-            home_country_code: eb_data.home_country_code,
-            home_city: eb_data.home_city,
-        },
-        job: {
-            job_title: eb_data.job_title,
-            work_address: eb_data.work_address
-        },
-        eventbrite: [
-            {
-                event_id: eb_data.event_id,
-                ticket_id: eb_data.ticket_id
-            }
-        ]
-    });
-
-    var query = generateQuery(user);
-    User.find(query, function (err, results) {
-        if (err) {
-            return callback(err);
-        }
-        if (results.length === 0) {
-            //No such user!
-            user.save(function (err, u) {
-                return callback(err, getPublicObject(u));
-            })
-        } else {
-            if (results.length > 1) {
-                console.log('OH SHIT!');
-                return callback('Server problems!');
-            }
-
-            return callback(null, getPublicObject(results[0]));
-        }
-    });
-}
+exports.User = User;
 
 var generateQuery = function (user) {
     return {
@@ -159,10 +116,27 @@ var getPublicObject = function (user) {
     };
 }
 
+exports.addUser = function (user, callback) {
+    User.find(user, function (err, users) {
+        if (err) {
+            return callback(err);
+        }
+        if (users.length === 0) {
+            user.save(function (err, u) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    return callback(null, u)
+                }
+            });
+        } else {
+            return callback('Already registered');
+        }
+    });
+}
+
 exports.findOne = function (query, callback) {
-    console.log('User.findOne called with query ' + JSON.stringify(query));
     User.find(query, function (err, users) {
-        console.log('Result: err=' + err + ', users=' + JSON.stringify(users));
         if (err) {
             return callback(err);
         }
@@ -177,28 +151,84 @@ exports.findOne = function (query, callback) {
 }
 
 exports.setPassword = function (email, passwd, callback) {
-    User.find({
+    User.findOne({
         email: email
-    }, function (err, users) {
-        if(err){
+    }, function (err, us) {
+        if (err) {
             return callback(err);
         }
-        
-        if(users.length === 0){
+
+        if (!us) {
             return callback('No user found');
         }
-        
-        if(users.length > 1){
-            return callback('More than one user with email '+email+', please contact us');
+
+        if (us.hasPassword === true) {
+            return callback('Already have password');
         }
-        
-        users[0].password = crypto.createHash('md5').update(users[0].password_sel + passwd).digest('base64');
-        users[0].hasPassword = true;
-        users[0].save(function(err, u){
-            if(err){
-                return callback(err);
+
+        us.password = crypto.createHash('md5').update(us.password_sel + passwd).digest('base64');
+        us.hasPassword = true;
+        us.save();
+        return callback(null, us);
+    });
+}
+
+exports.changePassword = function (email, new_passwd, passwd, callback) {
+    User.findOne({
+        email: email
+    }, function (err, us) {
+        if (err) {
+            return callback(err);
+        }
+
+        if (!us) {
+            return callback('No user found');
+        }
+
+        if (!us.validPassword(passwd)) {
+            return callback('Wrong old password');
+        }
+
+        us.password = crypto.createHash('md5').update(us.password_sel + new_passwd).digest('base64');
+        us.save();
+        return callback(null, us);
+    });
+}
+
+exports.confirmOrder = function (eb_data, callback) {
+    var user = new User({
+        email: eb_data.email,
+        human_data: {
+            prefix: eb_data.prefix,
+            first_name: eb_data.first_name,
+            last_name: eb_data.last_name,
+            gender: eb_data.gender,
+            birth_date: new Date(eb_data.birth_date),
+        },
+        contact: {
+            home_phone: eb_data.home_phone,
+            cell_phone: eb_data.cell_phone,
+            home_address: eb_data.home_address,
+            home_postal_code: eb_data.home_postal_code,
+            home_country_code: eb_data.home_country_code,
+            home_city: eb_data.home_city,
+        },
+        job: {
+            job_title: eb_data.job_title,
+            work_address: eb_data.work_address
+        },
+        eventbrite: [
+            {
+                event_id: eb_data.event_id,
+                ticket_id: eb_data.ticket_id
             }
-            return callback();
-        })
+        ]
+    });
+
+    exports.addUser(user, function (err, u) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(null, getPublicObject(u))
     });
 }

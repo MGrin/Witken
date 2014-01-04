@@ -13,7 +13,7 @@ exports.init = function () {
 exports.ORGANIZATION = "MGSDD";
 exports.ORGANIZATION_ID = 5669656715;
 
-exports.MAX_NUMBER_OF_PARTICIPANTS = 150;
+exports.MAX_NUMBER_OF_PARTICIPANTS = 100;
 
 var events = [];
 
@@ -22,7 +22,8 @@ exports.updateEventsData = function (callback) {
         id: exports.ORGANIZATION_ID
     }, function (err, data) {
         if (err) {
-            return console.log('Error while retrieving events from eventbrite: ' + err);
+            console.log('Error while retrieving events from eventbrite: ' + err);
+            return callback('Error while retrieving events from eventbrite: ' + err);
         }
 
         for (var i = 0; i < data.events.length; i++) {
@@ -52,12 +53,11 @@ exports.updateEventsData = function (callback) {
             events.push(event);
         }
 
-        callback();
+        callback(null, events);
     });
 }
 
 exports.confirmOrder = function (eventID, orderID, callback) {
-    console.log('Confirming order ' + eventID + ' ' + orderID);
     if (!eventID || !orderID) {
         return callback('Faild to confirm your order. Please send us an email with this data: eid=' + eventID + ' oid=' + orderID);
     }
@@ -67,7 +67,6 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         count: exports.MAX_NUMBER_OF_PARTICIPANTS,
     }, function (err, data) {
         if (err) {
-            console.log('Error from eventbrite: ' + JSON.stringify(err));
             return callback('Error from eventbrite: ' + JSON.stringify(err));
         }
         var attendees = data.attendees;
@@ -81,7 +80,6 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         }
 
         if (!user) {
-            console.log('Error while verifing order');
             return callback('Error while verifing order');
         }
         User.confirmOrder(user, function (err, user) {
@@ -97,5 +95,25 @@ exports.confirmOrder = function (eventID, orderID, callback) {
 exports.getValidEvents = function (callback) {
     exports.updateEventsData(function () {
         callback(events);
+    });
+}
+
+exports.getAttendees = function (eventID, callback) {
+    eb_client.event_list_attendees({
+        id: eventID,
+        count: exports.MAX_NUMBER_OF_PARTICIPANTS,
+    }, function (err, data) {
+        if (err) {
+            return callback('Error from eventbrite: ' + JSON.stringify(err));
+        }
+        var attendees = data.attendees;
+        var res = [];
+        var user;
+
+        for (var i = 0; i < attendees.length; i++) {
+            res.push(attendees[i].attendee);
+        }
+        
+        callback(null, res);
     });
 }

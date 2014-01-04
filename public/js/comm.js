@@ -28,15 +28,6 @@ function setupOnClickEvents() {
         });
     });
 
-    $('.js_redirect_indexation').click(function () {
-        var href = '/indexation?lang=' + current_lang;
-        $.get(href, {
-            ajax: true
-        }, function (data) {
-            bindOnContentReceiveEvent(data, 'Indexation', href);
-        });
-    });
-
     $('.js_redirect_witken').click(function () {
         var href = '/witken?lang=' + current_lang;
         $.get(href, {

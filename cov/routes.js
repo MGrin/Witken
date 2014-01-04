@@ -3,185 +3,186 @@ if (typeof _$jscoverage === 'undefined') _$jscoverage = {};
 if (! _$jscoverage['routes.js']) {
   _$jscoverage['routes.js'] = [];
   _$jscoverage['routes.js'][1] = 0;
-  _$jscoverage['routes.js'][5] = 0;
+  _$jscoverage['routes.js'][3] = 0;
+  _$jscoverage['routes.js'][4] = 0;
   _$jscoverage['routes.js'][6] = 0;
   _$jscoverage['routes.js'][8] = 0;
+  _$jscoverage['routes.js'][9] = 0;
   _$jscoverage['routes.js'][10] = 0;
   _$jscoverage['routes.js'][11] = 0;
   _$jscoverage['routes.js'][12] = 0;
-  _$jscoverage['routes.js'][13] = 0;
   _$jscoverage['routes.js'][14] = 0;
-  _$jscoverage['routes.js'][16] = 0;
-  _$jscoverage['routes.js'][19] = 0;
+  _$jscoverage['routes.js'][17] = 0;
+  _$jscoverage['routes.js'][18] = 0;
   _$jscoverage['routes.js'][20] = 0;
-  _$jscoverage['routes.js'][22] = 0;
-  _$jscoverage['routes.js'][25] = 0;
+  _$jscoverage['routes.js'][23] = 0;
+  _$jscoverage['routes.js'][24] = 0;
   _$jscoverage['routes.js'][26] = 0;
-  _$jscoverage['routes.js'][28] = 0;
-  _$jscoverage['routes.js'][31] = 0;
+  _$jscoverage['routes.js'][29] = 0;
+  _$jscoverage['routes.js'][32] = 0;
+  _$jscoverage['routes.js'][33] = 0;
   _$jscoverage['routes.js'][34] = 0;
   _$jscoverage['routes.js'][35] = 0;
-  _$jscoverage['routes.js'][39] = 0;
+  _$jscoverage['routes.js'][36] = 0;
   _$jscoverage['routes.js'][40] = 0;
   _$jscoverage['routes.js'][41] = 0;
   _$jscoverage['routes.js'][42] = 0;
-  _$jscoverage['routes.js'][43] = 0;
+  _$jscoverage['routes.js'][44] = 0;
+  _$jscoverage['routes.js'][45] = 0;
+  _$jscoverage['routes.js'][46] = 0;
   _$jscoverage['routes.js'][47] = 0;
   _$jscoverage['routes.js'][48] = 0;
   _$jscoverage['routes.js'][49] = 0;
-  _$jscoverage['routes.js'][50] = 0;
   _$jscoverage['routes.js'][51] = 0;
-  _$jscoverage['routes.js'][52] = 0;
   _$jscoverage['routes.js'][53] = 0;
   _$jscoverage['routes.js'][54] = 0;
   _$jscoverage['routes.js'][55] = 0;
   _$jscoverage['routes.js'][57] = 0;
-  _$jscoverage['routes.js'][59] = 0;
+  _$jscoverage['routes.js'][62] = 0;
   _$jscoverage['routes.js'][63] = 0;
-  _$jscoverage['routes.js'][64] = 0;
-  _$jscoverage['routes.js'][65] = 0;
-  _$jscoverage['routes.js'][69] = 0;
+  _$jscoverage['routes.js'][66] = 0;
+  _$jscoverage['routes.js'][67] = 0;
+  _$jscoverage['routes.js'][68] = 0;
   _$jscoverage['routes.js'][70] = 0;
   _$jscoverage['routes.js'][71] = 0;
   _$jscoverage['routes.js'][73] = 0;
   _$jscoverage['routes.js'][74] = 0;
+  _$jscoverage['routes.js'][75] = 0;
   _$jscoverage['routes.js'][76] = 0;
-  _$jscoverage['routes.js'][77] = 0;
-  _$jscoverage['routes.js'][78] = 0;
   _$jscoverage['routes.js'][79] = 0;
-  _$jscoverage['routes.js'][82] = 0;
+  _$jscoverage['routes.js'][80] = 0;
   _$jscoverage['routes.js'][83] = 0;
-  _$jscoverage['routes.js'][86] = 0;
-  _$jscoverage['routes.js'][87] = 0;
+  _$jscoverage['routes.js'][84] = 0;
 }
 _$jscoverage['routes.js'][1]++;
-var events = process.env.APP_COV? require(__dirname + "/../cov/eventbrite.js"): require(__dirname + "/witken/eventbrite.js");
-_$jscoverage['routes.js'][5]++;
+var events = process.env.APP_COV? require(__dirname + "/../cov/eventbrite.js"): require(__dirname + "/eventbrite.js");
+_$jscoverage['routes.js'][3]++;
 function generateParams(req, content) {
-  _$jscoverage['routes.js'][6]++;
+  _$jscoverage['routes.js'][4]++;
   var par = {};
-  _$jscoverage['routes.js'][8]++;
+  _$jscoverage['routes.js'][6]++;
   par.content = content;
-  _$jscoverage['routes.js'][10]++;
-  par.connected = require("./server.js").connected;
-  _$jscoverage['routes.js'][11]++;
+  _$jscoverage['routes.js'][8]++;
+  par.connected = require("../server.js").connected;
+  _$jscoverage['routes.js'][9]++;
   if (! req.param("lang")) {
-    _$jscoverage['routes.js'][12]++;
+    _$jscoverage['routes.js'][10]++;
     par.lang = "fr";
   }
   else {
-    _$jscoverage['routes.js'][13]++;
+    _$jscoverage['routes.js'][11]++;
     if (req.param("lang") === "fr" || req.param("lang") === "en") {
-      _$jscoverage['routes.js'][14]++;
+      _$jscoverage['routes.js'][12]++;
       par.lang = req.param("lang");
     }
     else {
-      _$jscoverage['routes.js'][16]++;
+      _$jscoverage['routes.js'][14]++;
       par.lang = "fr";
     }
   }
-  _$jscoverage['routes.js'][19]++;
+  _$jscoverage['routes.js'][17]++;
   if (! req.param("ajax")) {
-    _$jscoverage['routes.js'][20]++;
+    _$jscoverage['routes.js'][18]++;
     par.render = "full";
   }
   else {
-    _$jscoverage['routes.js'][22]++;
+    _$jscoverage['routes.js'][20]++;
     par.render = "part";
   }
-  _$jscoverage['routes.js'][25]++;
+  _$jscoverage['routes.js'][23]++;
   if (! req.user) {
-    _$jscoverage['routes.js'][26]++;
+    _$jscoverage['routes.js'][24]++;
     par.user = "None";
   }
   else {
-    _$jscoverage['routes.js'][28]++;
+    _$jscoverage['routes.js'][26]++;
     par.user = req.user;
   }
-  _$jscoverage['routes.js'][31]++;
+  _$jscoverage['routes.js'][29]++;
   return par;
 }
-_$jscoverage['routes.js'][34]++;
-exports.auth = (function (req, res) {
-  _$jscoverage['routes.js'][35]++;
-  res.render("template.html", generateParams(req, "auth"));
-});
-_$jscoverage['routes.js'][39]++;
+_$jscoverage['routes.js'][32]++;
 exports.inscription = (function (req, res) {
-  _$jscoverage['routes.js'][40]++;
+  _$jscoverage['routes.js'][33]++;
   var params = generateParams(req, "inscription");
-  _$jscoverage['routes.js'][41]++;
+  _$jscoverage['routes.js'][34]++;
   events.getValidEvents((function (events) {
-  _$jscoverage['routes.js'][42]++;
+  _$jscoverage['routes.js'][35]++;
   params.events = events;
-  _$jscoverage['routes.js'][43]++;
+  _$jscoverage['routes.js'][36]++;
   res.render("template.html", params);
 }));
 });
-_$jscoverage['routes.js'][47]++;
+_$jscoverage['routes.js'][40]++;
 exports.confirm_order = (function (req, res) {
-  _$jscoverage['routes.js'][48]++;
+  _$jscoverage['routes.js'][41]++;
   var eventID = req.query.eid;
-  _$jscoverage['routes.js'][49]++;
+  _$jscoverage['routes.js'][42]++;
   var orderID = req.query.oid;
-  _$jscoverage['routes.js'][50]++;
+  _$jscoverage['routes.js'][44]++;
   events.confirmOrder(eventID, orderID, (function (err, user) {
-  _$jscoverage['routes.js'][51]++;
+  _$jscoverage['routes.js'][45]++;
   var params = generateParams(req, "sign_up");
-  _$jscoverage['routes.js'][52]++;
+  _$jscoverage['routes.js'][46]++;
   params.err = "None";
-  _$jscoverage['routes.js'][53]++;
+  _$jscoverage['routes.js'][47]++;
   params.user = "None";
-  _$jscoverage['routes.js'][54]++;
+  _$jscoverage['routes.js'][48]++;
   if (err) {
-    _$jscoverage['routes.js'][55]++;
+    _$jscoverage['routes.js'][49]++;
     params.err = err;
   }
   else {
-    _$jscoverage['routes.js'][57]++;
+    _$jscoverage['routes.js'][51]++;
     params.user = user;
   }
-  _$jscoverage['routes.js'][59]++;
-  res.render("template.html", params);
+  _$jscoverage['routes.js'][53]++;
+  console.log("Confirmation order for user " + JSON.stringify(params.user) + ", hasPassword=" + params.user.hasPassword);
+  _$jscoverage['routes.js'][54]++;
+  if (params.user && params.user.hasPassword) {
+    _$jscoverage['routes.js'][55]++;
+    res.redirect("/inscription");
+  }
+  else {
+    _$jscoverage['routes.js'][57]++;
+    res.render("template.html", params);
+  }
 }));
 });
-_$jscoverage['routes.js'][63]++;
-exports.eventbrite = (function (req, res) {
-  _$jscoverage['routes.js'][64]++;
-  events.getEventFromEventbrite(req.param("id"), (function (data) {
-  _$jscoverage['routes.js'][65]++;
-  res.send(data);
-}));
+_$jscoverage['routes.js'][62]++;
+exports.profile = (function (req, res) {
+  _$jscoverage['routes.js'][63]++;
+  res.render("template.html", generateParams(req, "profile"));
 });
-_$jscoverage['routes.js'][69]++;
+_$jscoverage['routes.js'][66]++;
 exports.logout = (function (req, res) {
-  _$jscoverage['routes.js'][70]++;
+  _$jscoverage['routes.js'][67]++;
   req.logout();
-  _$jscoverage['routes.js'][71]++;
+  _$jscoverage['routes.js'][68]++;
   res.redirect("/");
 });
-_$jscoverage['routes.js'][73]++;
+_$jscoverage['routes.js'][70]++;
 exports.index = (function (req, res) {
-  _$jscoverage['routes.js'][74]++;
+  _$jscoverage['routes.js'][71]++;
   res.render("template.html", generateParams(req, "index"));
 });
-_$jscoverage['routes.js'][76]++;
+_$jscoverage['routes.js'][73]++;
 exports.label = (function (req, res) {
-  _$jscoverage['routes.js'][77]++;
+  _$jscoverage['routes.js'][74]++;
   var params = generateParams(req, "label_index");
-  _$jscoverage['routes.js'][78]++;
+  _$jscoverage['routes.js'][75]++;
   params.user = req.param("user");
-  _$jscoverage['routes.js'][79]++;
+  _$jscoverage['routes.js'][76]++;
   res.render("template.html", params);
 });
-_$jscoverage['routes.js'][82]++;
+_$jscoverage['routes.js'][79]++;
 exports.examen = (function (req, res) {
-  _$jscoverage['routes.js'][83]++;
+  _$jscoverage['routes.js'][80]++;
   res.render("template.html", generateParams(req, "examen_index"));
 });
-_$jscoverage['routes.js'][86]++;
+_$jscoverage['routes.js'][83]++;
 exports.witken = (function (req, res) {
-  _$jscoverage['routes.js'][87]++;
+  _$jscoverage['routes.js'][84]++;
   res.render("template.html", generateParams(req, "witken_index"));
 });
-_$jscoverage['routes.js'].source = ["var events = process.env.APP_COV","  ? require(__dirname + '/../cov/eventbrite.js') ","  : require(__dirname + '/witken/eventbrite.js')","","function generateParams(req, content) {","    var par = {};","","    par.content = content;","","    par.connected = require('./server.js').connected;","    if (!req.param('lang')) {","        par.lang = 'fr';","    } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {","        par.lang = req.param('lang');","    } else {","        par.lang = 'fr';","    }","","    if (!req.param('ajax')) {","        par.render = 'full';","    } else {","        par.render = 'part';","    }","","    if (!req.user) {","        par.user = 'None';","    } else {","        par.user = req.user;","    }","","    return par;","}","","exports.auth = function (req, res) {","    res.render('template.html', generateParams(req, 'auth'));","}","","","exports.inscription = function (req, res) {","    var params = generateParams(req, 'inscription');","    events.getValidEvents(function (events) {","        params.events = events;","        res.render('template.html', params);","    });","}","","exports.confirm_order = function (req, res) {","    var eventID = req.query.eid;","    var orderID = req.query.oid;","    events.confirmOrder(eventID, orderID, function (err, user) {","        var params = generateParams(req, 'sign_up');","        params.err = 'None';","        params.user = 'None';","        if (err) {","            params.err = err;","        } else {","            params.user = user;","        }","        res.render('template.html', params);","    })","}","","exports.eventbrite = function (req, res) {","    events.getEventFromEventbrite(req.param('id'), function (data) {","        res.send(data);","    })","}","","exports.logout = function (req, res) {","    req.logout();","    res.redirect('/');","}","exports.index = function (req, res) {","    res.render('template.html', generateParams(req, 'index'));","}","exports.label = function (req, res) {","    var params = generateParams(req, 'label_index');","    params.user = req.param('user');","    res.render('template.html', params);","}","","exports.examen = function (req, res) {","    res.render('template.html', generateParams(req, 'examen_index'));","}","","exports.witken = function (req, res) {","    res.render('template.html', generateParams(req, 'witken_index'));","}"];
+_$jscoverage['routes.js'].source = ["var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') : require(__dirname + '/eventbrite.js')","","function generateParams(req, content) {","    var par = {};","","    par.content = content;","","    par.connected = require('../server.js').connected;","    if (!req.param('lang')) {","        par.lang = 'fr';","    } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {","        par.lang = req.param('lang');","    } else {","        par.lang = 'fr';","    }","","    if (!req.param('ajax')) {","        par.render = 'full';","    } else {","        par.render = 'part';","    }","","    if (!req.user) {","        par.user = 'None';","    } else {","        par.user = req.user;","    }","","    return par;","}","","exports.inscription = function (req, res) {","    var params = generateParams(req, 'inscription');","    events.getValidEvents(function (events) {","        params.events = events;","        res.render('template.html', params);","    });","}","","exports.confirm_order = function (req, res) {","    var eventID = req.query.eid;","    var orderID = req.query.oid;","","    events.confirmOrder(eventID, orderID, function (err, user) {","        var params = generateParams(req, 'sign_up');","        params.err = 'None';","        params.user = 'None';","        if (err) {","            params.err = err;","        } else {","            params.user = user;","        }","        console.log('Confirmation order for user ' + JSON.stringify(params.user) + ', hasPassword=' + params.user.hasPassword);","        if (params.user &amp;&amp; params.user.hasPassword) {","            res.redirect('/inscription');","        } else {","            res.render('template.html', params);","        }","    });","}","","exports.profile = function(req, res){","    res.render('template.html', generateParams(req, 'profile'));","}","","exports.logout = function (req, res) {","    req.logout();","    res.redirect('/');","}","exports.index = function (req, res) {","    res.render('template.html', generateParams(req, 'index'));","}","exports.label = function (req, res) {","    var params = generateParams(req, 'label_index');","    params.user = req.param('user');","    res.render('template.html', params);","}","","exports.examen = function (req, res) {","    res.render('template.html', generateParams(req, 'examen_index'));","}","","exports.witken = function (req, res) {","    res.render('template.html', generateParams(req, 'witken_index'));","}"];

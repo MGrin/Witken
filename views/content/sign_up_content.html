@@ -6,14 +6,15 @@
         <span class="multilang" text="general_hello">Hi,</span>§;=user.human_data.prefix;§ §;=user.human_data.last_name;§!
     </h1>
     <div class="row">
-        <div class="form col-lg-4">
-            <div class="form-group">
+        <div class="form col-lg-4" id="sign_up_form">
+            <div class="form-group" id="pwd_div">
                 <label>Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="pwd_rpt_div">
                 <label>Repeat password</label>
                 <input type="password" class="form-control" id="password_repeat" placeholder="Repeat password">
+                <span class="help-block" id="error_div"></span>
             </div>
             <button class="btn btn-default" id="sign_up_submit_btn">Submit</button>
         </div>
@@ -22,14 +23,20 @@
 §;};§
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
 <script>
+    var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+    var user = §;- JSON.stringify(user);§ ;
+
     var onDataLoaded = function() {
         var passwd_chk = function(pwd, pwd_rpt) {
-            if (!pwd || pwd === '' || !pwd_rpt || pwd_rpt === '') {
-                return {
-                    field: 'passwd',
-                    err: 'Empty fields'
-                };
+            if (!passRE.test(pwd)) {
+                return 'Wrong password format';
             }
+
+            if (pwd !== pwd_rpt) {
+                return 'Passwords are differents';
+            }
+
+            return undefined;
         }
 
         $('#sign_up_submit_btn').click(function() {
@@ -37,20 +44,36 @@
             var passwd_rpt = $('#password_repeat').val();
 
             var test_res = passwd_chk(passwd, passwd_rpt);
-            
+
+            $('#error_div').text('');
+            $('#pwd_div').removeClass('has-error');
+            $('#pwd_rpt_div').removeClass('has-error');
+
             if (test_res) {
-                alert(JSON.stringify(test_res));
+                $('#error_div').text(test_res);
+                $('#pwd_div').addClass('has-error');
+                $('#pwd_rpt_div').addClass('has-error');
             } else {
                 var params = {};
                 params.user_email = '§;=user.email;§';
                 params.pass = CryptoJS.MD5(passwd).toString();
-                
+
+                $('#sign_up_form').block({
+                    message: 'Loading'
+                });
                 $.post('/signup', params, function(data) {
-                    alert('Success');
+                    $('#sign_up_form').unblock();
                     if (data.err) {
-                        alert('Error: ' + data.err);
-                    } else if (data.redirect) {
-                        document.location.href = document.location.origin + data.redirect + '?lang=' + current_lang;
+                        $('#error_div').text(data.err);
+                        $('#pwd_div').addClass('has-error');
+                        $('#pwd_rpt_div').addClass('has-error');
+                    } else {
+                        var href = '/profile?lang=' + current_lang;
+                        $.get(href, {
+                            ajax: true
+                        }, function(data) {
+                            bindOnContentReceiveEvent(data, 'Witken - Profile', href);
+                        });
                     }
                 })
             }

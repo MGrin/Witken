@@ -28,11 +28,11 @@ describe('Routes', function(){
         should.exist(routes.confirm_order);
     });
     
+    it('should have a profile page', function(){
+        should.exist(routes.profile);
+    });
+    
     it('should have a route to the logout page', function(){
         should.exist(routes.logout);
     });
-});
-
-describe('Routes.index', function(){
-    
 });

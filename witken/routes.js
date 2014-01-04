@@ -1,12 +1,11 @@
 var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') : require(__dirname + '/eventbrite.js')
-var server = require('../server');
 
 function generateParams(req, content) {
     var par = {};
 
     par.content = content;
 
-    par.connected = server.connected;
+    par.connected = require('../server.js').connected;
     if (!req.param('lang')) {
         par.lang = 'fr';
     } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {
@@ -51,19 +50,23 @@ exports.confirm_order = function (req, res) {
         } else {
             params.user = user;
         }
-        console.log('Confirmation order for user '+JSON.stringify(params.user)+', hasPassword='+params.user.hasPassword);
-        if (params.user && params.user.hasPassword) {
+        
+        console.log(params.user);
+        if (params.user && params.user.hasPassword===true) {
             res.redirect('/inscription');
         } else {
             res.render('template.html', params);
         }
-    })
+    });
 }
 
-exports.eventbrite = function (req, res) {
-    events.getEventFromEventbrite(req.param('id'), function (data) {
-        res.send(data);
-    })
+exports.profile = function(req, res){
+    var params = generateParams(req, 'profile');
+    if(params.user!='None'){
+        res.render('template.html', params);
+    }else{
+        res.render('template.html', generateParams(req, 'inscription'))
+    }    
 }
 
 exports.logout = function (req, res) {

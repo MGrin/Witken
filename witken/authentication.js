@@ -78,22 +78,20 @@ exports.authenticate = function (req, res, next) {
                 return res.send(data);
             }
             data.redirect = {
-                path: '/'
+                path: '/profile'
             }
             return res.send(data);
         });
     })(req, res, next);
 }
 
-exports.signup = function(req, res){
+exports.signup = function (req, res) {
     var user_email = req.body.user_email;
     var passwd = req.body.pass;
-    
-    user.setPassword(user_email, passwd, function(err){
-        if(err){
-            res.send({err: err});
-        }else{
-            res.send({redirect: '/profile'});
-        }
+
+    user.setPassword(user_email, passwd, function (err) {
+        res.send({
+            err: err
+        });
     });
 }
