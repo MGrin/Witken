@@ -51,8 +51,7 @@ exports.confirm_order = function (req, res) {
             params.user = user;
         }
         
-        console.log(params.user);
-        if (params.user && params.user.hasPassword===true) {
+        if (params.err) {
             res.redirect('/inscription');
         } else {
             res.render('template.html', params);
@@ -65,7 +64,7 @@ exports.profile = function(req, res){
     if(params.user!='None'){
         res.render('template.html', params);
     }else{
-        res.render('template.html', generateParams(req, 'inscription'))
+        res.redirect('/inscription');
     }    
 }
 
@@ -78,7 +77,6 @@ exports.index = function (req, res) {
 }
 exports.label = function (req, res) {
     var params = generateParams(req, 'label_index');
-    params.user = req.param('user');
     res.render('template.html', params);
 }
 

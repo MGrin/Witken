@@ -84,8 +84,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         }
         User.confirmOrder(user, function (err, user) {
             if (err) {
-                console.log('Error from userDB: ' + err);
-                return callback('Error from userDB: ' + err);
+                return callback(err);
             }
             return callback(null, user);
         });
@@ -113,7 +112,7 @@ exports.getAttendees = function (eventID, callback) {
         for (var i = 0; i < attendees.length; i++) {
             res.push(attendees[i].attendee);
         }
-        
+
         callback(null, res);
     });
 }

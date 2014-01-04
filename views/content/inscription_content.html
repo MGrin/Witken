@@ -101,7 +101,8 @@
                     password: pwd
                 }, function(data) {
                     $('#login_form').unblock();
-                    if (data.err) {
+                    console.log(data);
+                    if (data.err && data.err.length>0) {
                         data.err.forEach(function(err) {
                             if (err.field === 'email') {
                                 $('#email_sign_in').addClass('has-error');
@@ -113,6 +114,8 @@
                                 $('#password_error_div').text(err.error);
                             }
                         });
+                    }else if(data.redirect){
+                        document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
                     }
                 });
             }

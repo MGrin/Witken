@@ -52,7 +52,7 @@
     </div>
 
     <div class="user-space-support red_bg white_text col-lg-2 col-md-2 col-sm-2 hidden-xs">
-        §;if(user==='None'){;§
+        §;if(user==='None' || user === undefined){;§
         <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
         §;}else{;§
         <h3>§;= user.human_data.first_name ;§ §;= user.human_data.last_name;§</h3>

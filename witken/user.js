@@ -117,7 +117,9 @@ var getPublicObject = function (user) {
 }
 
 exports.addUser = function (user, callback) {
-    User.find(user, function (err, users) {
+    User.find({
+        email: user.email
+    }, function (err, users) {
         if (err) {
             return callback(err);
         }
