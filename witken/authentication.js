@@ -3,33 +3,30 @@ var passport = require('passport'),
 exports.passport = passport;
 
 var user = require('./user.js');
+var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');
 
 exports.passportInit = function () {
     passport.use(new LocalStrategy(
         function (username, password, done) {
-            console.log('Using Passport local strategy with credentials: ' + username + '/' + password);
+            //console.log('Using Passport local strategy with credentials: ' + username + '/' + password);
             user.findOne({
                 email: username
             }, function (err, user) {
                 if (err) {
-                    console.log('Error whiel calling user.findOne(): ' + err)
+                    //console.log('Error whiel calling user.findOne(): ' + err)
                     return done(err);
                 }
                 if (!user) {
-                    console.log('Error: Incorent username');
-                    return done(null, false, {
-                        field: 'email',
-                        message: 'Incorrect username.'
-                    });
+                    //console.log('Error: Incorent username');
+                    var err = utils.generateInputError('email', 'Incorrect username.');
+                    return done(null, false, err);
                 }
                 if (!user.validPassword(password)) {
-                    console.log('Error: Incorrect password');
-                    return done(null, false, {
-                        field: 'pass',
-                        message: 'Incorrect password.'
-                    });
+                    //console.log('Error: Incorrect password');
+                    var err = utils.generateInputError('pass', 'Incorrect password.');
+                    return done(null, false, err);
                 }
-                console.log('Using Passport local strategy with credentials: ' + username + '/' + password + ' success!');
+                //console.log('Using Passport local strategy with credentials: ' + username + '/' + password + ' success!');
                 return done(null, user);
             });
         }
@@ -41,11 +38,11 @@ exports.passportInit = function () {
     });
 
     passport.deserializeUser(function (id, done) {
-        console.log('Deserializing of ' + id);
+        //console.log('Deserializing of ' + id);
         user.findOne({
             _id: id
         }, function (err, user) {
-            console.log('Obtaining ' + JSON.stringify(user));
+            //console.log('Obtaining ' + JSON.stringify(user));
             done(err, user);
         });
     });
@@ -54,27 +51,17 @@ exports.passportInit = function () {
 exports.authenticate = function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         var data = new Object();
-        data.err = [];
         if (err) {
-            data.err.push({
-                field: 'general',
-                error: err
-            });
+            data.err = utils.generateInputError('general', err);
             return res.send(data);
         }
         if (!user) {
-            data.err.push({
-                field: info.field,
-                error: info.message
-            });
+            data.err = info;
             return res.send(data);
         }
         req.logIn(user, function (err) {
             if (err) {
-                data.err.push({
-                    field: 'general',
-                    error: err
-                });
+                data.err = utils.generateInputError('general', err);
                 return res.send(data);
             }
             data.redirect = {
@@ -90,8 +77,10 @@ exports.signup = function (req, res) {
     var passwd = req.body.pass;
 
     user.setPassword(user_email, passwd, function (err) {
-        res.send({
-            err: err
-        });
+        if (err) {
+            res.send({
+                err: err
+            });
+        }
     });
 }

@@ -5,7 +5,8 @@ function generateParams(req, content) {
 
     par.content = content;
 
-    par.connected = require('../server.js').connected;
+    par.connected = 'YES';
+    
     if (!req.param('lang')) {
         par.lang = 'fr';
     } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {
@@ -76,8 +77,7 @@ exports.index = function (req, res) {
     res.render('template.html', generateParams(req, 'index'));
 }
 exports.label = function (req, res) {
-    var params = generateParams(req, 'label_index');
-    res.render('template.html', params);
+    res.render('template.html', generateParams(req, 'label_index'));
 }
 
 exports.examen = function (req, res) {

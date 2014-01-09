@@ -1,4 +1,5 @@
 var User = require('./user.js');
+var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');
 
 var Eventbrite = require('eventbrite');
 var eb_client = Eventbrite({
@@ -22,8 +23,8 @@ exports.updateEventsData = function (callback) {
         id: exports.ORGANIZATION_ID
     }, function (err, data) {
         if (err) {
-            console.log('Error while retrieving events from eventbrite: ' + err);
-            return callback('Error while retrieving events from eventbrite: ' + err);
+            //console.log('Error while retrieving events from eventbrite: ' + err);
+            return callback(utils.generateDatabaseError('Eventbrite', err));
         }
 
         for (var i = 0; i < data.events.length; i++) {
@@ -59,7 +60,7 @@ exports.updateEventsData = function (callback) {
 
 exports.confirmOrder = function (eventID, orderID, callback) {
     if (!eventID || !orderID) {
-        return callback('Faild to confirm your order. Please send us an email with this data: eid=' + eventID + ' oid=' + orderID);
+        return callback(utils.generateRoutingError('Order confirmation', 'fatal', 'Faild to confirm your order. Please contact us. Sorry for that.'));
     }
 
     eb_client.event_list_attendees({
@@ -67,7 +68,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         count: exports.MAX_NUMBER_OF_PARTICIPANTS,
     }, function (err, data) {
         if (err) {
-            return callback('Error from eventbrite: ' + JSON.stringify(err));
+            return callback(utils.generateDatabaseError('Eventbrite', err));
         }
         var attendees = data.attendees;
         var user;
@@ -80,7 +81,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         }
 
         if (!user) {
-            return callback('Error while verifing order');
+            return callback(utils.generateDatabaseError('Eventbrite', 'Failed to verify order, please contact us. Sorry for that.'));
         }
         User.confirmOrder(user, function (err, user) {
             if (err) {

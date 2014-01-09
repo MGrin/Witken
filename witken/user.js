@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
 
+var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');
+
 exports.setDB = function (url) {
     witken_users = url;
 }
@@ -21,7 +23,7 @@ exports.init = function () {
             process.exit(1);
     });
     db.once('open', function callback() {
-        console.log('Connected to UsersDB');
+        //console.log('Connected to UsersDB');
     });
 }
 
@@ -121,18 +123,18 @@ exports.addUser = function (user, callback) {
         email: user.email
     }, function (err, users) {
         if (err) {
-            return callback(err);
+            return callback(utils.generateDatabaseError('User', err));
         }
         if (users.length === 0) {
             user.save(function (err, u) {
                 if (err) {
-                    return callback(err);
+                    return callback(utils.generateDatabaseError('User', err));
                 } else {
                     return callback(null, u)
                 }
             });
         } else {
-            return callback('Already registered');
+            return callback(utils.generateServerError('fatal', 'Already registered'));
         }
     });
 }
@@ -140,13 +142,13 @@ exports.addUser = function (user, callback) {
 exports.findOne = function (query, callback) {
     User.find(query, function (err, users) {
         if (err) {
-            return callback(err);
+            return callback(utils.generateDatabaseError('User', err));
         }
         if (users.length === 0) {
-            return callback(err, null);
+            return callback(null, null);
         }
         if (users.length > 1) {
-            return callback('More than one user with the same ' + JSON.stringify(query));
+            return callback(utils.generateDatabaseError('User', 'More than one user with the same ' + JSON.stringify(query)));
         }
         return callback(null, users[0]);
     });
@@ -157,15 +159,15 @@ exports.setPassword = function (email, passwd, callback) {
         email: email
     }, function (err, us) {
         if (err) {
-            return callback(err);
+            return callback(utils.generateDatabaseError('User', err));
         }
 
         if (!us) {
-            return callback('No user found');
+            return callback(utils.generateServerError('warning', 'User '+email+' not found'));
         }
 
         if (us.hasPassword === true) {
-            return callback('Already have password');
+            return callback(utils.generateServerError('fatal', 'Already has password'));
         }
 
         us.password = crypto.createHash('md5').update(us.password_sel + passwd).digest('base64');
@@ -180,15 +182,15 @@ exports.changePassword = function (email, new_passwd, passwd, callback) {
         email: email
     }, function (err, us) {
         if (err) {
-            return callback(err);
+            return callback(utils.generateDatabaseError('User', err));
         }
 
         if (!us) {
-            return callback('No user found');
+            return callback(utils.generateServerError('warning', 'No user found'));
         }
 
         if (!us.validPassword(passwd)) {
-            return callback('Wrong old password');
+            return callback(utils.generateInputError('password', 'Wrong old password'));
         }
 
         us.password = crypto.createHash('md5').update(us.password_sel + new_passwd).digest('base64');

@@ -76,8 +76,6 @@ describe('User', function () {
             user.addUser(u, function (err, us) {
                 should.exist(err);
                 should.not.exist(us);
-
-                err.should.be.equal('Already registered');
             });
         });
 

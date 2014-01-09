@@ -9,80 +9,76 @@ if (! _$jscoverage['user.js']) {
   _$jscoverage['user.js'][7] = 0;
   _$jscoverage['user.js'][8] = 0;
   _$jscoverage['user.js'][10] = 0;
-  _$jscoverage['user.js'][11] = 0;
-  _$jscoverage['user.js'][14] = 0;
-  _$jscoverage['user.js'][15] = 0;
+  _$jscoverage['user.js'][12] = 0;
+  _$jscoverage['user.js'][13] = 0;
   _$jscoverage['user.js'][16] = 0;
+  _$jscoverage['user.js'][17] = 0;
   _$jscoverage['user.js'][18] = 0;
-  _$jscoverage['user.js'][19] = 0;
   _$jscoverage['user.js'][20] = 0;
   _$jscoverage['user.js'][21] = 0;
+  _$jscoverage['user.js'][22] = 0;
   _$jscoverage['user.js'][23] = 0;
-  _$jscoverage['user.js'][24] = 0;
-  _$jscoverage['user.js'][28] = 0;
-  _$jscoverage['user.js'][75] = 0;
-  _$jscoverage['user.js'][76] = 0;
+  _$jscoverage['user.js'][25] = 0;
+  _$jscoverage['user.js'][30] = 0;
   _$jscoverage['user.js'][77] = 0;
   _$jscoverage['user.js'][78] = 0;
+  _$jscoverage['user.js'][79] = 0;
   _$jscoverage['user.js'][80] = 0;
-  _$jscoverage['user.js'][84] = 0;
-  _$jscoverage['user.js'][85] = 0;
+  _$jscoverage['user.js'][82] = 0;
+  _$jscoverage['user.js'][86] = 0;
   _$jscoverage['user.js'][87] = 0;
-  _$jscoverage['user.js'][88] = 0;
-  _$jscoverage['user.js'][93] = 0;
-  _$jscoverage['user.js'][94] = 0;
-  _$jscoverage['user.js'][119] = 0;
-  _$jscoverage['user.js'][120] = 0;
+  _$jscoverage['user.js'][89] = 0;
+  _$jscoverage['user.js'][90] = 0;
+  _$jscoverage['user.js'][95] = 0;
+  _$jscoverage['user.js'][96] = 0;
   _$jscoverage['user.js'][121] = 0;
   _$jscoverage['user.js'][122] = 0;
-  _$jscoverage['user.js'][124] = 0;
   _$jscoverage['user.js'][125] = 0;
   _$jscoverage['user.js'][126] = 0;
-  _$jscoverage['user.js'][127] = 0;
+  _$jscoverage['user.js'][128] = 0;
   _$jscoverage['user.js'][129] = 0;
+  _$jscoverage['user.js'][130] = 0;
+  _$jscoverage['user.js'][131] = 0;
   _$jscoverage['user.js'][133] = 0;
-  _$jscoverage['user.js'][138] = 0;
-  _$jscoverage['user.js'][139] = 0;
-  _$jscoverage['user.js'][140] = 0;
-  _$jscoverage['user.js'][141] = 0;
+  _$jscoverage['user.js'][137] = 0;
+  _$jscoverage['user.js'][142] = 0;
   _$jscoverage['user.js'][143] = 0;
   _$jscoverage['user.js'][144] = 0;
-  _$jscoverage['user.js'][146] = 0;
+  _$jscoverage['user.js'][145] = 0;
   _$jscoverage['user.js'][147] = 0;
-  _$jscoverage['user.js'][149] = 0;
+  _$jscoverage['user.js'][148] = 0;
+  _$jscoverage['user.js'][150] = 0;
+  _$jscoverage['user.js'][151] = 0;
   _$jscoverage['user.js'][153] = 0;
-  _$jscoverage['user.js'][154] = 0;
   _$jscoverage['user.js'][157] = 0;
   _$jscoverage['user.js'][158] = 0;
   _$jscoverage['user.js'][161] = 0;
   _$jscoverage['user.js'][162] = 0;
   _$jscoverage['user.js'][165] = 0;
   _$jscoverage['user.js'][166] = 0;
-  _$jscoverage['user.js'][168] = 0;
   _$jscoverage['user.js'][169] = 0;
-  _$jscoverage['user.js'][172] = 0;
+  _$jscoverage['user.js'][170] = 0;
   _$jscoverage['user.js'][173] = 0;
   _$jscoverage['user.js'][174] = 0;
   _$jscoverage['user.js'][175] = 0;
-  _$jscoverage['user.js'][179] = 0;
+  _$jscoverage['user.js'][176] = 0;
   _$jscoverage['user.js'][180] = 0;
-  _$jscoverage['user.js'][183] = 0;
+  _$jscoverage['user.js'][181] = 0;
   _$jscoverage['user.js'][184] = 0;
-  _$jscoverage['user.js'][187] = 0;
+  _$jscoverage['user.js'][185] = 0;
   _$jscoverage['user.js'][188] = 0;
-  _$jscoverage['user.js'][191] = 0;
+  _$jscoverage['user.js'][189] = 0;
   _$jscoverage['user.js'][192] = 0;
-  _$jscoverage['user.js'][195] = 0;
+  _$jscoverage['user.js'][193] = 0;
   _$jscoverage['user.js'][196] = 0;
-  _$jscoverage['user.js'][199] = 0;
-  _$jscoverage['user.js'][200] = 0;
-  _$jscoverage['user.js'][201] = 0;
-  _$jscoverage['user.js'][205] = 0;
-  _$jscoverage['user.js'][206] = 0;
-  _$jscoverage['user.js'][235] = 0;
+  _$jscoverage['user.js'][197] = 0;
+  _$jscoverage['user.js'][198] = 0;
+  _$jscoverage['user.js'][202] = 0;
+  _$jscoverage['user.js'][203] = 0;
+  _$jscoverage['user.js'][232] = 0;
+  _$jscoverage['user.js'][233] = 0;
+  _$jscoverage['user.js'][234] = 0;
   _$jscoverage['user.js'][236] = 0;
-  _$jscoverage['user.js'][237] = 0;
-  _$jscoverage['user.js'][239] = 0;
 }
 _$jscoverage['user.js'][1]++;
 var randomstring = require("randomstring");
@@ -97,194 +93,184 @@ var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 _$jscoverage['user.js'][8]++;
 var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
 _$jscoverage['user.js'][10]++;
+var utils = process.env.APP_COV? require(__dirname + "/../cov/utils.js"): require(__dirname + "/utils.js");
+_$jscoverage['user.js'][12]++;
 exports.setDB = (function (url) {
-  _$jscoverage['user.js'][11]++;
+  _$jscoverage['user.js'][13]++;
   witken_users = url;
 });
-_$jscoverage['user.js'][14]++;
+_$jscoverage['user.js'][16]++;
 exports.init = (function () {
-  _$jscoverage['user.js'][15]++;
+  _$jscoverage['user.js'][17]++;
   mongoose.connect(witken_users);
-  _$jscoverage['user.js'][16]++;
-  var db = mongoose.connection;
   _$jscoverage['user.js'][18]++;
-  db.on("error", (function () {
-  _$jscoverage['user.js'][19]++;
-  console.log("Failed to connect to UsersDB");
+  var db = mongoose.connection;
   _$jscoverage['user.js'][20]++;
+  db.on("error", (function () {
+  _$jscoverage['user.js'][21]++;
+  console.log("Failed to connect to UsersDB");
+  _$jscoverage['user.js'][22]++;
   if (require("../server.js").connected === "YES") {
-    _$jscoverage['user.js'][21]++;
+    _$jscoverage['user.js'][23]++;
     process.exit(1);
   }
 }));
-  _$jscoverage['user.js'][23]++;
+  _$jscoverage['user.js'][25]++;
   db.once("open", (function callback() {
-  _$jscoverage['user.js'][24]++;
-  console.log("Connected to UsersDB");
 }));
 });
-_$jscoverage['user.js'][28]++;
+_$jscoverage['user.js'][30]++;
 var userSchema = mongoose.Schema({email: String, password_sel: {type: String, default: randomstring.generate(3)}, password: {type: String, default: randomstring.generate()}, hasPassword: {type: Boolean, default: false}, human_data: {prefix: String, first_name: String, last_name: String, gender: String, birth_date: Date}, contact: {home_phone: String, cell_phone: String, home_address: String, home_postal_code: String, home_country_code: String, home_city: String}, job: {job_title: String, work_address: String}, eventbrite: [{event_id: Number, ticket_id: Number}], witken: {results: {type: Array, default: []}}});
-_$jscoverage['user.js'][75]++;
+_$jscoverage['user.js'][77]++;
 userSchema.methods.validPassword = (function (p) {
-  _$jscoverage['user.js'][76]++;
+  _$jscoverage['user.js'][78]++;
   if (this.hasPassword) {
-    _$jscoverage['user.js'][77]++;
+    _$jscoverage['user.js'][79]++;
     var selled_hash = crypto.createHash("md5").update(this.password_sel + p).digest("base64");
-    _$jscoverage['user.js'][78]++;
+    _$jscoverage['user.js'][80]++;
     return selled_hash === this.password;
   }
   else {
-    _$jscoverage['user.js'][80]++;
+    _$jscoverage['user.js'][82]++;
     return false;
   }
 });
-_$jscoverage['user.js'][84]++;
+_$jscoverage['user.js'][86]++;
 var User = mongoose.model("User", userSchema);
-_$jscoverage['user.js'][85]++;
-exports.User = User;
 _$jscoverage['user.js'][87]++;
+exports.User = User;
+_$jscoverage['user.js'][89]++;
 var generateQuery = (function (user) {
-  _$jscoverage['user.js'][88]++;
+  _$jscoverage['user.js'][90]++;
   return ({email: user.email});
 });
-_$jscoverage['user.js'][93]++;
+_$jscoverage['user.js'][95]++;
 var getPublicObject = (function (user) {
-  _$jscoverage['user.js'][94]++;
+  _$jscoverage['user.js'][96]++;
   return ({email: user.email, hasPassword: user.hasPassword, human_data: {prefix: user.human_data.prefix, first_name: user.human_data.first_name, last_name: user.human_data.last_name, gender: user.human_data.gender, birth_date: new Date(user.human_data.birth_date)}, contact: {home_phone: user.contact.home_phone, cell_phone: user.contact.cell_phone, home_address: user.contact.home_address, home_postal_code: user.contact.home_postal_code, home_country_code: user.contact.home_country_code, home_city: user.contact.home_city}, job: {job_title: user.contact.job_title, work_address: user.contact.work_address}});
 });
-_$jscoverage['user.js'][119]++;
+_$jscoverage['user.js'][121]++;
 exports.addUser = (function (user, callback) {
-  _$jscoverage['user.js'][120]++;
-  User.find(user, (function (err, users) {
-  _$jscoverage['user.js'][121]++;
+  _$jscoverage['user.js'][122]++;
+  User.find({email: user.email}, (function (err, users) {
+  _$jscoverage['user.js'][125]++;
   if (err) {
-    _$jscoverage['user.js'][122]++;
-    return callback(err);
+    _$jscoverage['user.js'][126]++;
+    return callback(utils.generateDatabaseError("User", err));
   }
-  _$jscoverage['user.js'][124]++;
+  _$jscoverage['user.js'][128]++;
   if (users.length === 0) {
-    _$jscoverage['user.js'][125]++;
+    _$jscoverage['user.js'][129]++;
     user.save((function (err, u) {
-  _$jscoverage['user.js'][126]++;
+  _$jscoverage['user.js'][130]++;
   if (err) {
-    _$jscoverage['user.js'][127]++;
-    return callback(err);
+    _$jscoverage['user.js'][131]++;
+    return callback(utils.generateDatabaseError("User", err));
   }
   else {
-    _$jscoverage['user.js'][129]++;
+    _$jscoverage['user.js'][133]++;
     return callback(null, u);
   }
 }));
   }
   else {
-    _$jscoverage['user.js'][133]++;
-    return callback("Already registered");
+    _$jscoverage['user.js'][137]++;
+    return callback(utils.generateServerError("fatal", "Already registered"));
   }
 }));
 });
-_$jscoverage['user.js'][138]++;
+_$jscoverage['user.js'][142]++;
 exports.findOne = (function (query, callback) {
-  _$jscoverage['user.js'][139]++;
-  User.find(query, (function (err, users) {
-  _$jscoverage['user.js'][140]++;
-  if (err) {
-    _$jscoverage['user.js'][141]++;
-    return callback(err);
-  }
   _$jscoverage['user.js'][143]++;
+  User.find(query, (function (err, users) {
+  _$jscoverage['user.js'][144]++;
+  if (err) {
+    _$jscoverage['user.js'][145]++;
+    return callback(utils.generateDatabaseError("User", err));
+  }
+  _$jscoverage['user.js'][147]++;
   if (users.length === 0) {
-    _$jscoverage['user.js'][144]++;
-    return callback(err, null);
+    _$jscoverage['user.js'][148]++;
+    return callback(null, null);
   }
-  _$jscoverage['user.js'][146]++;
+  _$jscoverage['user.js'][150]++;
   if (users.length > 1) {
-    _$jscoverage['user.js'][147]++;
-    return callback("More than one user with the same " + JSON.stringify(query));
+    _$jscoverage['user.js'][151]++;
+    return callback(utils.generateDatabaseError("User", "More than one user with the same " + JSON.stringify(query)));
   }
-  _$jscoverage['user.js'][149]++;
+  _$jscoverage['user.js'][153]++;
   return callback(null, users[0]);
 }));
 });
-_$jscoverage['user.js'][153]++;
+_$jscoverage['user.js'][157]++;
 exports.setPassword = (function (email, passwd, callback) {
-  _$jscoverage['user.js'][154]++;
+  _$jscoverage['user.js'][158]++;
   User.findOne({email: email}, (function (err, us) {
-  _$jscoverage['user.js'][157]++;
-  if (err) {
-    _$jscoverage['user.js'][158]++;
-    return callback(err);
-  }
   _$jscoverage['user.js'][161]++;
-  if (! us) {
+  if (err) {
     _$jscoverage['user.js'][162]++;
-    return callback("No user found");
+    return callback(utils.generateDatabaseError("User", err));
   }
   _$jscoverage['user.js'][165]++;
-  if (us.hasPassword === true) {
-    _$jscoverage['user.js'][166]++;
-    return callback("Already have password");
-  }
-  _$jscoverage['user.js'][168]++;
-  if (! passRE.test(passwd)) {
-    _$jscoverage['user.js'][169]++;
-    return callback("Wrong password format");
-  }
-  _$jscoverage['user.js'][172]++;
-  us.password = crypto.createHash("md5").update(us.password_sel + passwd).digest("base64");
-  _$jscoverage['user.js'][173]++;
-  us.hasPassword = true;
-  _$jscoverage['user.js'][174]++;
-  us.save();
-  _$jscoverage['user.js'][175]++;
-  return callback(null, us);
-}));
-});
-_$jscoverage['user.js'][179]++;
-exports.changePassword = (function (email, new_passwd, passwd, callback) {
-  _$jscoverage['user.js'][180]++;
-  User.findOne({email: email}, (function (err, us) {
-  _$jscoverage['user.js'][183]++;
-  if (err) {
-    _$jscoverage['user.js'][184]++;
-    return callback(err);
-  }
-  _$jscoverage['user.js'][187]++;
   if (! us) {
-    _$jscoverage['user.js'][188]++;
-    return callback("No user found");
+    _$jscoverage['user.js'][166]++;
+    return callback(utils.generateServerError("warning", "User " + email + " not found"));
   }
-  _$jscoverage['user.js'][191]++;
-  if (! us.validPassword(passwd)) {
-    _$jscoverage['user.js'][192]++;
-    return callback("Wrong old password");
+  _$jscoverage['user.js'][169]++;
+  if (us.hasPassword === true) {
+    _$jscoverage['user.js'][170]++;
+    return callback(utils.generateServerError("fatal", "Already has password"));
   }
-  _$jscoverage['user.js'][195]++;
-  if (! passRE.test(new_passwd)) {
-    _$jscoverage['user.js'][196]++;
-    return callback("Wrong password format");
-  }
-  _$jscoverage['user.js'][199]++;
-  us.password = crypto.createHash("md5").update(us.password_sel + new_passwd).digest("base64");
-  _$jscoverage['user.js'][200]++;
+  _$jscoverage['user.js'][173]++;
+  us.password = crypto.createHash("md5").update(us.password_sel + passwd).digest("base64");
+  _$jscoverage['user.js'][174]++;
+  us.hasPassword = true;
+  _$jscoverage['user.js'][175]++;
   us.save();
-  _$jscoverage['user.js'][201]++;
+  _$jscoverage['user.js'][176]++;
   return callback(null, us);
 }));
 });
-_$jscoverage['user.js'][205]++;
-exports.confirmOrder = (function (eb_data, callback) {
-  _$jscoverage['user.js'][206]++;
-  var user = new User({email: eb_data.email, human_data: {prefix: eb_data.prefix, first_name: eb_data.first_name, last_name: eb_data.last_name, gender: eb_data.gender, birth_date: new Date(eb_data.birth_date)}, contact: {home_phone: eb_data.home_phone, cell_phone: eb_data.cell_phone, home_address: eb_data.home_address, home_postal_code: eb_data.home_postal_code, home_country_code: eb_data.home_country_code, home_city: eb_data.home_city}, job: {job_title: eb_data.job_title, work_address: eb_data.work_address}, eventbrite: [{event_id: eb_data.event_id, ticket_id: eb_data.ticket_id}]});
-  _$jscoverage['user.js'][235]++;
-  exports.addUser(user, (function (err, u) {
-  _$jscoverage['user.js'][236]++;
+_$jscoverage['user.js'][180]++;
+exports.changePassword = (function (email, new_passwd, passwd, callback) {
+  _$jscoverage['user.js'][181]++;
+  User.findOne({email: email}, (function (err, us) {
+  _$jscoverage['user.js'][184]++;
   if (err) {
-    _$jscoverage['user.js'][237]++;
+    _$jscoverage['user.js'][185]++;
+    return callback(utils.generateDatabaseError("User", err));
+  }
+  _$jscoverage['user.js'][188]++;
+  if (! us) {
+    _$jscoverage['user.js'][189]++;
+    return callback(utils.generateServerError("warning", "No user found"));
+  }
+  _$jscoverage['user.js'][192]++;
+  if (! us.validPassword(passwd)) {
+    _$jscoverage['user.js'][193]++;
+    return callback(utils.generateInputError("password", "Wrong old password"));
+  }
+  _$jscoverage['user.js'][196]++;
+  us.password = crypto.createHash("md5").update(us.password_sel + new_passwd).digest("base64");
+  _$jscoverage['user.js'][197]++;
+  us.save();
+  _$jscoverage['user.js'][198]++;
+  return callback(null, us);
+}));
+});
+_$jscoverage['user.js'][202]++;
+exports.confirmOrder = (function (eb_data, callback) {
+  _$jscoverage['user.js'][203]++;
+  var user = new User({email: eb_data.email, human_data: {prefix: eb_data.prefix, first_name: eb_data.first_name, last_name: eb_data.last_name, gender: eb_data.gender, birth_date: new Date(eb_data.birth_date)}, contact: {home_phone: eb_data.home_phone, cell_phone: eb_data.cell_phone, home_address: eb_data.home_address, home_postal_code: eb_data.home_postal_code, home_country_code: eb_data.home_country_code, home_city: eb_data.home_city}, job: {job_title: eb_data.job_title, work_address: eb_data.work_address}, eventbrite: [{event_id: eb_data.event_id, ticket_id: eb_data.ticket_id}]});
+  _$jscoverage['user.js'][232]++;
+  exports.addUser(user, (function (err, u) {
+  _$jscoverage['user.js'][233]++;
+  if (err) {
+    _$jscoverage['user.js'][234]++;
     return callback(err);
   }
-  _$jscoverage['user.js'][239]++;
+  _$jscoverage['user.js'][236]++;
   return callback(null, getPublicObject(u));
 }));
 });
-_$jscoverage['user.js'].source = ["var randomstring = require(\"randomstring\");","var crypto = require('crypto');","","var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'","var mongoose = require('mongoose');","","var emailRE = /^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$/;","var passRE = /^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{6,}$/;","","exports.setDB = function (url) {","    witken_users = url;","}","","exports.init = function () {","    mongoose.connect(witken_users);","    var db = mongoose.connection;","","    db.on('error', function () {","        console.log('Failed to connect to UsersDB');","        if (require('../server.js').connected === 'YES')","            process.exit(1);","    });","    db.once('open', function callback() {","        console.log('Connected to UsersDB');","    });","}","","var userSchema = mongoose.Schema({","    email: String,","    password_sel: {","        type: String,","        default: randomstring.generate(3)","    },","    password: {","        type: String,","        default: randomstring.generate()","    },","    hasPassword: {","        type: Boolean,","        default: false","    },","    human_data: {","        prefix: String,","        first_name: String,","        last_name: String,","        gender: String,","        birth_date: Date,","    },","    contact: {","        home_phone: String,","        cell_phone: String,","        home_address: String,","        home_postal_code: String,","        home_country_code: String,","        home_city: String,","    },","    job: {","        job_title: String,","        work_address: String","    },","    eventbrite: [","        {","            event_id: Number,","            ticket_id: Number","            }","        ],","    witken: {","        results: {","            type: Array,","            default: [],","        }","    }","});","","userSchema.methods.validPassword = function (p) {","    if (this.hasPassword) {","        var selled_hash = crypto.createHash('md5').update(this.password_sel + p).digest('base64');","        return selled_hash === this.password;","    } else {","        return false;","    }","}","","var User = mongoose.model('User', userSchema);","exports.User = User;","","var generateQuery = function (user) {","    return {","        email: user.email","    }","}","","var getPublicObject = function (user) {","    return {","        email: user.email,","        hasPassword: user.hasPassword,","        human_data: {","            prefix: user.human_data.prefix,","            first_name: user.human_data.first_name,","            last_name: user.human_data.last_name,","            gender: user.human_data.gender,","            birth_date: new Date(user.human_data.birth_date),","        },","        contact: {","            home_phone: user.contact.home_phone,","            cell_phone: user.contact.cell_phone,","            home_address: user.contact.home_address,","            home_postal_code: user.contact.home_postal_code,","            home_country_code: user.contact.home_country_code,","            home_city: user.contact.home_city,","        },","        job: {","            job_title: user.contact.job_title,","            work_address: user.contact.work_address","        }","    };","}","","exports.addUser = function (user, callback) {","    User.find(user, function (err, users) {","        if (err) {","            return callback(err);","        }","        if (users.length === 0) {","            user.save(function (err, u) {","                if (err) {","                    return callback(err);","                } else {","                    return callback(null, u)","                }","            });","        } else {","            return callback('Already registered');","        }","    });","}","","exports.findOne = function (query, callback) {","    User.find(query, function (err, users) {","        if (err) {","            return callback(err);","        }","        if (users.length === 0) {","            return callback(err, null);","        }","        if (users.length &gt; 1) {","            return callback('More than one user with the same ' + JSON.stringify(query));","        }","        return callback(null, users[0]);","    });","}","","exports.setPassword = function (email, passwd, callback) {","    User.findOne({","        email: email","    }, function (err, us) {","        if (err) {","            return callback(err);","        }","","        if (!us) {","            return callback('No user found');","        }","","        if (us.hasPassword === true) {","            return callback('Already have password');","        }","        if(!passRE.test(passwd)){","            return callback('Wrong password format');","        }","        ","        us.password = crypto.createHash('md5').update(us.password_sel + passwd).digest('base64');","        us.hasPassword = true;","        us.save();","        return callback(null, us);","    });","}","","exports.changePassword = function (email, new_passwd, passwd, callback) {","    User.findOne({","        email: email","    }, function (err, us) {","        if (err) {","            return callback(err);","        }","","        if (!us) {","            return callback('No user found');","        }","","        if (!us.validPassword(passwd)) {","            return callback('Wrong old password');","        }","        ","        if(!passRE.test(new_passwd)){","            return callback('Wrong password format');","        }","","        us.password = crypto.createHash('md5').update(us.password_sel + new_passwd).digest('base64');","        us.save();","        return callback(null, us);","    });","}","","exports.confirmOrder = function (eb_data, callback) {","    var user = new User({","        email: eb_data.email,","        human_data: {","            prefix: eb_data.prefix,","            first_name: eb_data.first_name,","            last_name: eb_data.last_name,","            gender: eb_data.gender,","            birth_date: new Date(eb_data.birth_date),","        },","        contact: {","            home_phone: eb_data.home_phone,","            cell_phone: eb_data.cell_phone,","            home_address: eb_data.home_address,","            home_postal_code: eb_data.home_postal_code,","            home_country_code: eb_data.home_country_code,","            home_city: eb_data.home_city,","        },","        job: {","            job_title: eb_data.job_title,","            work_address: eb_data.work_address","        },","        eventbrite: [","            {","                event_id: eb_data.event_id,","                ticket_id: eb_data.ticket_id","            }","        ]","    });","","    exports.addUser(user, function (err, u) {","        if (err) {","            return callback(err);","        }","        return callback(null, getPublicObject(u))","    });","}"];
+_$jscoverage['user.js'].source = ["var randomstring = require(\"randomstring\");","var crypto = require('crypto');","","var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'","var mongoose = require('mongoose');","","var emailRE = /^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$/;","var passRE = /^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{6,}$/;","","var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');","","exports.setDB = function (url) {","    witken_users = url;","}","","exports.init = function () {","    mongoose.connect(witken_users);","    var db = mongoose.connection;","","    db.on('error', function () {","        console.log('Failed to connect to UsersDB');","        if (require('../server.js').connected === 'YES')","            process.exit(1);","    });","    db.once('open', function callback() {","        //console.log('Connected to UsersDB');","    });","}","","var userSchema = mongoose.Schema({","    email: String,","    password_sel: {","        type: String,","        default: randomstring.generate(3)","    },","    password: {","        type: String,","        default: randomstring.generate()","    },","    hasPassword: {","        type: Boolean,","        default: false","    },","    human_data: {","        prefix: String,","        first_name: String,","        last_name: String,","        gender: String,","        birth_date: Date,","    },","    contact: {","        home_phone: String,","        cell_phone: String,","        home_address: String,","        home_postal_code: String,","        home_country_code: String,","        home_city: String,","    },","    job: {","        job_title: String,","        work_address: String","    },","    eventbrite: [","        {","            event_id: Number,","            ticket_id: Number","            }","        ],","    witken: {","        results: {","            type: Array,","            default: [],","        }","    }","});","","userSchema.methods.validPassword = function (p) {","    if (this.hasPassword) {","        var selled_hash = crypto.createHash('md5').update(this.password_sel + p).digest('base64');","        return selled_hash === this.password;","    } else {","        return false;","    }","}","","var User = mongoose.model('User', userSchema);","exports.User = User;","","var generateQuery = function (user) {","    return {","        email: user.email","    }","}","","var getPublicObject = function (user) {","    return {","        email: user.email,","        hasPassword: user.hasPassword,","        human_data: {","            prefix: user.human_data.prefix,","            first_name: user.human_data.first_name,","            last_name: user.human_data.last_name,","            gender: user.human_data.gender,","            birth_date: new Date(user.human_data.birth_date),","        },","        contact: {","            home_phone: user.contact.home_phone,","            cell_phone: user.contact.cell_phone,","            home_address: user.contact.home_address,","            home_postal_code: user.contact.home_postal_code,","            home_country_code: user.contact.home_country_code,","            home_city: user.contact.home_city,","        },","        job: {","            job_title: user.contact.job_title,","            work_address: user.contact.work_address","        }","    };","}","","exports.addUser = function (user, callback) {","    User.find({","        email: user.email","    }, function (err, users) {","        if (err) {","            return callback(utils.generateDatabaseError('User', err));","        }","        if (users.length === 0) {","            user.save(function (err, u) {","                if (err) {","                    return callback(utils.generateDatabaseError('User', err));","                } else {","                    return callback(null, u)","                }","            });","        } else {","            return callback(utils.generateServerError('fatal', 'Already registered'));","        }","    });","}","","exports.findOne = function (query, callback) {","    User.find(query, function (err, users) {","        if (err) {","            return callback(utils.generateDatabaseError('User', err));","        }","        if (users.length === 0) {","            return callback(null, null);","        }","        if (users.length &gt; 1) {","            return callback(utils.generateDatabaseError('User', 'More than one user with the same ' + JSON.stringify(query)));","        }","        return callback(null, users[0]);","    });","}","","exports.setPassword = function (email, passwd, callback) {","    User.findOne({","        email: email","    }, function (err, us) {","        if (err) {","            return callback(utils.generateDatabaseError('User', err));","        }","","        if (!us) {","            return callback(utils.generateServerError('warning', 'User '+email+' not found'));","        }","","        if (us.hasPassword === true) {","            return callback(utils.generateServerError('fatal', 'Already has password'));","        }","","        us.password = crypto.createHash('md5').update(us.password_sel + passwd).digest('base64');","        us.hasPassword = true;","        us.save();","        return callback(null, us);","    });","}","","exports.changePassword = function (email, new_passwd, passwd, callback) {","    User.findOne({","        email: email","    }, function (err, us) {","        if (err) {","            return callback(utils.generateDatabaseError('User', err));","        }","","        if (!us) {","            return callback(utils.generateServerError('warning', 'No user found'));","        }","","        if (!us.validPassword(passwd)) {","            return callback(utils.generateInputError('password', 'Wrong old password'));","        }","","        us.password = crypto.createHash('md5').update(us.password_sel + new_passwd).digest('base64');","        us.save();","        return callback(null, us);","    });","}","","exports.confirmOrder = function (eb_data, callback) {","    var user = new User({","        email: eb_data.email,","        human_data: {","            prefix: eb_data.prefix,","            first_name: eb_data.first_name,","            last_name: eb_data.last_name,","            gender: eb_data.gender,","            birth_date: new Date(eb_data.birth_date),","        },","        contact: {","            home_phone: eb_data.home_phone,","            cell_phone: eb_data.cell_phone,","            home_address: eb_data.home_address,","            home_postal_code: eb_data.home_postal_code,","            home_country_code: eb_data.home_country_code,","            home_city: eb_data.home_city,","        },","        job: {","            job_title: eb_data.job_title,","            work_address: eb_data.work_address","        },","        eventbrite: [","            {","                event_id: eb_data.event_id,","                ticket_id: eb_data.ticket_id","            }","        ]","    });","","    exports.addUser(user, function (err, u) {","        if (err) {","            return callback(err);","        }","        return callback(null, getPublicObject(u))","    });","}"];
