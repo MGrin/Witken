@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 
 var ejs = require('ejs');
-ejs.open = '§;';
+ejs.open = '§§';
 ejs.close = ';§';
 
 app.configure(function () {

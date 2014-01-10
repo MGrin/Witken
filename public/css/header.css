@@ -1,18 +1,14 @@
-.header #logo {
-    width: 150px;
+.header {
+    height: 150px;
 }
-
-@media (max-width: 750px) {
-    .header #logo {
-        width: 100px;
+@media (max-width: 992px) {
+    .header {
+        height: 100px;
     }
+}
+@media (max-width: 768px) {
     .header .menu_item {
         border-bottom-style: groove;
         border-bottom-width: 2px;
-    }
-}
-@media (max-width: 970px) {
-    .header #logo {
-        width: 100px;
     }
 }

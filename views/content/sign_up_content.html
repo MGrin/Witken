@@ -1,9 +1,9 @@
-§;if(err!='None'){;§
-<p class="text-danger">Error: §;=err;§</p>
-§;}else if(user!='None'){;§
+§§if(err!='None'){;§
+<p class="text-danger">Error: §§=err;§</p>
+§§}else if(user!='None'){;§
 <div class="card grey_dark_bg">
     <h1>
-        <span class="multilang" text="general_hello">Hi,</span>§;=user.human_data.prefix;§ §;=user.human_data.last_name;§!
+        <span class="multilang" text="general_hello">Hi,</span>§§=user.human_data.prefix;§ §§=user.human_data.last_name;§!
     </h1>
     <div class="row">
         <div class="form col-lg-4" id="sign_up_form">
@@ -20,11 +20,11 @@
         </div>
     </div>
 </div>
-§;};§
+§§};§
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
 <script>
     var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
-    var user = §;- JSON.stringify(user);§ ;
+    var user = §§-JSON.stringify(user);§;
 
     var onDataLoaded = function() {
         var passwd_chk = function(pwd, pwd_rpt) {
@@ -55,24 +55,30 @@
                 $('#pwd_rpt_div').addClass('has-error');
             } else {
                 var params = {};
-                params.user_email = '§;=user.email;§';
+                params.user_email = '§§=user.email;§';
                 params.pass = CryptoJS.MD5(passwd).toString();
 
                 $('#sign_up_form').block({
                     message: 'Loading'
                 });
                 $.post('/signup', params, function(data) {
-                    $('#sign_up_form').unblock();
                     if (data.err) {
-                        $('#error_div').text(data.err);
+                        $('#error_div').text(data.err.error_message);
                         $('#pwd_div').addClass('has-error');
                         $('#pwd_rpt_div').addClass('has-error');
                     } else {
-                        var href = '/profile?lang=' + current_lang;
-                        $.get(href, {
-                            ajax: true
+                        pwd = CryptoJS.MD5(pwd).toString();
+
+                        $.post('/auth', {
+                            username: user.email,
+                            password: pwd
                         }, function(data) {
-                            bindOnContentReceiveEvent(data, 'Witken - Profile', href);
+                            $('#sign_up_form').unblock();
+                            if (data.err) {
+                                document.location.href = document.location.origin + '/inscription' + '?lang=' + current_lang;
+                            } else if (data.redirect) {
+                                document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
+                            }
                         });
                     }
                 })

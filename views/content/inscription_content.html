@@ -2,6 +2,7 @@
 
     <div class="col-lg-4" id="inscription_form">
         <h1>Inscription</h1>
+        §§ if(events.length>0){;§
         <div id="location_form" class="form-group">
             <label>Location:</label>
             <select id="location_selection" class="form-control">
@@ -22,6 +23,11 @@
             </select>
         </div>
         <button id="proceed_btn" class="btn btn-default hide">Proceed</button>
+        §§}else{;§
+        <div class="alert alert-danger">
+            <p>Sorry, no events this time...</p>
+        </div>
+        §§};§
     </div>
 
     <div class="col-lg-4 col-lg-offset-3" id="login_form">
@@ -42,7 +48,7 @@
 
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
 <script>
-    var events = §;- JSON.stringify(events);§;
+    var events = §§-JSON.stringify(events);§;
 
     var location_selected;
     var date_selected;
@@ -53,81 +59,13 @@
     var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
 
     var onDataLoaded = function() {
-        $('#login_submit_btn').click(function() {
-            $('#email_sign_in').removeClass('has-error');
-            $('#password_sign_in').removeClass('has-error');
-            $('#email_error_div').text(' ');
-            $('#password_error_div').text(' ');
+        $('#login_submit_btn').click(login);
 
-            var testInputData = function(email, passwd) {
-                var res = undefined;
-
-                if (!emailRE.test(email)) {
-                    res = {};
-                    res.emailError = "Wrong email format";
-                }
-
-                if (!passRE.test(passwd)) {
-                    if (!res) {
-                        res = {};
-                    }
-                    res.passwordError = "Wrong password format";
-                }
-
-                return res;
-            }
-
-            var email = $('#email').val();
-            var pwd = $('#password').val();
-
-            var test_res = testInputData(email, pwd);
-            if (test_res) {
-                if (test_res.emailError) {
-                    $('#email_sign_in').addClass('has-error');
-                    $('#email_error_div').text(test_res.emailError);
-                }
-
-                if (test_res.passwordError) {
-                    $('#password_sign_in').addClass('has-error');
-                    $('#password_error_div').text(test_res.passwordError);
-                }
-            } else {
-                pwd = CryptoJS.MD5(pwd).toString();
-                $('#login_form').block({
-                    message: "Loading..."
-                });
-                $.post('/auth', {
-                    username: email,
-                    password: pwd
-                }, function(data) {
-                    $('#login_form').unblock();
-                    console.log(data);
-                    if (data.err && data.err.length>0) {
-                        data.err.forEach(function(err) {
-                            if (err.field === 'email') {
-                                $('#email_sign_in').addClass('has-error');
-                                $('#email_error_div').text(err.error);
-                            }
-
-                            if (err.field === 'pass') {
-                                $('#password_sign_in').addClass('has-error');
-                                $('#password_error_div').text(err.error);
-                            }
-                        });
-                    }else if(data.redirect){
-                        document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
-                    }
-                });
-            }
-        });
-
-        console.log('Inscription content loaded');
         $('#location_selection').change(onLocationChanged);
         $('#date_selection').change(onDateChanged);
         $('#time_selection').change(onTimeChanged);
 
         $('#proceed_btn').click(function() {
-            console.log('Choosen event: ' + choosenEvent.url);
             document.location.href = choosenEvent.url;
         });
         constructLocations();
@@ -135,8 +73,7 @@
 
     var constructLocations = function() {
         var locations = [];
-        var locations_html = '<option></option>';
-
+        var locations_html = '';
 
         for (var i = 0; i < events.length; i++) {
             var venue = events[i].venue.city + ", " + events[i].venue.country;
@@ -147,21 +84,12 @@
             }
         };
         $('#location_selection').html(locations_html);
-    }
-
-    var onLocationChanged = function() {
-        location_selected = $('#location_selection').val();
-        console.log('Location: ' + location_selected);
-
-        $('#date_form').removeClass('hide');
-        $('#time_form').addClass('hide');
-        $('#proceed_btn').addClass('hide');
-        constructDates();
+        onLocationChanged();
     }
 
     var constructDates = function() {
         var dates = [];
-        var dates_html = '<option></option>';
+        var dates_html = '';
 
         if (location_selected) {
             for (var i = 0; i < events.length; i++) {
@@ -175,6 +103,7 @@
                 }
             };
             $('#date_selection').html(dates_html);
+            onDateChanged();
         } else {
             $('#date_form').addClass('hide');
             $('#time_form').addClass('hide');
@@ -182,18 +111,9 @@
         }
     }
 
-    var onDateChanged = function() {
-        date_selected = $('#date_selection').val();
-        console.log('Date: ' + date_selected);
-
-        $('#time_form').removeClass('hide');
-        $('#proceed_btn').addClass('hide');
-        constructTimes();
-    }
-
     var constructTimes = function() {
         var times = [];
-        var times_html = '<option></option>';
+        var times_html = '';
 
         if (location_selected && date_selected) {
             for (var i = 0; i < events.length; i++) {
@@ -208,22 +128,11 @@
                 }
             };
             $('#time_selection').html(times_html);
+            onTimeChanged();
         } else {
             $('#time_form').addClass('hide');
             $('#proceed_btn').addClass('hide');
         }
-    }
-
-    var onTimeChanged = function() {
-        time_selected = $('#time_selection').val();
-        console.log('Time: ' + time_selected);
-
-        choosenEvent = getChoosenEvent();
-        if (!choosenEvent) {
-            return console.log('FUCKING SHIT!');
-        }
-
-        $('#proceed_btn').removeClass('hide');
     }
 
     var hasPlace = function(event) {
@@ -248,5 +157,106 @@
         }
 
         return undefined;
+    }
+
+    var login = function() {
+        var testInputData = function(email, passwd) {
+            var res;
+
+            if (!emailRE.test(email)) {
+                res = {};
+                res.emailError = "Wrong email format";
+            }
+
+            if (!passRE.test(passwd)) {
+                if (!res) {
+                    res = {};
+                }
+                res.passwordError = "Wrong password format";
+            }
+
+            return res;
+        }
+        var showEmailError = function(error) {
+            $('#email_sign_in').addClass('has-error');
+            $('#email_error_div').text(error);
+        }
+        var showPasswordError = function(error) {
+            $('#password_sign_in').addClass('has-error');
+            $('#password_error_div').text(error);
+        }
+
+        $('#email_sign_in').removeClass('has-error');
+        $('#password_sign_in').removeClass('has-error');
+        $('#email_error_div').text('');
+        $('#password_error_div').text('');
+
+        var email = $('#email').val();
+        var pwd = $('#password').val();
+
+        var test_res = testInputData(email, pwd);
+        if (test_res) {
+            if (test_res.emailError) {
+                showEmailError(test_res.emailError);
+            }
+
+            if (test_res.passwordError) {
+                showPasswordError(test_res.passwordError);
+            }
+        } else {
+            pwd = CryptoJS.MD5(pwd).toString();
+            $('#login_form').block({
+                message: "Loading..."
+            });
+
+            $.post('/auth', {
+                username: email,
+                password: pwd
+            }, function(data) {
+                $('#login_form').unblock();
+                if (data.err) {
+                    if (data.err.field === 'email') {
+                        showEmailError(data.err.error_message);
+                    } else if (data.err.field === 'pass') {
+                        showPasswordError(data.err.error_message);
+                    } else if (data.err.field === 'general') {
+                        showModalError(data.err.error_message);
+                    }
+                } else if (data.redirect) {
+                    document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
+                }
+            });
+        }
+    }
+
+    var onLocationChanged = function() {
+        location_selected = $('#location_selection').val();
+        console.log('Location: ' + location_selected);
+
+        $('#date_form').removeClass('hide');
+        $('#time_form').addClass('hide');
+        $('#proceed_btn').addClass('hide');
+        constructDates();
+    }
+
+    var onDateChanged = function() {
+        date_selected = $('#date_selection').val();
+        console.log('Date: ' + date_selected);
+
+        $('#time_form').removeClass('hide');
+        $('#proceed_btn').addClass('hide');
+        constructTimes();
+    }
+
+    var onTimeChanged = function() {
+        time_selected = $('#time_selection').val();
+        console.log('Time: ' + time_selected);
+
+        choosenEvent = getChoosenEvent();
+        if (!choosenEvent) {
+            return console.log('FUCKING SHIT!');
+        }
+
+        $('#proceed_btn').removeClass('hide');
     }
 </script>

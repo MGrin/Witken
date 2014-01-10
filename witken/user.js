@@ -163,7 +163,7 @@ exports.setPassword = function (email, passwd, callback) {
         }
 
         if (!us) {
-            return callback(utils.generateServerError('warning', 'User '+email+' not found'));
+            return callback(utils.generateServerError('warning', 'User ' + email + ' not found'));
         }
 
         if (us.hasPassword === true) {
@@ -231,7 +231,31 @@ exports.confirmOrder = function (eb_data, callback) {
 
     exports.addUser(user, function (err, u) {
         if (err) {
-            return callback(err);
+            if (err.error_message !== 'Already registered') {
+                return callback(err);
+            } else {
+                User.findOne({
+                    email: user.email
+                }, function (err, us) {
+                    if (err) {
+                        return callback(utils.generateDatabaseError('User', err));
+                    }
+
+                    if (!us) {
+                        return callback(utils.generateServerError('warning', 'No user found'));
+                    }
+
+                    if (!us.eventbrite) {
+                        us.eventbrite = [];
+                    }
+                    us.eventbrite.push({
+                        event_id: eb_data.event_id,
+                        ticket_id: eb_data.ticket_id
+                    });
+                    us.save();
+                    return callback(null, us);
+                });
+            }
         }
         return callback(null, getPublicObject(u))
     });

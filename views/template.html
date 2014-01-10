@@ -1,75 +1,74 @@
-§;if(render=='full') {;§
+§§if(render=='full') {;§
 
 <!doctype html>
 <html>
 
 <head>
-    §;- include unique/head.html;§
+    §§- include unique/head.html;§
 </head>
 
 <body class="black_text grey_light_bg">
     <div class="container-fluid">
 
-        §;- include unique/header.html;§
+        §§- include unique/header.html;§
 
         <div class="central row">
-            §;if(user!='None'){;§
+            §§if(user!='None'){;§
             <div id="content" class="col-lg-6 col-lg-offset-2 col-md-10 col-sm-10 col-xs-12">
-                §;}else{;§
+                §§}else{;§
                 <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
-                    §;};§
-                    §;};§
-                    §;if(content=='index'){;§
-                    §;- include content/index_content.html;§
-                    §;}else if(content=='label_index'){;§
-                    §;- include content/label_index_content.html;§
-                    §;}else if(content=='examen_index'){;§
-                    §;- include content/examen_index_content.html;§
-                    §;}else if(content=='witken_index'){;§
-                    §;- include content/witken_index_content.html;§
-                    §;}else if(content=='inscription'){;§
-                    §;- include content/inscription_content.html;§
-                    §;}else if(content=='sign_up'){;§
-                    §;- include content/sign_up_content.html;§
-                    §;}else if(content=='profile'){;§
-                    §;- include content/profile_content.html;§
-                    §;};§
+                    §§};§
+                    §§};§
+                    §§if(content=='index'){;§
+                    §§- include content/index_content.html;§
+                    §§}else if(content=='label_index'){;§
+                    §§- include content/label_index_content.html;§
+                    §§}else if(content=='examen_index'){;§
+                    §§- include content/examen_index_content.html;§
+                    §§}else if(content=='witken_index'){;§
+                    §§- include content/witken_index_content.html;§
+                    §§}else if(content=='inscription'){;§
+                    §§- include content/inscription_content.html;§
+                    §§}else if(content=='sign_up'){;§
+                    §§- include content/sign_up_content.html;§
+                    §§}else if(content=='profile'){;§
+                    §§- include content/profile_content.html;§
+                    §§};§
 
-                    §;if(render=='full') {;§
+                    §§if(render=='full') {;§
                 </div>
 
-                §;if(user!='None'){;§
-                <div class="user-space-support col-lg-2 col-md-2 col-sm-2 hidden-xs">
-                    §;- include unique/user_side.html;§
+                §§if(user!='None'){;§
+                <div class="user-content col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    §§- include unique/user_side.html;§
                 </div>
-                §;};§
-                <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12" id="loading_content_div">
-                    <h1>Loading</h1>
-                    <div class="progress progress-striped active">                        
-                        <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            <span class="sr-only">45% Complete</span>
-                        </div>
-                    </div>
+                §§};§
+                §§if(user!='None'){;§
+                <div id="content" class="col-lg-6 col-lg-offset-2 col-md-10 col-sm-10 col-xs-12" id="#loading_content_div">
+                §§}else{;§
+                <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12" id="#loading_content_div">
+                §§};§
+                    
                 </div>
                 
             </div>
-            §;- include unique/footer.html;§
+            §§- include unique/footer.html;§
         </div>
 </body>
 
-§;- include unique/scripts.html;§
+§§- include unique/scripts.html;§
 
 <script>
-    var current_lang = "§;= lang ;§"
+    var current_lang = "§§= lang ;§"
     $(document).ready(function() {
         setLocalTexts();
         setupOnClickEvents();
     });
     window.onload = function() {
-        //        $(window).resize(function() {
-        //            initiate();
-        //            onDataLoaded();
-        //        });
+        $(window).resize(function() {
+            initiate();
+            onDataLoaded();
+        });
         initiate();
         onDataLoaded();
     };
@@ -77,4 +76,4 @@
 
 </html>
 
-§;};§
+§§};§

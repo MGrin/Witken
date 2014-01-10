@@ -36,10 +36,6 @@ function bindOnContentReceiveEvent(content, name, pathname) {
         onDataLoaded();
         setLocalTexts();
     });
-
-    if ($(window).width() < 970) {
-        $(window).scrollTop($('#content').position().top)
-    }
 }
 
 function bindOnClickEventForContentClass(redirect_class, path, history_name) {
