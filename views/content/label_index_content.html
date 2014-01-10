@@ -5,12 +5,12 @@
     <h1 class="multilang col-lg-12" text="general_label"></h1>
     <br />
     <p class="multilang col-lg-6" text="label_description"></p>
-    <img src="/img/label_tablette.png" class="col-lg-4 col-lg-offset-1" onload="setupFooter" />
+    <img src="/img/label_tablette.png" class="col-lg-4 col-lg-offset-1" />
 </div>
 
 <div class="card grey_light_bg row">
     <div class="col-lg-2 col-lg-offset-1 text-center">
-        <img id="label_area" src="/img/wk_white_label.png" class="gold_bg img-circle label_border" style="margin-top: 30px; width: 100%; padding: 10px;" onload="setupFooter" />
+        <img id="label_area" src="/img/wk_white_label.png" class="gold_bg img-circle label_border" style="margin-top: 30px; width: 100%; padding: 10px;" />
         <div class="btn-group" style="margin-top: 30px;">
             <img id="gold_label_small" class="gold_bg img-circle card_black_border js_label" style="width: 30px; height: 30px; margin: 0px 5px;" />
             <img id="silver_label_small" class="silver_bg img-circle js_label" style="width: 30px; height: 30px; margin: 0px 5px;" />
@@ -42,7 +42,7 @@
 
         $('#label_silver_text').hide();
         $('#label_bronze_text').hide();
-        
+
         $('.js_label').each(function() {
             $(this).mouseenter(function() {
                 $('.js_label').each(function() {
