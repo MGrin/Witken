@@ -6,6 +6,7 @@ function setupOnClickEvents() {
     bindOnClickEventForContentClass('.js_redirect_witken', '/witken', 'Witken');
     bindOnClickEventForContentClass('.js_redirect_register', '/inscription', 'Witken - Inscription');
     bindOnClickEventForContentClass('.js_redirect_profile', '/profile', 'Witken - Profile');
+    bindOnClickEventForContentClass('.js_redirect_logout', '/logout', 'Witken - Index');
 
     if (current_lang === 'fr') {
         newLang = 'en';
