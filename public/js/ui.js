@@ -25,8 +25,8 @@ function initiate() {
 
     setupHeaderAlignement();
     setupImages();
-    setupUserContent();
     setupFooter();
+    setupUserContent();
 }
 
 function setupHeaderAlignement() {
@@ -59,20 +59,19 @@ function setupHeaderAlignement() {
         });
 
         $('.header > .user-content').each(function () {
-            $(this).css('height', 3*$(this).parent().height()/4);
+            $(this).css('height', 3 * $(this).parent().height() / 4);
         });
     }
 
 
 
     if ($(window).width() < phablet_screen) {
-        $('#logo').addClass("center-block")
         $('.menu_item').each(function () {
             $(this).css('text-align', 'center');
             $(this).addClass('grey_dark_bg');
         });
+        $('#logo').css('margin-top', ($('.header').height()-$('#logo').height())/2);
     } else {
-        $('#logo').removeClass("center-block")
         $('.menu_item').each(function () {
             $(this).css('text-align', 'left');
             $(this).removeClass('grey_dark_bg');
@@ -90,14 +89,18 @@ function setupImages() {
 
     $("img").each(function () {
         if ($(window).width() < tablet_screen) {
-            $(this).width($(this).attr('full-size') * 0.75);
+            if ($(this).attr('id')==='logo') {
+                $(this).width($(this).attr('full-size') * 0.5);
+            } else {
+                $(this).width($(this).attr('full-size') * 0.75);
+            }
         } else {
             $(this).width($(this).attr('full-size'));
         }
     });
 }
 
-function setupUserContent(){
+function setupUserContent() {
     $('#user_content').height($('#content').height());
 }
 
@@ -118,11 +121,12 @@ function onContentChangeEnd(callback) {
             callback();
         }
         setupFooter();
-        setupUserContent();
-        $('.footer').show(function () {
+        $('.footer').fadeIn(animationTime, function () {
             if ($(window).width() < phablet_screen) {
-                $(window).scrollTop($('#content').position().top)
+                $(window).scrollTop($('#content').position().top);
             }
+
+            setupUserContent();
         });
     });
 }

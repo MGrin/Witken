@@ -84,6 +84,32 @@ userSchema.methods.validPassword = function (p) {
     }
 }
 
+userSchema.methods.generatePublicObject = function(){
+    return {
+        email: this.email,
+        hasPassword: this.hasPassword,
+        human_data: {
+            prefix: this.human_data.prefix,
+            first_name: this.human_data.first_name,
+            last_name: this.human_data.last_name,
+            gender: this.human_data.gender,
+            birth_date: new Date(this.human_data.birth_date),
+        },
+        contact: {
+            home_phone: this.contact.home_phone,
+            cell_phone: this.contact.cell_phone,
+            home_address: this.contact.home_address,
+            home_postal_code: this.contact.home_postal_code,
+            home_country_code: this.contact.home_country_code,
+            home_city: this.contact.home_city,
+        },
+        job: {
+            job_title: this.contact.job_title,
+            work_address: this.contact.work_address
+        }
+    };
+}
+
 var User = mongoose.model('User', userSchema);
 exports.User = User;
 
@@ -93,31 +119,6 @@ var generateQuery = function (user) {
     }
 }
 
-var getPublicObject = function (user) {
-    return {
-        email: user.email,
-        hasPassword: user.hasPassword,
-        human_data: {
-            prefix: user.human_data.prefix,
-            first_name: user.human_data.first_name,
-            last_name: user.human_data.last_name,
-            gender: user.human_data.gender,
-            birth_date: new Date(user.human_data.birth_date),
-        },
-        contact: {
-            home_phone: user.contact.home_phone,
-            cell_phone: user.contact.cell_phone,
-            home_address: user.contact.home_address,
-            home_postal_code: user.contact.home_postal_code,
-            home_country_code: user.contact.home_country_code,
-            home_city: user.contact.home_city,
-        },
-        job: {
-            job_title: user.contact.job_title,
-            work_address: user.contact.work_address
-        }
-    };
-}
 
 exports.addUser = function (user, callback) {
     User.find({
@@ -255,10 +256,10 @@ exports.confirmOrder = function (eb_data, callback) {
                         ticket_id: eb_data.ticket_id
                     });
                     us.save();
-                    return callback(err, getPublicObject(u));
+                    return callback(err, u.generatePublicObject);
                 });
             }
         }
-        return callback(null, getPublicObject(u))
+        return callback(null, u.generatePublicObject)
     });
 }
