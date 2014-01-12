@@ -67,7 +67,7 @@
                         $('#pwd_div').addClass('has-error');
                         $('#pwd_rpt_div').addClass('has-error');
                     } else {
-                        pwd = CryptoJS.MD5(pwd).toString();
+                        pwd = params.pass;
 
                         $.post('/auth', {
                             username: user.email,
