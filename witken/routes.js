@@ -49,6 +49,7 @@ exports.confirm_order = function (req, res) {
         
         if (err) {
             params.err = err;
+            params.events = [];
             params.content = 'inscription';
         } else {
             params.user = user;
