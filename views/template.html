@@ -38,12 +38,11 @@
                     §§if(render=='full') {;§
                 </div>
 
+                
                 §§if(user!='None'){;§
-                <div class="user-content col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                <div id="user_content" class="user-content red_bg col-lg-2 col-md-2 col-sm-2 hidden-xs">
                     §§- include unique/user_side.html;§
                 </div>
-                §§};§
-                §§if(user!='None'){;§
                 <div id="content" class="col-lg-6 col-lg-offset-2 col-md-10 col-sm-10 col-xs-12" id="#loading_content_div">
                 §§}else{;§
                 <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12" id="#loading_content_div">

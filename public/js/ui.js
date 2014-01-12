@@ -25,6 +25,7 @@ function initiate() {
 
     setupHeaderAlignement();
     setupImages();
+    setupUserContent();
     setupFooter();
 }
 
@@ -82,6 +83,7 @@ function setupHeaderAlignement() {
 function setupImages() {
     $("img").one('load', function () {
         setupFooter();
+        setupUserContent();
     }).each(function () {
         if (this.complete) $(this).load();
     });
@@ -95,8 +97,12 @@ function setupImages() {
     });
 }
 
+function setupUserContent(){
+    $('#user_content').height($('#content').height());
+}
+
 function onContentChangeStart(callback) {
-    $('#content').fadeOut(animationTime, function () {
+    $('.central').fadeOut(animationTime, function () {
         $('.footer').hide();
         $('#loading_content_div').fadeIn(animationTime);
         if (callback) {
@@ -107,11 +113,12 @@ function onContentChangeStart(callback) {
 
 function onContentChangeEnd(callback) {
     $('#loading_content_div').hide();
-    $('#content').fadeIn(animationTime, function () {
+    $('.central').fadeIn(animationTime, function () {
         if (callback) {
             callback();
         }
         setupFooter();
+        setupUserContent();
         $('.footer').show(function () {
             if ($(window).width() < phablet_screen) {
                 $(window).scrollTop($('#content').position().top)
