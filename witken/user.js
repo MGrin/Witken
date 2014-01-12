@@ -1,5 +1,6 @@
 var randomstring = require("randomstring");
 var crypto = require('crypto');
+var email = require('./email.js');
 
 var witken_users = 'mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users'
 var mongoose = require('mongoose');
@@ -130,6 +131,7 @@ exports.addUser = function (user, callback) {
                 if (err) {
                     return callback(utils.generateDatabaseError('User', err));
                 } else {
+                    email.sendInscriptionConfirmation(u);
                     return callback(null, u)
                 }
             });
@@ -253,7 +255,7 @@ exports.confirmOrder = function (eb_data, callback) {
                         ticket_id: eb_data.ticket_id
                     });
                     us.save();
-                    return callback(null, us);
+                    return callback(err, getPublicObject(u));
                 });
             }
         }

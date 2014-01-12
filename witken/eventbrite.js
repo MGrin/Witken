@@ -84,10 +84,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
             return callback(utils.generateDatabaseError('Eventbrite', 'Failed to verify order, please contact us. Sorry for that.'));
         }
         User.confirmOrder(user, function (err, user) {
-            if (err) {
-                return callback(err);
-            }
-            return callback(null, user);
+            return callback(err, user);
         });
     });
 }

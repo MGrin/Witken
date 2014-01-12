@@ -10,7 +10,8 @@
     "passport-local": "*",
     "mongoose": "*",
     "eventbrite": "*",
-    "randomstring": "*"
+    "randomstring": "*",
+    "nodemailer": "~0.6.0"
   },
   "devDependencies": {
     "should": "~2.1.1"
