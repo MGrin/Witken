@@ -70,7 +70,7 @@ function setupHeaderAlignement() {
             $(this).css('text-align', 'center');
             $(this).addClass('grey_dark_bg');
         });
-        $('#logo').css('margin-top', ($('.header').height()-$('#logo').height())/2);
+        $('.logo').css('margin-top', ($('.header').height() - $('.logo').height()) / 8);
     } else {
         $('.menu_item').each(function () {
             $(this).css('text-align', 'left');
@@ -88,16 +88,16 @@ function setupImages() {
     });
 
     $("img").each(function () {
-        if ($(window).width() < tablet_screen) {
-            if ($(this).attr('id')==='logo') {
-                $(this).width($(this).attr('full-size') * 0.5);
-            } else {
-                $(this).width($(this).attr('full-size') * 0.75);
-            }
+        if ($(window).width() < phablet_screen) {
+            console.log('Lalala');
+            $(this).width($(this).attr('full-size') * 0.85);
         } else {
             $(this).width($(this).attr('full-size'));
         }
     });
+    if ($(window).width() < phablet_screen) {
+        $('.logo').width($('.logo').attr('full-size') * 0.5);
+    }
 }
 
 function setupUserContent() {
