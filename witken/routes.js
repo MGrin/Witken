@@ -46,17 +46,15 @@ exports.confirm_order = function (req, res) {
         var params = generateParams(req, 'sign_up');
         params.err = 'None';
         params.user = 'None';
+        
         if (err) {
             params.err = err;
+            params.content = 'inscription';
         } else {
             params.user = user;
         }
         
-        if (params.err) {
-            res.redirect('/inscription');
-        } else {
-            res.render('template.html', params);
-        }
+        res.render('template.html', params);
     });
 }
 
