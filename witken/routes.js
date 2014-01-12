@@ -3,6 +3,7 @@ var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') 
 function generateParams(req, content) {
     var par = {};
 
+    par.err='None';
     par.content = content;
 
     par.connected = 'YES';
