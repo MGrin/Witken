@@ -81,6 +81,10 @@ exports.signup = function (req, res) {
             res.send({
                 err: err
             });
+        } else {
+            res.send({
+                success: true
+            });
         }
     });
 }

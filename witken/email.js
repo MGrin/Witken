@@ -3,8 +3,8 @@ var nodemailer = require('nodemailer');
 var emailSettings = {
     service: "Gmail",
     auth: {
-        user: "mr6r1n@gmail.com",
-        pass: "1qse4rgy7"
+        user: "user@gmail.com",
+        pass: "password"
     }
 }
 
