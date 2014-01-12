@@ -29,26 +29,40 @@ function initiate() {
 }
 
 function setupHeaderAlignement() {
-    var val;
-    $('.bottom-aligned').each(function () {
-        val = $('.header').height() - $(this).height() - defPadding;
-        $(this).css('margin-top', val);
-    });
+    if ($(window).width() > phablet_screen) {
+        var val;
+        var setupUserSide = function () {
+            if (!val) {
+                setTimeout(setupUserSide, 10);
+            }
+            $('.header > .user-content > h3').each(function () {
+                $(this).css('margin-top', val + 20);
+            });
+        };
 
-    $('.header > .user-content').each(function () {
-        $(this).css('height', $(this).parent().height());
-    });
-
-    var setupUserSide = function () {
-        if (!val) {
-            setTimeout(setupUserSide, 10);
-        }
-        $('.header > .user-content > h3').each(function () {
-            $(this).css('margin-top', val + 20);
+        setupUserSide();
+        $('.header > .bottom-aligned').each(function () {
+            val = $('.header').height() - $(this).height() - defPadding;
+            $(this).css('margin-top', val);
         });
-    };
 
-    setupUserSide();
+        $('.header > .user-content').each(function () {
+            $(this).css('height', $(this).parent().height());
+        });
+    } else {
+        $('.header > .bottom-aligned').each(function () {
+            $(this).css('margin-top', 0);
+        });
+        $('.header > .user-content > h3').each(function () {
+            $(this).css('margin-top', 50);
+        });
+
+        $('.header > .user-content').each(function () {
+            $(this).css('height', 3*$(this).parent().height()/4);
+        });
+    }
+
+
 
     if ($(window).width() < phablet_screen) {
         $('#logo').addClass("center-block")

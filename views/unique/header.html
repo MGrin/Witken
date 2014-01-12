@@ -1,8 +1,16 @@
 <div class="bottom-aligned header row grey_dark_bg">
-    <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-12">
-        <img src="/img/WKlogo.png" id="logo" class="link js_redirect_index" full-size="150"/>
+    <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 col-xs-6">
+        <img src="/img/WKlogo.png" id="logo" class="link js_redirect_index" full-size="150" />
     </div>
-
+    <div class="user-content red_bg white_text col-xs-6 visible-xs">
+        §§if(user==='None' || user === undefined){;§
+        <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
+        §§}else{;§
+        <h3>§§= user.human_data.first_name ;§ §§= user.human_data.last_name;§</h3>
+        <p text="general_registration" class="multilang link js_redirect_profile"></p>
+        §§};§
+    </div>
+    
     <div class="bottom-aligned menu_item col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1 col-xs-12">
         <h3 text="general_label" class="multilang link js_redirect_label"></h3>
         <small>

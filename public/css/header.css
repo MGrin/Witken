@@ -1,7 +1,7 @@
 .header {
     height: 150px;
 }
-@media (max-width: 992px) {
+@media (max-width: 992px; min-width: 768px) {
     .header {
         height: 100px;
     }
@@ -10,5 +10,6 @@
     .header .menu_item {
         border-bottom-style: groove;
         border-bottom-width: 2px;
+        margin: 0px;
     }
 }

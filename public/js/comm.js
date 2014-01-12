@@ -40,6 +40,7 @@ function bindOnContentReceiveEvent(content, name, pathname) {
 
 function bindOnClickEventForContentClass(redirect_class, path, history_name) {
     $(redirect_class).click(function () {
+        console.log(redirect_class+' clicked');
         var href = path + '?lang=' + current_lang;
         onContentChangeStart(function () {
             $.get(href, {

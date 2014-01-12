@@ -3,3 +3,15 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.carousel-inner .item {
+    padding: 0px 50px;
+}
+
+.carousel-inner .item img{
+    margin-left: -50px;
+    margin-top: 20px;
+}
+/*.carousel-inner .carousel-caption {
+    margin-bottom: -100px;
+}*/
