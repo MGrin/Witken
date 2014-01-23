@@ -41,21 +41,19 @@ if (! _$jscoverage['eventbrite.js']) {
   _$jscoverage['eventbrite.js'][84] = 0;
   _$jscoverage['eventbrite.js'][86] = 0;
   _$jscoverage['eventbrite.js'][87] = 0;
-  _$jscoverage['eventbrite.js'][88] = 0;
-  _$jscoverage['eventbrite.js'][90] = 0;
-  _$jscoverage['eventbrite.js'][95] = 0;
-  _$jscoverage['eventbrite.js'][96] = 0;
-  _$jscoverage['eventbrite.js'][97] = 0;
-  _$jscoverage['eventbrite.js'][101] = 0;
-  _$jscoverage['eventbrite.js'][102] = 0;
+  _$jscoverage['eventbrite.js'][92] = 0;
+  _$jscoverage['eventbrite.js'][93] = 0;
+  _$jscoverage['eventbrite.js'][94] = 0;
+  _$jscoverage['eventbrite.js'][98] = 0;
+  _$jscoverage['eventbrite.js'][99] = 0;
+  _$jscoverage['eventbrite.js'][103] = 0;
+  _$jscoverage['eventbrite.js'][104] = 0;
   _$jscoverage['eventbrite.js'][106] = 0;
   _$jscoverage['eventbrite.js'][107] = 0;
-  _$jscoverage['eventbrite.js'][109] = 0;
+  _$jscoverage['eventbrite.js'][108] = 0;
   _$jscoverage['eventbrite.js'][110] = 0;
   _$jscoverage['eventbrite.js'][111] = 0;
-  _$jscoverage['eventbrite.js'][113] = 0;
   _$jscoverage['eventbrite.js'][114] = 0;
-  _$jscoverage['eventbrite.js'][117] = 0;
 }
 _$jscoverage['eventbrite.js'][1]++;
 var User = require("./user.js");
@@ -146,45 +144,40 @@ exports.confirmOrder = (function (eventID, orderID, callback) {
   _$jscoverage['eventbrite.js'][86]++;
   User.confirmOrder(user, (function (err, user) {
   _$jscoverage['eventbrite.js'][87]++;
-  if (err) {
-    _$jscoverage['eventbrite.js'][88]++;
-    return callback(err);
-  }
-  _$jscoverage['eventbrite.js'][90]++;
-  return callback(null, user);
+  return callback(err, user);
 }));
 }));
 });
-_$jscoverage['eventbrite.js'][95]++;
+_$jscoverage['eventbrite.js'][92]++;
 exports.getValidEvents = (function (callback) {
-  _$jscoverage['eventbrite.js'][96]++;
+  _$jscoverage['eventbrite.js'][93]++;
   exports.updateEventsData((function () {
-  _$jscoverage['eventbrite.js'][97]++;
+  _$jscoverage['eventbrite.js'][94]++;
   callback(events);
 }));
 });
-_$jscoverage['eventbrite.js'][101]++;
+_$jscoverage['eventbrite.js'][98]++;
 exports.getAttendees = (function (eventID, callback) {
-  _$jscoverage['eventbrite.js'][102]++;
+  _$jscoverage['eventbrite.js'][99]++;
   eb_client.event_list_attendees({id: eventID, count: exports.MAX_NUMBER_OF_PARTICIPANTS}, (function (err, data) {
-  _$jscoverage['eventbrite.js'][106]++;
+  _$jscoverage['eventbrite.js'][103]++;
   if (err) {
-    _$jscoverage['eventbrite.js'][107]++;
+    _$jscoverage['eventbrite.js'][104]++;
     return callback("Error from eventbrite: " + JSON.stringify(err));
   }
-  _$jscoverage['eventbrite.js'][109]++;
+  _$jscoverage['eventbrite.js'][106]++;
   var attendees = data.attendees;
-  _$jscoverage['eventbrite.js'][110]++;
+  _$jscoverage['eventbrite.js'][107]++;
   var res = [];
-  _$jscoverage['eventbrite.js'][111]++;
+  _$jscoverage['eventbrite.js'][108]++;
   var user;
-  _$jscoverage['eventbrite.js'][113]++;
+  _$jscoverage['eventbrite.js'][110]++;
   for (var i = 0; i < attendees.length; i++) {
-    _$jscoverage['eventbrite.js'][114]++;
+    _$jscoverage['eventbrite.js'][111]++;
     res.push(attendees[i].attendee);
 }
-  _$jscoverage['eventbrite.js'][117]++;
+  _$jscoverage['eventbrite.js'][114]++;
   callback(null, res);
 }));
 });
-_$jscoverage['eventbrite.js'].source = ["var User = require('./user.js');","var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');","","var Eventbrite = require('eventbrite');","var eb_client = Eventbrite({","    'app_key': \"YJSBEX5NJKKTMRAH5J\",","    'user_key': \"138684355683422048593\"","});","","exports.init = function () {","    exports.updateEventsData(function () {});","}","","exports.ORGANIZATION = \"MGSDD\";","exports.ORGANIZATION_ID = 5669656715;","","exports.MAX_NUMBER_OF_PARTICIPANTS = 100;","","var events = [];","","exports.updateEventsData = function (callback) {","    eb_client.organizer_list_events({","        id: exports.ORGANIZATION_ID","    }, function (err, data) {","        if (err) {","            //console.log('Error while retrieving events from eventbrite: ' + err);","            return callback(utils.generateDatabaseError('Eventbrite', err));","        }","","        for (var i = 0; i &lt; data.events.length; i++) {","            var e = data.events[i].event;","            var tickets = [];","            for (var j = 0; j &lt; e.tickets.length; j++) {","                var t = e.tickets[j].ticket;","                tickets.push({","                    quantity_sold: t.quantity_sold,","                    currency: t.currency,","                    quantity_available: t.quantity_available,","                    price: t.price","                });","            }","            var event = {","                id: e.id,","                start_date: e.start_date,","                end_date: e.end_date,","                venue: {","                    city: e.venue.city,","                    country: e.venue.country,","                    id: e.venue.id","                },","                tickets: tickets,","                url: e.url","            };","            events.push(event);","        }","","        callback(null, events);","    });","}","","exports.confirmOrder = function (eventID, orderID, callback) {","    if (!eventID || !orderID) {","        return callback(utils.generateRoutingError('Order confirmation', 'fatal', 'Faild to confirm your order. Please contact us. Sorry for that.'));","    }","","    eb_client.event_list_attendees({","        id: eventID,","        count: exports.MAX_NUMBER_OF_PARTICIPANTS,","    }, function (err, data) {","        if (err) {","            return callback(utils.generateDatabaseError('Eventbrite', err));","        }","        var attendees = data.attendees;","        var user;","","        for (var i = 0; i &lt; attendees.length; i++) {","            if (attendees[i].attendee.order_id === parseInt(orderID)) {","                user = attendees[i].attendee;","                break;","            }","        }","","        if (!user) {","            return callback(utils.generateDatabaseError('Eventbrite', 'Failed to verify order, please contact us. Sorry for that.'));","        }","        User.confirmOrder(user, function (err, user) {","            if (err) {","                return callback(err);","            }","            return callback(null, user);","        });","    });","}","","exports.getValidEvents = function (callback) {","    exports.updateEventsData(function () {","        callback(events);","    });","}","","exports.getAttendees = function (eventID, callback) {","    eb_client.event_list_attendees({","        id: eventID,","        count: exports.MAX_NUMBER_OF_PARTICIPANTS,","    }, function (err, data) {","        if (err) {","            return callback('Error from eventbrite: ' + JSON.stringify(err));","        }","        var attendees = data.attendees;","        var res = [];","        var user;","","        for (var i = 0; i &lt; attendees.length; i++) {","            res.push(attendees[i].attendee);","        }","","        callback(null, res);","    });","}"];
+_$jscoverage['eventbrite.js'].source = ["var User = require('./user.js');","var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');","","var Eventbrite = require('eventbrite');","var eb_client = Eventbrite({","    'app_key': \"YJSBEX5NJKKTMRAH5J\",","    'user_key': \"138684355683422048593\"","});","","exports.init = function () {","    exports.updateEventsData(function () {});","}","","exports.ORGANIZATION = \"MGSDD\";","exports.ORGANIZATION_ID = 5669656715;","","exports.MAX_NUMBER_OF_PARTICIPANTS = 100;","","var events = [];","","exports.updateEventsData = function (callback) {","    eb_client.organizer_list_events({","        id: exports.ORGANIZATION_ID","    }, function (err, data) {","        if (err) {","            //console.log('Error while retrieving events from eventbrite: ' + err);","            return callback(utils.generateDatabaseError('Eventbrite', err));","        }","","        for (var i = 0; i &lt; data.events.length; i++) {","            var e = data.events[i].event;","            var tickets = [];","            for (var j = 0; j &lt; e.tickets.length; j++) {","                var t = e.tickets[j].ticket;","                tickets.push({","                    quantity_sold: t.quantity_sold,","                    currency: t.currency,","                    quantity_available: t.quantity_available,","                    price: t.price","                });","            }","            var event = {","                id: e.id,","                start_date: e.start_date,","                end_date: e.end_date,","                venue: {","                    city: e.venue.city,","                    country: e.venue.country,","                    id: e.venue.id","                },","                tickets: tickets,","                url: e.url","            };","            events.push(event);","        }","","        callback(null, events);","    });","}","","exports.confirmOrder = function (eventID, orderID, callback) {","    if (!eventID || !orderID) {","        return callback(utils.generateRoutingError('Order confirmation', 'fatal', 'Faild to confirm your order. Please contact us. Sorry for that.'));","    }","","    eb_client.event_list_attendees({","        id: eventID,","        count: exports.MAX_NUMBER_OF_PARTICIPANTS,","    }, function (err, data) {","        if (err) {","            return callback(utils.generateDatabaseError('Eventbrite', err));","        }","        var attendees = data.attendees;","        var user;","","        for (var i = 0; i &lt; attendees.length; i++) {","            if (attendees[i].attendee.order_id === parseInt(orderID)) {","                user = attendees[i].attendee;","                break;","            }","        }","","        if (!user) {","            return callback(utils.generateDatabaseError('Eventbrite', 'Failed to verify order, please contact us. Sorry for that.'));","        }","        User.confirmOrder(user, function (err, user) {","            return callback(err, user);","        });","    });","}","","exports.getValidEvents = function (callback) {","    exports.updateEventsData(function () {","        callback(events);","    });","}","","exports.getAttendees = function (eventID, callback) {","    eb_client.event_list_attendees({","        id: eventID,","        count: exports.MAX_NUMBER_OF_PARTICIPANTS,","    }, function (err, data) {","        if (err) {","            return callback('Error from eventbrite: ' + JSON.stringify(err));","        }","        var attendees = data.attendees;","        var res = [];","        var user;","","        for (var i = 0; i &lt; attendees.length; i++) {","            res.push(attendees[i].attendee);","        }","","        callback(null, res);","    });","}"];

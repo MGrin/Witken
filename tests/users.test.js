@@ -1,4 +1,5 @@
 var should = require('should');
+var crypto = require('crypto');
 var user = process.env.APP_COV ? require(__dirname + '/../cov/user.js') : require(__dirname + '/../witken/user.js');
 
 describe('User', function () {
@@ -89,10 +90,10 @@ describe('User', function () {
     describe('User.setPassword', function () {
         it('should set a new password only for the first time', function (done) {
             realUser.hasPassword.should.be.equal(false);
-            user.setPassword(realUser.email, "123qweQWE", function (err, u) {
+            user.setPassword(realUser, "123qweQWE", function (err, u) {
                 should.not.exist(err);
                 u.hasPassword.should.be.equal(true);
-                u.validPassword('123qweQWE').should.be.equal(true);
+                u.validPassword("123qweQWE").should.be.equal(true);
                 realUser = u;
                 done();
             });
@@ -100,11 +101,11 @@ describe('User', function () {
 
         it('should not set a new password for the second time', function (done) {
             realUser.hasPassword.should.be.equal(true);
-            user.setPassword(realUser.email, "123qweQWE2", function (err, u) {
+            user.setPassword(realUser, "123qweQWE2", function (err, u) {
                 should.exist(err);
                 should.not.exist(u);
-                realUser.validPassword('123qweQWE').should.be.equal(true);
-                realUser.validPassword('123qweQWE2').should.be.equal(false);
+                realUser.validPassword("123qweQWE").should.be.equal(true);
+                realUser.validPassword("123qweQWE2").should.be.equal(false);
                 done();
             })
         });
@@ -113,7 +114,7 @@ describe('User', function () {
 
     describe('User.changePassword', function () {
         it('should change password if the old one is valid', function (done) {
-            user.changePassword(realUser.email, "123qweZXC", "123qweQWE", function (err, u) {
+            user.changePassword(realUser, "123qweZXC", "123qweQWE", function (err, u) {
                 should.not.exist(err);
                 should.exist(u);
                 u.validPassword("123qweZXC").should.be.equal(true);
@@ -123,7 +124,7 @@ describe('User', function () {
         });
 
         it('should not change password if the old password is not valid', function (done) {
-            user.changePassword(realUser.email, "123asdZXC", "123qweRTY", function (err, u) {
+            user.changePassword(realUser, "123asdZXC", "123qweRTY", function (err, u) {
                 should.exist(err);
                 should.not.exist(u);
                 realUser.validPassword("123qweZXC").should.be.equal(true);

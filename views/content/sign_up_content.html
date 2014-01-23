@@ -55,8 +55,8 @@
                 $('#pwd_rpt_div').addClass('has-error');
             } else {
                 var params = {};
-                params.user_email = '§§=user.email;§';
-                params.pass = CryptoJS.MD5(passwd).toString();
+                params.user = user;
+                params.pass = CryptoJS.SHA1(passwd).toString();
 
                 $('#sign_up_form').block({
                     message: 'Loading'

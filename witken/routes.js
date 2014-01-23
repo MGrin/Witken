@@ -5,8 +5,6 @@ function generateParams(req, content) {
 
     par.err='None';
     par.content = content;
-
-    par.connected = 'YES';
     
     if (!req.param('lang')) {
         par.lang = 'fr';
@@ -25,7 +23,7 @@ function generateParams(req, content) {
     if (!req.user) {
         par.user = 'None';
     } else {
-        par.user = req.user;
+        par.user = req.user.generatePublicObject();
     }
 
     return par;
