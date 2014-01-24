@@ -33,8 +33,7 @@ var userTools = {
     },
     generateQuery: function (user) {
         return {
-            email: user.email,
-            witken_id: user.witken_id
+            email: user.email
         }
     },
     generateHashedPassword: function (us, pwd) {
@@ -112,10 +111,6 @@ var userSchema = mongoose.Schema({
         type: Array,
         default: [],
     },
-    witken_id: {
-        type: Number,
-        default: userTools.createNewUserID()
-    },
     witken: {
         results: {
             type: Array,
@@ -167,7 +162,6 @@ var User = mongoose.model('User', userSchema);
 
 var confirmOrder = function (eb_data, callback) {
     var user = userTools.generateUserFromEventbrite(eb_data);
-
     addUser(user, function (err, u) {
         if (err) {
             if (err.error_message !== 'Already registered') {
@@ -193,8 +187,11 @@ var confirmOrder = function (eb_data, callback) {
                     return callback(err, us.generatePublicObject());
                 });
             }
+        } else if (!u) {
+            return callback(utils.generateServerError('fatal', 'No user found'));
+        } else {
+            return callback(null, u.generatePublicObject())
         }
-        return callback(null, u.generatePublicObject)
     });
 }
 
@@ -204,30 +201,13 @@ var addUser = function (user, callback) {
             return callback(utils.generateDatabaseError('User', err));
         }
         if (users.length === 0) {
-            var verifyUnicityOfUserWitkenId = function (callback) {
-                User.findOne({
-                    witken_id: user.witken_id
-                }, function (err, u) {
-                    if (err) {
-                        return callback(utils.generateDatabaseError('User', err));
-                    }
-                    if (!u) {
-                        return callback();
-                    }
-                    user.witken_id = userTools.createNewUserID();
-                    u.save();
-                    return verifyUnicityOfUser(callback);
-                });
-            };
-            verifyUnicityOfUserWitkenId(function () {
-                user.save(function (err, u) {
-                    if (err) {
-                        return callback(utils.generateDatabaseError('User', err));
-                    } else {
-                        email.sendInscriptionConfirmation(u);
-                        return callback(null, u)
-                    }
-                });
+            user.save(function (err, u) {
+                if (err) {
+                    return callback(utils.generateDatabaseError('User', err));
+                } else {
+                    email.sendInscriptionConfirmation(u);
+                    return callback(null, u)
+                }
             });
         } else {
             return callback(utils.generateServerError('fatal', 'Already registered'));
@@ -297,6 +277,7 @@ var findOne = function (query, callback) {
 
 exports.User = User;
 exports.tools = userTools;
+
 exports.confirmOrder = confirmOrder;
 exports.addUser = addUser;
 exports.setPassword = setPassword;

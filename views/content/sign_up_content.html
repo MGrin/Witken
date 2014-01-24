@@ -1,6 +1,6 @@
-§§if(err!='None'){;§
+§§if(err!=='None'){;§
 <p class="text-danger">Error: §§=err;§</p>
-§§}else if(user!='None'){;§
+§§}else if(user!=='None'){;§
 <div class="card grey_dark_bg">
     <h1>
         <span class="multilang" text="general_hello">Hi,</span>§§=user.human_data.prefix;§ §§=user.human_data.last_name;§!
@@ -21,7 +21,7 @@
     </div>
 </div>
 §§};§
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
 <script>
     var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
     var user = §§-JSON.stringify(user);§;
@@ -61,7 +61,9 @@
                 $('#sign_up_form').block({
                     message: 'Loading'
                 });
-                $.post('/signup', params, function(data) {
+                $.post('/signup', params, function() {
+                    console.log('post /auth');
+                }).success(function(data){
                     if (data.err) {
                         $('#error_div').text(data.err.error_message);
                         $('#pwd_div').addClass('has-error');
@@ -81,7 +83,9 @@
                             }
                         });
                     }
-                })
+                }).fail(function(){
+                    alert('Server faled');
+                });
             }
         });
     };

@@ -73,10 +73,10 @@ exports.authenticate = function (req, res, next) {
 }
 
 exports.signup = function (req, res) {
-    var user = req.body.user;
+    var us = req.body.user;
     var passwd = req.body.pass;
 
-    user.setPassword(user, passwd, function (err) {
+    user.setPassword(us, passwd, function (err) {
         if (err) {
             res.send({
                 err: err
