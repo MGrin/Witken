@@ -10,6 +10,8 @@ var defHeaderHeight = 150;
 var defFooterHeight = 150;
 var defHeaderMobileHeight = 100;
 
+var defCardHeight = 350;
+
 var animationTime = 200;
 
 var mobile_screen = 480;
@@ -25,6 +27,7 @@ function initiate() {
 
     setupHeaderAlignement();
     setupImages();
+    setupCards();
     setupFooter();
     setupUserContent();
 }
@@ -98,6 +101,14 @@ function setupImages() {
     if ($(window).width() < phablet_screen) {
         $('.logo').width($('.logo').attr('full-size') * 0.5);
     }
+}
+
+function setupCards() {
+    $('.card').each(function(){
+        if($(this).height() < defCardHeight){
+            $(this).height(defCardHeight);
+        }
+    });
 }
 
 function setupUserContent() {

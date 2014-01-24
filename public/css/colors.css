@@ -18,8 +18,12 @@
     background-color: rgb(222, 70, 73);
 }
 
-.grey_light_bg {
+.grey_bg {
     background-color: rgb(238, 238, 238);
+}
+
+.grey_light_bg {
+    background-color: rgb(228, 228, 228);
 }
 
 .grey_dark_bg {
