@@ -9,6 +9,9 @@ var eb_client = Eventbrite({
 
 exports.init = function () {
     exports.updateEventsData(function () {});
+    setInterval(function(){
+        exports.updateEventsData(function () {});
+    }, 1000*60*60*12);
 }
 
 exports.ORGANIZATION = "MGSDD";
@@ -26,7 +29,7 @@ exports.updateEventsData = function (callback) {
             //console.log('Error while retrieving events from eventbrite: ' + err);
             return callback(utils.generateDatabaseError('Eventbrite', err));
         }
-
+        events = [];
         for (var i = 0; i < data.events.length; i++) {
             var e = data.events[i].event;
             var tickets = [];
@@ -91,9 +94,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
 }
 
 exports.getValidEvents = function (callback) {
-    exports.updateEventsData(function () {
-        callback(events);
-    });
+    callback(events);
 }
 
 exports.getAttendees = function (eventID, callback) {

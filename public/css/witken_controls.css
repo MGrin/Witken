@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 .link:hover {
-    text-decoration: overline;
+/*    text-decoration: overline;*/
 }
 .witken_button {
     font-size: 25px;
@@ -35,4 +35,15 @@
     border-color: rgb(48, 49, 53);
     border-width: 2px;
     padding: 10px;
+}
+
+.circle_control {
+    border-color: white;
+    border-style: solid;
+    border-radius: 50%;
+    border-width: 2px;
+    
+    margin: 0px -10px;
+    
+    background-color: rgb(48, 49, 53);
 }

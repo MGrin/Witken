@@ -49,3 +49,6 @@ var port = process.env.PORT || 5000;
 app.listen(port, function () {
     console.log("Listening on " + port);
 });
+
+exports.mode = process.env.MODE || 'DEV';
+exports.connected = process.env.CONNECTED || "YES"

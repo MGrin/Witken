@@ -19,12 +19,7 @@ var phablet_screen = 768;
 var tablet_screen = 992;
 var normal_screen = 1280;
 
-var loading_div = '<h1>Loading</h1>' + '<div class="progress progress-striped active">' + '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">' + '</div>' + '</div>';
-
 function initiate() {
-    $('#loading_content_div').hide();
-    $('#loading_content_div').html(loading_div);
-
     setupHeaderAlignement();
     setupImages();
     setupCards();
@@ -104,8 +99,8 @@ function setupImages() {
 }
 
 function setupCards() {
-    $('.card').each(function(){
-        if($(this).height() < defCardHeight){
+    $('.card').each(function () {
+        if ($(this).height() < defCardHeight) {
             $(this).height(defCardHeight);
         }
     });
@@ -118,7 +113,6 @@ function setupUserContent() {
 function onContentChangeStart(callback) {
     $('.central').fadeOut(animationTime, function () {
         $('.footer').hide();
-        $('#loading_content_div').fadeIn(animationTime);
         if (callback) {
             callback();
         }
@@ -126,7 +120,6 @@ function onContentChangeStart(callback) {
 }
 
 function onContentChangeEnd(callback) {
-    $('#loading_content_div').hide();
     $('.central').fadeIn(animationTime, function () {
         if (callback) {
             callback();
@@ -159,5 +152,27 @@ function setupFooter() {
             margin_top = centralMarginTop;
         }
         $(this).css('margin-top', margin_top);
+    });
+}
+
+function setupWitkenCircleControls() {
+    $('.circle_control').each(function () {
+        $(this).height($(this).width());
+        $(this).children().css('margin-top', $(this).height() / 2 - $(this).children().height() / 2);
+        if (!$(this).hasClass('no-hover')) {
+            $(this).hover(function () {
+                if (!$(this).hasClass('active')) {
+                    $(this).css('background-color', 'rgb(100,100,100)');
+                } else {
+                    $(this).css('background-color', 'rgb(91, 151, 40)');
+                }
+            }, function () {
+                if (!$(this).hasClass('active')) {
+                    $(this).css('background-color', 'rgb(48,49,53)');
+                } else {
+                    $(this).css('background-color', 'rgb(71, 131, 20)');
+                }
+            });
+        }
     });
 }

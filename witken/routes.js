@@ -30,11 +30,8 @@ function generateParams(req, content) {
 }
 
 exports.inscription = function (req, res) {
-    var params = generateParams(req, 'inscription');
-    events.getValidEvents(function (events) {
-        params.events = events;
-        res.render('template.html', params);
-    });
+    res.render('template.html', generateParams(req, 'inscription'));
+    
 }
 
 exports.confirm_order = function (req, res) {
@@ -79,7 +76,12 @@ exports.label = function (req, res) {
 }
 
 exports.examen = function (req, res) {
-    res.render('template.html', generateParams(req, 'examen_index'));
+    var params = generateParams(req, 'examen_index');
+
+    events.getValidEvents(function (events) {
+        params.events = events;
+        res.render('template.html', params);
+    });   
 }
 
 exports.witken = function (req, res) {
