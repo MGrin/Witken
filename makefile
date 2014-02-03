@@ -1,6 +1,9 @@
 REPORTER=spec
 TESTS=$(shell find ./tests -type f -name "*.test.js")
 
+start:
+	foreman start
+
 test:
 	mocha --require should --reporter $(REPORTER) $(TESTS)
 
@@ -16,4 +19,4 @@ app-cov:
 clean:
 	rm -rf cov
 
-.PHONY: test
+.PHONY: start
