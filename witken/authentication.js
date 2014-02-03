@@ -1,5 +1,5 @@
-var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 exports.passport = passport;
 
 var user = require('./user.js');
@@ -73,10 +73,10 @@ exports.authenticate = function (req, res, next) {
 }
 
 exports.signup = function (req, res) {
-    var user_email = req.body.user_email;
+    var us = req.body.user;
     var passwd = req.body.pass;
 
-    user.setPassword(user_email, passwd, function (err) {
+    user.setPassword(us, passwd, function (err) {
         if (err) {
             res.send({
                 err: err

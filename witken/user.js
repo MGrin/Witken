@@ -20,23 +20,69 @@ exports.init = function () {
 
     db.on('error', function () {
         console.log('Failed to connect to UsersDB');
-        if (require('../server.js').connected === 'YES')
-            process.exit(1);
+        process.exit(1);
     });
     db.once('open', function callback() {
         //console.log('Connected to UsersDB');
     });
 }
 
+var userTools = {
+    createNewUserID: function () {
+        return Math.floor(Math.random() * 1000000000);
+    },
+    generateQuery: function (user) {
+        return {
+            email: user.email
+        }
+    },
+    generateHashedPassword: function (us, pwd) {
+        return crypto.createHash('sha1').update(us.password_sel + pwd + us.email).digest('base64');
+    },
+    generateUserFromEventbrite: function (eb_data) {
+        return new User({
+            email: eb_data.email,
+            human_data: {
+                prefix: eb_data.prefix,
+                first_name: eb_data.first_name,
+                last_name: eb_data.last_name,
+                gender: eb_data.gender,
+                birth_date: new Date(eb_data.birth_date),
+            },
+            contact: {
+                home_phone: eb_data.home_phone,
+                cell_phone: eb_data.cell_phone,
+                home_address: eb_data.home_address,
+                home_postal_code: eb_data.home_postal_code,
+                home_country_code: eb_data.home_country_code,
+                home_city: eb_data.home_city,
+            },
+            job: {
+                job_title: eb_data.job_title,
+                work_address: eb_data.work_address
+            },
+            eventbrite: [
+                {
+                    event_id: eb_data.event_id,
+                    ticket_id: eb_data.ticket_id
+            }
+        ]
+        });
+    }
+}
+
 var userSchema = mongoose.Schema({
-    email: String,
+    email: {
+        type: String,
+        required: true
+    },
     password_sel: {
         type: String,
         default: randomstring.generate(3)
     },
     password: {
         type: String,
-        default: randomstring.generate()
+        default: randomstring.generate(10)
     },
     hasPassword: {
         type: Boolean,
@@ -61,12 +107,10 @@ var userSchema = mongoose.Schema({
         job_title: String,
         work_address: String
     },
-    eventbrite: [
-        {
-            event_id: Number,
-            ticket_id: Number
-            }
-        ],
+    eventbrite: {
+        type: Array,
+        default: [],
+    },
     witken: {
         results: {
             type: Array,
@@ -77,14 +121,14 @@ var userSchema = mongoose.Schema({
 
 userSchema.methods.validPassword = function (p) {
     if (this.hasPassword) {
-        var selled_hash = crypto.createHash('md5').update(this.password_sel + p).digest('base64');
+        var selled_hash = userTools.generateHashedPassword(this, p);
         return selled_hash === this.password;
     } else {
         return false;
     }
 }
 
-userSchema.methods.generatePublicObject = function(){
+userSchema.methods.generatePublicObject = function () {
     return {
         email: this.email,
         hasPassword: this.hasPassword,
@@ -106,24 +150,53 @@ userSchema.methods.generatePublicObject = function(){
         job: {
             job_title: this.contact.job_title,
             work_address: this.contact.work_address
-        }
+        },
+        witken: {
+            results: this.witken.results
+        },
+        eventbrite: this.eventbrite
     };
 }
 
 var User = mongoose.model('User', userSchema);
-exports.User = User;
 
-var generateQuery = function (user) {
-    return {
-        email: user.email
-    }
+var confirmOrder = function (eb_data, callback) {
+    var user = userTools.generateUserFromEventbrite(eb_data);
+    addUser(user, function (err, u) {
+        if (err) {
+            if (err.error_message !== 'Already registered') {
+                return callback(err);
+            } else {
+                User.findOne(userTools.generateQuery(user), function (err, us) {
+                    if (err) {
+                        return callback(utils.generateDatabaseError('User', err));
+                    }
+
+                    if (!us) {
+                        return callback(utils.generateServerError('fatal', 'No user found'));
+                    }
+
+                    if (!us.eventbrite) {
+                        us.eventbrite = [];
+                    }
+                    us.eventbrite.push({
+                        event_id: eb_data.event_id,
+                        ticket_id: eb_data.ticket_id
+                    });
+                    us.save();
+                    return callback(err, us.generatePublicObject());
+                });
+            }
+        } else if (!u) {
+            return callback(utils.generateServerError('fatal', 'No user found'));
+        } else {
+            return callback(null, u.generatePublicObject())
+        }
+    });
 }
 
-
-exports.addUser = function (user, callback) {
-    User.find({
-        email: user.email
-    }, function (err, users) {
+var addUser = function (user, callback) {
+    User.find(userTools.generateQuery(user), function (err, users) {
         if (err) {
             return callback(utils.generateDatabaseError('User', err));
         }
@@ -142,7 +215,52 @@ exports.addUser = function (user, callback) {
     });
 }
 
-exports.findOne = function (query, callback) {
+var setPassword = function (user, passwd, callback) {
+    User.findOne({
+        email: user.email
+    }, function (err, us) {
+        if (err) {
+            return callback(utils.generateDatabaseError('User', err));
+        }
+
+        if (!us) {
+            return callback(utils.generateServerError('warning', 'No user found'));
+        }
+
+        if (us.hasPassword === true) {
+            return callback(utils.generateServerError('fatal', 'Already has password'));
+        }
+
+        us.password = userTools.generateHashedPassword(us, passwd);
+        us.hasPassword = true;
+        us.save();
+        return callback(null, us);
+    });
+}
+
+var changePassword = function (user, new_passwd, passwd, callback) {
+    User.findOne({
+        email: user.email
+    }, function (err, us) {
+        if (err) {
+            return callback(utils.generateDatabaseError('User', err));
+        }
+
+        if (!us) {
+            return callback(utils.generateServerError('warning', 'No user found'));
+        }
+
+        if (!us.validPassword(passwd)) {
+            return callback(utils.generateInputError('password', 'Wrong old password'));
+        }
+
+        us.password = userTools.generateHashedPassword(us, new_passwd);
+        us.save();
+        return callback(null, us);
+    });
+}
+
+var findOne = function (query, callback) {
     User.find(query, function (err, users) {
         if (err) {
             return callback(utils.generateDatabaseError('User', err));
@@ -157,109 +275,11 @@ exports.findOne = function (query, callback) {
     });
 }
 
-exports.setPassword = function (email, passwd, callback) {
-    User.findOne({
-        email: email
-    }, function (err, us) {
-        if (err) {
-            return callback(utils.generateDatabaseError('User', err));
-        }
+exports.User = User;
+exports.tools = userTools;
 
-        if (!us) {
-            return callback(utils.generateServerError('warning', 'User ' + email + ' not found'));
-        }
-
-        if (us.hasPassword === true) {
-            return callback(utils.generateServerError('fatal', 'Already has password'));
-        }
-
-        us.password = crypto.createHash('md5').update(us.password_sel + passwd).digest('base64');
-        us.hasPassword = true;
-        us.save();
-        return callback(null, us);
-    });
-}
-
-exports.changePassword = function (email, new_passwd, passwd, callback) {
-    User.findOne({
-        email: email
-    }, function (err, us) {
-        if (err) {
-            return callback(utils.generateDatabaseError('User', err));
-        }
-
-        if (!us) {
-            return callback(utils.generateServerError('warning', 'No user found'));
-        }
-
-        if (!us.validPassword(passwd)) {
-            return callback(utils.generateInputError('password', 'Wrong old password'));
-        }
-
-        us.password = crypto.createHash('md5').update(us.password_sel + new_passwd).digest('base64');
-        us.save();
-        return callback(null, us);
-    });
-}
-
-exports.confirmOrder = function (eb_data, callback) {
-    var user = new User({
-        email: eb_data.email,
-        human_data: {
-            prefix: eb_data.prefix,
-            first_name: eb_data.first_name,
-            last_name: eb_data.last_name,
-            gender: eb_data.gender,
-            birth_date: new Date(eb_data.birth_date),
-        },
-        contact: {
-            home_phone: eb_data.home_phone,
-            cell_phone: eb_data.cell_phone,
-            home_address: eb_data.home_address,
-            home_postal_code: eb_data.home_postal_code,
-            home_country_code: eb_data.home_country_code,
-            home_city: eb_data.home_city,
-        },
-        job: {
-            job_title: eb_data.job_title,
-            work_address: eb_data.work_address
-        },
-        eventbrite: [
-            {
-                event_id: eb_data.event_id,
-                ticket_id: eb_data.ticket_id
-            }
-        ]
-    });
-
-    exports.addUser(user, function (err, u) {
-        if (err) {
-            if (err.error_message !== 'Already registered') {
-                return callback(err);
-            } else {
-                User.findOne({
-                    email: user.email
-                }, function (err, us) {
-                    if (err) {
-                        return callback(utils.generateDatabaseError('User', err));
-                    }
-
-                    if (!us) {
-                        return callback(utils.generateServerError('warning', 'No user found'));
-                    }
-
-                    if (!us.eventbrite) {
-                        us.eventbrite = [];
-                    }
-                    us.eventbrite.push({
-                        event_id: eb_data.event_id,
-                        ticket_id: eb_data.ticket_id
-                    });
-                    us.save();
-                    return callback(err, u.generatePublicObject);
-                });
-            }
-        }
-        return callback(null, u.generatePublicObject)
-    });
-}
+exports.confirmOrder = confirmOrder;
+exports.addUser = addUser;
+exports.setPassword = setPassword;
+exports.changePassword = changePassword;
+exports.findOne = findOne;

@@ -22,6 +22,13 @@
     border-color: rgb(218, 218, 218);
     border-width: 1px;
     padding: 10px;
+    
+    padding-bottom: 100px;
+    text-align: justify;
+}
+
+.card h1 {
+    margin-bottom: 50px;
 }
 .card_black_border {
     border-style: solid;

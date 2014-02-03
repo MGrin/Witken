@@ -1,6 +1,70 @@
 var should = require('should');
 var routes = process.env.APP_COV ? require(__dirname + '/../cov/routes.js') : require(__dirname + '/../witken/routes.js');
 
+var testUser = {
+    "contact": {
+        "home_phone": "",
+        "cell_phone": "",
+        "home_address": "",
+        "home_postal_code": "",
+        "home_country_code": "",
+        "home_city": ""
+    },
+    "email": "test@user.com",
+    "eventbrite": [
+        {
+            "ticket_id": 1234,
+            "event_id": 1234
+        }
+    ],
+    "hasPassword": true,
+    "human_data": {
+        "prefix": "Mr",
+        "first_name": "Test",
+        "last_name": "User",
+        "gender": "Male",
+        "birth_date": {
+            "$date": "2014-01-23T17:29:36.258Z"
+        }
+    },
+    "job": {
+        "job_title": "Witken",
+        "work_address": ""
+    },
+    "witken": {
+        "results": []
+    },
+    generatePublicObject: function () {
+        return {
+            email: this.email,
+            hasPassword: this.hasPassword,
+            human_data: {
+                prefix: this.human_data.prefix,
+                first_name: this.human_data.first_name,
+                last_name: this.human_data.last_name,
+                gender: this.human_data.gender,
+                birth_date: new Date(this.human_data.birth_date),
+            },
+            contact: {
+                home_phone: this.contact.home_phone,
+                cell_phone: this.contact.cell_phone,
+                home_address: this.contact.home_address,
+                home_postal_code: this.contact.home_postal_code,
+                home_country_code: this.contact.home_country_code,
+                home_city: this.contact.home_city,
+            },
+            job: {
+                job_title: this.contact.job_title,
+                work_address: this.contact.work_address
+            },
+            witken: {
+                results: this.witken.results
+            },
+            eventbrite: this.eventbrite
+        };
+    }
+}
+
 describe('Routes', function () {
     it('should have a route to the index page', function () {
         should.exist(routes.index);
@@ -79,9 +143,7 @@ describe('Routes', function () {
         });
 
         it('should redirect if I\'m logged in', function () {
-            var req = generateReq(null, null, {
-                email: 'test@user.com'
-            });
+            var req = generateReq(null, null, testUser);
             var res = generateRes('template.html', generateParams(req, 'profile'));
             routes.profile(req, res);
         });
@@ -99,9 +161,9 @@ describe('Routes', function () {
             routes.inscription(req, res);
         });
     });
-    
-    describe('Routes.confirm_orfder', function(){
-        
+
+    describe('Routes.confirm_orfder', function () {
+
     });
 });
 
@@ -135,9 +197,8 @@ function generateRes(expected_page, expected_params) {
 function generateParams(req, content) {
     var par = {};
 
+    par.err = 'None';
     par.content = content;
-
-    par.connected = 'YES';
 
     if (!req.param('lang')) {
         par.lang = 'fr';
@@ -156,7 +217,7 @@ function generateParams(req, content) {
     if (!req.user) {
         par.user = 'None';
     } else {
-        par.user = req.user;
+        par.user = req.user.generatePublicObject();
     }
 
     return par;
