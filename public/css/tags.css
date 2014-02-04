@@ -17,6 +17,7 @@
 html,
 body {
     font-family: HelveticaNeueLight;
+    overflow-x: hidden;
 }
 small {
     font-family: HelveticaUltraLight;
