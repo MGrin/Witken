@@ -1,7 +1,9 @@
 .central {
     margin-top: 50px;
     margin-bottom: 50px;
+    padding: 0px 15px;
 }
-#loading_content_div {
-    text-align: center;
+
+#content {
+    padding: 0;   
 }

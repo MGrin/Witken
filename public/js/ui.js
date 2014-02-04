@@ -20,6 +20,7 @@ var tablet_screen = 992;
 var normal_screen = 1280;
 
 function initiate() {
+    $(document).width($(window).width());
     setupHeaderAlignement();
     setupImages();
     setupCards();
@@ -84,18 +85,6 @@ function setupImages() {
     }).each(function () {
         if (this.complete) $(this).load();
     });
-
-    $("img").each(function () {
-        if ($(window).width() < phablet_screen) {
-            console.log('Lalala');
-            $(this).width($(this).attr('full-size') * 0.85);
-        } else {
-            $(this).width($(this).attr('full-size'));
-        }
-    });
-    if ($(window).width() < phablet_screen) {
-        $('.logo').width($('.logo').attr('full-size') * 0.5);
-    }
 }
 
 function setupCards() {
@@ -175,4 +164,12 @@ function setupWitkenCircleControls() {
             });
         }
     });
+}
+
+var generateTextCircle = function (text, cl) {
+    return '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><div class="link circle_control text-center ' + cl + '">' + '<p class="white_text">' + text + '</p>' + '</div></div>'
+}
+
+var generateSelectorCircleWithId = function (id) {
+    return '<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3"><div class="circle_control text-center no-hover date">' + '<select id="' + id + '">' + '</select>' + '</div></div>'
 }

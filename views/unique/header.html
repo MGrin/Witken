@@ -1,63 +1,65 @@
-<div class="bottom-aligned header row grey_dark_bg">
-    <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0 hidden-xs">
-        <img src="/img/WKlogo.png" class="link js_redirect_index logo" full-size="150" />
-    </div>
-    <div class="col-xs-6 visible-xs">
-        <img src="/img/wk_black_label.png" class="link js_redirect_index center-block logo" full-size="150" />
-    </div>
-    <div class="user-content red_bg white_text col-xs-6 visible-xs">
-        §§if(user==='None' || user === undefined){;§
-        <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
-        §§}else{;§
-        <h3>§§= user.human_data.first_name ;§ §§= user.human_data.last_name;§</h3>
-        <p text="general_registration" class="multilang link js_redirect_profile"></p>
-        §§};§
-    </div>
-    
-    <div class="bottom-aligned menu_item col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1 col-xs-12">
-        <h3 text="general_label" class="multilang link js_redirect_label"></h3>
-        <small>
-            <ul class="list-unstyled">
-                <li text="header_label_description_text" class="multilang"></li>
-                <li text="header_label_reconnaissance_text" class="multilang"></li>
-            </ul>
-        </small>
-    </div>
-    <div class=" bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 col-xs-12">
-        <h3 text="general_examen" class="multilang link js_redirect_examen"></h3>
-        <small>
-            <ul class="list-unstyled">
-                <li text="header_examen_text" class="multilang"></li>
-            </ul>
-        </small>
-    </div>
-    <div class="bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 col-xs-12">
-        <h3 text="general_witken" class="multilang link js_redirect_witken"></h3>
-        <small>
-            <ul class="list-unstyled">
-                <li text="header_witken_nous_text" class="multilang"></li>
-                <li text="header_witken_partenaires_text" class="multilang"></li>
-            </ul>
-        </small>
-    </div>
-    <div class="bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 hidden-xs">
-        <h3 text="general_language_switch" class="multilang link js_redirect_language"></h3>
-        <small>
-            <ul class="list-unstyled">
-                <li text="general_language_current" class="multilang"></li>
-                <li>
-                    <br/>
-                </li>
-            </ul>
-        </small>
-    </div>
+<div class="row grey_dark_bg">
+    <div class="bottom-aligned header col-lg-12 col-lg-offset-2 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 grey_dark_bg">
+        <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs">
+            <img src="/img/WKlogo.png" class="link js_redirect_index logo" />
+        </div>
+        <div class="col-xs-6 visible-xs">
+            <img src="/img/wk_black_label.png" class="link js_redirect_index center-block logo" />
+        </div>
+        <div class="user-content red_bg white_text col-xs-6 visible-xs">
+            §§if(user==='None' || user === undefined){;§
+            <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
+            §§}else{;§
+            <h3>§§= user.human_data.first_name ;§ §§= user.human_data.last_name;§</h3>
+            <p text="general_registration" class="multilang link js_redirect_profile"></p>
+            §§};§
+        </div>
 
-    <div class="user-content red_bg white_text col-lg-2 col-md-2 col-sm-2 hidden-xs">
-        §§if(user==='None' || user === undefined){;§
-        <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
-        §§}else{;§
-        <h3>§§= user.human_data.first_name ;§ §§= user.human_data.last_name;§</h3>
-        <p text="general_registration" class="multilang link js_redirect_profile"></p>
-        §§};§
+        <div class="bottom-aligned menu_item col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1 col-xs-12">
+            <h3 text="general_label" class="multilang link js_redirect_label"></h3>
+            <small>
+                <ul class="list-unstyled">
+                    <li text="header_label_description_text" class="multilang"></li>
+                    <li text="header_label_reconnaissance_text" class="multilang"></li>
+                </ul>
+            </small>
+        </div>
+        <div class=" bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 col-xs-12">
+            <h3 text="general_examen" class="multilang link js_redirect_examen"></h3>
+            <small>
+                <ul class="list-unstyled">
+                    <li text="header_examen_text" class="multilang"></li>
+                </ul>
+            </small>
+        </div>
+        <div class="bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 col-xs-12">
+            <h3 text="general_witken" class="multilang link js_redirect_witken"></h3>
+            <small>
+                <ul class="list-unstyled">
+                    <li text="header_witken_nous_text" class="multilang"></li>
+                    <li text="header_witken_partenaires_text" class="multilang"></li>
+                </ul>
+            </small>
+        </div>
+        <div class="bottom-aligned menu_item col-lg-1 col-md-2 col-sm-2 hidden-xs">
+            <h3 text="general_language_switch" class="multilang link js_redirect_language"></h3>
+            <small>
+                <ul class="list-unstyled">
+                    <li text="general_language_current" class="multilang"></li>
+                    <li>
+                        <br/>
+                    </li>
+                </ul>
+            </small>
+        </div>
+
+        <div class="user-content red_bg white_text col-lg-2 col-md-2 col-sm-2 hidden-xs">
+            §§if(user==='None' || user === undefined){;§
+            <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
+            §§}else{;§
+            <h3>§§= user.human_data.first_name ;§ §§= user.human_data.last_name;§</h3>
+            <p text="general_registration" class="multilang link js_redirect_profile"></p>
+            §§};§
+        </div>
     </div>
 </div>

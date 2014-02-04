@@ -1,12 +1,15 @@
+/*Links*/
 .link {
     cursor: pointer;
 }
 .link:hover {
-/*    text-decoration: overline;*/
+
 }
 .witken_button {
     font-size: 25px;
 }
+
+/*Borders*/
 .right_border {
     border-right-style: solid;
     border-right-color: rgb(48, 49, 53);
@@ -17,10 +20,9 @@
     border-left-color: rgb(48, 49, 53);
     border-left-width: 1px;
 }
+
+/*Card styles*/
 .card {
-    border-style: solid;
-    border-color: rgb(218, 218, 218);
-    border-width: 1px;
     padding: 10px;
     
     padding-bottom: 100px;
@@ -41,6 +43,7 @@
     padding: 10px;
 }
 
+/*Circle control*/
 .circle_control {
     border-color: white;
     border-style: solid;

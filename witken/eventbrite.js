@@ -62,7 +62,6 @@ exports.updateEventsData = function (callback) {
 }
 
 exports.confirmOrder = function (eventID, orderID, callback) {
-    console.log('Confirming order');
     if (!eventID || !orderID) {
         return callback(utils.generateRoutingError('Order confirmation', 'fatal', 'Faild to confirm your order. Please contact us. Sorry for that.'));
     }
@@ -87,7 +86,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         if (!user) {
             return callback(utils.generateDatabaseError('Eventbrite', 'Failed to verify order, please contact us. Sorry for that.'));
         }
-        User.confirmOrder(user, function (err, user) {
+        User.confirmOrder(user, eventID, orderID, function (err, user) {
             return callback(err, user);
         });
     });

@@ -160,7 +160,7 @@ userSchema.methods.generatePublicObject = function () {
 
 var User = mongoose.model('User', userSchema);
 
-var confirmOrder = function (eb_data, callback) {
+var confirmOrder = function (eb_data, eventID, orderID, callback) {
     var user = userTools.generateUserFromEventbrite(eb_data);
     addUser(user, function (err, u) {
         if (err) {
@@ -184,12 +184,14 @@ var confirmOrder = function (eb_data, callback) {
                         ticket_id: eb_data.ticket_id
                     });
                     us.save();
+                    email.sendInscriptionConfirmation(us, utils.generateConfirmationLink(eventID, orderID)); 
                     return callback(err, us.generatePublicObject());
                 });
             }
         } else if (!u) {
             return callback(utils.generateServerError('fatal', 'No user found'));
         } else {
+            email.sendInscriptionConfirmation(user, utils.generateConfirmationLink(eventID, orderID)); 
             return callback(null, u.generatePublicObject())
         }
     });
@@ -205,7 +207,6 @@ var addUser = function (user, callback) {
                 if (err) {
                     return callback(utils.generateDatabaseError('User', err));
                 } else {
-                    email.sendInscriptionConfirmation(u);
                     return callback(null, u)
                 }
             });

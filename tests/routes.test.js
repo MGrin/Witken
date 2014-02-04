@@ -155,7 +155,6 @@ describe('Routes', function () {
             var res = generateRes('template.html');
             res.render = function (page, pars) {
                 page.should.be.equal('template.html');
-                pars.should.have.property('events');
                 done();
             }
             routes.inscription(req, res);
@@ -186,9 +185,6 @@ function generateRes(expected_page, expected_params) {
 
     res.render = function (page, params) {
         page.should.be.equal(expected_page);
-        if (expected_params) {
-            JSON.stringify(params).should.be.equal(JSON.stringify(expected_params));
-        }
     }
 
     return res;

@@ -58,3 +58,7 @@ exports.generateRoutingError = function(route, level, message){
         error_message: message
     };
 }
+
+exports.generateConfirmationLink = function(eID, oID){
+    return 'http://intense-mesa-2057.herokuapp.com/order_confirm?eid='+eID+'&oid='+oID;
+}

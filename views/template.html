@@ -9,50 +9,42 @@
 
 <body class="black_text grey_bg">
     <div class="container-fluid">
-
         §§- include unique/header.html;§
-
         <div class="central row">
-            §§if(user!='None'){;§
-            <div id="content" class="col-lg-6 col-lg-offset-2 col-md-10 col-sm-10 col-xs-12">
-                §§}else{;§
-                <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
-                    §§};§
-                    §§};§
-                    §§if(content=='index'){;§
-                    §§- include content/index_content.html;§
-                    §§}else if(content=='label_index'){;§
-                    §§- include content/label_index_content.html;§
-                    §§}else if(content=='examen_index'){;§
-                    §§- include content/examen_index_content.html;§
-                    §§}else if(content=='witken_index'){;§
-                    §§- include content/witken_index_content.html;§
-                    §§}else if(content=='inscription'){;§
-                    §§- include content/inscription_content.html;§
-                    §§}else if(content=='sign_up'){;§
-                    §§- include content/sign_up_content.html;§
-                    §§}else if(content=='profile'){;§
-                    §§- include content/profile_content.html;§
-                    §§};§
-
-                    §§if(render=='full') {;§
-                </div>
-
-                
+            <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
+§§};§
                 §§if(user!='None'){;§
-                <div id="user_content" class="user-content red_bg col-lg-2 col-md-2 col-sm-2 hidden-xs">
-                    §§- include unique/user_side.html;§
-                </div>
-                <div id="content" class="col-lg-6 col-lg-offset-2 col-md-10 col-sm-10 col-xs-12" id="#loading_content_div">
-                §§}else{;§
-                <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12" id="#loading_content_div">
+                    <div class="col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                §§};§
+                §§if(content=='index'){;§
+                    §§- include content/index_content.html;§
+                §§}else if(content=='label_index'){;§
+                    §§- include content/label_index_content.html;§
+                §§}else if(content=='examen_index'){;§
+                    §§- include content/examen_index_content.html;§
+                §§}else if(content=='witken_index'){;§
+                    §§- include content/witken_index_content.html;§
+                §§}else if(content=='inscription'){;§
+                    §§- include content/inscription_content.html;§
+                §§}else if(content=='sign_up'){;§
+                    §§- include content/sign_up_content.html;§
+                §§}else if(content=='profile'){;§
+                    §§- include content/profile_content.html;§
                 §§};§
                     
+                §§if(user!='None'){;§
                 </div>
-                
+                <div id="user_content" class="user-content red_bg col-lg-3 col-md-2 col-sm-2 hidden-xs">
+                    §§- include unique/user_side.html;§
+                </div>
+                §§};§
+§§if(render=='full') {;§
+                </div>                    
             </div>
-            §§- include unique/footer.html;§
+                
         </div>
+            §§- include unique/footer.html;§
+    </div>
 </body>
 
 §§- include unique/scripts.html;§

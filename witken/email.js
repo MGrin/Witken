@@ -8,13 +8,13 @@ var emailSettings = {
     }
 }
 
-exports.sendInscriptionConfirmation = function (user) {
+exports.sendInscriptionConfirmation = function (user, href) {
     var mailOptions = {
         from: "Witken - Inscription <inscritpion@witken.org>",
         to: user.email,
         subject: "Welcome to Witken",
         text: "Inscription stuff",
-        html: generateMail(user)
+        html: generateInscriptionMail(user, href)
     }
     
     sendMail(mailOptions);
@@ -38,6 +38,6 @@ var addAtachment = function(mail, file){
     
 }
 
-var generateMail = function(user){
-    return '<p>Hello</p>'
+var generateInscriptionMail = function(user, href){
+    return '<p>Hello</p>To set password, use this <a href='+href+'>this</a> link.'
 }

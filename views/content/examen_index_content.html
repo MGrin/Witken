@@ -42,28 +42,22 @@
         $('#dates').html('');
         $('#times').html('');
         
+        if(locationSelected){
+            locationSelected = null;
+            dateSelected = null;
+            timeSelected = null;
+            hideBtn();
+        }        
         constructLocations();
         constructDates();
         constructTimes();
-        if(locationElementSelected){
-            locationElementSelected = null;
-            locationSelected = null;
-            dateSelected = null;
-            timeElementSelected = null;
-            timeSelected = null;
-            constructLocations();
-            constructDates();
-            constructTimes();
-        }
+        
         setupWitkenCircleControls();
     };
     
     var locationSelected;
     var dateSelected;
     var timeSelected;
-    
-    var locationElementSelected;
-    var timeElementSelected;
     
     var constructLocations = function() {
         $('#locations').html('');
@@ -87,7 +81,6 @@
         loc.addClass('active');
         loc.css('background-color', 'rgb(91, 151, 40)');
         
-        locationElementSelected = loc;
         locationSelected = loc.children().text();
         dateSelected = null;
         constructDates();
@@ -149,7 +142,6 @@
         time.addClass('active');
         time.css('background-color', 'rgb(91, 151, 40)');
         
-        timeElementSelected = time;
         timeSelected = time.children().text();
         $('#button_div').html('<button type="button" class="btn btn-default" id="proceed-btn">Proceed</button>');
         $('#proceed-btn').click(function(){
@@ -209,14 +201,6 @@
     }
     
     var hideBtn = function(){
-        $('#proceed_btn').addClass('hide');
-    }
-    
-    var generateTextCircle = function(text, cl){
-        return '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><div class="link circle_control text-center '+cl+'">'+'<p class="white_text">'+text+'</p>'+'</div></div>'
-    }
-    
-    var generateSelectorCircleWithId = function(id){
-        return '<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3"><div class="circle_control text-center no-hover date">'+'<select id="'+id+'">'+'</select>'+'</div></div>'
+        $('#proceed-btn').addClass('hide');
     }
 </script>
