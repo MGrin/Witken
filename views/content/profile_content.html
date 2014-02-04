@@ -4,6 +4,8 @@
     var user = §§-JSON.stringify(user);§;
     
     var onDataLoaded = function() {
-        bindOnClickEventForContentClass('.js_redirect_logout', '/logout', 'Witken - Index');
+        $('.js_redirect_logout').click(function () {
+            document.location.href = document.location.origin + '/logout' + '?lang=' + current_lang;
+        });
     };
 </script>
