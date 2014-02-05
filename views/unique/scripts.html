@@ -1,6 +1,23 @@
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.blockUI.js"></script>
+<script src="/js/frameworks/jquery-2.0.3.min.js"></script>
+<script src="/js/frameworks/bootstrap.min.js"></script>
+<script src="/js/frameworks/jquery.blockUI.js"></script>
+
 <script src="/js/ui.js"></script>
-<script src="/js/lang/§§= lang ;§.js"></script>
 <script src="/js/comm.js"></script>
+<script src="/js/lang/§§= lang ;§.js"></script>
+
+<script>
+    var current_lang = "§§= lang ;§"
+    $(document).ready(function() {
+        setLocalTexts();
+        setupOnClickEvents();
+    });
+    window.onload = function() {
+        $(window).resize(function() {
+            initiate();
+            onDataLoaded();
+        });
+        initiate();
+        onDataLoaded();
+    };
+</script>

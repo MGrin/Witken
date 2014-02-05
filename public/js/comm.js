@@ -4,7 +4,7 @@ function setupOnClickEvents() {
     bindOnClickEventForContentClass('.js_redirect_label', '/label', 'Label');
     bindOnClickEventForContentClass('.js_redirect_examen', '/examen', 'Examen');
     bindOnClickEventForContentClass('.js_redirect_witken', '/witken', 'Witken');
-    bindOnClickEventForContentClass('.js_redirect_register', '/inscription', 'Witken - Inscription');
+    bindOnClickEventForContentClass('.js_redirect_login', '/login', 'Witken - Inscription');
     bindOnClickEventForContentClass('.js_redirect_profile', '/profile', 'Witken - Profile');
 
     if (current_lang === 'fr') {
@@ -33,6 +33,7 @@ function bindOnContentReceiveEvent(content, name, pathname) {
     window.history.pushState(content, name, pathname);
 
     $(document).ready(function () {
+        initiate();
         onDataLoaded();
         setLocalTexts();
     });
@@ -40,7 +41,6 @@ function bindOnContentReceiveEvent(content, name, pathname) {
 
 function bindOnClickEventForContentClass(redirect_class, path, history_name) {
     $(redirect_class).click(function () {
-        console.log(redirect_class+' clicked');
         var href = path + '?lang=' + current_lang;
         onContentChangeStart(function () {
             $.get(href, {

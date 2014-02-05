@@ -29,8 +29,8 @@ function generateParams(req, content) {
     return par;
 }
 
-exports.inscription = function (req, res) {
-    res.render('template.html', generateParams(req, 'inscription'));
+exports.login = function (req, res) {
+    res.render('template.html', generateParams(req, 'login'));
     
 }
 
@@ -39,7 +39,7 @@ exports.confirm_order = function (req, res) {
     var orderID = req.query.oid;
 
     events.confirmOrder(eventID, orderID, function (err, user) {
-        var params = generateParams(req, 'sign_up');
+        var params = generateParams(req, 'signup');
         params.err = 'None';
         params.user = 'None';
         
@@ -60,7 +60,7 @@ exports.profile = function(req, res){
     if(params.user!='None'){
         res.render('template.html', params);
     }else{
-        res.redirect('/inscription');
+        res.redirect('/login');
     }    
 }
 
@@ -72,11 +72,11 @@ exports.index = function (req, res) {
     res.render('template.html', generateParams(req, 'index'));
 }
 exports.label = function (req, res) {
-    res.render('template.html', generateParams(req, 'label_index'));
+    res.render('template.html', generateParams(req, 'label'));
 }
 
 exports.examen = function (req, res) {
-    var params = generateParams(req, 'examen_index');
+    var params = generateParams(req, 'examen');
 
     events.getValidEvents(function (events) {
         params.events = events;
@@ -85,5 +85,5 @@ exports.examen = function (req, res) {
 }
 
 exports.witken = function (req, res) {
-    res.render('template.html', generateParams(req, 'witken_index'));
+    res.render('template.html', generateParams(req, 'witken'));
 }

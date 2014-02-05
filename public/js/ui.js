@@ -21,6 +21,7 @@ var normal_screen = 1280;
 
 function initiate() {
     $(document).width($(window).width());
+
     setupHeaderAlignement();
     setupImages();
     setupCards();
@@ -93,54 +94,18 @@ function setupCards() {
             $(this).height(defCardHeight);
         }
     });
-}
 
-function setupUserContent() {
-    $('#user_content').height($('#content').height());
-}
-
-function onContentChangeStart(callback) {
-    $('.central').fadeOut(animationTime, function () {
-        $('.footer').hide();
-        if (callback) {
-            callback();
-        }
-    });
-}
-
-function onContentChangeEnd(callback) {
-    $('.central').fadeIn(animationTime, function () {
-        if (callback) {
-            callback();
-        }
-        setupFooter();
-        $('.footer').fadeIn(animationTime, function () {
-            if ($(window).width() < phablet_screen) {
-                $(window).scrollTop($('#content').position().top);
+    $('.card-wrapper').children().each(function (index, element) {
+        if ($(element).hasClass('card')) {
+            if (index === 0) {
+                $(element).addClass('black_light_bg');
+                $(element).addClass('white_text');
+            } else if (index % 2 === 0) {
+                $(element).addClass('grey_dark_bg');
+            } else {
+                $(element).addClass('grey_light_bg');
             }
-
-            setupUserContent();
-        });
-    });
-}
-
-function setupFooter() {
-    var centralMarginTop = defCentralMarginTop;
-    if ($(window).width() < normal_screen) {
-        centralMarginTop = 0;
-    }
-
-    $('.footer').each(function () {
-        var margin_top;
-        var this_height = $('.header').height();
-
-        //If the whole page can be complitely shown on one page...
-        if ($(window).height() - $('.header').height() - centralMarginTop - $('#content').height() - this_height > 0) {
-            margin_top = $(window).height() - $('.header').height() - $('#content').height() - this_height - centralMarginTop + 10;
-        } else {
-            margin_top = centralMarginTop;
         }
-        $(this).css('margin-top', margin_top);
     });
 }
 
@@ -163,6 +128,55 @@ function setupWitkenCircleControls() {
                 }
             });
         }
+    });
+}
+
+function setupUserContent() {
+    $('#content > #user_side').height($('#content').height());
+}
+
+function setupFooter() {
+    var centralMarginTop = defCentralMarginTop;
+    if ($(window).width() < normal_screen) {
+        centralMarginTop = 0;
+    }
+
+    $('.footer').each(function () {
+        var margin_top;
+        var this_height = $('.header').height();
+
+        //If the whole page can be complitely shown on one page...
+        if ($(window).height() - $('.header').height() - centralMarginTop - $('#content').height() - this_height > 0) {
+            margin_top = $(window).height() - $('.header').height() - $('#content').height() - this_height - centralMarginTop + 10;
+        } else {
+            margin_top = centralMarginTop;
+        }
+        $(this).css('margin-top', margin_top);
+    });
+}
+
+function onContentChangeStart(callback) {
+    $('#central').fadeOut(animationTime, function () {
+        $('.footer').hide();
+        if (callback) {
+            callback();
+        }
+    });
+}
+
+function onContentChangeEnd(callback) {
+    $('#central').fadeIn(animationTime, function () {
+        if (callback) {
+            callback();
+        }
+        setupFooter();
+        $('.footer').fadeIn(animationTime, function () {
+            if ($(window).width() < phablet_screen) {
+                $(window).scrollTop($('#content').position().top);
+            }
+
+            setupUserContent();
+        });
     });
 }
 

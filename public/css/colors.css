@@ -45,6 +45,18 @@
     background-color: rgb(172, 172, 172);
 }
 
+.silver_light_bg {
+    background-color: rgb(214, 211, 211);
+}
+
+.silver_dark_bg {
+    background-color: rgb(169, 175, 175);
+}
+
+.silver_very_dark_bg {
+    background-color: rgb(134, 139, 141);
+}
+
 .bronze_bg {
     background-color: rgb(210, 132, 110);
 }

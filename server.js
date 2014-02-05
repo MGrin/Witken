@@ -36,7 +36,7 @@ app.get('/', routes.index);
 app.get('/label', routes.label);
 app.get('/examen', routes.examen);
 app.get('/witken', routes.witken);
-app.get('/inscription', routes.inscription);
+app.get('/login', routes.login);
 app.get('/order_confirm', routes.confirm_order);
 app.get('/profile', routes.profile);
 app.get('/logout', routes.logout);

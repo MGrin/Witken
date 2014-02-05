@@ -1,5 +1,4 @@
 §§if(render=='full') {;§
-
 <!doctype html>
 <html>
 
@@ -10,33 +9,32 @@
 <body class="black_text grey_bg">
     <div class="container-fluid">
         §§- include unique/header.html;§
-        <div class="central row">
+        <div id="central" class="row">
             <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
 §§};§
                 §§if(user!='None'){;§
                     <div class="col-lg-9 col-md-10 col-sm-10 col-xs-12">
                 §§};§
-                §§if(content=='index'){;§
-                    §§- include content/index_content.html;§
-                §§}else if(content=='label_index'){;§
-                    §§- include content/label_index_content.html;§
-                §§}else if(content=='examen_index'){;§
-                    §§- include content/examen_index_content.html;§
-                §§}else if(content=='witken_index'){;§
-                    §§- include content/witken_index_content.html;§
-                §§}else if(content=='inscription'){;§
-                    §§- include content/inscription_content.html;§
-                §§}else if(content=='sign_up'){;§
-                    §§- include content/sign_up_content.html;§
-                §§}else if(content=='profile'){;§
-                    §§- include content/profile_content.html;§
-                §§};§
+                        
+                    §§if(content=='index'){;§
+                        §§- include content/index.html;§
+                    §§}else if(content=='label'){;§
+                        §§- include content/label.html;§
+                    §§}else if(content=='examen'){;§
+                        §§- include content/examen.html;§
+                    §§}else if(content=='witken'){;§
+                        §§- include content/witken.html;§
+                    §§}else if(content=='login'){;§
+                        §§- include content/login.html;§
+                    §§}else if(content=='signup'){;§
+                        §§- include content/signup.html;§
+                    §§}else if(content=='profile'){;§
+                        §§- include content/profile.html;§
+                    §§};§
                     
                 §§if(user!='None'){;§
-                </div>
-                <div id="user_content" class="user-content red_bg col-lg-3 col-md-2 col-sm-2 hidden-xs">
+                    </div>
                     §§- include unique/user_side.html;§
-                </div>
                 §§};§
 §§if(render=='full') {;§
                 </div>                    
@@ -48,23 +46,5 @@
 </body>
 
 §§- include unique/scripts.html;§
-
-<script>
-    var current_lang = "§§= lang ;§"
-    $(document).ready(function() {
-        setLocalTexts();
-        setupOnClickEvents();
-    });
-    window.onload = function() {
-        $(window).resize(function() {
-            initiate();
-            onDataLoaded();
-        });
-        initiate();
-        onDataLoaded();
-    };
-</script>
-
 </html>
-
 §§};§

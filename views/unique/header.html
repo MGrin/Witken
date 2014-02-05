@@ -8,7 +8,7 @@
         </div>
         <div class="user-content red_bg white_text col-xs-6 visible-xs">
             §§if(user==='None' || user === undefined){;§
-            <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
+            <h3 text="general_registration" class="multilang link js_redirect_login"></h3>
             §§}else{;§
             <h3>§§= user.human_data.first_name ;§ §§= user.human_data.last_name;§</h3>
             <p text="general_registration" class="multilang link js_redirect_profile"></p>
@@ -53,9 +53,9 @@
             </small>
         </div>
 
-        <div class="user-content red_bg white_text col-lg-2 col-md-2 col-sm-2 hidden-xs">
+        <div class="user-content red_bg white_text col-lg-2 col-md-2 col-sm-2 hidden-xs" §§if(user==='None' || user === undefined){;§style="margin-left: 15px;"§§};§>
             §§if(user==='None' || user === undefined){;§
-            <h3 text="general_registration" class="multilang link js_redirect_register"></h3>
+            <h3 text="general_registration" class="multilang link js_redirect_login"></h3>
             §§}else{;§
             <h3>§§= user.human_data.first_name ;§ §§= user.human_data.last_name;§</h3>
             <p text="general_registration" class="multilang link js_redirect_profile"></p>

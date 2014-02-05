@@ -30,6 +30,10 @@ var general = {
     general_examen: "Examen",
     general_indexation: "Indexation",
     general_witken: "Witken",
+    general_results: "Resultats",
+    general_label_and_certificats: "Label & Certificats",
+    general_messages: "Messages",
+    general_compte: "Compte",
     general_language_switch: "English",
     general_language_current: "Francais"
 };
@@ -45,7 +49,7 @@ var header = {
 };
 
 var footer = {
-    footer_partenaires_title: "Nos partenaires"
+    footer_text: "Copyright 2014 witken.ch. tout droit réservé"
 };
 
 var index = {
