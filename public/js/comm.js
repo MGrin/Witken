@@ -33,7 +33,7 @@ function bindOnContentReceiveEvent(content, name, pathname) {
     window.history.pushState(content, name, pathname);
 
     $(document).ready(function () {
-        initiate();
+        setupCards();
         onDataLoaded();
         setLocalTexts();
     });
