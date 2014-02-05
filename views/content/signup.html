@@ -1,0 +1,27 @@
+§§if(err!=='None'){;§
+<p class="text-danger">Error: §§=err;§</p>
+§§}else if(user!=='None'){;§
+<div class="card grey_dark_bg">
+    <h1>
+        <span class="multilang" text="general_hello">Hi, </span>§§=user.human_data.prefix;§ §§=user.human_data.last_name;§!
+    </h1>
+    <div class="row">
+        <div class="form col-lg-4" id="sign_up_form">
+            <div class="form-group" id="pwd_div">
+                <label>Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="form-group" id="pwd_rpt_div">
+                <label>Repeat password</label>
+                <input type="password" class="form-control" id="password_repeat" placeholder="Repeat password">
+                <span class="help-block" id="error_div"></span>
+            </div>
+            <button class="btn btn-default" id="sign_up_submit_btn">Submit</button>
+        </div>
+    </div>
+</div>
+§§};§
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+<script>
+    §§- include ../OnDataLoadedScripts/signup.js ;§
+</script>

@@ -1,0 +1,9 @@
+#profile-menu {
+    padding: 0;
+}
+#profile-menu li{
+    padding: 10px 30px;
+}
+.profile-menu-item {
+    margin-top: 30px;
+}
