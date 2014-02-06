@@ -17,6 +17,8 @@ function getTextForId(text) {
         return label[text];
     case 'examen':
         return examen[text];
+    case 'profile':
+        return profile[text];
     default:
         console.log('problem with texts: ' + spl[0]);
         return "";
@@ -52,6 +54,11 @@ var footer = {
     footer_text: "Copyright 2014 witken.ch. tout droit réservé"
 };
 
+var profile = {
+    profile_next_exam_1: "Votre examen est planifie pour le",
+    profile_next_exam_2: "de",
+    profile_next_exam_3: "à"
+}
 var index = {
     index_slide1_title: "Label de haut potentiel",
     index_slide1_text: "Boostez vos neurones en passant l'examen<br />et obtenez un label certificat...",

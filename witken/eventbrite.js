@@ -7,11 +7,11 @@ var eb_client = Eventbrite({
     'user_key': "138684355683422048593"
 });
 
-exports.init = function () {
-    exports.updateEventsData(function () {});
-    setInterval(function(){
-        exports.updateEventsData(function () {});
-    }, 1000*60*60*12);
+exports.init = function() {
+    exports.updateEventsData(function() {});
+    setInterval(function() {
+        exports.updateEventsData(function() {});
+    }, 1000 * 60 * 60 * 12);
 }
 
 exports.ORGANIZATION = "MGSDD";
@@ -21,10 +21,34 @@ exports.MAX_NUMBER_OF_PARTICIPANTS = 100;
 
 var events = [];
 
-exports.updateEventsData = function (callback) {
+var generatePublicEvent = function(e) {
+    var tickets = [];
+    for (var j = 0; j < e.tickets.length; j++) {
+        var t = e.tickets[j].ticket;
+        tickets.push({
+            quantity_sold: t.quantity_sold,
+            currency: t.currency,
+            quantity_available: t.quantity_available,
+            price: t.price
+        });
+    }
+    return {
+        id: e.id,
+        start_date: e.start_date,
+        end_date: e.end_date,
+        venue: {
+            city: e.venue.city,
+            country: e.venue.country,
+            id: e.venue.id
+        },
+        tickets: tickets,
+        url: e.url
+    };
+}
+exports.updateEventsData = function(callback) {
     eb_client.organizer_list_events({
         id: exports.ORGANIZATION_ID
-    }, function (err, data) {
+    }, function(err, data) {
         if (err) {
             //console.log('Error while retrieving events from eventbrite: ' + err);
             return callback(utils.generateDatabaseError('Eventbrite', err));
@@ -32,28 +56,7 @@ exports.updateEventsData = function (callback) {
         events = [];
         for (var i = 0; i < data.events.length; i++) {
             var e = data.events[i].event;
-            var tickets = [];
-            for (var j = 0; j < e.tickets.length; j++) {
-                var t = e.tickets[j].ticket;
-                tickets.push({
-                    quantity_sold: t.quantity_sold,
-                    currency: t.currency,
-                    quantity_available: t.quantity_available,
-                    price: t.price
-                });
-            }
-            var event = {
-                id: e.id,
-                start_date: e.start_date,
-                end_date: e.end_date,
-                venue: {
-                    city: e.venue.city,
-                    country: e.venue.country,
-                    id: e.venue.id
-                },
-                tickets: tickets,
-                url: e.url
-            };
+            var event = generatePublicEvent(e);
             events.push(event);
         }
 
@@ -61,7 +64,40 @@ exports.updateEventsData = function (callback) {
     });
 }
 
-exports.confirmOrder = function (eventID, orderID, callback) {
+
+exports.getValidEvents = function(callback) {
+    callback(events);
+}
+
+exports.getEvent = function(id, callback) {
+    eb_client.event_get({
+        id: id
+    }, function(err, data) {
+        return callback(err, generatePublicEvent(data.event));
+    });
+}
+
+exports.getAttendees = function(eventID, callback) {
+    eb_client.event_list_attendees({
+        id: eventID,
+        count: exports.MAX_NUMBER_OF_PARTICIPANTS,
+    }, function(err, data) {
+        if (err) {
+            return callback('Error from eventbrite: ' + JSON.stringify(err));
+        }
+        var attendees = data.attendees;
+        var res = [];
+        var user;
+
+        for (var i = 0; i < attendees.length; i++) {
+            res.push(attendees[i].attendee);
+        }
+
+        callback(null, res);
+    });
+}
+
+exports.confirmOrder = function(eventID, orderID, callback) {
     if (!eventID || !orderID) {
         return callback(utils.generateRoutingError('Order confirmation', 'fatal', 'Faild to confirm your order. Please contact us. Sorry for that.'));
     }
@@ -69,7 +105,7 @@ exports.confirmOrder = function (eventID, orderID, callback) {
     eb_client.event_list_attendees({
         id: eventID,
         count: exports.MAX_NUMBER_OF_PARTICIPANTS,
-    }, function (err, data) {
+    }, function(err, data) {
         if (err) {
             return callback(utils.generateDatabaseError('Eventbrite', err));
         }
@@ -86,32 +122,17 @@ exports.confirmOrder = function (eventID, orderID, callback) {
         if (!user) {
             return callback(utils.generateDatabaseError('Eventbrite', 'Failed to verify order, please contact us. Sorry for that.'));
         }
-        User.confirmOrder(user, eventID, orderID, function (err, user) {
+
+        for (var i = 0; i < events.length; i++) {
+            if (events[i].id === parseInt(eventID)) {
+                console.log(user.event);
+                user.event = events[i];
+                console.log(user.event);
+                break;
+            }
+        }
+        User.confirmOrder(user, eventID, orderID, function(err, user) {
             return callback(err, user);
         });
-    });
-}
-
-exports.getValidEvents = function (callback) {
-    callback(events);
-}
-
-exports.getAttendees = function (eventID, callback) {
-    eb_client.event_list_attendees({
-        id: eventID,
-        count: exports.MAX_NUMBER_OF_PARTICIPANTS,
-    }, function (err, data) {
-        if (err) {
-            return callback('Error from eventbrite: ' + JSON.stringify(err));
-        }
-        var attendees = data.attendees;
-        var res = [];
-        var user;
-
-        for (var i = 0; i < attendees.length; i++) {
-            res.push(attendees[i].attendee);
-        }
-
-        callback(null, res);
     });
 }

@@ -5,13 +5,13 @@ exports.passport = passport;
 var user = require('./user.js');
 var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');
 
-exports.passportInit = function () {
+exports.passportInit = function() {
     passport.use(new LocalStrategy(
-        function (username, password, done) {
+        function(username, password, done) {
             //console.log('Using Passport local strategy with credentials: ' + username + '/' + password);
             user.findOne({
                 email: username
-            }, function (err, user) {
+            }, function(err, user) {
                 if (err) {
                     //console.log('Error whiel calling user.findOne(): ' + err)
                     return done(err);
@@ -32,24 +32,23 @@ exports.passportInit = function () {
         }
     ));
 
-    passport.serializeUser(function (user, done) {
-        console.log('Serializing user ' + JSON.stringify(user));
+    passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
 
-    passport.deserializeUser(function (id, done) {
+    passport.deserializeUser(function(id, done) {
         //console.log('Deserializing of ' + id);
         user.findOne({
             _id: id
-        }, function (err, user) {
+        }, function(err, user) {
             //console.log('Obtaining ' + JSON.stringify(user));
             done(err, user);
         });
     });
 }
 
-exports.authenticate = function (req, res, next) {
-    passport.authenticate('local', function (err, user, info) {
+exports.authenticate = function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
         var data = new Object();
         if (err) {
             data.err = utils.generateInputError('general', err);
@@ -59,7 +58,7 @@ exports.authenticate = function (req, res, next) {
             data.err = info;
             return res.send(data);
         }
-        req.logIn(user, function (err) {
+        req.logIn(user, function(err) {
             if (err) {
                 data.err = utils.generateInputError('general', err);
                 return res.send(data);
@@ -72,11 +71,11 @@ exports.authenticate = function (req, res, next) {
     })(req, res, next);
 }
 
-exports.signup = function (req, res) {
+exports.signup = function(req, res) {
     var us = req.body.user;
     var passwd = req.body.pass;
 
-    user.setPassword(us, passwd, function (err) {
+    user.setPassword(us, passwd, function(err) {
         if (err) {
             res.send({
                 err: err

@@ -38,6 +38,9 @@
     font-family: HelveticaNeueThin;
     src: url(/fonts/HelveticaNeue/HelveticaNeue-Thin.ttf);
 }
+.font-HelveticaNeueThin {
+    font-family: HelveticaNeueThin;
+}
 @font-face {
     font-family: HelveticaNeueThinItalic;
     src: url(/fonts/HelveticaNeue/HelveticaNeue-ThinItalic.ttf);
