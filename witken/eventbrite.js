@@ -5,10 +5,7 @@ var user;
 var ORGANIZATION;
 var ORGANIZATION_ID;
 
-var eb_client = Eventbrite({
-    'app_key': "YJSBEX5NJKKTMRAH5J",
-    'user_key': "138684355683422048593"
-});
+var eb_client;
 
 var init = function(_utils, _examen, _user, _organization, _organization_ID) {
     utils = _utils;
@@ -16,13 +13,18 @@ var init = function(_utils, _examen, _user, _organization, _organization_ID) {
     user = _user;
     ORGANIZATION = _organization;
     ORGANIZATION_ID = _organization_ID;
+
+    eb_client = Eventbrite({
+        'app_key': "YJSBEX5NJKKTMRAH5J",
+        'user_key': "138684355683422048593"
+    });
 }
 
 var MAX_NUMBER_OF_PARTICIPANTS = 100;
 
 var getEventsList = function(callback) {
     eb_client.organizer_list_events({
-        id: exports.ORGANIZATION_ID
+        id: parseInt(ORGANIZATION_ID)
     }, function(err, data) {
         if (err) {
             return callback(utils.generateDatabaseError('Eventbrite', err));
@@ -39,7 +41,7 @@ var getEventsList = function(callback) {
 
 var getEvent = function(id, callback) {
     eb_client.event_get({
-        id: id
+        id: parseInt(id)
     }, function(err, data) {
         return callback(err, data.event);
     });
@@ -47,8 +49,7 @@ var getEvent = function(id, callback) {
 
 var getAttendeesList = function(eventID, callback) {
     eb_client.event_list_attendees({
-        id: eventID,
-        count: exports.MAX_NUMBER_OF_PARTICIPANTS,
+        id: parseInt(eventID)
     }, function(err, data) {
         if (err) {
             return callback(utils.generateDatabaseError('Eventbrite', err));

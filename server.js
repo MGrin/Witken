@@ -24,8 +24,14 @@ user.init(utils, email, USER_DB, function(err) {
 eventbrite.init(utils, examen, user, EVENTBRITE_ORGANIZATION, EVENTBRITE_ORGANIZATION_ID);
 routes.init(eventbrite, examen);
 examen.init(eventbrite, utils, user, EXAMEN_DB, function error(err) {
-    throw err;
-}, function success() {});
+    console.log('Failed to connect to Examen DB');
+}, function success() {
+    console.log('Connected to Examen DB');
+    examen.updateExamensList(function() {})
+    setInterval(function() {
+        examen.updateExamensList(function() {});
+    }, 1000 * 60 * 60 * 24);
+});
 
 email.init();
 

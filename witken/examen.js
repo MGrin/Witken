@@ -22,8 +22,7 @@ var init = function(_eventbrite, _utils, _user, _db, error_callback, success_cal
         return error_callback('Failed to connect to Examen DB');
     });
     db.once('open', success_callback);
-    updateExamensList(function() {});
-    setInterval(updateExamensList, 1000 * 60 * 60 * 12);
+
 }
 
 var examenSchema = mongoose.Schema({
@@ -91,12 +90,20 @@ examenSchema.methods.addSuperviser = function(superviser, callback) {
 var Examen = mongoose.model('Examen', examenSchema, 'examens');
 
 var updateExamensList = function(callback) {
+    console.log('Update examens list...');
     eventbrite.getEventsList(function(err, events) {
         if (err) {
+            console.log(err);
             return callback(err);
         }
         events.forEach(function(event) {
-            getExamenFromEventbrite(event, function() {});
+            getExamenFromEventbrite(event, function(err, exam) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(exam);
+                }
+            });
         });
     });
 }
@@ -123,9 +130,19 @@ var getExamenFromEventbrite = function(eb_exam, callback) {
         }
 
         if (!ex) {
+            console.log('Looking for attendees for event ' + eb_exam.id);
             eventbrite.getAttendeesList(eb_exam.id, function(err, attendees) {
                 if (err) {
-                    return callback(err);
+                    ex = new Examen({
+                        date: eb_exam.start_date,
+                        venue: eb_exam.venue,
+                        tickets: eb_exam.tickets,
+                        attendees: [],
+                        eb_id: eb_exam.id,
+                        url: eb_exam.url
+                    });
+                    ex.save();
+                    return callback(null, ex);
                 }
                 var emailList = [];
                 for (var i = 0; i < attendees.length; i++) {
