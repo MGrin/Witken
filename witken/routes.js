@@ -50,12 +50,12 @@ var confirm_order = function(req, res) {
 
         if (err) {
             params.err = err;
-            params.content = 'examen';
+            params.content = 'login';
         } else {
             params.user = user;
         }
 
-        if (user.hasPassword) {
+        if (user && user.hasPassword) {
             params.content = 'login';
         }
         res.render('template.html', params);
@@ -63,7 +63,7 @@ var confirm_order = function(req, res) {
 }
 
 var profile = function(req, res) {
-    if (params.user != 'None') {
+    if (req.user) {
         res.render('template.html', generateParams(req, 'profile'));
     } else {
         res.redirect('/login');

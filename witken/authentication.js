@@ -70,18 +70,31 @@ exports.authenticate = function(req, res, next) {
 }
 
 exports.signup = function(req, res) {
-    var us = req.body.user;
     var passwd = req.body.pass;
-
-    us.setPassword(passwd, function(err) {
+    user.User.findOne({
+        email: req.body.user.email
+    }, function(err, us) {
         if (err) {
-            res.send({
+            return res.send({
                 err: err
             });
-        } else {
-            res.send({
-                success: true
+        }
+        if (!us) {
+            return res.send({
+                err: utils.generateDatabaseError('User', 'User ' + ureq.body.user.email + ' not found')
             });
         }
+
+        us.setPassword(passwd, function(err) {
+            if (err) {
+                res.send({
+                    err: err
+                });
+            } else {
+                res.send({
+                    success: true
+                });
+            }
+        });
     });
 }

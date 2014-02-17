@@ -82,7 +82,7 @@ var confirmOrder = function(eventID, orderID, callback) {
                 return callback(err);
             }
             for (var i = 0; i < attendees.length; i++) {
-                if (attendees[i].order_id === orderID) {
+                if (attendees[i].order_id === parseInt(orderID)) {
                     eb_user = attendees[i];
                     break;
                 }
@@ -99,6 +99,7 @@ var confirmOrder = function(eventID, orderID, callback) {
                     if (err) {
                         return callback(err);
                     }
+                    us.addExamen(ex.generateShortObject());
                     ex.addAttendee(us, function(err, exam) {
                         if (err) {
                             return callback(err);
@@ -106,7 +107,6 @@ var confirmOrder = function(eventID, orderID, callback) {
                             return callback(null, us);
                         }
                     });
-                    us.addExamen(ex.generateShortObject());
                 });
             });
         });

@@ -56,15 +56,21 @@ examenSchema.methods.addAttendee = function(attendee, callback) {
             return callback(utils.generateServerError('warning', 'No user found!'));
         }
         if (ex.attendees) {
-            for (var i = 0; i < ex.attendees.length; i++) {
-                if (ex.attendees[i].email === attendee.email) {
-                    return callback(utils.generateServerError('warning', 'User ' + attendee.email + ' already registered for this examen'));
-                }
-            }
+            return callback(null, this)
         } else {
             ex.attendees = [];
         }
-        ex.attendees.push(us);
+        var exist = false;
+
+        for (var i = 0; i < ex.attendees.length; i++) {
+            if (ex.attendeesp[i].email === us.email) {
+                exist = true;
+                break;
+            }
+        }
+        if (!exist) {
+            ex.attendees.push(us);
+        }
         ex.save();
         return callback(null, this);
     });
@@ -90,7 +96,6 @@ examenSchema.methods.addSuperviser = function(superviser, callback) {
 var Examen = mongoose.model('Examen', examenSchema, 'examens');
 
 var updateExamensList = function(callback) {
-    console.log('Update examens list...');
     eventbrite.getEventsList(function(err, events) {
         if (err) {
             console.log(err);
@@ -98,11 +103,7 @@ var updateExamensList = function(callback) {
         }
         events.forEach(function(event) {
             getExamenFromEventbrite(event, function(err, exam) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(exam);
-                }
+                return callback(err, exam);
             });
         });
     });
@@ -130,7 +131,6 @@ var getExamenFromEventbrite = function(eb_exam, callback) {
         }
 
         if (!ex) {
-            console.log('Looking for attendees for event ' + eb_exam.id);
             eventbrite.getAttendeesList(eb_exam.id, function(err, attendees) {
                 if (err) {
                     ex = new Examen({

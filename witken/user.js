@@ -174,11 +174,19 @@ userSchema.methods.addExamen = function(ex) {
     if (!this.examen) {
         this.examen = ex;
     } else {
-        if (this.examen.date > ex.date) {
-            this.next_exams.push(this.examen);
-            this.examen = ex;
-        } else {
-            this.next_exams.push(ex);
+        var exist = false;
+        for (var i = 0; i < this.next_exams.length; i++) {
+            if (ex.eb_id === this.next_exams[i].eb_id) {
+                exist = true;
+            }
+        }
+        if (!exist) {
+            if (this.examen.date > ex.date) {
+                this.next_exams.push(this.examen);
+                this.examen = ex;
+            } else {
+                this.next_exams.push(ex);
+            }
         }
     }
     this.save();
