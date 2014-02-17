@@ -3,12 +3,16 @@ var nodemailer = require('nodemailer');
 var emailSettings = {
     service: "Gmail",
     auth: {
-        user: "mr6r1n@gmail.com",
-        pass: "1asd4ghj8QPP"
+        user: "test",
+        pass: "test"
     }
 }
 
-exports.sendInscriptionConfirmation = function (user, href) {
+var init = function() {
+
+}
+
+var sendInscriptionConfirmation = function(user, href) {
     var mailOptions = {
         from: "Witken - Inscription <inscritpion@witken.org>",
         to: user.email,
@@ -16,14 +20,14 @@ exports.sendInscriptionConfirmation = function (user, href) {
         text: "Inscription stuff",
         html: generateInscriptionMail(user, href)
     }
-    
+
     sendMail(mailOptions);
 }
 
-var sendMail = function (mail) {
+var sendMail = function(mail) {
     var smtpTransport = nodemailer.createTransport("SMTP", emailSettings);
 
-    smtpTransport.sendMail(mail, function (error, response) {
+    smtpTransport.sendMail(mail, function(error, response) {
         if (error) {
             console.log(error);
         } else {
@@ -34,10 +38,13 @@ var sendMail = function (mail) {
     });
 }
 
-var addAtachment = function(mail, file){
-    
+var addAttachement = function(mail, file) {
+    throw 'Not implemented yet!';
 }
 
-var generateInscriptionMail = function(user, href){
-    return '<p>Hello</p>To set password, use this <a href='+href+'>this</a> link.'
+var generateInscriptionMail = function(user, href) {
+    return '<p>Hello</p>To set password, use this <a href=' + href + '>this</a> link.'
 }
+exports.init = init;
+exports.sendInscriptionConfirmation = sendInscriptionConfirmation;
+exports.addAttachement = addAttachement;

@@ -1,93 +1,60 @@
-var User = require('./user.js');
-var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');
-
 var Eventbrite = require('eventbrite');
+var utils;
+var examen;
+var user;
+var ORGANIZATION;
+var ORGANIZATION_ID;
+
 var eb_client = Eventbrite({
     'app_key': "YJSBEX5NJKKTMRAH5J",
     'user_key': "138684355683422048593"
 });
 
-exports.init = function() {
-    exports.updateEventsData(function() {});
-    setInterval(function() {
-        exports.updateEventsData(function() {});
-    }, 1000 * 60 * 60 * 12);
+var init = function(_utils, _examen, _user, _organization, _organization_ID) {
+    utils = _utils;
+    examen = _examen;
+    user = _user;
+    ORGANIZATION = _organization;
+    ORGANIZATION_ID = _organization_ID;
 }
 
-exports.ORGANIZATION = "MGSDD";
-exports.ORGANIZATION_ID = 5669656715;
+var MAX_NUMBER_OF_PARTICIPANTS = 100;
 
-exports.MAX_NUMBER_OF_PARTICIPANTS = 100;
-
-var events = [];
-
-var generatePublicEvent = function(e) {
-    var tickets = [];
-    for (var j = 0; j < e.tickets.length; j++) {
-        var t = e.tickets[j].ticket;
-        tickets.push({
-            quantity_sold: t.quantity_sold,
-            currency: t.currency,
-            quantity_available: t.quantity_available,
-            price: t.price
-        });
-    }
-    return {
-        id: e.id,
-        start_date: e.start_date,
-        end_date: e.end_date,
-        venue: {
-            city: e.venue.city,
-            country: e.venue.country,
-            id: e.venue.id
-        },
-        tickets: tickets,
-        url: e.url
-    };
-}
-exports.updateEventsData = function(callback) {
+var getEventsList = function(callback) {
     eb_client.organizer_list_events({
         id: exports.ORGANIZATION_ID
     }, function(err, data) {
         if (err) {
-            //console.log('Error while retrieving events from eventbrite: ' + err);
             return callback(utils.generateDatabaseError('Eventbrite', err));
         }
-        events = [];
+        var events = [];
+
         for (var i = 0; i < data.events.length; i++) {
-            var e = data.events[i].event;
-            var event = generatePublicEvent(e);
-            events.push(event);
+            events.push(data.events[i].event);
         }
 
         callback(null, events);
     });
 }
 
-
-exports.getValidEvents = function(callback) {
-    callback(events);
-}
-
-exports.getEvent = function(id, callback) {
+var getEvent = function(id, callback) {
     eb_client.event_get({
         id: id
     }, function(err, data) {
-        return callback(err, generatePublicEvent(data.event));
+        return callback(err, data.event);
     });
 }
 
-exports.getAttendees = function(eventID, callback) {
+var getAttendeesList = function(eventID, callback) {
     eb_client.event_list_attendees({
         id: eventID,
         count: exports.MAX_NUMBER_OF_PARTICIPANTS,
     }, function(err, data) {
         if (err) {
-            return callback('Error from eventbrite: ' + JSON.stringify(err));
+            return callback(utils.generateDatabaseError('Eventbrite', err));
         }
         var attendees = data.attendees;
         var res = [];
-        var user;
 
         for (var i = 0; i < attendees.length; i++) {
             res.push(attendees[i].attendee);
@@ -97,42 +64,56 @@ exports.getAttendees = function(eventID, callback) {
     });
 }
 
-exports.confirmOrder = function(eventID, orderID, callback) {
-    if (!eventID || !orderID) {
-        return callback(utils.generateRoutingError('Order confirmation', 'fatal', 'Faild to confirm your order. Please contact us. Sorry for that.'));
-    }
+var confirmOrder = function(eventID, orderID, callback) {
+    var eb_user; //get User Data From Eventbrite
+    var eb_examen; //get Event Data From Eventbrite
 
-    eb_client.event_list_attendees({
-        id: eventID,
-        count: exports.MAX_NUMBER_OF_PARTICIPANTS,
-    }, function(err, data) {
+    getEvent(eventID, function(err, event) {
         if (err) {
             return callback(utils.generateDatabaseError('Eventbrite', err));
         }
-        var attendees = data.attendees;
-        var user;
-
-        for (var i = 0; i < attendees.length; i++) {
-            if (attendees[i].attendee.order_id === parseInt(orderID)) {
-                user = attendees[i].attendee;
-                break;
+        if (!event) {
+            return callback(utils.generateServerError('fatal', 'No event found, please contact us'));
+        }
+        eb_examen = event;
+        getAttendeesList(eventID, function(err, attendees) {
+            if (err) {
+                return callback(err);
             }
-        }
-
-        if (!user) {
-            return callback(utils.generateDatabaseError('Eventbrite', 'Failed to verify order, please contact us. Sorry for that.'));
-        }
-
-        for (var i = 0; i < events.length; i++) {
-            if (events[i].id === parseInt(eventID)) {
-                console.log(user.event);
-                user.event = events[i];
-                console.log(user.event);
-                break;
+            for (var i = 0; i < attendees.length; i++) {
+                if (attendees[i].order_id === orderID) {
+                    eb_user = attendees[i];
+                    break;
+                }
             }
-        }
-        User.confirmOrder(user, eventID, orderID, function(err, user) {
-            return callback(err, user);
+            if (!eb_user) {
+                return callback(utils.generateServerError('fatal', 'No order found, please contact us'));
+            }
+
+            user.getUserFromEventbrite(eb_user, function(err, us) {
+                if (err) {
+                    return callback(err);
+                }
+                examen.getExamenFromEventbrite(eb_examen, function(err, ex) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    ex.addAttendee(us, function(err, exam) {
+                        if (err) {
+                            return callback(err);
+                        } else {
+                            return callback(null, us);
+                        }
+                    });
+                    us.addExamen(ex.generateShortObject());
+                });
+            });
         });
     });
 }
+
+exports.init = init;
+exports.getEventsList = getEventsList;
+exports.getEvent = getEvent;
+exports.getAttendeesList = getAttendeesList;
+exports.confirmOrder = confirmOrder;

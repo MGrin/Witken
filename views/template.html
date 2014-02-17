@@ -1,7 +1,7 @@
 §§if(render=='full') {;§
 <!doctype html>
 <html>
-
+<!--TODO Button TOP!!!-->
 <head>
     §§- include unique/head.html;§
 </head>
@@ -11,11 +11,7 @@
         §§- include unique/header.html;§
         <div id="central" class="row">
             <div id="content" class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
-§§};§
-                §§if(user!='None'){;§
-                    <div class="col-lg-9 col-md-10 col-sm-10 col-xs-12">
-                §§};§
-                        
+§§};§                        
                     §§if(content=='index'){;§
                         §§- include content/index.html;§
                     §§}else if(content=='label'){;§
@@ -32,10 +28,7 @@
                         §§- include content/profile.html;§
                     §§};§
                     
-                §§if(user!='None'){;§
-                    </div>
-                    §§- include unique/user_side.html;§
-                §§};§
+                    
 §§if(render=='full') {;§
                 </div>                    
             </div>

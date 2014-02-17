@@ -1,6 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <h1 class="multilang text-right" text="examen_inscription_title"></h1>
-    §§ if(events.length>0){;§
+    §§ if(events!=='None' && events.length>0){;§
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="locations">
 
@@ -19,7 +19,7 @@
     </div>
     §§}else{;§
     <div class="alert alert-danger">
-        <p>Sorry, no events this time...</p>
+        <p>Sorry, no events this time: §§=err;§</p>
     </div>
     §§};§
 </div>

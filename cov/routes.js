@@ -6,53 +6,53 @@ if (! _$jscoverage['routes.js']) {
   _$jscoverage['routes.js'][3] = 0;
   _$jscoverage['routes.js'][4] = 0;
   _$jscoverage['routes.js'][6] = 0;
-  _$jscoverage['routes.js'][7] = 0;
-  _$jscoverage['routes.js'][9] = 0;
+  _$jscoverage['routes.js'][8] = 0;
   _$jscoverage['routes.js'][10] = 0;
   _$jscoverage['routes.js'][11] = 0;
   _$jscoverage['routes.js'][12] = 0;
-  _$jscoverage['routes.js'][14] = 0;
-  _$jscoverage['routes.js'][17] = 0;
+  _$jscoverage['routes.js'][13] = 0;
+  _$jscoverage['routes.js'][15] = 0;
   _$jscoverage['routes.js'][18] = 0;
-  _$jscoverage['routes.js'][20] = 0;
-  _$jscoverage['routes.js'][23] = 0;
+  _$jscoverage['routes.js'][19] = 0;
+  _$jscoverage['routes.js'][21] = 0;
   _$jscoverage['routes.js'][24] = 0;
-  _$jscoverage['routes.js'][26] = 0;
-  _$jscoverage['routes.js'][29] = 0;
-  _$jscoverage['routes.js'][32] = 0;
+  _$jscoverage['routes.js'][25] = 0;
+  _$jscoverage['routes.js'][27] = 0;
+  _$jscoverage['routes.js'][30] = 0;
   _$jscoverage['routes.js'][33] = 0;
   _$jscoverage['routes.js'][34] = 0;
   _$jscoverage['routes.js'][35] = 0;
   _$jscoverage['routes.js'][36] = 0;
-  _$jscoverage['routes.js'][40] = 0;
+  _$jscoverage['routes.js'][37] = 0;
   _$jscoverage['routes.js'][41] = 0;
   _$jscoverage['routes.js'][42] = 0;
-  _$jscoverage['routes.js'][44] = 0;
+  _$jscoverage['routes.js'][43] = 0;
   _$jscoverage['routes.js'][45] = 0;
   _$jscoverage['routes.js'][46] = 0;
   _$jscoverage['routes.js'][47] = 0;
+  _$jscoverage['routes.js'][48] = 0;
   _$jscoverage['routes.js'][49] = 0;
   _$jscoverage['routes.js'][50] = 0;
-  _$jscoverage['routes.js'][51] = 0;
   _$jscoverage['routes.js'][52] = 0;
-  _$jscoverage['routes.js'][54] = 0;
-  _$jscoverage['routes.js'][57] = 0;
-  _$jscoverage['routes.js'][61] = 0;
-  _$jscoverage['routes.js'][62] = 0;
+  _$jscoverage['routes.js'][55] = 0;
+  _$jscoverage['routes.js'][56] = 0;
+  _$jscoverage['routes.js'][58] = 0;
   _$jscoverage['routes.js'][63] = 0;
   _$jscoverage['routes.js'][64] = 0;
+  _$jscoverage['routes.js'][65] = 0;
   _$jscoverage['routes.js'][66] = 0;
-  _$jscoverage['routes.js'][70] = 0;
-  _$jscoverage['routes.js'][71] = 0;
+  _$jscoverage['routes.js'][68] = 0;
   _$jscoverage['routes.js'][72] = 0;
+  _$jscoverage['routes.js'][73] = 0;
   _$jscoverage['routes.js'][74] = 0;
-  _$jscoverage['routes.js'][75] = 0;
+  _$jscoverage['routes.js'][76] = 0;
   _$jscoverage['routes.js'][77] = 0;
-  _$jscoverage['routes.js'][78] = 0;
-  _$jscoverage['routes.js'][81] = 0;
-  _$jscoverage['routes.js'][82] = 0;
-  _$jscoverage['routes.js'][85] = 0;
-  _$jscoverage['routes.js'][86] = 0;
+  _$jscoverage['routes.js'][79] = 0;
+  _$jscoverage['routes.js'][80] = 0;
+  _$jscoverage['routes.js'][83] = 0;
+  _$jscoverage['routes.js'][84] = 0;
+  _$jscoverage['routes.js'][87] = 0;
+  _$jscoverage['routes.js'][88] = 0;
 }
 _$jscoverage['routes.js'][1]++;
 var events = process.env.APP_COV? require(__dirname + "/../cov/eventbrite.js"): require(__dirname + "/eventbrite.js");
@@ -61,128 +61,131 @@ function generateParams(req, content) {
   _$jscoverage['routes.js'][4]++;
   var par = {};
   _$jscoverage['routes.js'][6]++;
-  par.err = "None";
-  _$jscoverage['routes.js'][7]++;
   par.content = content;
-  _$jscoverage['routes.js'][9]++;
+  _$jscoverage['routes.js'][8]++;
+  par.connected = "YES";
+  _$jscoverage['routes.js'][10]++;
   if (! req.param("lang")) {
-    _$jscoverage['routes.js'][10]++;
+    _$jscoverage['routes.js'][11]++;
     par.lang = "fr";
   }
   else {
-    _$jscoverage['routes.js'][11]++;
+    _$jscoverage['routes.js'][12]++;
     if (req.param("lang") === "fr" || req.param("lang") === "en") {
-      _$jscoverage['routes.js'][12]++;
+      _$jscoverage['routes.js'][13]++;
       par.lang = req.param("lang");
     }
     else {
-      _$jscoverage['routes.js'][14]++;
+      _$jscoverage['routes.js'][15]++;
       par.lang = "fr";
     }
   }
-  _$jscoverage['routes.js'][17]++;
+  _$jscoverage['routes.js'][18]++;
   if (! req.param("ajax")) {
-    _$jscoverage['routes.js'][18]++;
+    _$jscoverage['routes.js'][19]++;
     par.render = "full";
   }
   else {
-    _$jscoverage['routes.js'][20]++;
+    _$jscoverage['routes.js'][21]++;
     par.render = "part";
   }
-  _$jscoverage['routes.js'][23]++;
+  _$jscoverage['routes.js'][24]++;
   if (! req.user) {
-    _$jscoverage['routes.js'][24]++;
+    _$jscoverage['routes.js'][25]++;
     par.user = "None";
   }
   else {
-    _$jscoverage['routes.js'][26]++;
+    _$jscoverage['routes.js'][27]++;
     par.user = req.user;
   }
-  _$jscoverage['routes.js'][29]++;
+  _$jscoverage['routes.js'][30]++;
   return par;
 }
-_$jscoverage['routes.js'][32]++;
+_$jscoverage['routes.js'][33]++;
 exports.inscription = (function (req, res) {
-  _$jscoverage['routes.js'][33]++;
-  var params = generateParams(req, "inscription");
   _$jscoverage['routes.js'][34]++;
-  events.getValidEvents((function (events) {
+  var params = generateParams(req, "inscription");
   _$jscoverage['routes.js'][35]++;
-  params.events = events;
+  events.getValidEvents((function (events) {
   _$jscoverage['routes.js'][36]++;
+  params.events = events;
+  _$jscoverage['routes.js'][37]++;
   res.render("template.html", params);
 }));
 });
-_$jscoverage['routes.js'][40]++;
+_$jscoverage['routes.js'][41]++;
 exports.confirm_order = (function (req, res) {
-  _$jscoverage['routes.js'][41]++;
-  var eventID = req.query.eid;
   _$jscoverage['routes.js'][42]++;
+  var eventID = req.query.eid;
+  _$jscoverage['routes.js'][43]++;
   var orderID = req.query.oid;
-  _$jscoverage['routes.js'][44]++;
-  events.confirmOrder(eventID, orderID, (function (err, user) {
   _$jscoverage['routes.js'][45]++;
-  var params = generateParams(req, "sign_up");
+  events.confirmOrder(eventID, orderID, (function (err, user) {
   _$jscoverage['routes.js'][46]++;
-  params.err = "None";
+  var params = generateParams(req, "sign_up");
   _$jscoverage['routes.js'][47]++;
+  params.err = "None";
+  _$jscoverage['routes.js'][48]++;
   params.user = "None";
   _$jscoverage['routes.js'][49]++;
   if (err) {
     _$jscoverage['routes.js'][50]++;
     params.err = err;
-    _$jscoverage['routes.js'][51]++;
-    params.events = [];
-    _$jscoverage['routes.js'][52]++;
-    params.content = "inscription";
   }
   else {
-    _$jscoverage['routes.js'][54]++;
+    _$jscoverage['routes.js'][52]++;
     params.user = user;
   }
-  _$jscoverage['routes.js'][57]++;
-  res.render("template.html", params);
+  _$jscoverage['routes.js'][55]++;
+  if (params.err) {
+    _$jscoverage['routes.js'][56]++;
+    res.redirect("/inscription");
+  }
+  else {
+    _$jscoverage['routes.js'][58]++;
+    res.render("template.html", params);
+  }
 }));
 });
-_$jscoverage['routes.js'][61]++;
+_$jscoverage['routes.js'][63]++;
 exports.profile = (function (req, res) {
-  _$jscoverage['routes.js'][62]++;
+  _$jscoverage['routes.js'][64]++;
   var params = generateParams(req, "profile");
-  _$jscoverage['routes.js'][63]++;
+  _$jscoverage['routes.js'][65]++;
   if (params.user != "None") {
-    _$jscoverage['routes.js'][64]++;
+    _$jscoverage['routes.js'][66]++;
     res.render("template.html", params);
   }
   else {
-    _$jscoverage['routes.js'][66]++;
+    _$jscoverage['routes.js'][68]++;
     res.redirect("/inscription");
   }
 });
-_$jscoverage['routes.js'][70]++;
+_$jscoverage['routes.js'][72]++;
 exports.logout = (function (req, res) {
-  _$jscoverage['routes.js'][71]++;
+  _$jscoverage['routes.js'][73]++;
   req.logout();
-  _$jscoverage['routes.js'][72]++;
+  _$jscoverage['routes.js'][74]++;
   res.redirect("/");
 });
-_$jscoverage['routes.js'][74]++;
+_$jscoverage['routes.js'][76]++;
 exports.index = (function (req, res) {
-  _$jscoverage['routes.js'][75]++;
+  _$jscoverage['routes.js'][77]++;
   res.render("template.html", generateParams(req, "index"));
 });
-_$jscoverage['routes.js'][77]++;
+_$jscoverage['routes.js'][79]++;
 exports.label = (function (req, res) {
-  _$jscoverage['routes.js'][78]++;
+  _$jscoverage['routes.js'][80]++;
   res.render("template.html", generateParams(req, "label_index"));
 });
-_$jscoverage['routes.js'][81]++;
+_$jscoverage['routes.js'][83]++;
 exports.examen = (function (req, res) {
-  _$jscoverage['routes.js'][82]++;
+  _$jscoverage['routes.js'][84]++;
   res.render("template.html", generateParams(req, "examen_index"));
 });
-_$jscoverage['routes.js'][85]++;
+_$jscoverage['routes.js'][87]++;
 exports.witken = (function (req, res) {
-  _$jscoverage['routes.js'][86]++;
+  _$jscoverage['routes.js'][88]++;
   res.render("template.html", generateParams(req, "witken_index"));
 });
-_$jscoverage['routes.js'].source = ["var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') : require(__dirname + '/eventbrite.js')","","function generateParams(req, content) {","    var par = {};","","    par.err='None';","    par.content = content;","    ","    if (!req.param('lang')) {","        par.lang = 'fr';","    } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {","        par.lang = req.param('lang');","    } else {","        par.lang = 'fr';","    }","","    if (!req.param('ajax')) {","        par.render = 'full';","    } else {","        par.render = 'part';","    }","","    if (!req.user) {","        par.user = 'None';","    } else {","        par.user = req.user;","    }","","    return par;","}","","exports.inscription = function (req, res) {","    var params = generateParams(req, 'inscription');","    events.getValidEvents(function (events) {","        params.events = events;","        res.render('template.html', params);","    });","}","","exports.confirm_order = function (req, res) {","    var eventID = req.query.eid;","    var orderID = req.query.oid;","","    events.confirmOrder(eventID, orderID, function (err, user) {","        var params = generateParams(req, 'sign_up');","        params.err = 'None';","        params.user = 'None';","        ","        if (err) {","            params.err = err;","            params.events = [];","            params.content = 'inscription';","        } else {","            params.user = user;","        }","        ","        res.render('template.html', params);","    });","}","","exports.profile = function(req, res){","    var params = generateParams(req, 'profile');","    if(params.user!='None'){","        res.render('template.html', params);","    }else{","        res.redirect('/inscription');","    }    ","}","","exports.logout = function (req, res) {","    req.logout();","    res.redirect('/');","}","exports.index = function (req, res) {","    res.render('template.html', generateParams(req, 'index'));","}","exports.label = function (req, res) {","    res.render('template.html', generateParams(req, 'label_index'));","}","","exports.examen = function (req, res) {","    res.render('template.html', generateParams(req, 'examen_index'));","}","","exports.witken = function (req, res) {","    res.render('template.html', generateParams(req, 'witken_index'));","}"];
+_$jscoverage['routes.js'].source = ["var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') : require(__dirname + '/eventbrite.js')","","function generateParams(req, content) {","    var par = {};","","    par.content = content;","","    par.connected = 'YES';","    ","    if (!req.param('lang')) {","        par.lang = 'fr';","    } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {","        par.lang = req.param('lang');","    } else {","        par.lang = 'fr';","    }","","    if (!req.param('ajax')) {","        par.render = 'full';","    } else {","        par.render = 'part';","    }","","    if (!req.user) {","        par.user = 'None';","    } else {","        par.user = req.user;","    }","","    return par;","}","","exports.inscription = function (req, res) {","    var params = generateParams(req, 'inscription');","    events.getValidEvents(function (events) {","        params.events = events;","        res.render('template.html', params);","    });","}","","exports.confirm_order = function (req, res) {","    var eventID = req.query.eid;","    var orderID = req.query.oid;","","    events.confirmOrder(eventID, orderID, function (err, user) {","        var params = generateParams(req, 'sign_up');","        params.err = 'None';","        params.user = 'None';","        if (err) {","            params.err = err;","        } else {","            params.user = user;","        }","        ","        if (params.err) {","            res.redirect('/inscription');","        } else {","            res.render('template.html', params);","        }","    });","}","","exports.profile = function(req, res){","    var params = generateParams(req, 'profile');","    if(params.user!='None'){","        res.render('template.html', params);","    }else{","        res.redirect('/inscription');","    }    ","}","","exports.logout = function (req, res) {","    req.logout();","    res.redirect('/');","}","exports.index = function (req, res) {","    res.render('template.html', generateParams(req, 'index'));","}","exports.label = function (req, res) {","    res.render('template.html', generateParams(req, 'label_index'));","}","","exports.examen = function (req, res) {","    res.render('template.html', generateParams(req, 'examen_index'));","}","","exports.witken = function (req, res) {","    res.render('template.html', generateParams(req, 'witken_index'));","}"];

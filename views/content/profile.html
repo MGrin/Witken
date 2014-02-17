@@ -1,12 +1,51 @@
-<h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
-<p class="link js_redirect_logout pull-right">logout</p>
-<br />
-<span class="multilang font-HelveticaNeueThin" text="profile_next_exam_1"></span>
-§§=new Date(user.eventbrite[0].event.start_date).toLocaleDateString();§
-<span class="multilang font-HelveticaNeueThin" text="profile_next_exam_2"></span>
-§§=new Date(user.eventbrite[0].event.start_date).toTimeString();§
-<span class="multilang font-HelveticaNeueThin" text="profile_next_exam_3"></span>
-§§=new Date(user.eventbrite[0].event.end_date).toTimeString();§
+<div class="profile col-lg-9 col-md-10 col-sm-10 col-xs-12 silver_light_bg">
+    <div id="profile-examen" class="profile-content">
+        <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
+        <p class="link js_redirect_logout pull-right">logout</p>
+        <br />
+        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_1"></span>
+        §§=new Date(user.eventbrite[0].event.start_date).toLocaleDateString();§
+        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_2"></span>
+        §§=new Date(user.eventbrite[0].event.start_date).toTimeString();§
+        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_3"></span>
+        §§=new Date(user.eventbrite[0].event.end_date).toTimeString();§
+    </div>
+    <div id="profile-resultat" class="profile-content hide">
+        Results
+        <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
+        <p class="link js_redirect_logout pull-right">logout</p>
+        <br />
+        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_1"></span>
+        §§=new Date(user.eventbrite[0].event.start_date).toLocaleDateString();§
+        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_2"></span>
+        §§=new Date(user.eventbrite[0].event.start_date).toTimeString();§
+        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_3"></span>
+        §§=new Date(user.eventbrite[0].event.end_date).toTimeString();§
+    </div>
+</div>
+
+<div id="profile-menu" class="silver_dark_bg white_text col-lg-3 col-md-2 col-sm-2 hidden-xs">
+    <ul class="list-unstyled">
+        <li class="profile-menu-item active silver_very_dark_bg link">
+            <h4 class="multilang" text="general_examen"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_results"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_label_and_certificats"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_indexation"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_messages"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_compte"></h4>
+        </li>
+    </ul>
+</div>
 <script>
     §§- include ../onDataLoadedScripts/profile.js ;§
 </script>

@@ -48,10 +48,11 @@ p{
     margin-top: 50px;
     margin-bottom: 50px;
     padding: 0px 15px;
+    padding-left: 0px;
 }
 #content {
     padding: 0;
-    left: 5px;
+    left: 0px;
 }
 .footer {
     height: 150px;

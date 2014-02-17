@@ -1,0 +1,310 @@
+    <section class="suite">
+      <h1>Authentication</h1>
+      <dl>
+        <dt>should have a valid init function</dt>
+        <dd><pre><code>auth.should.have.property('init');</code></pre></dd>
+        <dt>should have a passport object</dt>
+        <dd><pre><code>auth.should.have.property('passport');</code></pre></dd>
+        <dt>should have an authentication function</dt>
+        <dd><pre><code>auth.should.have.property('authenticate');</code></pre></dd>
+        <dt>should have an sugnup function</dt>
+        <dd><pre><code>auth.should.have.property('signup');</code></pre></dd>
+        <dt>should cover all exports functions</dt>
+        <dd><pre><code>var counter = 0;
+for (var key in auth) {
+    counter++;
+}
+counter.should.be.equal(NB_EXPORTS_OBJECTS);</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Email</h1>
+      <dl>
+        <dt>should have a valid init function</dt>
+        <dd><pre><code>email.should.have.property('init');</code></pre></dd>
+        <dt>should have a sendInscriptionConfirmation function</dt>
+        <dd><pre><code>email.should.have.property('sendInscriptionConfirmation');</code></pre></dd>
+        <dt>should have an addAttachement function</dt>
+        <dd><pre><code>email.should.have.property('addAttachement');</code></pre></dd>
+        <dt>should cover all exports functions</dt>
+        <dd><pre><code>var counter = 0;
+for (var key in email) {
+    counter++;
+}
+counter.should.be.equal(NB_EXPORTS_OBJECTS);</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Eventbrite</h1>
+      <dl>
+        <dt>should have a valid init function</dt>
+        <dd><pre><code>eventbrite.should.have.property('init');</code></pre></dd>
+        <dt>should have a getEventsList function</dt>
+        <dd><pre><code>eventbrite.should.have.property('getEventsList');</code></pre></dd>
+        <dt>should have a getEvent function</dt>
+        <dd><pre><code>eventbrite.should.have.property('getEvent');</code></pre></dd>
+        <dt>should have a getAttendeesList function</dt>
+        <dd><pre><code>eventbrite.should.have.property('getAttendeesList');</code></pre></dd>
+        <dt>should cover all exports functions</dt>
+        <dd><pre><code>var counter = 0;
+for (var key in eventbrite) {
+    counter++;
+}
+counter.should.be.equal(NB_EXPORTS_OBJECTS);</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Examen</h1>
+      <dl>
+        <dt>should have a valid init function</dt>
+        <dd><pre><code>examen.should.have.property('init');</code></pre></dd>
+        <dt>should have an updateExamensList function</dt>
+        <dd><pre><code>examen.should.have.property('updateExamensList');</code></pre></dd>
+        <dt>should have a confirmExamen function</dt>
+        <dd><pre><code>examen.should.have.property('confirmExamen');</code></pre></dd>
+        <dt>should have a getValidExamensList function</dt>
+        <dd><pre><code>examen.should.have.property('getValidExamensList');</code></pre></dd>
+        <dt>should have an examen model</dt>
+        <dd><pre><code>examen.should.have.property('Examen');</code></pre></dd>
+        <dt>should cover all exports functions</dt>
+        <dd><pre><code>var counter = 0;
+for (var key in examen) {
+    counter++;
+}
+counter.should.be.equal(NB_EXPORTS_OBJECTS);</code></pre></dd>
+        <section class="suite">
+          <h1>init</h1>
+          <dl>
+            <dt>should run with error if arguments are wrong</dt>
+            <dd><pre><code>var exception = 'No Exception';
+try {
+    examen.init();
+} catch (e) {
+    exception = e;
+}
+should.exist(exception);
+exception.should.be.equal('Wrong arguments exception!');
+
+exception = 'No Exception';
+try {
+    examen.init(eventbrite, utils);
+} catch (e) {
+    exception = e;
+}
+should.exist(exception);
+exception.should.be.equal('Wrong arguments exception!');
+
+exception = 'No Exception';
+try {
+    examen.init(eventbrite, utils, user, EXAMEN_DB_TEST);
+} catch (e) {
+    exception = e;
+}
+should.exist(exception);
+exception.should.be.equal('Wrong arguments exception!');</code></pre></dd>
+            <dt>should callback with error if can not connect to DB</dt>
+            <dd><pre><code>var exception = 'No Exception';
+
+examen.init(eventbrite, utils, user, 'bad_url', function error(err) {
+    exception = err;
+}, function success() {
+
+});
+
+setTimeout(function() {
+    should.exist(exception);
+    exception.should.be.equal('Failed to connect to Examen DB');
+    done();
+}, 50);</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>model</h1>
+          <dl>
+            <dt>should have all required fields</dt>
+            <dd><pre><code>ex.should.have.property('date');
+ex.should.have.property('location');
+ex.should.have.property('attendees');
+ex.should.have.property('supervisors');
+
+ex.should.have.property('addAttendee');
+ex.should.have.property('addSuperviser');</code></pre></dd>
+            <section class="suite">
+              <h1>addAttendee</h1>
+              <dl>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>addSuperviser</h1>
+              <dl>
+                <dt>should work, kind of =)</dt>
+                <dd><pre><code>ex.addSuperviser('Nikita Grishin', function(err) {
+    should.not.exist(err);
+    done();
+})</code></pre></dd>
+              </dl>
+            </section>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>updateExamensList</h1>
+          <dl>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>get valid examens list</h1>
+          <dl>
+          </dl>
+        </section>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Routes</h1>
+      <dl>
+        <dt>should have a valid init function</dt>
+        <dd><pre><code>routes.should.have.property('init');</code></pre></dd>
+        <dt>should have a route to the index page</dt>
+        <dd><pre><code>routes.should.have.property('index');</code></pre></dd>
+        <dt>should have a route to the label page</dt>
+        <dd><pre><code>routes.should.have.property('label');</code></pre></dd>
+        <dt>should have a route to the examen page</dt>
+        <dd><pre><code>routes.should.have.property('examen');</code></pre></dd>
+        <dt>should have a route to the witken page</dt>
+        <dd><pre><code>routes.should.have.property('witken');</code></pre></dd>
+        <dt>should have a route to the login page</dt>
+        <dd><pre><code>routes.should.have.property('login');</code></pre></dd>
+        <dt>should have a route to the logout page</dt>
+        <dd><pre><code>routes.should.have.property('logout');</code></pre></dd>
+        <dt>should have a route to the profile page</dt>
+        <dd><pre><code>routes.should.have.property('profile');</code></pre></dd>
+        <dt>should have a route to the order confirmation page</dt>
+        <dd><pre><code>routes.should.have.property('confirm_order');</code></pre></dd>
+        <dt>should cover all exports functions</dt>
+        <dd><pre><code>var counter = 0;
+for (var key in routes) {
+    counter++;
+}
+counter.should.be.equal(NB_EXPORTS_OBJECTS);</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>User</h1>
+      <dl>
+        <dt>should have a valid init function</dt>
+        <dd><pre><code>user.should.have.property('init');</code></pre></dd>
+        <dt>should have an User model</dt>
+        <dd><pre><code>user.should.have.property('User');</code></pre></dd>
+        <dt>should have an confirm order function</dt>
+        <dd><pre><code>user.should.have.property('confirmOrder');</code></pre></dd>
+        <dt>should have a userTools object</dt>
+        <dd><pre><code>user.should.have.property('tools');</code></pre></dd>
+        <dt>should cover all exports functions</dt>
+        <dd><pre><code>var counter = 0;
+for (var key in user) {
+    counter++;
+}
+counter.should.be.equal(NB_EXPORTS_OBJECTS);</code></pre></dd>
+        <section class="suite">
+          <h1>init</h1>
+          <dl>
+            <dt>should run with error if arguments are wrong</dt>
+            <dd><pre><code>var exception = 'No Exception';
+try {
+    user.init();
+} catch (e) {
+    exception = e;
+}
+should.exist(exception);
+exception.should.be.equal('Wrong arguments exception!');</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>model</h1>
+          <dl>
+            <dt>should have all required fields</dt>
+            <dd><pre><code>u.should.have.property('email');
+            u.should.have.property('hasPassword');
+            u.hasPassword.should.be.false;
+            u.should.have.property('password');
+            u.should.have.property('password_sel');
+            u.should.have.property('validPassword');
+            u.should.have.property('setPassword');
+            u.should.have.property('changePassword');
+            u.should.have.property('generatePublicObject');
+u.should.have.property('examen');
+            u.should.have.property('next_exams');
+            u.should.have.property('label');
+            u.should.have.property('result');</code></pre></dd>
+            <section class="suite">
+              <h1>validPassword, changePassword, setPassword functions</h1>
+              <dl>
+                <dt>should not validate any password if no password has been set</dt>
+                <dd><pre><code>u.validPassword('lalala').should.be.false;</code></pre></dd>
+                <dt>should not change the password if the password was not set and return an error with id 666</dt>
+                <dd><pre><code>u.changePassword('new lalala', 'lalala', function(err, us) {
+    should.not.exist(us);
+    should.exist(err);
+    err.should.have.property('id');
+    err.id.should.be.equal(666)
+});</code></pre></dd>
+                <dt>should set a password if the password was not set before</dt>
+                <dd><pre><code>u.setPassword('cool password', function(err, us) {
+    should.not.exist(err);
+    should.exist(us);
+    u = us;
+    done();
+});;</code></pre></dd>
+                <dt>should validate a new password</dt>
+                <dd><pre><code>u.validPassword('cool password').should.be.true;</code></pre></dd>
+                <dt>should not set a password for the second time</dt>
+                <dd><pre><code>u.setPassword('new cool password', function(err, us) {
+    should.exist(err);
+    should.not.exist(us);
+    err.should.have.property('id');
+    err.id.should.be.equal(20);
+});</code></pre></dd>
+                <dt>should not change the password if the old one is wrong</dt>
+                <dd><pre><code>u.changePassword('new cool password', 'wrong old password', function(err, us) {
+    should.exist(err);
+    should.not.exist(us);
+    err.should.have.property('id');
+    err.id.should.be.equal(2);
+});</code></pre></dd>
+                <dt>should change the password if the old one is correct</dt>
+                <dd><pre><code>u.changePassword('new cool password', 'cool password', function(err, us) {
+    should.not.exist(err);
+    should.exist(us);
+    us.validPassword('new cool password').should.be.true;
+    us.validPassword('cool password').should.be.false;
+});</code></pre></dd>
+              </dl>
+            </section>
+          </dl>
+        </section>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Utils</h1>
+      <dl>
+        <dt>should have a generateInputError function</dt>
+        <dd><pre><code>utils.should.have.property('generateInputError');</code></pre></dd>
+        <dt>should have a generateDatabaseError function</dt>
+        <dd><pre><code>utils.should.have.property('generateDatabaseError');</code></pre></dd>
+        <dt>should have a generateServerError function</dt>
+        <dd><pre><code>utils.should.have.property('generateServerError');</code></pre></dd>
+        <dt>should have a generateRoutingError function</dt>
+        <dd><pre><code>utils.should.have.property('generateRoutingError');</code></pre></dd>
+        <dt>should have a generateHackingError</dt>
+        <dd><pre><code>utils.should.have.property('generateHackingError');</code></pre></dd>
+        <dt>should have a generateNotImplementedYetError function</dt>
+        <dd><pre><code>utils.should.have.property('generateNotImplementedYetError');</code></pre></dd>
+        <dt>should have a generateConfirmationLink function</dt>
+        <dd><pre><code>utils.should.have.property('generateConfirmationLink');</code></pre></dd>
+        <dt>should cover all exports functions</dt>
+        <dd><pre><code>var counter = 0;
+for (var key in utils) {
+    counter++;
+}
+counter.should.be.equal(NB_EXPORTS_OBJECTS);</code></pre></dd>
+      </dl>
+    </section>

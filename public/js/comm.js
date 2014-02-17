@@ -32,10 +32,10 @@ function bindOnContentReceiveEvent(content, name, pathname) {
 
     window.history.pushState(content, name, pathname);
 
-    $(document).ready(function () {
+    $(document).ready(function () {        
+        setLocalTexts();
         onDataLoaded();
         setupCards();
-        setLocalTexts();
     });
 }
 

@@ -1,4 +1,5 @@
-var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') : require(__dirname + '/eventbrite.js')
+var eventbrite;
+var examen
 
     function generateParams(req, content) {
         var par = {};
@@ -29,16 +30,20 @@ var events = process.env.APP_COV ? require(__dirname + '/../cov/eventbrite.js') 
         return par;
     }
 
-exports.login = function(req, res) {
-    res.render('template.html', generateParams(req, 'login'));
-
+var init = function(_eventbrite, _examen) {
+    eventbrite = _eventbrite;
+    examen = _examen;
 }
 
-exports.confirm_order = function(req, res) {
+var login = function(req, res) {
+    res.render('template.html', generateParams(req, 'login'));
+}
+
+var confirm_order = function(req, res) {
     var eventID = req.query.eid;
     var orderID = req.query.oid;
 
-    events.confirmOrder(eventID, orderID, function(err, user) {
+    eventbrite.confirmOrder(eventID, orderID, function(err, user) {
         var params = generateParams(req, 'signup');
         params.err = 'None';
         params.user = 'None';
@@ -57,35 +62,51 @@ exports.confirm_order = function(req, res) {
     });
 }
 
-exports.profile = function(req, res) {
-    var params = generateParams(req, 'profile');
+var profile = function(req, res) {
     if (params.user != 'None') {
-        res.render('template.html', params);
+        res.render('template.html', generateParams(req, 'profile'));
     } else {
         res.redirect('/login');
     }
 }
 
-exports.logout = function(req, res) {
+var logout = function(req, res) {
     req.logout();
     res.redirect('/');
 }
-exports.index = function(req, res) {
+
+var index = function(req, res) {
     res.render('template.html', generateParams(req, 'index'));
 }
-exports.label = function(req, res) {
+
+var label = function(req, res) {
     res.render('template.html', generateParams(req, 'label'));
 }
 
-exports.examen = function(req, res) {
+var examen = function(req, res) {
     var params = generateParams(req, 'examen');
-
-    events.getValidEvents(function(events) {
-        params.events = events;
+    params.err = 'None';
+    params.events = 'None';
+    examen.getValidExamensList(function(err, e) {
+        if (err) {
+            params.err = err;
+        } else {
+            params.events = e;
+        }
         res.render('template.html', params);
     });
 }
 
-exports.witken = function(req, res) {
+var witken = function(req, res) {
     res.render('template.html', generateParams(req, 'witken'));
 }
+
+exports.init = init;
+exports.login = login;
+exports.confirm_order = confirm_order;
+exports.profile = profile;
+exports.logout = logout;
+exports.index = index;
+exports.label = label;
+exports.examen = examen;
+exports.witken = witken;

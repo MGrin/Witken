@@ -23,10 +23,10 @@ function initiate() {
     $(document).width($(window).width());
 
     setupHeaderAlignement();
+    setupContent();
     setupImages();
     setupCards();
     setupFooter();
-    setupUserContent();
 }
 
 function setupHeaderAlignement() {
@@ -79,10 +79,15 @@ function setupHeaderAlignement() {
     }
 }
 
+function setupContent(){
+    if($(window).width()<normal_screen){
+        $('#central').css('padding-left', 15);
+    }
+}
+
 function setupImages() {
     $("img").one('load', function () {
         setupFooter();
-        setupUserContent();
     }).each(function () {
         if (this.complete) $(this).load();
     });
@@ -131,10 +136,6 @@ function setupWitkenCircleControls() {
     });
 }
 
-function setupUserContent() {
-    $('#content > #user_side').height($('#content').height());
-}
-
 function setupFooter() {
     var centralMarginTop = defCentralMarginTop;
     if ($(window).width() < normal_screen) {
@@ -174,8 +175,7 @@ function onContentChangeEnd(callback) {
             if ($(window).width() < phablet_screen) {
                 $(window).scrollTop($('#content').position().top);
             }
-
-            setupUserContent();
+            setupCards();
         });
     });
 }

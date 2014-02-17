@@ -3,7 +3,6 @@ if (typeof _$jscoverage === 'undefined') _$jscoverage = {};
 if (! _$jscoverage['authentication.js']) {
   _$jscoverage['authentication.js'] = [];
   _$jscoverage['authentication.js'][1] = 0;
-  _$jscoverage['authentication.js'][2] = 0;
   _$jscoverage['authentication.js'][3] = 0;
   _$jscoverage['authentication.js'][5] = 0;
   _$jscoverage['authentication.js'][6] = 0;
@@ -46,12 +45,9 @@ if (! _$jscoverage['authentication.js']) {
   _$jscoverage['authentication.js'][79] = 0;
   _$jscoverage['authentication.js'][80] = 0;
   _$jscoverage['authentication.js'][81] = 0;
-  _$jscoverage['authentication.js'][85] = 0;
 }
 _$jscoverage['authentication.js'][1]++;
-var passport = require("passport");
-_$jscoverage['authentication.js'][2]++;
-var LocalStrategy = require("passport-local").Strategy;
+var passport = require("passport"), LocalStrategy = require("passport-local").Strategy;
 _$jscoverage['authentication.js'][3]++;
 exports.passport = passport;
 _$jscoverage['authentication.js'][5]++;
@@ -142,20 +138,16 @@ exports.authenticate = (function (req, res, next) {
 _$jscoverage['authentication.js'][75]++;
 exports.signup = (function (req, res) {
   _$jscoverage['authentication.js'][76]++;
-  var user = req.body.user;
+  var user_email = req.body.user_email;
   _$jscoverage['authentication.js'][77]++;
   var passwd = req.body.pass;
   _$jscoverage['authentication.js'][79]++;
-  user.setPassword(user, passwd, (function (err) {
+  user.setPassword(user_email, passwd, (function (err) {
   _$jscoverage['authentication.js'][80]++;
   if (err) {
     _$jscoverage['authentication.js'][81]++;
     res.send({err: err});
   }
-  else {
-    _$jscoverage['authentication.js'][85]++;
-    res.send({success: true});
-  }
 }));
 });
-_$jscoverage['authentication.js'].source = ["var passport = require('passport');","var LocalStrategy = require('passport-local').Strategy;","exports.passport = passport;","","var user = require('./user.js');","var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');","","exports.passportInit = function () {","    passport.use(new LocalStrategy(","        function (username, password, done) {","            //console.log('Using Passport local strategy with credentials: ' + username + '/' + password);","            user.findOne({","                email: username","            }, function (err, user) {","                if (err) {","                    //console.log('Error whiel calling user.findOne(): ' + err)","                    return done(err);","                }","                if (!user) {","                    //console.log('Error: Incorent username');","                    var err = utils.generateInputError('email', 'Incorrect username.');","                    return done(null, false, err);","                }","                if (!user.validPassword(password)) {","                    //console.log('Error: Incorrect password');","                    var err = utils.generateInputError('pass', 'Incorrect password.');","                    return done(null, false, err);","                }","                //console.log('Using Passport local strategy with credentials: ' + username + '/' + password + ' success!');","                return done(null, user);","            });","        }","    ));","","    passport.serializeUser(function (user, done) {","        console.log('Serializing user ' + JSON.stringify(user));","        done(null, user.id);","    });","","    passport.deserializeUser(function (id, done) {","        //console.log('Deserializing of ' + id);","        user.findOne({","            _id: id","        }, function (err, user) {","            //console.log('Obtaining ' + JSON.stringify(user));","            done(err, user);","        });","    });","}","","exports.authenticate = function (req, res, next) {","    passport.authenticate('local', function (err, user, info) {","        var data = new Object();","        if (err) {","            data.err = utils.generateInputError('general', err);","            return res.send(data);","        }","        if (!user) {","            data.err = info;","            return res.send(data);","        }","        req.logIn(user, function (err) {","            if (err) {","                data.err = utils.generateInputError('general', err);","                return res.send(data);","            }","            data.redirect = {","                path: '/profile'","            }","            return res.send(data);","        });","    })(req, res, next);","}","","exports.signup = function (req, res) {","    var user = req.body.user;","    var passwd = req.body.pass;","","    user.setPassword(user, passwd, function (err) {","        if (err) {","            res.send({","                err: err","            });","        } else {","            res.send({","                success: true","            });","        }","    });","}"];
+_$jscoverage['authentication.js'].source = ["var passport = require('passport'),","    LocalStrategy = require('passport-local').Strategy;","exports.passport = passport;","","var user = require('./user.js');","var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/utils.js');","","exports.passportInit = function () {","    passport.use(new LocalStrategy(","        function (username, password, done) {","            //console.log('Using Passport local strategy with credentials: ' + username + '/' + password);","            user.findOne({","                email: username","            }, function (err, user) {","                if (err) {","                    //console.log('Error whiel calling user.findOne(): ' + err)","                    return done(err);","                }","                if (!user) {","                    //console.log('Error: Incorent username');","                    var err = utils.generateInputError('email', 'Incorrect username.');","                    return done(null, false, err);","                }","                if (!user.validPassword(password)) {","                    //console.log('Error: Incorrect password');","                    var err = utils.generateInputError('pass', 'Incorrect password.');","                    return done(null, false, err);","                }","                //console.log('Using Passport local strategy with credentials: ' + username + '/' + password + ' success!');","                return done(null, user);","            });","        }","    ));","","    passport.serializeUser(function (user, done) {","        console.log('Serializing user ' + JSON.stringify(user));","        done(null, user.id);","    });","","    passport.deserializeUser(function (id, done) {","        //console.log('Deserializing of ' + id);","        user.findOne({","            _id: id","        }, function (err, user) {","            //console.log('Obtaining ' + JSON.stringify(user));","            done(err, user);","        });","    });","}","","exports.authenticate = function (req, res, next) {","    passport.authenticate('local', function (err, user, info) {","        var data = new Object();","        if (err) {","            data.err = utils.generateInputError('general', err);","            return res.send(data);","        }","        if (!user) {","            data.err = info;","            return res.send(data);","        }","        req.logIn(user, function (err) {","            if (err) {","                data.err = utils.generateInputError('general', err);","                return res.send(data);","            }","            data.redirect = {","                path: '/profile'","            }","            return res.send(data);","        });","    })(req, res, next);","}","","exports.signup = function (req, res) {","    var user_email = req.body.user_email;","    var passwd = req.body.pass;","","    user.setPassword(user_email, passwd, function (err) {","        if (err) {","            res.send({","                err: err","            });","        }","    });","}"];

@@ -1,147 +1,154 @@
 var should = require('should');
 var crypto = require('crypto');
 var user = process.env.APP_COV ? require(__dirname + '/../cov/user.js') : require(__dirname + '/../witken/user.js');
+var email = process.env.APP_COV ? require(__dirname + '/../cov/email.js') : require(__dirname + '/../witken/email.js');
+var utils = process.env.APP_COV ? require(__dirname + '/../cov/utils.js') : require(__dirname + '/../witken/utils.js');
 
-describe('User', function () {
-    it('should have an init function', function () {
+var USER_DB_TEST = 'mongodb://test:test@10.0.0.133:27017/witken';
+var NB_EXPORTS_OBJECTS = 3;
+
+email.init();
+
+describe('User', function() {
+    it('should have a valid init function', function() {
         user.should.have.property('init');
     });
-    it('should have an User model', function () {
+    it('should have an User model', function() {
         user.should.have.property('User');
     });
-    it('should have an addUser function', function () {
-        user.should.have.property('addUser');
+    it('should have a userTools object', function() {
+        user.should.have.property('tools');
     });
-    it('should have an confirm order function', function () {
-        user.should.have.property('confirmOrder');
-    });
-    it('should have a set password function', function () {
-        user.should.have.property('setPassword');
-    });
-    it('should have an change password function', function () {
-        user.should.have.property('changePassword');
-    });
-    it('should have a find one function', function () {
-        user.should.have.property('findOne');
-    });
-    it('should have a setDB method', function () {
-        user.should.have.property('setDB');
+    it('should cover all exports functions', function() {
+        var counter = 0;
+        for (var key in user) {
+            counter++;
+        }
+        counter.should.be.equal(NB_EXPORTS_OBJECTS);
     });
 
-    user.setDB('mongodb://witkenDB:usersDB2013WitKen@ds057538.mongolab.com:57538/witken_users');
-    user.init();
-    var realUser;
+    describe('init', function() {
+        user.User.remove({});
+        it('should run with error if arguments are wrong', function() {
+            var exception = 'No Exception';
+            try {
+                user.init();
+            } catch (e) {
+                exception = e;
+            }
+            should.exist(exception);
+            exception.should.be.equal('Wrong arguments exception!');
+        });
+        it('should callback with an error if can not connect to DB', function(done) {
+            user.init(utils, email, 'very_bad_db_url', function(err) {
+                should.exist(err);
+                err.should.be.equal('Failed to connect to User DB');
+                done();
+            }, function() {
+                'Success called'.should.be.equal('');
+                done();
+            });
 
-    describe('User.addUser', function () {
-        user.User.remove({}, function () {});
+        })
+        it('should run without any issues', function(done) {
+            user.init(utils, email, USER_DB_TEST, function(err) {
+                throw err;
+            }, function() {
+                done();
+            });
+        });
+    });
 
-        var u = new user.User({
-            email: "test@user.com",
+    describe('model', function() {
+        var user_data = {
+            email: 'test@email.com',
             human_data: {
-                prefix: 'Mr',
-                first_name: 'Test',
-                last_name: 'User',
+                prefix: 'M',
+                first_name: 'Nikita',
+                last_name: 'Grishin',
                 gender: 'Male',
-                birth_date: new Date(),
+                birth_date: new Date()
             },
             contact: {
-                home_phone: '',
-                cell_phone: '',
-                home_address: '',
-                home_postal_code: '',
-                home_country_code: '',
-                home_city: '',
+                home_phone: "022 111 11 11",
+                cell_phone: "076 384 77 02",
+                home_address: "32, promenade des artisans",
+                home_postal_code: "1217",
+                home_country_code: "CH",
+                home_city: "Meyrin"
             },
             job: {
-                job_title: 'Witken',
-                work_address: ''
-            },
-            eventbrite: [
-                {
-                    event_id: 1234,
-                    ticket_id: 1234
+                job_title: "CTO",
+                work_address: "Val d'Isere, Kilo"
             }
-        ]
-        });
+        };
 
-        it('should add an inexisting user', function (done) {
-            user.addUser(u, function (err, us) {
-                should.not.exist(err);
-                should.exist(us);
-                u = us;
-                done();
+        var u = new user.User(user_data);
+
+        it('should have all required fields', function() {
+
+            u.should.have.property('email');
+            u.should.have.property('hasPassword');
+            u.hasPassword.should.be.false;
+            u.should.have.property('password');
+            u.should.have.property('password_sel');
+            u.should.have.property('validPassword');
+            u.should.have.property('setPassword');
+            u.should.have.property('changePassword');
+            u.should.have.property('generatePublicObject');
+
+            u.should.have.property('examen');
+            u.should.have.property('next_exams');
+            u.should.have.property('label');
+            u.should.have.property('result');
+
+        });
+        describe('validPassword, changePassword, setPassword functions', function() {
+            it('should not validate any password if no password has been set', function() {
+                u.validPassword('lalala').should.be.false;
             });
-        });
-
-        it('should not add an existing user', function () {
-            user.addUser(u, function (err, us) {
-                should.exist(err);
-                should.not.exist(us);
+            it('should not change the password if the password was not set and return an error with id 666', function() {
+                u.changePassword('new lalala', 'lalala', function(err, us) {
+                    should.not.exist(us);
+                    should.exist(err);
+                    err.should.have.property('id');
+                    err.id.should.be.equal(666)
+                });
             });
-        });
-
-        it('should not validate password', function () {
-            u.validPassword(u.password).should.be.equal(false);
-        });
-
-        realUser = u;
-    });
-
-    describe('User.setPassword', function () {
-        it('should set a new password only for the first time', function (done) {
-            realUser.hasPassword.should.be.equal(false);
-            user.setPassword(realUser, "123qweQWE", function (err, u) {
-                should.not.exist(err);
-                u.hasPassword.should.be.equal(true);
-                u.validPassword("123qweQWE").should.be.equal(true);
-                realUser = u;
-                done();
+            it('should set a password if the password was not set before', function(done) {
+                u.setPassword('cool password', function(err, us) {
+                    should.not.exist(err);
+                    should.exist(us);
+                    u = us;
+                    done();
+                });;
             });
-        });
-
-        it('should not set a new password for the second time', function (done) {
-            realUser.hasPassword.should.be.equal(true);
-            user.setPassword(realUser, "123qweQWE2", function (err, u) {
-                should.exist(err);
-                should.not.exist(u);
-                realUser.validPassword("123qweQWE").should.be.equal(true);
-                realUser.validPassword("123qweQWE2").should.be.equal(false);
-                done();
-            })
-        });
-
-    });
-
-    describe('User.changePassword', function () {
-        it('should change password if the old one is valid', function (done) {
-            user.changePassword(realUser, "123qweZXC", "123qweQWE", function (err, u) {
-                should.not.exist(err);
-                should.exist(u);
-                u.validPassword("123qweZXC").should.be.equal(true);
-                realUser = u;
-                done();
+            it('should validate a new password', function() {
+                u.validPassword('cool password').should.be.true;
             });
-        });
-
-        it('should not change password if the old password is not valid', function (done) {
-            user.changePassword(realUser, "123asdZXC", "123qweRTY", function (err, u) {
-                should.exist(err);
-                should.not.exist(u);
-                realUser.validPassword("123qweZXC").should.be.equal(true);
-                done();
+            it('should not set a password for the second time', function() {
+                u.setPassword('new cool password', function(err, us) {
+                    should.exist(err);
+                    should.not.exist(us);
+                    err.should.have.property('id');
+                    err.id.should.be.equal(20);
+                });
             });
-        });
-    });
-
-    describe('User.findOne', function () {
-        it('should found a real user', function (done) {
-            user.findOne({
-                email: realUser.email
-            }, function (err, us) {
-                should.not.exist(err);
-                should.exist(us);
-                us._id.toString().should.be.equal(realUser._id.toString());
-                done();
+            it('should not change the password if the old one is wrong', function() {
+                u.changePassword('new cool password', 'wrong old password', function(err, us) {
+                    should.exist(err);
+                    should.not.exist(us);
+                    err.should.have.property('id');
+                    err.id.should.be.equal(2);
+                });
+            });
+            it('should change the password if the old one is correct', function() {
+                u.changePassword('new cool password', 'cool password', function(err, us) {
+                    should.not.exist(err);
+                    should.exist(us);
+                    us.validPassword('new cool password').should.be.true;
+                    us.validPassword('cool password').should.be.false;
+                });
             });
         });
     });
