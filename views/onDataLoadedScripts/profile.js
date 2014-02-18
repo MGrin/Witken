@@ -65,9 +65,8 @@ var getExamenStatus = function() {
         exam_id: §§= user.examen.eb_id;§
     };
     console.log(params);
-    console.log('§§- JSON.stringify(user.examen);§');
     $.get('/api/exam_sts', params, function(data) {
         console.log(data);
-        $('#exam_status').text('Status: ' + data.status);
+        $('#exam_status').html('<span class="font-HelveticaNeueThin">Status : </span>' + (data.status?'Confirme':'Pas confirme'));
     });
 }

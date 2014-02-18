@@ -22,6 +22,9 @@ p{
     font-family: HelveticaNeueThin;
 /*    font-size: 1.1em;*/
 }
+.padding-10{
+    padding: 10px;
+}
 .header {
     height: 150px;
 }
