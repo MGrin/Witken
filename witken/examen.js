@@ -5,6 +5,8 @@ var examen_db;
 
 var mongoose = require('mongoose');
 
+var MIN_NUMBER_ATTENDEES = 5;
+
 var init = function(_eventbrite, _utils, _user, _db, error_callback, success_callback) {
     if (!_eventbrite || !_utils || !_user || !_db || !error_callback || !success_callback) {
         throw 'Wrong arguments exception!';
@@ -41,6 +43,10 @@ var examenSchema = mongoose.Schema({
         type: Array,
         default: []
     },
+    status: {
+        type: Boolean,
+        default: false
+    },
     eb_id: Number
 });
 
@@ -55,9 +61,7 @@ examenSchema.methods.addAttendee = function(attendee, callback) {
         if (!us) {
             return callback(utils.generateServerError('warning', 'No user found!'));
         }
-        if (ex.attendees) {
-            return callback(null, this)
-        } else {
+        if (!ex.attendees) {
             ex.attendees = [];
         }
         var exist = false;
@@ -71,6 +75,9 @@ examenSchema.methods.addAttendee = function(attendee, callback) {
         if (!exist) {
             ex.attendees.push(us);
         }
+        if (!ex.status && ex.attendees.length > MIN_NUMBER_ATTENDEES) {
+            ex.status = true;
+        }
         ex.save();
         return callback(null, this);
     });
@@ -81,7 +88,7 @@ examenSchema.methods.generateShortObject = function() {
         venue: this.venue,
         url: this.url,
         tickets: this.tickets,
-        eb_id: Number
+        eb_id: this.eb_id
     };
 }
 

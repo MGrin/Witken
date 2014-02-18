@@ -22,7 +22,7 @@ user.init(utils, email, USER_DB, function(err) {
     console.log('Connected to User DB');
 });
 eventbrite.init(utils, examen, user, EVENTBRITE_ORGANIZATION, EVENTBRITE_ORGANIZATION_ID);
-routes.init(eventbrite, examen);
+routes.init(eventbrite, examen, utils);
 examen.init(eventbrite, utils, user, EXAMEN_DB, function error(err) {
     console.log('Failed to connect to Examen DB');
 }, function success() {
@@ -66,7 +66,7 @@ app.get('/login', routes.login);
 app.get('/order_confirm', routes.confirm_order);
 app.get('/profile', routes.profile);
 app.get('/logout', routes.logout);
-
+app.get('/api/exam_sts', routes.api.getExamenStatus);
 app.post('/auth', auth.authenticate);
 app.post('/signup', auth.signup);
 

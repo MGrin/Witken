@@ -1,38 +1,40 @@
 var eventbrite;
-var examen
+var examen;
+var utils;
 
-    function generateParams(req, content) {
-        var par = {};
+function generateParams(req, content) {
+    var par = {};
 
-        par.err = 'None';
-        par.content = content;
+    par.err = 'None';
+    par.content = content;
 
-        if (!req.param('lang')) {
-            par.lang = 'fr';
-        } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {
-            par.lang = req.param('lang');
-        } else {
-            par.lang = 'fr';
-        }
-
-        if (!req.param('ajax')) {
-            par.render = 'full';
-        } else {
-            par.render = 'part';
-        }
-
-        if (!req.user) {
-            par.user = 'None';
-        } else {
-            par.user = req.user.generatePublicObject();
-        }
-
-        return par;
+    if (!req.param('lang')) {
+        par.lang = 'fr';
+    } else if (req.param('lang') === 'fr' || req.param('lang') === 'en') {
+        par.lang = req.param('lang');
+    } else {
+        par.lang = 'fr';
     }
 
-var init = function(_eventbrite, _examen) {
+    if (!req.param('ajax')) {
+        par.render = 'full';
+    } else {
+        par.render = 'part';
+    }
+
+    if (!req.user) {
+        par.user = 'None';
+    } else {
+        par.user = req.user.generatePublicObject();
+    }
+
+    return par;
+}
+
+var init = function(_eventbrite, _examen, _utils) {
     eventbrite = _eventbrite;
     examen = _examen;
+    utils = _utils;
 }
 
 var login = function(req, res) {
@@ -101,6 +103,28 @@ var witken = function(req, res) {
     res.render('template.html', generateParams(req, 'witken'));
 }
 
+var api = new Object();
+api.getExamenStatus = function(req, res) {
+    var examID = req.query.exam_id;
+    if (!examID) {
+        return res.send(utils.generateInputError('Database', 'No parameters was givenm'));
+    }
+    examen.Examen.findOne({
+        eb_id: examID
+    }, function(err, ex) {
+        if (err) {
+            return res.send(utils.generateDatabaseError('Examen', err));
+        }
+        if (!ex) {
+            return res.send(utils.generateServerError('warning', 'No examen found with following id: ' + examID));
+        }
+        return res.send({
+            status: ex.status
+        });
+    })
+}
+
+exports.api = api;
 exports.init = init;
 exports.login = login;
 exports.confirm_order = confirm_order;

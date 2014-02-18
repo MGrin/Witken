@@ -3,12 +3,15 @@
         <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
         <p class="link js_redirect_logout pull-right">logout</p>
         <br />
-        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_1"></span>
-        lala
-        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_2"></span>
-        lala
-        <span class="multilang font-HelveticaNeueThin" text="profile_next_exam_3"></span>
-        lala
+        <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_1"></span>
+        §§=user.examen.date.toLocaleDateString();§
+        §§if(user.examen.date.getHours() > 8){;§
+            <span class="multilang font-HelveticaNeue" text="profile_text_exam_time_morning"></span>
+        §§}else{;§
+            <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_time_afternoon"></span>
+        §§};§
+        <br />
+        <span class="font-HelveticaNeueThin" id="exam_status"></span>
     </div>
     <div id="profile-resultat" class="profile-content hide">
         Results

@@ -1,7 +1,8 @@
 var user = §§-JSON.stringify(user);§;
 
-var onDataLoaded = function () {
-    $('.js_redirect_logout').click(function () {
+var onDataLoaded = function() {
+    getExamenStatus();
+    $('.js_redirect_logout').click(function() {
         document.location.href = document.location.origin + '/logout' + '?lang=' + current_lang;
     });
 
@@ -13,48 +14,60 @@ var onDataLoaded = function () {
         $('.profile').css('left', 0);
     }
 
-    $('.profile-content').each(function () {
+    $('.profile-content').each(function() {
         $(this).removeClass('hide');
         $(this).hide();
     });
 
     $('#profile-examen').show();
 
-    var addActiveClass = function(element){
+    var addActiveClass = function(element) {
         element.addClass('active');
         element.addClass('silver_very_dark_bg');
     }
-    
-    var removeActiveClass = function(element){
+
+    var removeActiveClass = function(element) {
         element.removeClass('active');
         element.removeClass('silver_very_dark_bg');
     }
-    
-    $('.profile-menu-item').each(function () {
-        $(this).click(function () {
-            $('.profile-menu-item').each(function(){
+
+    $('.profile-menu-item').each(function() {
+        $(this).click(function() {
+            $('.profile-menu-item').each(function() {
                 removeActiveClass($(this));
             });
             addActiveClass($(this));
-            
+
             switch ($(this).children().attr('text')) {
-            case 'general_examen':
-                showProfilePage($('#profile-examen'));
-                break;
-            case 'general_results':
-                showProfilePage($('#profile-resultat'));
-                break;
-            default:
-                return;
+                case 'general_examen':
+                    showProfilePage($('#profile-examen'));
+                    break;
+                case 'general_results':
+                    showProfilePage($('#profile-resultat'));
+                    break;
+                default:
+                    return;
             }
         });
     });
     $('.profile').height($('#profile-menu').height());
 };
 
-var showProfilePage = function (page) {
-    $('.profile-content').each(function () {
+var showProfilePage = function(page) {
+    $('.profile-content').each(function() {
         $(this).hide();
     });
     page.show();
+}
+
+var getExamenStatus = function() {
+    var params = {
+        exam_id: §§= user.examen.eb_id;§
+    };
+    console.log(params);
+    console.log('§§- JSON.stringify(user.examen);§');
+    $.get('/api/exam_sts', params, function(data) {
+        console.log(data);
+        $('#exam_status').text('Status: ' + data.status);
+    });
 }

@@ -1,27 +1,27 @@
 function getTextForId(text) {
     var spl = text.split('_');
     switch (spl[0]) {
-    case 'general':
-        return general[text];
-        break;
-    case 'header':
-        return header[text];
-        break;
-    case 'footer':
-        return footer[text];
-        break;
-    case 'index':
-        return index[text];
-        break;
-    case 'label':
-        return label[text];
-    case 'examen':
-        return examen[text];
-    case 'profile':
-        return profile[text];
-    default:
-        console.log('problem with texts: ' + spl[0]);
-        return "";
+        case 'general':
+            return general[text];
+            break;
+        case 'header':
+            return header[text];
+            break;
+        case 'footer':
+            return footer[text];
+            break;
+        case 'index':
+            return index[text];
+            break;
+        case 'label':
+            return label[text];
+        case 'examen':
+            return examen[text];
+        case 'profile':
+            return profile[text];
+        default:
+            console.log('problem with texts: ' + spl[0]);
+            return "";
     }
 }
 var general = {
@@ -55,9 +55,9 @@ var footer = {
 };
 
 var profile = {
-    profile_next_exam_1: "Votre examen est planifie pour le",
-    profile_next_exam_2: "de",
-    profile_next_exam_3: "à"
+    profile_text_exam_1: "Votre examen est planifie pour le",
+    profile_text_exam_time_morning: "de 8:30 a 12:30",
+    profile_text_exam_time_afternoon: "de 13:30 a 16:30"
 }
 var index = {
     index_slide1_title: "Label de haut potentiel",
