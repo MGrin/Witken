@@ -20,8 +20,7 @@ function getTextForId(text) {
         case 'profile':
             return profile[text];
         default:
-            console.log('problem with texts: ' + spl[0]);
-            return "";
+            return "No text";
     }
 }
 var general = {
@@ -57,7 +56,9 @@ var footer = {
 var profile = {
     profile_text_exam_1: "Votre examen est planifie pour le",
     profile_text_exam_time_morning: "de 8:30 a 12:30",
-    profile_text_exam_time_afternoon: "de 13:30 a 16:30"
+    profile_text_exam_time_afternoon: "de 13:30 a 16:30",
+    profile_text_convocation: "Convocation",
+    profile_text_horaires_detaile: "Horaires detaile"
 }
 var index = {
     index_slide1_title: "Label de haut potentiel",

@@ -53,3 +53,12 @@
     
     background-color: rgb(48, 49, 53);
 }
+/*Profile specific stuff*/
+.profile-download-file {
+    margin: 20px 0px;
+    margin-right: 20px;
+    padding-top: 60px;
+    width: 150px;
+    height: 190px;
+    text-align:center;
+}

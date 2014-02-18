@@ -26,7 +26,7 @@ function initiate() {
     setupContent();
     setupImages();
     setupCards();
-    setupFooter();
+    setupFooter();    
 }
 
 function setupHeaderAlignement() {

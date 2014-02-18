@@ -6,16 +6,39 @@
         <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_1"></span>
         <span>§§=user.examen.date.toLocaleDateString();§</span>
         §§if(user.examen.date.getHours() > 8){;§
-            <span class="multilang font-HelveticaNeue" text="profile_text_exam_time_morning"></span>
+        <span class="multilang font-HelveticaNeue" text="profile_text_exam_time_morning"></span>
         §§}else{;§
-            <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_time_afternoon"></span>
+        <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_time_afternoon"></span>
         §§};§
         <br />
-        <br />        
+        <br />
         <span class="yellow_bg padding-10" id="exam_status"></span>
+        <div class="profile-download-buttons-wrapper">
+            <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_convocation">
+            </div>
+            <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_horaires_detaile">
+            </div>
+        </div>
     </div>
     <div id="profile-resultat" class="profile-content hide">
-        Results
+        <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
+        <h2>Pas des resultats pour le moment.</h2>
+    </div>
+    <div id="profile-label_and_certificats" class="profile-content hide">
+        <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
+        <h2>Pas des label pour le moment.</h2>
+    </div>
+    <div id="profile-indexation" class="profile-content hide">
+        <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
+        <h2>Pas des indexation pour le moment.</h2>
+    </div>
+    <div id="profile-messages" class="profile-content hide">
+        <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
+        <h2>Pas des notification pour le moment.</h2>
+    </div>
+    <div id="profile-compte" class="profile-content hide">
+        <h1>§§=user.human_data.first_name;§ §§=user.human_data.last_name;§</h1>
+        <h2>Pas des compte pour le moment.</h2>
     </div>
 </div>
 
