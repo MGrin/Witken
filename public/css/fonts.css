@@ -57,3 +57,6 @@
     font-family: HelveticaNeue;
     src: url(/fonts/HelveticaNeue/HelveticaNeue.ttf);
 }
+.font-HelveticaNeue {
+    font-family: HelveticaNeue;
+}
