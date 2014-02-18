@@ -4,16 +4,15 @@
         <p class="link js_redirect_logout pull-right">logout</p>
         <br />
         <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_1"></span>
-        §§=user.examen.date.toLocaleDateString();§
+        <span>§§=user.examen.date.toLocaleDateString();§</span>
         §§if(user.examen.date.getHours() > 8){;§
             <span class="multilang font-HelveticaNeue" text="profile_text_exam_time_morning"></span>
         §§}else{;§
             <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_time_afternoon"></span>
         §§};§
         <br />
-        <br />
-        <p class="yellow_bg padding-10 pull-left" id="exam_status"></p>
-        
+        <br />        
+        <span class="yellow_bg padding-10" id="exam_status"></span>
     </div>
     <div id="profile-resultat" class="profile-content hide">
         Results

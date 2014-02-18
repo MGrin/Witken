@@ -67,6 +67,6 @@ var getExamenStatus = function() {
     console.log(params);
     $.get('/api/exam_sts', params, function(data) {
         console.log(data);
-        $('#exam_status').html('Status : <span class="font-HelveticaNeue">' + (data.status?'Confirme':'Pas confirme')+'</span>');
+        $('#exam_status').html('<span class="font-HelveticaNeueThin">Status : </span>' + (data.status?'Confirme':'Pas confirme'));
     });
 }
