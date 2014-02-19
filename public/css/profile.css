@@ -1,6 +1,7 @@
 #profile-menu {
     padding: 0;
 }
+
 #profile-menu li{
     padding: 10px 30px;
 }
@@ -12,7 +13,10 @@
     padding: 0px 30px;
 }
 
-.profile-wrapper {
-    margin-top: -20px;
-    padding-right: 0;
+.profile-download-buttons-wrapper{
+    position: absolute;
+    bottom: 0;
 }
+
+
+

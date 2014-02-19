@@ -58,7 +58,8 @@ var profile = {
     profile_text_exam_time_morning: "de 8:30 a 12:30",
     profile_text_exam_time_afternoon: "de 13:30 a 16:30",
     profile_text_convocation: "Convocation",
-    profile_text_horaires_detaile: "Horaires detaile"
+    profile_text_horaires_detaile: "Horaires detaile",
+    profile_text_terms: "Terms & conditions"
 }
 var index = {
     index_slide1_title: "Label de haut potentiel",

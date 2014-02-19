@@ -20,7 +20,7 @@ var onDataLoaded = function () {
     });
 
     $('#profile-examen').show();
-    $('.profile').height($('#profile-menu').height());
+    $('.profile-content').height($('#profile-menu').height()-20);
     getExamenStatus();
     bindOnClickEventForMenuItems();
     setupDownloadsLinks();
@@ -28,11 +28,10 @@ var onDataLoaded = function () {
 
 function setupDownloadsLinks() {
     $('.profile-download-buttons-wrapper').each(function () {
-        $(this).css('margin-top', $(this).parent().height() - $(this).height() + 20);
+        $(this).css('bottom', 0);
     });
     $('.profile-download-file').each(function () {
         $(this).html('<span>' + getTextForId($(this).attr('text')) + '</span><br/><img class="profile-download-img" src="/img/tools/WK-arrow-rouge.png" width=45 style="margin-top: 50px;"/>');
-        //$(this).css('margin-top', $(this).parent().height() - $(this).height()-20);
     });
 }
 
@@ -84,6 +83,7 @@ var showProfilePage = function (page) {
         $(this).hide();
     });
     page.show();
+    setupDownloadsLinks();
 }
 
 var getExamenStatus = function () {
