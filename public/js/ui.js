@@ -123,13 +123,13 @@ function setupWitkenCircleControls() {
                 if (!$(this).hasClass('active')) {
                     $(this).css('background-color', 'rgb(100,100,100)');
                 } else {
-                    $(this).css('background-color', 'rgb(91, 151, 40)');
+                    $(this).css('background-color', 'rgb(252, 182, 81)');
                 }
             }, function () {
                 if (!$(this).hasClass('active')) {
                     $(this).css('background-color', 'rgb(48,49,53)');
                 } else {
-                    $(this).css('background-color', 'rgb(71, 131, 20)');
+                    $(this).css('background-color', 'rgb(252, 182, 81)');
                 }
             });
         }

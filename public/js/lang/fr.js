@@ -59,7 +59,9 @@ var profile = {
     profile_text_exam_time_afternoon: "de 13:30 a 16:30",
     profile_text_convocation: "Convocation",
     profile_text_horaires_detaile: "Horaires detaile",
-    profile_text_terms: "Terms & conditions"
+    profile_text_terms: "Terms & conditions",
+    profile_indexation_insubscription: "Désinscription",
+    profile_indexation_insubscription_text: "Si vous souhaitez vous désinscrire de notre base de donnée veuillez nous envoyer un courriel à admin@witken.ch"
 }
 var index = {
     index_slide1_title: "Label de haut potentiel",

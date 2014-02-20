@@ -1,5 +1,5 @@
 var user = §§-JSON.stringify(user);§;
-
+var currentPage;
 var onDataLoaded = function () {
 
     $('.js_redirect_logout').click(function () {
@@ -19,19 +19,26 @@ var onDataLoaded = function () {
         $(this).hide();
     });
 
-    $('#profile-examen').show();
-    $('.profile-content').height($('#profile-menu').height()-20);
+    $('.profile-content').height($('#profile-menu').height()-80);
+    
+    if(!currentPage){
+        currentPage = $('#profile-examen');
+    }
+    showProfilePage(currentPage);
     getExamenStatus();
     bindOnClickEventForMenuItems();
     setupDownloadsLinks();
 };
 
 function setupDownloadsLinks() {
-    $('.profile-download-buttons-wrapper').each(function () {
-        $(this).css('bottom', 0);
-    });
     $('.profile-download-file').each(function () {
         $(this).html('<span>' + getTextForId($(this).attr('text')) + '</span><br/><img class="profile-download-img" src="/img/tools/WK-arrow-rouge.png" width=45 style="margin-top: 50px;"/>');
+    });
+    $('#profile-indexation > .profile-download-file').each(function(){
+        $(this).css('margin-left', $(this).parent().width()/2 - $(this).width()/2);
+    });
+    $('.profile-content-footer').each(function(){
+          
     });
 }
 
@@ -83,6 +90,7 @@ var showProfilePage = function (page) {
         $(this).hide();
     });
     page.show();
+    currentPage = page;
     setupDownloadsLinks();
 }
 

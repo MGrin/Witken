@@ -42,7 +42,7 @@ var selectLocation = function (loc) {
         $(this).css('background-color', 'rgb(48,49,53)');
     });
     loc.addClass('active');
-    loc.css('background-color', 'rgb(91, 151, 40)');
+    loc.css('background-color', 'rgb(252, 182, 81)');
 
     locationSelected = loc.children().text();
     dateSelected = null;
@@ -103,7 +103,7 @@ var selectTime = function (time) {
         $(this).css('background-color', 'rgb(48,49,53)');
     });
     time.addClass('active');
-    time.css('background-color', 'rgb(91, 151, 40)');
+    time.css('background-color', 'rgb(252, 182, 81)');
 
     timeSelected = time.children().text();
     $('#button_div').html('<button type="button" class="btn btn-default" id="proceed-btn">Proceed</button>');

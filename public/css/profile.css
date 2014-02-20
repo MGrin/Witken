@@ -10,12 +10,14 @@
 }
 
 .profile{
-    padding: 0px 30px;
+    padding: 0px 80px;
+    padding-bottom: 60px;
 }
 
-.profile-download-buttons-wrapper{
+.profile-download-buttons-wrapper, .profile-content-footer{
     position: absolute;
     bottom: 0;
+    padding-bottom: 60px;
 }
 
 

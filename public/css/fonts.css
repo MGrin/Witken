@@ -22,6 +22,9 @@
     font-family: HelveticaNeueLight;
     src: url(/fonts/HelveticaNeue/HelveticaNeue-Light.ttf);
 }
+.font-HelveticaNeueLight{
+    font-family: HelveticaNeueLight;
+}
 @font-face {
     font-family: HelveticaNeueLightItalic;
     src: url(/fonts/HelveticaNeue/HelveticaNeue-LightItalic.ttf);
@@ -29,6 +32,9 @@
 @font-face {
     font-family: HelveticaNeueMedium;
     src: url(/fonts/HelveticaNeue/HelveticaNeue-Medium.ttf);
+}
+.font-HelveticaNeueMedium {
+    font-family: HelveticaNeueMedium;   
 }
 @font-face {
     font-family: HelveticaNeueMediumItalic;
