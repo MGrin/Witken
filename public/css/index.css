@@ -1,0 +1,31 @@
+.index_footer {
+	padding: 0;
+	margin-top: 50px;
+}
+
+.index_footer > div{
+	padding-top: 10%;
+	padding-left: 30px;
+	margin: 0;
+}
+
+.index_footer > div > p {
+	margin-top: -11px;
+	line-height: 17px;
+}
+
+.index_footer > #results {
+	background-image: url(/img/results-world.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.index_footer > #labels {
+	background-image: url(/img/label-world.png);
+	background-size: 100%;
+}
+
+.index_footer > #enterprises {
+	background-image: url(/img/enterprise-world.png);
+	background-size: 100%;
+}

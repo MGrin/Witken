@@ -68,7 +68,8 @@ var profile = function(req, res) {
     if (req.user) {
         res.render('template.html', generateParams(req, 'profile'));
     } else {
-        res.redirect('/login');
+        res.render('template.html', generateParams(req, 'login'));
+        //res.redirect('/login');
     }
 }
 

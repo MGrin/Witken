@@ -7,6 +7,8 @@ var email = process.env.APP_COV ? require(__dirname + '/cov/email.js') : require
 var eventbrite = process.env.APP_COV ? require(__dirname + '/cov/eventbrite.js') : require(__dirname + '/witken/eventbrite.js');
 var examen = process.env.APP_COV ? require(__dirname + '/cov/examen.js') : require(__dirname + '/witken/examen.js');
 
+var label = process.env.APP_COV ? require(__dirname + '/cov/label.js') : require(__dirname + '/witken/label.js');
+
 var utils = process.env.APP_COV ? require(__dirname + '/cov/utils.js') : require(__dirname + '/witken/utils.js');
 
 var USER_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
@@ -31,6 +33,11 @@ examen.init(eventbrite, utils, user, EXAMEN_DB, function error(err) {
     setInterval(function() {
         examen.updateExamensList(function() {});
     }, 1000 * 60 * 60 * 24);
+});
+label.init(utils, user, EXAMEN_DB, function error(err) {
+    console.log('Failed to connect to Label DB');
+}, function success() {
+    console.log('Connected to Label DB');
 });
 
 email.init();

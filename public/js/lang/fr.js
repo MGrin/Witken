@@ -35,6 +35,7 @@ var general = {
     general_label_and_certificats: "Label & Certificats",
     general_messages: "Messages",
     general_compte: "Compte",
+    general_enterprise: "Enterprises",
     general_language_switch: "English",
     general_language_current: "Francais"
 };
@@ -66,8 +67,9 @@ var profile = {
 var index = {
     index_slide1_title: "Label de haut potentiel",
     index_slide1_text: "Boostez vos neurones en passant l'examen<br />et obtenez un label certificat...",
-    index_footer1_title: "Verifier un label",
-    index_footer1_text: "Vous etes une enterprise qui souhaite engager un nouveau collaborateur? <br /><br /> Verifiez son numero d'authencite"
+    index_footer_results_text: "consultez vos rapports <br />telecharger vos certificats",
+    index_footer_labels_text: "controle son authenticite",
+    index_footer_enterprises_text: "creez un compte <br /> verifiez un label"
 };
 
 var label = {

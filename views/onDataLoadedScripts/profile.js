@@ -32,7 +32,7 @@ var onDataLoaded = function () {
 
 function setupDownloadsLinks() {
     $('.profile-download-file').each(function () {
-        $(this).html('<span>' + getTextForId($(this).attr('text')) + '</span><br/><img class="profile-download-img" src="/img/tools/WK-arrow-rouge.png" width=45 style="margin-top: 50px;"/>');
+        $(this).html('<span>' + getTextForId($(this).attr('text')) + '</span><br/><img class="profile-download-img" src="/img/tools/WK-Download.png" width=45 style="margin-top: 30px;"/>');
     });
     $('#profile-indexation > .profile-download-file').each(function(){
         $(this).css('margin-left', $(this).parent().width()/2 - $(this).width()/2);

@@ -31,12 +31,7 @@ p{
 .header .logo {
     height: 150px;
 }
-@media (max-width: 992px;
- min-width: 768px) {
-    .header {
-        height: 100px;
-    }
-}
+
 @media (max-width: 768px) {
     .header .menu_item {
         border-bottom-style: groove;
