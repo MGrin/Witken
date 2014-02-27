@@ -28,6 +28,6 @@ if (!onDataLoaded) {
 
 function bindOnClickEventForContentClass(redirect_class, path) {
     $(redirect_class).click(function () {
-        location.href = path;
+        location.href = path+'?lang='+current_lang;
     });
 }

@@ -94,6 +94,12 @@ userSchema.methods.validPassword = function(p) {
 }
 
 userSchema.methods.generatePublicObject = function() {
+    if(this.examen && this.examen.date < new Date()){
+        console.log('Exam date is over');
+        this.next_exams.push(this.examen);
+        this.examen = null;
+        this.save();
+    }
     var res = {
         email: this.email,
         hasPassword: this.hasPassword,

@@ -33,7 +33,7 @@ var general = {
     general_witken: "Witken",
     general_results: "Resultats",
     general_label_and_certificats: "Label & Certificats",
-    general_messages: "Messages",
+    general_messages: "Demandes",
     general_compte: "Compte",
     general_enterprise: "Enterprises",
     general_language_switch: "English",
