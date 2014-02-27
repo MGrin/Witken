@@ -1,11 +1,11 @@
 function setupOnClickEvents() {
 
-    bindOnClickEventForContentClass('.js_redirect_index', '/', 'Index');
-    bindOnClickEventForContentClass('.js_redirect_label', '/label', 'Label');
-    bindOnClickEventForContentClass('.js_redirect_examen', '/examen', 'Examen');
-    bindOnClickEventForContentClass('.js_redirect_witken', '/witken', 'Witken');
-    bindOnClickEventForContentClass('.js_redirect_login', '/login', 'Witken - Inscription');
-    bindOnClickEventForContentClass('.js_redirect_profile', '/profile', 'Witken - Profile');
+    bindOnClickEventForContentClass('.js_redirect_index', '/');
+    bindOnClickEventForContentClass('.js_redirect_label', '/label');
+    bindOnClickEventForContentClass('.js_redirect_examen', '/examen');
+    bindOnClickEventForContentClass('.js_redirect_witken', '/witken');
+    bindOnClickEventForContentClass('.js_redirect_login', '/login');
+    bindOnClickEventForContentClass('.js_redirect_profile', '/profile');
 
     if (current_lang === 'fr') {
         newLang = 'en';
@@ -26,30 +26,8 @@ if (!onDataLoaded) {
     var onDataLoaded = function () {};
 }
 
-function bindOnContentReceiveEvent(content, name, pathname) {
-    $('#content').html(content);
-    onContentChangeEnd();
-
-    window.history.pushState(content, name, pathname);
-
-    $(document).ready(function () {        
-        setLocalTexts();
-        onDataLoaded();
-        setupCards();
-    });
-}
-
-function bindOnClickEventForContentClass(redirect_class, path, history_name) {
+function bindOnClickEventForContentClass(redirect_class, path) {
     $(redirect_class).click(function () {
-        var href = path + '?lang=' + current_lang;
-        onContentChangeStart(function () {
-            $.get(href, {
-                ajax: true
-            }, function (data) {
-                bindOnContentReceiveEvent(data, history_name, href);
-            }).fail(function(){
-                console.log('Failed to connect to server');
-            });
-        });
+        location.href = path;
     });
 }

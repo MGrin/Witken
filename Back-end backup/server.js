@@ -46,8 +46,8 @@ var express = require('express');
 var app = express();
 
 var ejs = require('ejs');
-ejs.open = '{{';
-ejs.close = '}}'
+ejs.open = '§§';
+ejs.close = ';§';
 
 app.configure(function() {
     app.use(express.favicon(__dirname + '/public/img/favicon.ico'));

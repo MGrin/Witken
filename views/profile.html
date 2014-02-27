@@ -1,0 +1,194 @@
+<html>
+<head>
+    {{- include head.html}}
+    <link rel="stylesheet" href="/css/profile.css" />
+</head>
+<body>
+    {{- include header.html}}
+    <div class="row">
+        <div id="central" class="col-lg-8 col-lg-offset-2">
+
+<div class="profile col-lg-9 col-md-10 col-sm-10 col-xs-12 silver_light_bg">
+    <div id="profile-examen" class="profile-content">
+        <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
+        <p class="link js_redirect_logout pull-right">logout</p>
+        <br />
+        <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_1"></span>
+        <span>{{=user.examen.date.toLocaleDateString()}}</span>
+        {{ if(user.examen.date.getHours() > 8){ }}
+        <span class="multilang font-HelveticaNeue" text="profile_text_exam_time_morning"></span>
+        {{ }else{ }}
+        <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_time_afternoon"></span>
+        {{ } }}
+        <br />
+        <br />
+        <span class="yellow_bg padding-10" id="exam_status"></span>
+        <div class="profile-download-buttons-wrapper">
+            <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_convocation">
+            </div>
+            <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_horaires_detaile">
+            </div>
+        </div>
+    </div>
+    <div id="profile-resultat" class="profile-content hide">
+        <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
+        <h2>Pas des resultats pour le moment.</h2>
+    </div>
+    <div id="profile-label_and_certificats" class="profile-content hide">
+        <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
+        <h2>Pas des label pour le moment.</h2>
+    </div>
+    <div id="profile-indexation" class="profile-content hide">
+        <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
+        <br />
+        <div class="center link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_terms">
+        </div>
+        <div class="profile-content-footer">
+            <p class="font-HelveticaNeueMedium grey_text multilang" text="profile_indexation_insubscription"></p>
+            <p class="grey_text multilang" text="profile_indexation_insubscription_text"></p>
+        </div>
+    </div>
+    <div id="profile-messages" class="profile-content hide">
+        <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
+        <h2>Pas des notification pour le moment.</h2>
+    </div>
+    <div id="profile-compte" class="profile-content hide">
+        <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
+        <h2>Pas des compte pour le moment.</h2>
+    </div>
+</div>
+
+<div id="profile-menu" class="silver_dark_bg white_text col-lg-3 col-md-2 col-sm-2 hidden-xs">
+    <ul class="list-unstyled">
+        <li class="profile-menu-item active silver_very_dark_bg link">
+            <h4 class="multilang" text="general_examen"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_results"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_label_and_certificats"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_indexation"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_messages"></h4>
+        </li>
+        <li class="profile-menu-item link">
+            <h4 class="multilang" text="general_compte"></h4>
+        </li>
+    </ul>
+</div>
+</div>
+    </div>
+    {{- include footer.html }}
+</body>
+<script>
+    var user = {{-JSON.stringify(user)}};
+var currentPage;
+var onDataLoaded = function () {
+
+    $('.js_redirect_logout').click(function () {
+        document.location.href = document.location.origin + '/logout' + '?lang=' + current_lang;
+    });
+
+    if ($(window).width() >= normal_screen) {
+        $('#profile-menu').css('left', 10);
+        $('.profile').css('left', 10);
+    } else {
+        $('#profile-menu').css('left', 0);
+        $('.profile').css('left', 0);
+    }
+
+    $('.profile-content').each(function () {
+        $(this).removeClass('hide');
+        $(this).hide();
+    });
+
+    $('.profile-content').height($('#profile-menu').height()-80);
+    
+    if(!currentPage){
+        currentPage = $('#profile-examen');
+    }
+    showProfilePage(currentPage);
+    getExamenStatus();
+    bindOnClickEventForMenuItems();
+    setupDownloadsLinks();
+};
+
+function setupDownloadsLinks() {
+    $('.profile-download-file').each(function () {
+        $(this).html('<span>' + getTextForId($(this).attr('text')) + '</span><br/><img class="profile-download-img" src="/img/tools/WK-Download.png" width=45 style="margin-top: 30px;"/>');
+    });
+    $('#profile-indexation > .profile-download-file').each(function(){
+        $(this).css('margin-left', $(this).parent().width()/2 - $(this).width()/2);
+    });
+    $('.profile-content-footer').each(function(){
+          
+    });
+}
+
+var bindOnClickEventForMenuItems = function () {
+    var addActiveClass = function (element) {
+        element.addClass('active');
+        element.addClass('silver_very_dark_bg');
+    }
+
+    var removeActiveClass = function (element) {
+        element.removeClass('active');
+        element.removeClass('silver_very_dark_bg');
+    }
+
+    $('.profile-menu-item').each(function () {
+        $(this).click(function () {
+            $('.profile-menu-item').each(function () {
+                removeActiveClass($(this));
+            });
+            addActiveClass($(this));
+
+            switch ($(this).children().attr('text')) {
+            case 'general_examen':
+                showProfilePage($('#profile-examen'));
+                break;
+            case 'general_results':
+                showProfilePage($('#profile-resultat'));
+                break;
+            case 'general_label_and_certificats':
+                showProfilePage($('#profile-label_and_certificats'));
+                break;
+            case 'general_indexation':
+                showProfilePage($('#profile-indexation'));
+                break;
+            case 'general_messages':
+                showProfilePage($('#profile-messages'));
+                break;
+            case 'general_compte':
+                showProfilePage($('#profile-compte'));
+                break;
+            default:
+                return;
+            }
+        });
+    });
+}
+var showProfilePage = function (page) {
+    $('.profile-content').each(function () {
+        $(this).hide();
+    });
+    page.show();
+    currentPage = page;
+    setupDownloadsLinks();
+}
+
+var getExamenStatus = function () {
+    var params = {
+        exam_id: {{= user.examen.eb_id}}
+    };
+    $.get('/api/exam_sts', params, function (data) {
+        $('#exam_status').html('<span class="font-HelveticaNeueThin">Status : </span>' + (data.status ? 'Confirme' : 'Pas confirme'));
+    });
+}
+</script>
+    {{- include scripts.html}}
+</html>

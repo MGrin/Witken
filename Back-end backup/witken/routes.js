@@ -2,10 +2,11 @@ var eventbrite;
 var examen;
 var utils;
 
-function generateParams(req) {
+function generateParams(req, content) {
     var par = {};
 
     par.err = 'None';
+    par.content = content;
 
     if (!req.param('lang')) {
         par.lang = 'fr';
@@ -13,6 +14,12 @@ function generateParams(req) {
         par.lang = req.param('lang');
     } else {
         par.lang = 'fr';
+    }
+
+    if (!req.param('ajax')) {
+        par.render = 'full';
+    } else {
+        par.render = 'part';
     }
 
     if (!req.user) {
@@ -31,7 +38,7 @@ var init = function(_eventbrite, _examen, _utils) {
 }
 
 var login = function(req, res) {
-    res.render('login.html', generateParams(req));
+    res.render('template.html', generateParams(req, 'login'));
 }
 
 var confirm_order = function(req, res) {
@@ -39,47 +46,48 @@ var confirm_order = function(req, res) {
     var orderID = req.query.oid;
 
     eventbrite.confirmOrder(eventID, orderID, function(err, user) {
-        var params = generateParams(req);
+        var params = generateParams(req, 'signup');
         params.err = 'None';
         params.user = 'None';
 
-        if (err || (user && user.hasPassword)) {
-            if(err){
-                params.err = err;
-            }
-            if(user){
-                params.user = user;
-            }
-            return res.redirect('login.html', params);
-        } else {            
-            return res.render('signup.html', params);
+        if (err) {
+            params.err = err;
+            params.content = 'login';
+        } else {
+            params.user = user;
         }
+
+        if (user && user.hasPassword) {
+            params.content = 'login';
+        }
+        res.render('template.html', params);
     });
 }
 
 var profile = function(req, res) {
     if (req.user) {
-        res.render('profile.html', generateParams(req));
+        res.render('template.html', generateParams(req, 'profile'));
     } else {
-        res.redirect('login');
+        res.render('template.html', generateParams(req, 'login'));
+        //res.redirect('/login');
     }
 }
 
 var logout = function(req, res) {
     req.logout();
-    return res.redirect('/');
+    res.redirect('/');
 }
 
 var index = function(req, res) {
-    return res.render('index.html', generateParams(req));
+    res.render('template.html', generateParams(req, 'index'));
 }
 
 var label = function(req, res) {
-    return res.render('label.html', generateParams(req));
+    res.render('template.html', generateParams(req, 'label'));
 }
 
 var examen = function(req, res) {
-    var params = generateParams(req);
+    var params = generateParams(req, 'examen');
     params.err = 'None';
     params.events = 'None';
     examen.getValidExamensList(function(err, e) {
@@ -88,12 +96,12 @@ var examen = function(req, res) {
         } else {
             params.events = e;
         }
-        return res.render('examen.html', params);
+        res.render('template.html', params);
     });
 }
 
 var witken = function(req, res) {
-    return res.render('witken.html', generateParams(req));
+    res.render('template.html', generateParams(req, 'witken'));
 }
 
 var api = new Object();
