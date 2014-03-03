@@ -11,11 +11,22 @@ var label = process.env.APP_COV ? require(__dirname + '/cov/label.js') : require
 
 var utils = process.env.APP_COV ? require(__dirname + '/cov/utils.js') : require(__dirname + '/witken/utils.js');
 
+var invitation = process.env.APP_COV ? require(__dirname + '/cov/invitations.js') : require(__dirname + '/witken/invitations.js');
+
 var USER_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
 var EXAMEN_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
+var INVITATION_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
+var LABEL_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
 
 var EVENTBRITE_ORGANIZATION = "MGSDD";
 var EVENTBRITE_ORGANIZATION_ID = 5669656715;
+
+email.init();
+invitation.init(utils, user, email, INVITATION_DB, function error(err) {
+    console.log('Failed to connect to Invitations DB');
+}, function success() {
+    console.log('Connected to Invitations DB');
+});
 
 auth.init(user, utils);
 user.init(utils, email, USER_DB, function(err) {
@@ -24,7 +35,7 @@ user.init(utils, email, USER_DB, function(err) {
     console.log('Connected to User DB');
 });
 eventbrite.init(utils, examen, user, EVENTBRITE_ORGANIZATION, EVENTBRITE_ORGANIZATION_ID);
-routes.init(eventbrite, examen, utils);
+routes.init(eventbrite, examen, utils, user, email, invitation);
 examen.init(eventbrite, utils, user, EXAMEN_DB, function error(err) {
     console.log('Failed to connect to Examen DB');
 }, function success() {
@@ -34,13 +45,12 @@ examen.init(eventbrite, utils, user, EXAMEN_DB, function error(err) {
         examen.updateExamensList(function() {});
     }, 1000 * 60 * 60 * 24);
 });
-label.init(utils, user, EXAMEN_DB, function error(err) {
+label.init(utils, user, LABEL_DB, function error(err) {
     console.log('Failed to connect to Label DB');
 }, function success() {
     console.log('Connected to Label DB');
 });
 
-email.init();
 
 var express = require('express');
 var app = express();
@@ -76,6 +86,7 @@ app.get('/logout', routes.logout);
 app.get('/api/exam_sts', routes.api.getExamenStatus);
 app.post('/auth', auth.authenticate);
 app.post('/signup', auth.signup);
+app.post('/api/invite', routes.api.invite);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {

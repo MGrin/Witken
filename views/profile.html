@@ -60,6 +60,14 @@
 					<div id="profile-compte" class="profile-content hide">
 						<h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
 						<h2>Pas des compte pour le moment.</h2>
+						<div class="col-lg-6 login-form">
+							<div class="form-group" id="email_invite">
+								<label>Invite your friend!</label>
+								<input type="email" class="form-control" id="email" placeholder="Email">
+								<span class="help-block" id="email_error_block"></span>
+							</div>
+							<button class="btn btn-default" id="invite_btn">Invite</button>
+						</div>
 					</div>
 				</div>
 				<div id="profile-menu" class="silver_dark_bg white_text col-lg-3 col-md-2 col-sm-2 hidden-xs">
@@ -114,6 +122,24 @@
 				currentPage = $('#profile-examen');
 			}
 	
+			$('#invite_btn').click(function(){
+				var params = {
+					invitation: {
+						email: $('#email').val()
+					}
+				};
+
+				$.post('/api/invite', params, function(data){
+					console.log(data);
+					if(data.err){
+						$('#email_error_block').text(data.err.error_message);
+					}else if(data.status === 'ok'){
+						$('#invite_btn').prop('disabled', true);
+						$('#email_invite').attr('disabled', 'disabled');
+						$('#email_invite').addClass('has-success');
+					}
+				});
+			});
 			showProfilePage(currentPage);
 			bindOnClickEventForMenuItems();
 			setupDownloadsLinks();

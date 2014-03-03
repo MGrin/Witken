@@ -24,6 +24,10 @@ var sendInscriptionConfirmation = function(user, href) {
     sendMail(mailOptions);
 }
 
+var sendInvitation = function(mail){
+    
+}
+
 var sendMail = function(mail) {
     var smtpTransport = nodemailer.createTransport("SMTP", emailSettings);
 
@@ -47,4 +51,5 @@ var generateInscriptionMail = function(user, href) {
 }
 exports.init = init;
 exports.sendInscriptionConfirmation = sendInscriptionConfirmation;
+exports.sendInvitation = sendInvitation;
 exports.addAttachement = addAttachement;

@@ -11,7 +11,7 @@ var init = function(_utils, _user, _db, error_callback, success_callback) {
     }
     utils = _utils;
     user = _user;
-    label = _db;
+    label_db = _db;
 
     mongoose.connect(label_db);
     var db = mongoose.connection;

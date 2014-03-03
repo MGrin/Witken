@@ -81,6 +81,10 @@ var userSchema = mongoose.Schema({
     result: {
         type: Object,
         default: null
+    },
+    invitations: {
+        type: Array,
+        default: []
     }
 });
 
@@ -198,6 +202,11 @@ userSchema.methods.addExamen = function(ex) {
     this.save();
 }
 
+userSchema.methods.addInvitation = function(inv){
+    console.log('Inviting '+JSON.stringify(inv)+' by '+this.email);
+    this.invitations.push(inv);
+    this.save();
+}
 var User = mongoose.model('User', userSchema, 'users');
 
 var getUserFromEventbrite = function(eb_user, callback) {

@@ -1,6 +1,9 @@
 var eventbrite;
 var examen;
 var utils;
+var user;
+var email;
+var invitations;
 
 function generateParams(req) {
     var par = {};
@@ -24,10 +27,12 @@ function generateParams(req) {
     return par;
 }
 
-var init = function(_eventbrite, _examen, _utils) {
+var init = function(_eventbrite, _examen, _utils, _user, _email, _invitations) {
     eventbrite = _eventbrite;
     examen = _examen;
     utils = _utils;
+    user = _user;
+    invitations = _invitations;
 }
 
 var login = function(req, res) {
@@ -114,7 +119,36 @@ api.getExamenStatus = function(req, res) {
         return res.send({
             status: ex.status
         });
-    })
+    });
+}
+
+api.invite = function(req, res){
+    var invitation = req.body.invitation;
+    if(!invitation){
+        return res.send(utils.generateInputError('email', 'No email was received'));
+    }
+    var u = req.user;
+    if(!u){
+        return res.send(utils.generateHackingError('Route', 'You are not logged in!'));
+    }
+
+    user.User.findOne({email: u.email}, function(err, us){
+        if(err){
+            return res.send(utils.generateDatabaseError('User', err));
+        }
+        if(!us){
+            return res.send(utils.generateDatabaseError('User', 'User '+u.email+' was not found'));
+        }
+        if(!us.invitations){
+            us.invitations = [];
+        }
+        invitations.invite(invitation, us, function(err){
+            if(err){
+                return res.send(err);
+            }
+            return res.send({status: 'ok'});
+        })
+    });
 }
 
 exports.api = api;

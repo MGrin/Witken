@@ -1,7 +1,7 @@
 var sources = ['Input', 'Database', 'Server', 'Route', 'Unknown'];
 var levels = ['fatal', 'warning', 'info'];
 var fields = ['email', 'pass', 'general'];
-var databases = ['User', 'Eventbrite', 'Unknown'];
+var databases = ['User', 'Eventbrite', 'Label', 'Invitation', 'Unknown'];
 var routes = ['Order confirmation', 'Unknown'];
 
 /*
