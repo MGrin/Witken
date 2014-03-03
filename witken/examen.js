@@ -67,7 +67,7 @@ examenSchema.methods.addAttendee = function(attendee, callback) {
         var exist = false;
 
         for (var i = 0; i < ex.attendees.length; i++) {
-            if (ex.attendeesp[i].email === us.email) {
+            if (ex.attendees[i].email === us.email) {
                 exist = true;
                 break;
             }

@@ -48,17 +48,18 @@ var confirm_order = function(req, res) {
         params.err = 'None';
         params.user = 'None';
 
-        if (err || (user && user.hasPassword)) {
-            if(err){
-                params.err = err;
-            }
-            if(user){
-                params.user = user;
-            }
+        if(err){
+            params.err = err;
             return res.redirect('login.html', params);
-        } else {            
+        }
+        if(user){
+            params.user = user;
+            if(user.hasPassword){
+                return res.redirect('login.html', params);
+            }
             return res.render('signup.html', params);
         }
+        return res.redirect('login.html', params);
     });
 }
 
