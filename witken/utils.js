@@ -19,11 +19,13 @@ exports.generateInputError = function(field, message) {
     }
 
     return {
-        source: 'Input',
-        field: field,
-        id: fields.indexOf(field),
-        level: 'Warning',
-        error_message: message
+        err: {
+            source: 'Input',
+            field: field,
+            id: fields.indexOf(field),
+            level: 'Warning',
+            error_message: message
+        }
     };
 }
 
@@ -47,10 +49,12 @@ exports.generateServerError = function(level, message) {
     }
 
     return {
-        source: 'Server',
-        id: (levels.indexOf(level) + 1) * 20,
-        level: level,
-        error_message: message
+        err: {
+            source: 'Server',
+            id: (levels.indexOf(level) + 1) * 20,
+            level: level,
+            error_message: message
+        }
     };
 }
 
@@ -64,29 +68,35 @@ exports.generateRoutingError = function(route, level, message) {
     }
 
     return {
-        source: 'Route',
-        id: (routes.indexOf(route) * levels.indexOf(level) + 1) * 30,
-        route: route,
-        level: level,
-        error_message: message
+        err: {
+            source: 'Route',
+            id: (routes.indexOf(route) * levels.indexOf(level) + 1) * 30,
+            route: route,
+            level: level,
+            error_message: message
+        }
     };
 }
 
 exports.generateNotImplementedYetError = function(source, function_name) {
     return {
-        source: source,
-        id: 500,
-        level: 'fatal',
-        error_message: ''
+        err: {
+            source: source,
+            id: 500,
+            level: 'fatal',
+            error_message: ''
+        }
     }
 }
 
 exports.generateHackingError = function(source, message) {
     return {
-        source: source,
-        id: 666,
-        level: 'fatal',
-        error_message: message
+        err: {
+            source: source,
+            id: 666,
+            level: 'fatal',
+            error_message: message
+        }
     };
 }
 

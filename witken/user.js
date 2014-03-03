@@ -203,7 +203,6 @@ userSchema.methods.addExamen = function(ex) {
 }
 
 userSchema.methods.addInvitation = function(inv){
-    console.log('Inviting '+JSON.stringify(inv)+' by '+this.email);
     this.invitations.push(inv);
     this.save();
 }

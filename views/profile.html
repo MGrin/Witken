@@ -65,7 +65,7 @@
 								<label>Invite your friend!</label>
 								<input type="email" class="form-control" id="email" placeholder="Email">
 								<span class="help-block" id="email_error_block"></span>
-							</div>
+							</div>							
 							<button class="btn btn-default" id="invite_btn">Invite</button>
 						</div>
 					</div>
@@ -97,6 +97,8 @@
 		{{- include footer.html }}
 	</body>
 	<script>
+		var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
 		var user = {{-JSON.stringify(user)}};
 
 		var currentPage;
@@ -129,16 +131,26 @@
 					}
 				};
 
-				$.post('/api/invite', params, function(data){
-					console.log(data);
-					if(data.err){
-						$('#email_error_block').text(data.err.error_message);
-					}else if(data.status === 'ok'){
-						$('#invite_btn').prop('disabled', true);
-						$('#email_invite').attr('disabled', 'disabled');
-						$('#email_invite').addClass('has-success');
+				if(!emailRE.test($('#email').val())){
+					if(!$('#email_invite').hasClass('has-error')){
+						$('#email_invite').addClass('has-error');
 					}
-				});
+					$('#email_error_block').text('Wrong email format');
+				}else{
+					$.post('/api/invite', params, function(data){
+						if(data.err){
+							if(!$('#email_invite').hasClass('has-error')){
+								$('#email_invite').addClass('has-error');
+							}
+							$('#email_error_block').text('Error: '+data.err.error_message);
+						}else if(data.status === 'ok'){
+							$('#invite_btn').prop('disabled', true);
+							$('#email_invite').prop('disabled', true);
+							$('#email_invite').addClass('has-success');
+							$('#email_error_block').text($('#email').val()+' successfully invited!');
+						}
+					});
+				}
 			});
 			showProfilePage(currentPage);
 			bindOnClickEventForMenuItems();
