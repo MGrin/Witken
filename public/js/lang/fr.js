@@ -62,7 +62,11 @@ var profile = {
     profile_text_horaires_detaile: "Horaires detaile",
     profile_text_terms: "Terms & conditions",
     profile_indexation_insubscription: "Désinscription",
-    profile_indexation_insubscription_text: "Si vous souhaitez vous désinscrire de notre base de donnée veuillez nous envoyer un courriel à admin@witken.ch"
+    profile_indexation_insubscription_text: "Si vous souhaitez vous désinscrire de notre base de donnée veuillez nous envoyer un courriel à admin@witken.ch",
+    profile_no_content_reason_results: "Ces informations s'afficherons des que vos resultats d'examen seront connu",
+    profile_personnal_number_text: "Numero d'intefication personnel:",
+    profile_personnal_data: "Données personnel",
+    profile_professional_data: "Données professionel"
 }
 var index = {
     index_slide1_title: "Label de haut potentiel",

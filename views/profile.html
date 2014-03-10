@@ -23,7 +23,7 @@
 						<br />
 						<br />
 						<span class="yellow_bg padding-10" id="exam_status"></span>
-						<div class="profile-download-buttons-wrapper">
+						<div class="profile-download-buttons-wrapper bottom-aligned">
 							<div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_convocation">
 							</div>
 							<div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_horaires_detaile">
@@ -37,11 +37,11 @@
 					</div>
 					<div id="profile-resultat" class="profile-content hide">
 						<h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-						<h2>Pas des resultats pour le moment.</h2>
+						{{-include no-content.html}}
 					</div>
 					<div id="profile-label_and_certificats" class="profile-content hide">
 						<h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-						<h2>Pas des label pour le moment.</h2>
+						{{-include no-content.html}}
 					</div>
 					<div id="profile-indexation" class="profile-content hide">
 						<h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
@@ -55,19 +55,39 @@
 					</div>
 					<div id="profile-messages" class="profile-content hide">
 						<h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-						<h2>Pas des notification pour le moment.</h2>
+						{{-include no-content.html}}
 					</div>
 					<div id="profile-compte" class="profile-content hide">
 						<h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-						<h2>Pas des compte pour le moment.</h2>
-						<div class="col-lg-6 login-form">
-							<div class="form-group" id="email_invite">
+						<div class="col-lg-12">
+							<p class="multilang col-lg-6" text="profile_personnal_number_text"></p>
+							<p class="col-lg-6">{{=user._id}}</p>
+						</div>
+						<div class="col-lg-6 col-lg-offset-0">
+							<p>{{=user.contact.home_address}}</p>
+							<p>{{=user.contact.home_postal_code}} {{=user.contact.home_city}}</p>
+							<p>{{=user.contact.home_country_code}}</p>
+						</div>
+						<div class="col-lg-6">
+							<p>{{=user.email}}</p>
+							<p>{{=user.contact.cell_phone}}</p>
+						</div>
+						<div class="col-lg-4 col-lg-offset-2">
+							<div class="form-group login-form" id="email_invite">
 								<label>Invite your friend!</label>
 								<input type="email" class="form-control" id="email" placeholder="Email">
 								<span class="help-block" id="email_error_block"></span>
 							</div>							
-							<button class="btn btn-default" id="invite_btn">Invite</button>
+							<button class="btn btn-default col-lg-6" id="invite_btn">Invite</button>
 						</div>
+
+						<div class="profile-download-buttons-wrapper profile-content-footer">
+							<div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_personnal_data">
+							</div>
+							<div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_professional_data">
+							</div>
+						</div>
+						
 					</div>
 				</div>
 				<div id="profile-menu" class="silver_dark_bg white_text col-lg-3 col-md-2 col-sm-2 hidden-xs">
@@ -167,7 +187,7 @@
 	
 		function setupDownloadsLinks() {
 			$('.profile-download-file').each(function () {
-			$(this).html('<span>' + getTextForId($(this).attr('text')) + '</span><br/><img class="profile-download-img" src="/img/tools/WK-Download.png" width=45 style="margin-top: 30px;"/>');
+				$(this).html('<span>' + getTextForId($(this).attr('text')) + '</span><br/><img class="profile-download-img" src="/img/tools/WK-Download.png" width=45 style="margin-top: 30px;"/>');
 			});
 			$('#profile-indexation > .profile-download-file').each(function(){
 				$(this).css('margin-left', $(this).parent().width()/2 - $(this).width()/2);

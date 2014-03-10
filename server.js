@@ -29,7 +29,7 @@ invitation.init(utils, user, email, INVITATION_DB, function error(err) {
 });
 
 auth.init(user, utils);
-user.init(utils, email, USER_DB, function(err) {
+user.init(utils, email, invitation, USER_DB, function(err) {
     console.log('Failed to connect to User DB');
 }, function() {
     console.log('Connected to User DB');

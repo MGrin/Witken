@@ -32,6 +32,10 @@ var invitationSchema = mongoose.Schema({
     user: Object,
     invitation: {
     	type: Object
+    },
+    registered: {
+    	type: Boolean,
+    	default: false
     }
 });
 
@@ -55,7 +59,8 @@ var invite = function(invitation, us, callback){
 				inv = new Invitation({
 					date: new Date(),
 					user: us.generateShortObject(),
-					invitation: invitation
+					invitation: invitation,
+					registered: false
 				});
 				us.addInvitation(inv);
 				inv.save();
@@ -63,6 +68,30 @@ var invite = function(invitation, us, callback){
 				return callback();
 			}
 		});
+	});
+}
+
+var updateInvitation = function(invitation, callback){
+	if(!invitation.email){
+		if(callback){
+			return callback(utils.generateDatabaseError('Invitation', 'Wrong invitation format!'));
+		}
+		throw new Error('Wrong invitation format!');
+	}
+	Invitation.findOne({invitation: invitation}, function(err, inv){
+		if(err){
+			if(callback){
+				return callback(err);
+			}
+			throw err;
+		}
+		if(inv){
+			inv.registered = true;
+			inv.save();
+			if(calback){
+				return callback();
+			}
+		}
 	});
 }
 

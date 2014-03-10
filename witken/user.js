@@ -5,14 +5,16 @@ var mongoose = require('mongoose');
 var email;
 var utils;
 var witken_users;
+var invitation;
 
-exports.init = function(_utils, _email, _db, error_callback, success_callback) {
+exports.init = function(_utils, _email, _invitation, _db, error_callback, success_callback) {
     if (!_utils || !_email || !_db || !error_callback || !success_callback) {
         throw 'Wrong arguments exception!';
         return;
     }
     utils = _utils;
     email = _email;
+    invitation = _invitation;
     witken_users = _db;
 
     mongoose.connect(witken_users);
@@ -106,6 +108,7 @@ userSchema.methods.generatePublicObject = function() {
     }
     var res = {
         email: this.email,
+        _id: this._id,
         hasPassword: this.hasPassword,
         human_data: {
             prefix: this.human_data.prefix,
@@ -241,6 +244,7 @@ var getUserFromEventbrite = function(eb_user, callback) {
                     work_address: eb_user.work_address
                 }
             });
+            invitation.updateInvitation({email: eb_user.email});
             us.save();
             return callback(null, us);
         }
