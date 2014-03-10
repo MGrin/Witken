@@ -82,6 +82,7 @@ app.get('/witken', routes.witken);
 app.get('/login', routes.login);
 app.get('/order_confirm', routes.confirm_order);
 app.get('/profile', routes.profile);
+app.get('/prof_data', routes.prof_data);
 app.get('/logout', routes.logout);
 app.get('/api/exam_sts', routes.api.getExamenStatus);
 app.post('/auth', auth.authenticate);

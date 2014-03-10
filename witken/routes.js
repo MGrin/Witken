@@ -71,6 +71,14 @@ var profile = function(req, res) {
     }
 }
 
+var prof_data = function(req, res){
+    if (req.user) {
+        res.render('professional_data.html', generateParams(req));
+    } else {
+        res.redirect('login');
+    }
+}
+
 var logout = function(req, res) {
     req.logout();
     return res.redirect('/');
@@ -157,6 +165,7 @@ exports.init = init;
 exports.login = login;
 exports.confirm_order = confirm_order;
 exports.profile = profile;
+exports.prof_data = prof_data;
 exports.logout = logout;
 exports.index = index;
 exports.label = label;

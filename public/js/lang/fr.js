@@ -19,6 +19,8 @@ function getTextForId(text) {
             return examen[text];
         case 'profile':
             return profile[text];
+        case 'prof':
+            return prof_data[text];
         default:
             return "No text";
     }
@@ -68,6 +70,27 @@ var profile = {
     profile_personnal_data: "Données personnel",
     profile_professional_data: "Données professionel"
 }
+
+var prof_data = {
+    prof_data_sector: "Secteur",
+    prof_data_post: "Poste",
+    prof_data_hierarchie_level: "Niveau d'hierarchie",
+    prof_data_experience_age: "Annee(s) d'experience",
+    prof_data_experience_prof: "Experience profesionnel",
+    prof_data_enterprise: "Enterprise",
+    prof_data_region: "Region",
+    prof_data_start_time: "De",
+    prof_data_end_time: "A",
+    prof_data_studies: "Formation",
+    prof_data_material: "Matiere",
+    prof_data_diplome: "Diplome",
+    prof_data_getting_year: "Annee d'obtention",
+    prof_data_language: "Langue",
+    prof_data_level: "Niveau",
+    prof_data_informatique: "Informatique (facultatif)",
+    prof_data_programm: "Programme"
+}
+
 var index = {
     index_slide1_title: "Label de haut potentiel",
     index_slide1_text: "Boostez vos neurones en passant l'examen<br />et obtenez un label certificat...",

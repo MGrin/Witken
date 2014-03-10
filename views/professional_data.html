@@ -1,0 +1,191 @@
+<html>
+	<head>
+		{{- include head.html}}
+		<link rel="stylesheet" href="/css/profile.css" />
+	</head>
+	<body>
+		{{- include header.html}}
+		<div class="row">
+			<div id="central" class="col-lg-8 col-lg-offset-2">
+				<div class="profile col-lg-12 col-md-12 col-sm-12 col-xs-12 silver_light_bg">
+					<h1 class="multilang" text="profile_professional_data"></h1>
+					<div id="short_data">
+						<div class="col-lg-offset-2">
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_sector"></p>
+									<select class="form-control js-select-sector">
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_post"></p>
+									<select class="form-control js-select-post">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_hierarchie_level"></p>
+									<select class="form-control js-select-hierarchie_level">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_experience_age"></p>
+									<select class="form-control js-select-experience_age">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div id="experience">
+						<h4 class="multilang" text="prof_data_experience_prof"></h4>
+						<div class="order_number"></div>
+						
+						<div class="col-lg-offset-2">
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_sector"></p>
+									<select class="form-control js-select-sector">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_enterprise"></p>
+									<select class="form-control js-select-enterprise">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_region"></p>
+									<select class="form-control js-select-region">
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-2">
+									<p class="multilang" text="prof_data_start_time"></p>
+									<select class="form-control js-select-start_time">
+									</select>
+								</div>
+								<div class="form-group col-lg-2">
+									<p class="multilang" text="prof_data_end_time"></p>
+									<select class="form-control js-select-end_time">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_post"></p>
+									<select class="form-control js-select-post">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_hierarchie_level"></p>
+									<select class="form-control js-select-hierarchie_level">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="addRow"></div>
+						<div class="clearfix"></div>
+					</div>
+					<div id="studies">
+						<h4 class="multilang" text="prof_data_studies"></h4>
+						<div class="order_number"></div>
+						<div class="col-lg-offset-2">
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_material"></p>
+									<select class="form-control js-select-material">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_diplome"></p>
+									<select class="form-control js-select-diplome">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_getting_year"></p>
+									<select class="form-control js-select-gettind_year">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="addRow"></div>
+						<div class="clearfix">
+					</div>
+					<div id="language">
+						<h4 class="multilang" text="prof_data_language"></h4>
+						<div class="order_number"></div>
+						<div class="col-lg-offset-2">
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_language"></p>
+									<select class="form-control js-select-language">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_level"></p>
+									<select class="form-control js-select-level">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="addRow"></div>
+						<div class="clearfix"></div>
+					</div>
+					<div id="informatics">
+						<h4 class="multilang" text="prof_data_informatique"></h4>
+						<div class="order_number"></div>
+						<div class="col-lg-offset-2">
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_programm"></p>
+									<select class="form-control js-select-programm">
+									</select>
+								</div>
+								<div class="form-group col-lg-4">
+									<p class="multilang" text="prof_data_level"></p>
+									<select class="form-control js-select-level">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="addRow"></div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		{{- include footer.html }}
+	</body>
+	<script src="/js/profileSelects.js"></script>
+	<script>
+	var onDataLoaded = function(){
+		$('.order_number').each(function(){
+			//<div class="col-lg-1 circle_button grey_bg"><h3 class="font-HelveticaNeueThin">1*</h3></div>
+			$(this).addClass('col-lg-1');
+			$(this).addClass('circle_button');
+			$(this).addClass('grey_bg');
+			$(this).html('<h3 class="font-HelveticaNeueThin">1*</h3>');
+		});
+		$('.addRow').each(function(){
+			//<div class="link col-lg-1 circle_button yellow_bg"><h3 class="font-HelveticaNeueThin">+</h3></div>
+			$(this).addClass('link');
+			$(this).addClass('col-lg-1');
+			$(this).addClass('circle_button');
+			$(this).addClass('yellow_bg');
+			$(this).html('<h3 class="font-HelveticaNeueThin">+</h3>');
+		});
+
+		var selects = ['.js-select-sector', '.js-select-level', '.js-select-programm', '.js-select-language',
+						'.js-select-post', '.js-select-diplome', '.js-select-material', '.js-select-region',
+						'.js-select-enterprise', '.js-select-hierarchie_level', '.js-select-gettind_year',
+						'.js-select-end_time', '.js-select-start_time', '.js-select-experience_age'];
+
+		selects.forEach(function(elem){
+			$(elem).each(function(){
+				$(this).html(getSelectListFor(elem));
+			});
+		});
+	}
+	</script>
+	{{- include scripts.html}}
+</html>

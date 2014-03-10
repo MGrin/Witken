@@ -71,23 +71,16 @@
 						<div class="col-lg-6">
 							<p>{{=user.email}}</p>
 							<p>{{=user.contact.cell_phone}}</p>
-						</div>
-						<div class="col-lg-4 col-lg-offset-2">
-							<div class="form-group login-form" id="email_invite">
-								<label>Invite your friend!</label>
-								<input type="email" class="form-control" id="email" placeholder="Email">
-								<span class="help-block" id="email_error_block"></span>
-							</div>							
-							<button class="btn btn-default col-lg-6" id="invite_btn">Invite</button>
-						</div>
-
+						</div>						
 						<div class="profile-download-buttons-wrapper profile-content-footer">
 							<div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_personnal_data">
 							</div>
-							<div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_professional_data">
+							<div class="link js_redirect_professional_data silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_professional_data">
 							</div>
 						</div>
-						
+						<button class="btn btn-default" data-toggle="modal" data-target="#invitation_modal">
+							Invite
+						</button>
 					</div>
 				</div>
 				<div id="profile-menu" class="silver_dark_bg white_text col-lg-3 col-md-2 col-sm-2 hidden-xs">
@@ -113,7 +106,29 @@
 					</ul>
 				</div>
 			</div>
+			<div class="modal fade" id="invitation_modal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+				    	<div class="modal-header">
+				    	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				    	    <h4 class="modal-title">Invitation</h4>
+				    	  </div>
+				    	  <div class="modal-body">
+								<div class="form-group login-form" id="email_invite">
+									<label>Invite your friend!</label>
+									<input type="email" class="form-control" id="email" placeholder="Email">
+									<span class="help-block" id="email_error_block"></span>
+								</div>
+				    	  </div>
+				    	  <div class="modal-footer">
+				    	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				    	    <button type="button" class="btn btn-primary" id="invite_btn">Invite</button>
+				    	  </div>
+				    	</div><!-- /.modal-content -->
+				  	</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 		</div>
+	
 		{{- include footer.html }}
 	</body>
 	<script>
@@ -127,6 +142,7 @@
 			$('.js_redirect_logout').click(function () {
 			document.location.href = document.location.origin + '/logout' + '?lang=' + current_lang;
 			});
+			bindOnClickEventForContentClass('.js_redirect_professional_data', '/prof_data');
 			if ($(window).width() >= normal_screen) {
 				$('#profile-menu').css('left', 10);
 				$('.profile').css('left', 10);
