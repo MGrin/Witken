@@ -73,7 +73,7 @@ var profile = function(req, res) {
 
 var prof_data = function(req, res){
     if (req.user) {
-        res.render('professional_data.html', generateParams(req));
+        res.render('profile/professional_data.html', generateParams(req));
     } else {
         res.redirect('login');
     }

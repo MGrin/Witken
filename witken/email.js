@@ -1,20 +1,21 @@
 var nodemailer = require('nodemailer');
 
 var emailSettings = {
-    service: "Gmail",
+    service: "Postmark",
+    name: "Witken",
     auth: {
-        user: "test",
-        pass: "test"
+        user: "972d4413-a003-4700-a9d3-9a4b4f08ba10",
+        pass: "972d4413-a003-4700-a9d3-9a4b4f08ba10"
     }
 }
 
 var init = function() {
-
+    sendMail()
 }
 
 var sendInscriptionConfirmation = function(user, href) {
     var mailOptions = {
-        from: "Witken - Inscription <inscritpion@witken.org>",
+        from: "Witken - Inscription <inscription@witken.com>",
         to: user.email,
         subject: "Welcome to Witken",
         text: "Inscription stuff",
@@ -24,8 +25,12 @@ var sendInscriptionConfirmation = function(user, href) {
     sendMail(mailOptions);
 }
 
-var sendInvitation = function(mail){
+var sendInvitation = function(email){
     
+}
+
+var sendInvitationConfirmation = function (email, inv){
+
 }
 
 var sendMail = function(mail) {
@@ -52,4 +57,5 @@ var generateInscriptionMail = function(user, href) {
 exports.init = init;
 exports.sendInscriptionConfirmation = sendInscriptionConfirmation;
 exports.sendInvitation = sendInvitation;
+exports.sendInvitationConfirmation = sendInvitationConfirmation;
 exports.addAttachement = addAttachement;

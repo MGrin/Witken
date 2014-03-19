@@ -87,6 +87,13 @@ var updateInvitation = function(invitation, callback){
 		}
 		if(inv){
 			inv.registered = true;
+			user.User.findOne({
+				email: inv.email
+			}, function(err, u){
+				if(!err && u){
+					u.notifyByEmail('invitation', inv);
+				}
+			})
 			inv.save();
 			if(calback){
 				return callback();

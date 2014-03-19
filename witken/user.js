@@ -209,6 +209,12 @@ userSchema.methods.addInvitation = function(inv){
     this.invitations.push(inv);
     this.save();
 }
+
+userSchema.methods.notifyByEmail = function (type, content) {
+    if(type === 'invitation'){
+        email.sendInvitationConfirmation(this.email, content);
+    }
+}
 var User = mongoose.model('User', userSchema, 'users');
 
 var getUserFromEventbrite = function(eb_user, callback) {
