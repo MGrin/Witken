@@ -114,7 +114,7 @@ var api = new Object();
 api.getExamenStatus = function(req, res) {
     var examID = req.query.exam_id;
     if (!examID) {
-        return res.send(utils.generateInputError('Database', 'No parameters was givenm'));
+        return res.send(utils.generateInputError('Database', 'No parameters were given'));
     }
     examen.Examen.findOne({
         eb_id: examID
@@ -123,7 +123,7 @@ api.getExamenStatus = function(req, res) {
             return res.send(utils.generateDatabaseError('Examen', err));
         }
         if (!ex) {
-            return res.send(utils.generateServerError('warning', 'No examen found with following id: ' + examID));
+            return res.send(utils.generateServerError('warning', 'No exam found with following id: ' + examID));
         }
         return res.send({
             status: ex.status
