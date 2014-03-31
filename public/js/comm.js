@@ -1,11 +1,17 @@
 function setupOnClickEvents() {
 
-    bindOnClickEventForContentClass('.js_redirect_index', '/');
-    bindOnClickEventForContentClass('.js_redirect_label', '/label');
-    bindOnClickEventForContentClass('.js_redirect_examen', '/examen');
-    bindOnClickEventForContentClass('.js_redirect_witken', '/witken');
-    bindOnClickEventForContentClass('.js_redirect_login', '/login');
-    bindOnClickEventForContentClass('.js_redirect_profile', '/profile');
+    var links = {
+
+        '.js_redirect_index' : '/',
+        '.js_redirect_label' : '/label',
+        '.js_redirect_examen' : '/examen',
+        '.js_redirect_witken' : '/witken',
+        '.js_redirect_login' : '/login',
+        '.js_redirect_profile' : '/profile'
+
+    }
+
+    for(var link in links) bindOnClickEventForContentClass(link, links[link]);
 
     if (current_lang === 'fr') {
         newLang = 'en';

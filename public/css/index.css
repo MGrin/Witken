@@ -1,6 +1,12 @@
+.index_header{
+    width: 100%;
+    height: 150px;
+}
+
 .index_footer {
 	padding: 0;
 	margin-top: 50px;
+    width: 955px;
 }
 
 .index_footer > div{
@@ -15,17 +21,27 @@
 }
 
 .index_footer > #results {
-	background-image: url(/img/results-world.png);
+	background-image: url(../img/results-world.png);
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
 
 .index_footer > #labels {
-	background-image: url(/img/label-world.png);
+	background-image: url(../img/label-world.png);
 	background-size: 100%;
 }
 
 .index_footer > #enterprises {
-	background-image: url(/img/enterprise-world.png);
+	background-image: url(../img/enterprise-world.png);
 	background-size: 100%;
+}
+
+.carousel_wrapper {
+    width: 955px;
+    height: 368px;
+    margin: 0 auto;
+}
+
+.demo_block {
+    width: 100%;
 }
