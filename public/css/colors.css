@@ -1,9 +1,9 @@
 .white_text {
-    color: white;
+    color: #FFFFFF;
 }
 
 .grey_text {
-    color: grey;
+    color: #9b9c9e;
 }
 
 .black_text {
@@ -17,6 +17,22 @@
 .red_bg {
     background-color: rgb(222, 70, 73);
 }
+
+.red_gradient{
+    background-image: -webkit-gradient(
+        linear,
+        right bottom,
+        left bottom,
+        color-stop(0, #F04646),
+        color-stop(1, #D02323)
+    );
+    background-image: -o-linear-gradient(left, #F04646 0%, #D02323 100%);
+    background-image: -moz-linear-gradient(left, #F04646 0%, #D02323 100%);
+    background-image: -webkit-linear-gradient(left, #F04646 0%, #D02323 100%);
+    background-image: -ms-linear-gradient(left, #F04646 0%, #D02323 100%);
+    background-image: linear-gradient(to left, #F04646 0%, #D02323 100%);
+}
+
 .yellow_bg {
     background-color: rgb(252, 182, 81);
 }

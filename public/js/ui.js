@@ -21,7 +21,7 @@ var normal_screen = 1280;
 function initiate() {
     $(document).width($(window).width());
 
-    setupHeaderAlignement();
+    //setupHeaderAlignement();
     setupImages();
     setupCards();
     setupFooter();    
