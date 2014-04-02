@@ -24,7 +24,7 @@ function initiate() {
     //setupHeaderAlignement();
     setupImages();
     setupCards();
-    setupFooter();    
+    //setupFooter();
 }
 
 function setupHeaderAlignement() {

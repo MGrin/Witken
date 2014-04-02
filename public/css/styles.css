@@ -82,6 +82,10 @@ footer table{
     margin-left: 50px;
 }
 
+.menu_item > h3:hover{
+    color: #9b9c9e;;
+}
+
 .logo {
     float: left;
     height: 150px;
@@ -90,7 +94,11 @@ footer table{
 
 .user-content{
     padding-left: 10px;
-    width: 220px;
+    width: 235px;
+}
+
+.user-content h3:hover{
+    color: #FFFFFF;
 }
 
 .info_icon{
