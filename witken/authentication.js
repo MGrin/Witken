@@ -82,14 +82,14 @@ exports.signup = function(req, res) {
         }
         if (us) {
             return res.send({
-                err: utils.generateInputError('email', 'User ' + ureq.body.user.email + ' already exists');
+                err: utils.generateInputError('email', 'User ' + ureq.body.user.email + ' already exists')
             });
         }
 
         user.create(data, function(err, us){
             if(err){
                 return res.send({
-                    err: utils.generateDatabaseError('User', err);
+                    err: utils.generateDatabaseError('User', err)
                 });
             }
             return res.redirect('/login');

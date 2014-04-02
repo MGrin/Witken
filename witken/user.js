@@ -273,4 +273,4 @@ var create = function(data, callback){
 exports.User = User;
 exports.tools = userTools;
 exports.getUserFromEventbrite = getUserFromEventbrite;
-expots.create = create;
+exports.create = create;
