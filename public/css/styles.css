@@ -92,6 +92,19 @@ footer table{
     padding-left: 10px;
     width: 220px;
 }
+
+.info_icon{
+    position: relative;
+    width: 30px;
+    float: right;
+    right: 20px;
+    bottom: 35px;
+}
+
+.info_icon:hover{
+    cursor: hand;
+}
+
 #central {
     margin-top: 50px;
     margin-bottom: 50px;

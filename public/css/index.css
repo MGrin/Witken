@@ -29,6 +29,8 @@
 .index_footer > #labels {
 	background-image: url(../img/label-world.png);
 	background-size: 100%;
+    border-right: 1px solid #000000;
+    border-left: 1px solid #000000;
 }
 
 .index_footer > #enterprises {
@@ -38,7 +40,17 @@
 
 .index_footer > .link{
     width: calc(100% / 3);
+    height: 100%;
     float: left;
+    background-repeat: no-repeat;
+}
+
+.link_icon{
+    position: relative;
+    width: 30px;
+    float: right;
+    right: 40px;
+    bottom: calc(50% - 28px);
 }
 
 .carousel_wrapper {
