@@ -106,7 +106,7 @@ footer table{
     width: 30px;
     float: right;
     right: 20px;
-    bottom: 35px;
+    top: 15px;
 }
 
 .info_icon:hover{

@@ -4,11 +4,12 @@
 			<img src="/img/WKlogo.png" class="link js_redirect_index logo" />
 		</div>
         <div class="menu_item user-content red_gradient white_text">
+            <img src="/img/WK-Info_white.png" class="info_icon">
             {{ if(user==='None' || user === undefined){ }}
             <h3 text="general_registration" class="multilang link js_redirect_login"></h3>
+
             {{ }else{ }}
             <h3>{{= user.human_data.first_name }} {{= user.human_data.last_name}}</h3>
-            <img src="/img/WK-Info_white.png" class="info_icon">
             <p text="general_registration" class="multilang link js_redirect_profile"></p>
             {{ } }}
         </div>
