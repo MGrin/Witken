@@ -214,7 +214,7 @@
 /* single slide */
 .sy-slide {
   position: absolute;
-  width: 955px;
+  width: 1100px;
   height: 368px;
   z-index: 2;
   background-image: -webkit-gradient(
@@ -224,11 +224,11 @@
   color-stop(0.42, #2D2E30),
   color-stop(1, #5C5D5A)
 );
-background-image: -o-linear-gradient(left bottom, #2D2E30 42%, #5C5D5A 100%);
-background-image: -moz-linear-gradient(left bottom, #2D2E30 42%, #5C5D5A 100%);
-background-image: -webkit-linear-gradient(left bottom, #2D2E30 42%, #5C5D5A 100%);
-background-image: -ms-linear-gradient(left bottom, #2D2E30 42%, #5C5D5A 100%);
-background-image: linear-gradient(to left bottom, #2D2E30 42%, #5C5D5A 100%);
+background-image: -o-linear-gradient(left bottom, #2D2E30 50%, #5C5D5A 100%);
+background-image: -moz-linear-gradient(left bottom, #2D2E30 50%, #5C5D5A 100%);
+background-image: -webkit-linear-gradient(left bottom, #2D2E30 50%, #5C5D5A 100%);
+background-image: -ms-linear-gradient(left bottom, #2D2E30 50%, #5C5D5A 100%);
+background-image: linear-gradient(to left bottom, #2D2E30 50%, #5C5D5A 100%);
 }
 .sy-slide.kenburns {
   width: 140%;
