@@ -70,31 +70,30 @@ exports.authenticate = function(req, res, next) {
 }
 
 exports.signup = function(req, res) {
-    var passwd = req.body.pass;
+    var data = req.body.user_data;
+
     user.User.findOne({
-        email: req.body.user.email
+        email: data.email
     }, function(err, us) {
         if (err) {
             return res.send({
                 err: err
             });
         }
-        if (!us) {
+        if (us) {
             return res.send({
-                err: utils.generateDatabaseError('User', 'User ' + ureq.body.user.email + ' not found')
+                err: utils.generateInputError('email', 'User ' + ureq.body.user.email + ' already exists')
             });
         }
 
-        us.setPassword(passwd, function(err) {
-            if (err) {
-                res.send({
-                    err: err
-                });
-            } else {
-                res.send({
-                    success: true
+        user.create(data, function(err, us){
+            if(err){
+                return res.send({
+                    err: utils.generateDatabaseError('User', err)
                 });
             }
+            return res.redirect('/login');
         });
+
     });
 }

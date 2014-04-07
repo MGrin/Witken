@@ -256,6 +256,21 @@ var getUserFromEventbrite = function(eb_user, callback) {
         }
     })
 }
+
+var create = function(data, callback){
+    //Check data
+    //TODO
+
+    var u = new User(data);
+    u.save(function(err){
+        if(err) return callback(err);
+        //TODO
+        //send email
+        callback(null, u);
+    });
+}
+
 exports.User = User;
 exports.tools = userTools;
 exports.getUserFromEventbrite = getUserFromEventbrite;
+exports.create = create;
