@@ -1,6 +1,5 @@
 html,
 body {
-    overflow-x: hidden;
     letter-spacing: 1px;
 }
 small {
@@ -34,7 +33,6 @@ p{
 }
 
 footer {
-
     height: 150px;
     padding-top: 50px;
 }
@@ -66,7 +64,7 @@ footer table{
 }
 .header {
     height: 150px;
-    width: 1000px;
+    width: 1250px;
     margin: 0 auto;
 }
 .menu_item {
