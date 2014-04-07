@@ -66,7 +66,7 @@ footer table{
 }
 .header {
     height: 150px;
-    width: 955px;
+    width: 1000px;
     margin: 0 auto;
 }
 .menu_item {
@@ -106,7 +106,7 @@ footer table{
     width: 30px;
     float: right;
     right: 20px;
-    top: 15px;
+    top: 20px;
 }
 
 .info_icon:hover{
