@@ -49,5 +49,14 @@ $(document).ready(function(){
     $('.link_icon').css({
         bottom : 50% - 28
     });
-    $('.body_wrapper').height($(window).height() - $('footer').height());
+    var min_height = $('.body_wrapper').height() + parseInt($('.footer_wrapper').css('padding-top'));
+    footerPosition();
+    $(window).resize(function(){
+        footerPosition();
+        });
+
+    function footerPosition(){
+        var new_height = $(window).height() - $('footer').height();
+        $('.body_wrapper').height((new_height <= min_height) ? min_height : new_height);
+    }
 })
