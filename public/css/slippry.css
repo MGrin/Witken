@@ -374,10 +374,10 @@ background-image: linear-gradient(to left bottom, #2D2E30 50%, #5C5D5A 100%);
 .sy-controls li a:after {
   content: "";
   background-repeat: no-repeat;
-  -webkit-background-size: 30px;
-  -moz-background-size: 30px;
-  -o-background-size: 30px;
-  background-size: 30px;
+  -webkit-background-size: 30px 30px;
+  -moz-background-size: 30px 30px;
+  -o-background-size: 30px 30px;
+  background-size: 30px 30px;
   text-align: center;
   text-indent: 0;
   line-height: 2.8em;

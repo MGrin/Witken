@@ -32,10 +32,6 @@ p{
 /*    font-size: 1.1em;*/
 }
 
-footer {
-    height: 150px;
-    padding-top: 50px;
-}
 footer .social-img {
     width: 30px;
 }
@@ -46,12 +42,15 @@ footer table{
 }
 
 .footer_wrapper{
+    height: 150px;
+    padding-top: 50px;
     width: 1100px;
     margin: 0 auto;
 }
 
 .copyright{
     float: left;
+    margin-left: 10px;
 }
 
 .padding-10{
@@ -114,4 +113,8 @@ footer table{
 #central {
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.clear{
+    clear: both;
 }
