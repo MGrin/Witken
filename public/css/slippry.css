@@ -340,7 +340,7 @@ background-image: linear-gradient(to left bottom, #2D2E30 50%, #5C5D5A 100%);
 }
 
 .sy-prev a:after{
-  background-image: url(../img/arrow_l.png);
+  background-image: url(../img/arrow_l_s.png);
 }
 
 .sy-controls li.sy-next {
@@ -353,7 +353,7 @@ background-image: linear-gradient(to left bottom, #2D2E30 50%, #5C5D5A 100%);
 }
 
 .sy-next a:after{
-  background-image: url(../img/arrow_r.png);
+  background-image: url(../img/arrow_r_s.png);
 }
 
 .sy-controls li a {
@@ -374,10 +374,6 @@ background-image: linear-gradient(to left bottom, #2D2E30 50%, #5C5D5A 100%);
 .sy-controls li a:after {
   content: "";
   background-repeat: no-repeat;
-  -webkit-background-size: 30px 30px;
-  -moz-background-size: 30px 30px;
-  -o-background-size: 30px 30px;
-  background-size: 30px 30px;
   text-align: center;
   text-indent: 0;
   line-height: 2.8em;

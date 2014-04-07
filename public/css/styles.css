@@ -70,7 +70,6 @@ footer table{
     height: 150px;
     padding-top: 45px;
     float: right;
-    width: calc(1100px / 7);
     margin: 0 auto;
     padding-left: 20px;
 }

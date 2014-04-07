@@ -36,7 +36,6 @@
 }
 
 .index_footer > .link{
-    width: calc(100% / 3);
     height: 100%;
     float: left;
     background-repeat: no-repeat;
@@ -47,7 +46,6 @@
     width: 30px;
     float: right;
     right: 40px;
-    bottom: calc(50% - 28px);
 }
 
 .carousel_wrapper {

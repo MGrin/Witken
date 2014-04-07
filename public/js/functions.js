@@ -40,4 +40,13 @@ $(document).ready(function(){
     $('.discover').click(function () {
         location.href = '/label' + '?lang=' + current_lang;
     });
+
+    $('.menu_item').width(1100 / 8);
+    $('.menu_item').first().width(235);
+    $('.index_footer').children(".link").css({
+        width : $('.index_footer').width() / 3
+    });
+    $('.link_icon').css({
+        bottom : 50% - 28
+    });
 })
