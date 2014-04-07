@@ -49,4 +49,5 @@ $(document).ready(function(){
     $('.link_icon').css({
         bottom : 50% - 28
     });
+    $('.body_wrapper').height($(window).height() - $('footer').height());
 })
