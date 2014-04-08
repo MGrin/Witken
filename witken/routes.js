@@ -35,20 +35,26 @@ var init = function(_eventbrite, _examen, _utils, _user, _email, _invitations) {
     invitations = _invitations;
 }
 
-var online_test = function (req, res) {
+var profile = {};
+
+profile.online_test = function (req, res) {
     if(req.user){
         req.user.startOnlineTest();
-        res.render('online_test.html', generateParams(req));
+        res.render('profile/online_test.html', generateParams(req));
     }else{
         res.redirect('/login');
     }
 }
 
-var login = function(req, res) {
-    res.render('login.html', generateParams(req));
+profile.prof_data = function(req, res){
+    if (req.user) {
+        res.render('profile/professional_data.html', generateParams(req));
+    } else {
+        res.redirect('/login');
+    }
 }
 
-var profile = function(req, res) {
+profile.index = function(req, res) {
     if (req.user) {
         res.render('profile.html', generateParams(req));
     } else {
@@ -56,11 +62,34 @@ var profile = function(req, res) {
     }
 }
 
-var prof_data = function(req, res){
+var api = {};
+api.online_test = function (req, res) {
+    var testData = req.body.testData;
     if (req.user) {
-        res.render('profile/professional_data.html', generateParams(req));
+        if(testData){
+            req.user.stopOnlineTest(testData);
+            res.redirect('/profile');
+        }else{
+            res.send(new utils.ServerError('No test data received'));
+        }
     } else {
-        res.redirect('/login');
+        res.send(new utils.ServerError('No access'));
+    }
+}
+
+var signup = function (req, res) {
+    if (!req.user) {
+        res.render('signup.html', generateParams(req));
+    } else {
+        res.redirect('/profile');
+    }
+}
+
+var login = function(req, res) {
+    if (!req.user) {
+        res.render('login.html', generateParams(req));
+    } else {
+        res.redirect('/profile');
     }
 }
 
@@ -96,12 +125,14 @@ var witken = function(req, res) {
 }
 
 exports.init = init;
+
+exports.signup = signup;
 exports.login = login;
-exports.profile = profile;
-exports.prof_data = prof_data;
 exports.logout = logout;
 exports.index = index;
 exports.label = label;
 exports.examen = examen;
 exports.witken = witken;
-exports.online_test = online_test;
+
+exports.profile = profile;
+exports.api = api;

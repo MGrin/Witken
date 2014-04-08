@@ -11,7 +11,6 @@ exports.init = function(_user, _utils) {
 
     passport.use(new LocalStrategy(
         function(username, password, done) {
-            //console.log('Using Passport local strategy with credentials: ' + username + '/' + password);
             user.User.findOne({
                 email: username
             }, function(err, user) {
@@ -19,12 +18,10 @@ exports.init = function(_user, _utils) {
                     return done(err);
                 }
                 if (!user) {
-                    var err = utils.generateInputError('email', 'Incorrect username.');
-                    return done(null, false, err);
+                    return done(null, false, new utils.ClientError('email', 'Incorrect username.'));
                 }
                 if (!user.validPassword(password)) {
-                    var err = utils.generateInputError('pass', 'Incorrect password.');
-                    return done(null, false, err);
+                    return done(null, false, new utils.ClientError('password', 'Incorrect password.'));
                 }
                 return done(null, user);
             });
@@ -47,19 +44,15 @@ exports.init = function(_user, _utils) {
 
 exports.authenticate = function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
-        var data = new Object();
         if (err) {
-            data.err = utils.generateInputError('general', err);
-            return res.send(data);
+            return res.send(new utils.ClientError('general', err));
         }
         if (!user) {
-            data.err = info;
-            return res.send(data);
+            return res.send(new utils.ServerError(info));
         }
         req.logIn(user, function(err) {
             if (err) {
-                data.err = utils.generateInputError('general', err);
-                return res.send(data);
+                return res.send(new utils.ClientError('general', err));
             }
             data.redirect = {
                 path: '/profile'
@@ -81,16 +74,12 @@ exports.signup = function(req, res) {
             });
         }
         if (us) {
-            return res.send({
-                err: utils.generateInputError('email', 'User ' + ureq.body.user.email + ' already exists')
-            });
+            return res.send(new utils.ClientError('email', 'User ' + ureq.body.user.email + ' already exists'));
         }
 
         user.create(data, function(err, us){
             if(err){
-                return res.send({
-                    err: utils.generateDatabaseError('User', err)
-                });
+                return res.send(new utils.DatabaseError('User', err));
             }
             req.user = us;
             req.login();

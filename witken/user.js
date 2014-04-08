@@ -69,21 +69,29 @@ var userSchema = mongoose.Schema({
 });
 
 userSchema.methods.validPassword = function(p) {
+    //TODO is called on each login, so we can check for the online test date
     var selled_hash = userTools.generateHashedPassword(this, p);
     return selled_hash === this.password;
 }
 
 userSchema.methods.startOnlineTest = function () {
-    if (this.online_test) {
+    if (this.online_test && !this.online_test.done ) {
         //TODO Test was already started, need to restart??
     } else {
         // Test is starting for the first time
         //TODO
         this.online_test = {
-            start_date: new Date()
+            start_date: new Date(),
+            done: false
         }
         this.save();
     }
+}
+
+userSchema.methods.stopOnlineTest = function (testData) {
+    if(!testData) throw new Exception('BAD THING');
+    this.online_test.done = true;
+    //TODO send data to CentralTest
 }
 
 userSchema.methods.generatePublicObject = function() {
@@ -100,7 +108,7 @@ var checkParams = function (data, cb) {
             data.gender && data.birth_date && data.home_phone &&
             data.cellphone && data.home_address && data.home_postal_code &&
             data.home_country && home_city && data.job_title && data.work_address)){
-        return cb(utils.generateInputError('general', 'Blablabla, fill all the stuff!!'));
+        return cb(new utils.InputError('general', 'Please, fill all required fields.'));
     }
 
     return cb();
