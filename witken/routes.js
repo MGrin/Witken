@@ -104,4 +104,4 @@ exports.index = index;
 exports.label = label;
 exports.examen = examen;
 exports.witken = witken;
-exports.online_test;
+exports.online_test = online_test;
