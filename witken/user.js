@@ -55,18 +55,35 @@ var userSchema = mongoose.Schema({
         cell_phone: String,
         home_address: String,
         home_postal_code: String,
-        home_country_code: String,
+        home_country: String,
         home_city: String,
     },
     job: {
         job_title: String,
         work_address: String
+    },
+    online_test: {
+        type: Object,
+        default: undefined
     }
 });
 
 userSchema.methods.validPassword = function(p) {
     var selled_hash = userTools.generateHashedPassword(this, p);
     return selled_hash === this.password;
+}
+
+userSchema.methods.startOnlineTest = function () {
+    if (this.online_test) {
+        //TODO Test was already started, need to restart??
+    } else {
+        // Test is starting for the first time
+        //TODO
+        this.online_test = {
+            start_date: new Date()
+        }
+        this.save();
+    }
 }
 
 userSchema.methods.generatePublicObject = function() {
@@ -99,9 +116,23 @@ var create = function(data, callback){
                 prefix: data.prefix,
                 first_name: data.first_name,
                 last_name: data.last_name,
-
+                gender: data.gender,
+                birth_date: data.birth_date
+            },
+            contanct: {
+                home_phone: data.home_phone,
+                cell_phone: data.cell_phone,
+                home_address: data.home_address,
+                home_postal_code: data.home_postal_code,
+                home_country: data.home_country,
+                home_city: data.home_city,
+            },
+            job: {
+                job_title: data.job_title,
+                work_address: data.work_address
             }
         });
+
         u.save(function(err){
             if(err) return callback(utils.databaseError('User',err));
             //TODO

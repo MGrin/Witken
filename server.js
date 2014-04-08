@@ -79,13 +79,18 @@ app.get('/', routes.index);
 app.get('/label', routes.label);
 app.get('/examen', routes.examen);
 app.get('/witken', routes.witken);
+
+app.post('/signup', auth.signup);
+app.get('/online_test', routes.online_test);
+
 app.get('/login', routes.login);
 app.get('/order_confirm', examen.confirm_order);
 app.get('/profile', routes.profile);
 app.get('/profile/prof_data', routes.prof_data);
 app.get('/logout', routes.logout);
+
 app.post('/auth', auth.authenticate);
-app.post('/signup', auth.signup);
+
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {

@@ -92,7 +92,9 @@ exports.signup = function(req, res) {
                     err: utils.generateDatabaseError('User', err)
                 });
             }
-            return res.redirect('/login');
+            req.user = us;
+            req.login();
+            return res.redirect('/online_test');
         });
 
     });

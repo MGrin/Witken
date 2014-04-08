@@ -35,6 +35,15 @@ var init = function(_eventbrite, _examen, _utils, _user, _email, _invitations) {
     invitations = _invitations;
 }
 
+var online_test = function (req, res) {
+    if(req.user){
+        req.user.startOnlineTest();
+        res.render('online_test.html', generateParams(req));
+    }else{
+        res.redirect('/login');
+    }
+}
+
 var login = function(req, res) {
     res.render('login.html', generateParams(req));
 }
@@ -95,3 +104,4 @@ exports.index = index;
 exports.label = label;
 exports.examen = examen;
 exports.witken = witken;
+exports.online_test;
