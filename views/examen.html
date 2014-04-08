@@ -28,18 +28,20 @@
 						<br />
 						<p class="multilang col-lg-6 col-lg-offset-6 col-md-6 col-sm-offset-6 col-sm-6 col-lsmoffset-6 col-xs-12" text="examen_description"></p>
 					</div>
+					{{if(user!='None'){ }}
 					<div class="card row">
-						{{if(user!='None'){ }}
 						{{- include examen/inscription.html }}
-						{{ } }}
 					</div>
+					{{ } }}
 				</div>
 			</div>
 		</div>
 		{{- include footer.html }}
 	</body>
 	<script>
+		{{if(user!='None'){ }}
 		var events = {{-JSON.stringify(events)}};
+
 		var onDataLoaded = function () {
 			$('#locations').html('');
 			$('#dates').html('');
@@ -186,6 +188,7 @@
 		var hideBtn = function () {
 			$('#proceed-btn').addClass('hide');
 		}
+		{{ } }}
 	</script>
 	{{- include scripts.html}}
 </html>
