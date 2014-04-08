@@ -26,11 +26,11 @@
         color-stop(0, #F04646),
         color-stop(1, #D02323)
     );
-    background-image: -o-linear-gradient(left, #F04646 0%, #D02323 100%);
-    background-image: -moz-linear-gradient(left, #F04646 0%, #D02323 100%);
-    background-image: -webkit-linear-gradient(left, #F04646 0%, #D02323 100%);
-    background-image: -ms-linear-gradient(left, #F04646 0%, #D02323 100%);
-    background-image: linear-gradient(to left, #F04646 0%, #D02323 100%);
+    background-image: -o-linear-gradient(top, rgb(208, 35, 35) 0%, rgb(240, 70, 70) 100%);
+    background-image: -moz-linear-gradient(top, rgb(208, 35, 35) 0%, rgb(240, 70, 70) 100%);
+    background-image: -webkit-linear-gradient(top, rgb(208, 35, 35) 0%, rgb(240, 70, 70) 100%);
+    background-image: -ms-linear-gradient(top, rgb(208, 35, 35) 0%, rgb(240, 70, 70) 100%);
+    background-image: linear-gradient(to top, rgb(208, 35, 35) 0%, rgb(240, 70, 70) 100%);
 }
 
 .yellow_bg {

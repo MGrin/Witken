@@ -5,6 +5,7 @@ body {
 }
 small {
     line-height: 15px;
+    font-size: 90%;
 }
 h1 {
     font-family: HelveticaNeueThin;
