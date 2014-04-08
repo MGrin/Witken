@@ -2,7 +2,6 @@ html,
 body {
     letter-spacing: 1px;
     height: 100%;
-    overflow-x: hidden;
 }
 small {
     line-height: 15px;
