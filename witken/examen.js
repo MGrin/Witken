@@ -20,9 +20,7 @@ var init = function(_eventbrite, _utils, _user, _db, error_callback, success_cal
     mongoose.connect(examen_db);
     var db = mongoose.connection;
 
-    db.on('error', function() {
-        return error_callback('Failed to connect to Examen DB');
-    });
+    db.on('error', error_callback);
     db.once('open', success_callback);
 
 }
@@ -81,23 +79,6 @@ examenSchema.methods.addAttendee = function(attendee, callback) {
         ex.save();
         return callback(null, this);
     });
-}
-examenSchema.methods.generateShortObject = function() {
-    return {
-        date: this.date,
-        venue: this.venue,
-        url: this.url,
-        tickets: this.tickets,
-        eb_id: this.eb_id
-    };
-}
-
-examenSchema.methods.addSuperviser = function(superviser, callback) {
-    if (this.supervisors.indexOf(superviser) === -1) {
-        this.supervisors.push(superviser);
-        this.save();
-    }
-    return callback();
 }
 
 var Examen = mongoose.model('Examen', examenSchema, 'examens');
@@ -189,8 +170,13 @@ var getExamenFromEventbrite = function(eb_exam, callback) {
     });
 }
 
+var confirm_order = function (req, res) {
+
+}
+
 exports.init = init;
 exports.updateExamensList = updateExamensList;
 exports.getValidExamensList = getValidExamensList;
 exports.Examen = Examen;
 exports.getExamenFromEventbrite = getExamenFromEventbrite;
+exports.confirm_order = confirm_order;

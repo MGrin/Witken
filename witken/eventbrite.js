@@ -91,24 +91,26 @@ var confirmOrder = function(eventID, orderID, callback) {
                 return callback(utils.generateServerError('fatal', 'No order found, please contact us'));
             }
 
-            user.getUserFromEventbrite(eb_user, function(err, us) {
-                if (err) {
-                    return callback(err);
-                }
-                examen.getExamenFromEventbrite(eb_examen, function(err, ex) {
-                    if (err) {
-                        return callback(err);
-                    }
-                    us.addExamen(ex.generateShortObject());
-                    ex.addAttendee(us, function(err, exam) {
-                        if (err) {
-                            return callback(err);
-                        } else {
-                            return callback(null, us);
-                        }
-                    });
-                });
-            });
+            //TODO
+            throw new Exception('Failed');
+            // user.getUserFromEventbrite(eb_user, function(err, us) {
+            //     if (err) {
+            //         return callback(err);
+            //     }
+            //     examen.getExamenFromEventbrite(eb_examen, function(err, ex) {
+            //         if (err) {
+            //             return callback(err);
+            //         }
+            //         us.addExamen(ex.generateShortObject());
+            //         ex.addAttendee(us, function(err, exam) {
+            //             if (err) {
+            //                 return callback(err);
+            //             } else {
+            //                 return callback(null, us);
+            //             }
+            //         });
+            //     });
+            // });
         });
     });
 }

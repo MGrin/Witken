@@ -72,7 +72,6 @@ exports.authenticate = function(req, res, next) {
 exports.signup = function(req, res) {
     var data = req.body.user_data;
 
-    // TODO:  change to new way of registration
     user.User.findOne({
         email: data.email
     }, function(err, us) {
