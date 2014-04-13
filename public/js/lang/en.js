@@ -27,7 +27,7 @@ var general = {
     general_registration: "Votre profil",
     general_logout: "Logout",
     general_label: "Label",
-    general_examen: "Examen",
+    general_emploi: "Emploi",
     general_indexation: "Indexation",
     general_witken: "Witken",
     general_language_switch: "English",
@@ -36,12 +36,12 @@ var general = {
 
 var header = {
     header_label_description_text: "description",
-    header_label_reconnaissance_text: "reconnaissance",
-    header_examen_text: "inscription, <br/>date, lieu & prix",
+    header_label_examen_text: "examen",
+    header_emploi_text: "découvrez vous<br/>démarquez vous",
     header_indexation_comment_text: "comment",
     header_indexation_pour_qui_text: "pour qui",
-    header_witken_nous_text: "nous",
-    header_witken_partenaires_text: "nos partenaires"
+    header_witken_nous_text: "à propos",
+    header_witken_partenaires_text: "contactez-nous"
 };
 
 var footer = {

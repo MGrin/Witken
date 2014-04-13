@@ -8,6 +8,12 @@ $(document).ready(function(){
         preload: 'visible'
     });
 
+    var full_height = '150px',
+        small_height = '75px',
+        animation_time = 500;
+
+    $('.header').data('size','full');
+
     $('.stop').click(function () {
         demo1.stopAuto();
     });
@@ -41,6 +47,7 @@ $(document).ready(function(){
         location.href = '/label' + '?lang=' + current_lang;
     });
 
+    $('.header').css('left', 163);
     $('.menu_item').width(1100 / 8);
     $('.menu_item').first().width(235);
     $('.index_footer').children(".link").css({
@@ -59,4 +66,42 @@ $(document).ready(function(){
         var new_height = $(window).height() - $('footer').height();
         $('.body_wrapper').height((new_height <= min_height) ? min_height : new_height);
     }
+
+    $(window).scroll(function(){
+        if($(document).scrollTop() > 0)
+        {
+            console.log("NA");
+            if($('.header').data('size') == 'full')
+            {
+                $('.header').data('size','small');
+                $('.header, .index_header').css('position', 'fixed');
+                $('.header').stop().animate({
+                    height : small_height
+                },animation_time);
+                $('.menu_item').stop().animate({
+                    "padding-top" : "3px",
+                    "height" : small_height
+                }, animation_time);
+                $('.index_header, .logo').stop().animate({'height' : small_height}, animation_time);
+                $('.menu_item small').css('display', 'none');
+            }
+        }
+        else
+        {
+            if($('.header').data('size') == 'small')
+            {
+                $('.header').data('size','full');
+                $('.header, .index_header').css('position', 'static');
+                $('.header').stop().animate({
+                    height : full_height
+                },animation_time);
+                $('.menu_item').stop().animate({
+                    "padding-top" : "45px",
+                    "height" : full_height
+                }, animation_time);
+                $('.index_header, .logo').stop().animate({'height' : full_height}, animation_time);
+                $('.menu_item small').css('display', 'block');
+            }
+        }
+    });
 })
