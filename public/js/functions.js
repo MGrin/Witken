@@ -68,7 +68,7 @@ $(document).ready(function(){
     }
 
     $(window).scroll(function(){
-        if($(document).scrollTop() > 0)
+        if($(document).scrollTop() > 0 && $(window).width() > 880)
         {
             console.log("NA");
             if($('.header').data('size') == 'full')
