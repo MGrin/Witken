@@ -67,6 +67,17 @@ $(document).ready(function(){
         $('.body_wrapper').height((new_height <= min_height) ? min_height : new_height);
     }
 
+    $( window ).resize(function() {
+
+        if($(window).width() <= 1100){
+
+            $('.header').css('left', 0);
+        }else{
+            
+            $('.header').css('left', 163);
+        }
+    });
+
     $(window).scroll(function(){
         if($(document).scrollTop() > 0 && $(window).width() > 880)
         {
