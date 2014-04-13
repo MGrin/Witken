@@ -158,3 +158,25 @@ footer table{
     width: 1100px;
     margin: 0 auto;
 }
+
+.card_text_left, .card_text_right{
+    position: relative;
+    width: 50%;
+}
+
+.card_text_left{
+    left: 15px;
+    float: left;
+}
+
+.card_text_right{
+    right: 15px;
+    float: right;
+}
+
+.card_image_left{
+    position: relative;
+    left: 9%;
+    top: 29%;
+    float: left;
+}

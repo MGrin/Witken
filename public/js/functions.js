@@ -10,7 +10,7 @@ $(document).ready(function(){
 
     var full_height = '150px',
         small_height = '75px',
-        animation_time = 500,
+        animation_time = 300,
         min_window_width = 1100;
 
     $('.header').data('size','full');
@@ -68,8 +68,9 @@ $(document).ready(function(){
         $('.body_wrapper').height((new_height <= min_height) ? min_height : new_height);
     }
 
+    console.log($('.body_wrapper').height());
     $(window).scroll(function(){
-        if($(document).scrollTop() > 0 && $(window).width() > min_window_width)
+        if($(document).scrollTop() > 0 && $(window).width() > min_window_width && $('.body_wrapper').height() > 720)
         {
             if($('.header').data('size') == 'full')
             {
