@@ -146,3 +146,15 @@ footer table{
 .clear{
     clear: both;
 }
+
+.clear_relative{
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.card-wrapper{
+    width: 1100px;
+    margin: 0 auto;
+}
