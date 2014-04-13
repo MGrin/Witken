@@ -10,7 +10,8 @@ $(document).ready(function(){
 
     var full_height = '150px',
         small_height = '75px',
-        animation_time = 500;
+        animation_time = 500,
+        min_window_width = 1100;
 
     $('.header').data('size','full');
 
@@ -69,17 +70,17 @@ $(document).ready(function(){
 
     $( window ).resize(function() {
 
-        if($(window).width() <= 1100){
+        if($(window).width() <= min_window_width){
 
             $('.header').css('left', 0);
         }else{
-            
+
             $('.header').css('left', 163);
         }
     });
 
     $(window).scroll(function(){
-        if($(document).scrollTop() > 0 && $(window).width() > 880)
+        if($(document).scrollTop() > 0 && $(window).width() > min_window_width)
         {
             console.log("NA");
             if($('.header').data('size') == 'full')
