@@ -27,7 +27,7 @@ var getEventsList = function(callback) {
         id: parseInt(ORGANIZATION_ID)
     }, function(err, data) {
         if (err) {
-            return callback(utils.generateDatabaseError('Eventbrite', err));
+            return callback(new utils.DatabaseError('Eventbrite', err));
         }
         var events = [];
 
@@ -52,7 +52,7 @@ var getAttendeesList = function(eventID, callback) {
         id: parseInt(eventID)
     }, function(err, data) {
         if (err) {
-            return callback(utils.generateDatabaseError('Eventbrite', err));
+            return callback(new utils.DatabaseError('Eventbrite', err));
         }
         var attendees = data.attendees;
         var res = [];
@@ -71,10 +71,10 @@ var confirmOrder = function(eventID, orderID, callback) {
 
     getEvent(eventID, function(err, event) {
         if (err) {
-            return callback(utils.generateDatabaseError('Eventbrite', err));
+            return callback(new utils.DatabaseError('Eventbrite', err));
         }
         if (!event) {
-            return callback(utils.generateServerError('fatal', 'No event found, please contact us'));
+            return callback(new utils.ServerError('No event found, please contact us'));
         }
         eb_examen = event;
         getAttendeesList(eventID, function(err, attendees) {
@@ -88,7 +88,7 @@ var confirmOrder = function(eventID, orderID, callback) {
                 }
             }
             if (!eb_user) {
-                return callback(utils.generateServerError('fatal', 'No order found, please contact us'));
+                return callback(new utils.ServerError('No order found, please contact us'));
             }
 
             //TODO

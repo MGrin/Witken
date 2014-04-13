@@ -13,6 +13,8 @@
                             <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
                             <p class="link js_redirect_logout pull-right">logout</p>
                             <br />
+                            <!-- TODO -->
+                        	<!-- Show this div only if user already did online test and was enregistered for examen -->
                             {{if(user.examen){ }}
                             <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_1"></span>
                             <span>{{=user.examen.date.toLocaleDateString()}}</span>
@@ -30,11 +32,19 @@
                                 <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_horaires_detaile">
                                 </div>
                             </div>
+                            <!--  -->
                             {{ }else{ }}
+                            <!-- TODO -->
+                            <!-- Create a cool div for someone who already passed exam -->
                             <div class="alert alert-danger">
                                 <p>You have already passed the exam!</p>
                             </div>
+                            <!--  -->
                             {{ } }}
+                        	<!-- TODO  -->
+                        	<!-- Create a div for a situation where user passed an online test but was not enregistered for the real exam-->
+
+                        	<!--  -->
                         </div>
                         <div id="profile-label_and_certificats" class="profile-content hide">
                             <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
@@ -125,6 +135,8 @@
         </div>
 		{{- include footer.html }}
 	</body>
+	<!-- TODO -->
+	<!-- Probably put this fucking shit in an external file? =( -->
 	<script>
 		var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 

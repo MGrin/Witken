@@ -1,105 +1,28 @@
-var sources = ['Input', 'Database', 'Server', 'Route', 'Unknown'];
-var levels = ['fatal', 'warning', 'info'];
-var fields = ['email', 'pass', 'general'];
-var databases = ['User', 'Eventbrite', 'Label', 'Invitation', 'Unknown'];
-var routes = ['Order confirmation', 'Unknown'];
+var ClientError = function (field, message) {
+    this.content = 'Error';
+    this._type = 'client';
+    this.field = field;
+    this.message = message;
 
-/*
-    {
-        source: 
-        level:
-        id:
-        error_message:
-    }
-*/
-
-exports.generateInputError = function(field, message) {
-    if (fields.indexOf(field) === -1) {
-        field = 'general';
-    }
-
-    return {
-        err: {
-            source: 'Input',
-            field: field,
-            id: fields.indexOf(field),
-            level: 'Warning',
-            error_message: message
-        }
-    };
+    console.log('Client error in '+field+' field: '+message);
 }
 
-exports.generateDatabaseError = function(database, message) {
-    if (databases.indexOf(database) === -1) {
-        database = 'Unknown';
-    }
+var ServerError = function (message) {
+    this.content = 'Error';
+    this._type = 'server';
+    this.message = message;
 
-    return {
-        source: 'Database',
-        database: database,
-        id: (databases.indexOf(database) + 1) * 10,
-        level: 'Fatal',
-        error_message: message
-    };
+    console.log('Server error: '+message);
 }
 
-exports.generateServerError = function(level, message) {
-    if (levels.indexOf(level) === -1) {
-        level = 'warning';
-    }
-
-    return {
-        err: {
-            source: 'Server',
-            id: (levels.indexOf(level) + 1) * 20,
-            level: level,
-            error_message: message
-        }
-    };
+var DatabaseError = function (database, error) {
+    this.content = 'Error';
+    this._type = 'database';
+    this.database = database;
+    this.error = error;
+    console.log('Database error in '+database+': '+error);
 }
 
-exports.generateRoutingError = function(route, level, message) {
-    if (routes.indexOf(route) === -1) {
-        route = 'Unknown';
-    }
-
-    if (levels.indexOf(level) === -1) {
-        level = 'warning';
-    }
-
-    return {
-        err: {
-            source: 'Route',
-            id: (routes.indexOf(route) * levels.indexOf(level) + 1) * 30,
-            route: route,
-            level: level,
-            error_message: message
-        }
-    };
-}
-
-exports.generateNotImplementedYetError = function(source, function_name) {
-    return {
-        err: {
-            source: source,
-            id: 500,
-            level: 'fatal',
-            error_message: ''
-        }
-    }
-}
-
-exports.generateHackingError = function(source, message) {
-    return {
-        err: {
-            source: source,
-            id: 666,
-            level: 'fatal',
-            error_message: message
-        }
-    };
-}
-
-exports.generateConfirmationLink = function(eID, oID) {
-    return 'http://intense-mesa-2057.herokuapp.com/order_confirm?eid=' + eID + '&oid=' + oID;
-}
+exports.ClientError = ClientError;
+exports.ServerError = ServerError;
+exports.DatabaseError = DatabaseError;

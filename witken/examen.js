@@ -57,7 +57,7 @@ examenSchema.methods.addAttendee = function(attendee, callback) {
             return callback(err);
         }
         if (!us) {
-            return callback(utils.generateServerError('warning', 'No user found!'));
+            return callback(new utils.ServerError('No user found!'));
         }
         if (!ex.attendees) {
             ex.attendees = [];
@@ -104,7 +104,7 @@ var getValidExamensList = function(callback) {
         }
     }, function(err, exs) {
         if (err) {
-            return callback(utils.generateDatabaseError('Examen', err));
+            return callback(new utils.DatabaseError('Examen', err));
         }
         return callback(null, exs);
     })
@@ -115,7 +115,7 @@ var getExamenFromEventbrite = function(eb_exam, callback) {
         eb_id: eb_exam.id
     }, function(err, ex) {
         if (err) {
-            return callback(utils.generateDatabaseError('Examen', err));
+            return callback(new utils.DatabaseError('Examen', err));
         }
 
         if (!ex) {
@@ -143,10 +143,10 @@ var getExamenFromEventbrite = function(eb_exam, callback) {
                 };
                 user.User.find(query, function(err, uss) {
                     if (err) {
-                        return callback(utils.generateDatabaseError('User', err));
+                        return callback(new utils.DatabaseError('User', err));
                     }
                     if (!uss) {
-                        return callback(utils.generateDatabaseError('User', 'No users found'));
+                        return callback(new utils.DatabaseError('User', 'No users found'));
                     }
                     var attendeeList = [];
                     for (var i = 0; i < uss.length; i++) {

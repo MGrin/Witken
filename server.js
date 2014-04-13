@@ -75,21 +75,25 @@ app.configure(function() {
     app.set('views', __dirname + '/views');
 });
 
+app.post('/auth', auth.authenticate);
+app.get('/signup', routes.signup);
+app.post('/signup', auth.signup);
+app.get('/login', routes.login);
+app.get('/logout', routes.logout);
+
 app.get('/', routes.index);
 app.get('/label', routes.label);
 app.get('/examen', routes.examen);
 app.get('/witken', routes.witken);
 
-app.post('/signup', auth.signup);
-app.get('/online_test', routes.online_test);
+app.get('/online_test', routes.profile.online_test);
+app.post('/online_test', routes.api.online_test);
 
-app.get('/login', routes.login);
+
+app.get('/profile', routes.profile.index);
+app.get('/profile/prof_data', routes.profile.prof_data);
+
 app.get('/order_confirm', examen.confirm_order);
-app.get('/profile', routes.profile);
-app.get('/profile/prof_data', routes.prof_data);
-app.get('/logout', routes.logout);
-
-app.post('/auth', auth.authenticate);
 
 
 var port = process.env.PORT || 5000;
