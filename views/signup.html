@@ -1,26 +1,54 @@
 <html>
 <head>
     {{- include head.html}}
-    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/signup.css" />
 </head>
 <body>
 <div class="body_wrapper">
     {{- include header.html}}
     <div id="central">
         <div class="card grey_dark_bg card-wrapper">
-            <div class="" id="login_form">
-                <h1>Login</h1>
-                <div class="form-group" id="email_sign_in">
-                    <label>Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email">
-                    <span class="help-block" id="email_error_div"></span>
-                </div>
-                <div class="form-group" id="password_sign_in">
-                    <label>Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
-                    <span class="help-block" id="password_error_div"></span>
-                </div>
-                <button class="btn btn-default" id="login_submit_btn">Submit</button>
+            <div class="" id="signup_form">
+                <h1>S'inscrire</h1>
+                <form action="" id="register_form">
+                    <fieldset>
+                        <label>Title</label>
+                        <input class="form-control" name="title" placeholder="RadioButton...">
+                        <label text="signup_name">Name</label>
+                        <input class="form-control" name="name" placeholder="Name...">
+                        <label>Surname</label>
+                        <input type="text" class="form-control" name="surname" placeholder="Surname...">
+                        <label>Birthday</label>
+                        <input type="text" class="form-control" name="birtday" placeholder="Birthday...">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" placeholder="Email..">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password...">
+                        <label>Repeat Password</label>
+                        <input type="password" class="form-control" name="repeat" placeholder="Password..">
+                    </fieldset>
+                    <fieldset>
+                        <label>Home Address</label>
+                        <input class="form-control" name="h_address" placeholder="Home Address...">
+                        <label>Home ZIP Code</label>
+                        <input class="form-control" name="h_zip" placeholder="Home ZIP Code...">
+                        <label>City</label>
+                        <input type="text" class="form-control" name="city" placeholder="City...">
+                        <label>Country</label>
+                        <input type="text" class="form-control" name="country" placeholder="Country...">
+                        <label>Home Phone</label>
+                        <input type="text" class="form-control" name="h_phone" placeholder="Home Phone..">
+                        <label>Cell Phone</label>
+                        <input type="text" class="form-control" name="c_phone" placeholder="Cell Phone...">
+                    </fieldset>
+                    <fieldset>
+                        <label>Job Title</label>
+                        <input type="text" class="form-control" name="j_title" placeholder="Job Title...">
+                        <label>Job Address</label>
+                        <input type="text" class="form-control" name="j_address" placeholder="Job Address">
+                    </fieldset>
+                        <input type="submit" class="btn btn-default" value="S'inscrire">
+                </form>
                 {{if (err !== 'None') { }}
                 {{=err.message}};
                 {{ } }}
@@ -35,8 +63,8 @@
     var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
     var onDataLoaded = function () {
-        $('#login_submit_btn').click(login);
-        $('#central').css('bottom', 0);
+        //$('#login_submit_btn').click(login);
+        register();
     }
     var login = function () {
         var testInputData = function (email, passwd) {
@@ -77,14 +105,14 @@
             }
         } else {
             pwd = CryptoJS.SHA1(pwd).toString();
-            $('#login_form').block({
+            $('#register_form').block({
                 message: "Loading..."
             });
             $.post('/auth', {
                 username: email,
                 password: pwd
             }, function (data) {
-                $('#login_form').unblock();
+                $('#register_form').unblock();
                 if (data.err) {
                     if (data.err.field === 'email') {
                         showEmailError(data.err.error_message);
@@ -98,6 +126,25 @@
                 }
             });
         }
+    }
+
+    var register = function(){
+        $("#register_form").submit(function(e) {
+            e.preventDefault();
+
+            var $form = $(this);
+
+            //TO DO Email Check, Password Check, SHA Password
+
+            $.post('/signup', $(this).serialize(), function (data) {
+                $('#register_form').unblock();
+                if (data.err) {
+                    //TO DO
+                } else if (data.redirect) {
+                    //TO DO
+                }
+            });
+        });
     }
 </script>
 {{- include scripts.html}}

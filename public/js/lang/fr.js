@@ -3,16 +3,12 @@ function getTextForId(text) {
     switch (spl[0]) {
         case 'general':
             return general[text];
-            break;
         case 'header':
             return header[text];
-            break;
         case 'footer':
             return footer[text];
-            break;
         case 'index':
             return index[text];
-            break;
         case 'label':
             return label[text];
         case 'examen':
@@ -22,6 +18,8 @@ function getTextForId(text) {
         case 'prof':
             return prof_data[text];
         case 'login':
+            return login[text];
+        case 'signup':
             return login[text];
         default:
             return "No text";
@@ -128,4 +126,23 @@ var login = {
     login_password: "S'identifier",
     login_register: "S'inscrire sur Witken",
     login_forgotten: "Mot de passe oublié?"
+}
+
+var signup = {
+    signup_title:"S'inscrire",
+    signup_name: "Prenom",
+    signup_surname: "Nom",
+    signup_person_title: "Titre",
+    signup_email: "Email",
+    signup_password: "Mot de passe",
+    signup_gender: "Sexe",
+    signup_birtday: "Naissance",
+    signup_contact_home_phone: "Téléphone Maison",
+    signup_contact_cell_phone: "Téléphone Natel",
+    signup_contact_home_address: "Adresse du domicile",
+    signup_contact_home_postal_code: "Code postal du domicile",
+    signup_contact_home_country: "Pays d'origine",
+    signup_contact_home_city: "Ville natale",
+    signup_job_title: "Titre d'emploi",
+    signup_work_address: "Adresse de travail"
 }

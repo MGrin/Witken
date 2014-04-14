@@ -1,0 +1,23 @@
+#signup_form{
+    position: relative;
+    left: 40px;
+    margin-bottom: 50px;
+}
+
+#register_form fieldset{
+    position: relative;
+    left: 5%;
+    width: 50%;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+#register_form input[type=submit]{
+    position: relative;
+    left: 5%;
+}
+
+#register_form fieldset label{
+    margin: 7px 0 2px 1px;
+}

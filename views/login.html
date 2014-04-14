@@ -41,7 +41,6 @@
 		var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
 		var onDataLoaded = function () {
 			$('#login_submit_btn').click(login);
-			$('#central').css('bottom', 0);
 		}
 		var login = function () {
 			var testInputData = function (email, passwd) {

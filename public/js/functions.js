@@ -68,7 +68,6 @@ $(document).ready(function(){
         $('.body_wrapper').height((new_height <= min_height) ? min_height : new_height);
     }
 
-    console.log($('.body_wrapper').height());
     $(window).scroll(function(){
         if($(document).scrollTop() > 0 && $(window).width() > min_window_width && $('.body_wrapper').height() > 720)
         {
