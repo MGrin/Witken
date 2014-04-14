@@ -9,21 +9,26 @@
                 <div id="central">
                     <div class="card grey_dark_bg card-wrapper">
                         <div class="" id="login_form">
-                            <h1>Login</h1>
+                            <h1>Authentification</h1>
                             <div class="form-group" id="email_sign_in">
                                 <label>Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                <input type="email" class="form-control" id="email" placeholder="Email" />
                                 <span class="help-block" id="email_error_div"></span>
                             </div>
                             <div class="form-group" id="password_sign_in">
                                 <label>Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <div class="inline">
+                                    <input type="password" class="form-control" id="password" placeholder="Password" />
+                                    <p text="login_forgotten" class="multilang link js_redirect_forgotten"></p>
+                                </div>
                                 <span class="help-block" id="password_error_div"></span>
                             </div>
-                            <button class="btn btn-default" id="login_submit_btn">Submit</button>
+                            <span><button text="login_submit" class="btn btn-default" id="login_submit_btn">S'identifier
+                                </button></span>
                             {{if (err !== 'None') { }}
                                 {{=err.message}};
                             {{ } }}
+                            <span><p text="login_register" class="multilang link js_redirect_signup"></p></span>
                         </div>
                     </div>
                 </div>

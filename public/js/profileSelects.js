@@ -215,7 +215,7 @@ var selects_fr = {
 		"IBM Lotus Notes",
 		"Google Chrome",
 		"Autodesk AutoCad",
-		"Maya ",
+		"Maya",
 		"3D Max",
 		"Dassault Catia"
 	],

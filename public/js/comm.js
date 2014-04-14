@@ -7,7 +7,8 @@ function setupOnClickEvents() {
         '.js_redirect_examen' : '/examen',
         '.js_redirect_witken' : '/witken',
         '.js_redirect_login' : '/login',
-        '.js_redirect_profile' : '/profile'
+        '.js_redirect_profile' : '/profile',
+        '.js_redirect_signup' : '/signup'
 
     }
 

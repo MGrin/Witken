@@ -21,6 +21,8 @@ function getTextForId(text) {
             return profile[text];
         case 'prof':
             return prof_data[text];
+        case 'login':
+            return login[text];
         default:
             return "No text";
     }
@@ -118,4 +120,12 @@ var label = {
 var examen = {
     examen_description: "Erroribus elaboraret delicatissimi pri ne, ut accumsan mnesarchum vel. Choro euripidis eu eam. Per meliore accusam phaedrum te, mel ex affert rationibus constituto. Ad primis option pro, epicurei appareat cu pri. Vis omnes splendide signiferumque eu, vide euripidis te sea. Natum civibus est eu, exerci denique ad qui, eu vim eros senserit. No purto graece nec, iudico tollit quo ut, agam porro mea cu. Has no oratio tantas. Laudem placerat vim ex. Mel an commune detraxit neglegentur. Veritus docendi denique ea quo.",
     examen_inscription_title: "Inscription"
+}
+
+var login = {
+    login_submit: "S'identifier",
+    login_email: "S'identifier",
+    login_password: "S'identifier",
+    login_register: "S'inscrire sur Witken",
+    login_forgotten: "Mot de passe oublié?"
 }

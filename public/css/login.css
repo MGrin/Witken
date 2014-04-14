@@ -1,5 +1,47 @@
 #login_form{
-    width: 50%;
-    margin: 0 auto;
+    position: relative;
+    left: 40px;
     margin-bottom: 50px;
+}
+
+#login_form > div, #login_form > button, #login_form > span{
+    position: inherit;
+    left: 10%;
+}
+
+#login_form > button{
+}
+
+#login_form label{
+    display: block;
+}
+
+#login_form input{
+    width: 30%;
+}
+
+.inline{
+    overflow: hidden;
+    width: 100%;
+}
+
+#login_form div div input{
+    float: left;
+}
+
+#password_sign_in > div > p{
+    position: relative;
+    margin-top: 7px;
+    float: right;
+    right: 54%;
+}
+
+#login_form > span{
+    display: inline-block;
+}
+
+#login_form span p{
+    position: inherit;
+    top: 0.1em;
+    left: 2em;
 }
