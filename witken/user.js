@@ -103,11 +103,9 @@ var User = mongoose.model('User', userSchema, 'users');
 
 var checkParams = function (data, cb) {
 
-    if(!(data.email && data.password &&
+    if(!data || !(data.email && data.password &&
             data.prefix && data.first_name && data.last_name &&
-            data.gender && data.birth_date && data.home_phone &&
-            data.cellphone && data.home_address && data.home_postal_code &&
-            data.home_country && home_city && data.job_title && data.work_address)){
+            data.job_title && data.work_address)){
         return cb(new utils.InputError('general', 'Please, fill all required fields.'));
     }
 
@@ -152,3 +150,4 @@ var create = function(data, callback){
 
 exports.User = User;
 exports.create = create;
+exports.userTools = userTools;
