@@ -141,7 +141,7 @@ var create = function(data, callback){
 
         u.save(function(err){
             if(err) return callback(utils.databaseError('User',err));
-            //TODO
+            //TO DO
             //send email
             callback(null, u);
         });

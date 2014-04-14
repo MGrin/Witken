@@ -26,6 +26,11 @@ var getSelectListFor = function(elem){
 	}
 }
 
+function selectArray(key){
+
+    return selects_fr[key];
+}
+
 var selects_fr = {
 	'.js-select-sector': [
 		"Administration publique",
