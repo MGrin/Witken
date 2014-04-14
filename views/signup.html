@@ -12,37 +12,37 @@
                 <h1>S'inscrire</h1>
                 <form action="" id="register_form">
                     <fieldset>
-                        <label class="multilang" text="signup_email"></label>
-                        <input type="email" class="form-control" name="email">
-                        <label class="multilang" text="signup_password"></label>
-                        <input type="password" class="form-control" name="password">
-                        <label class="multilang" text="signup_password_repeat"></label>
-                        <input type="password" class="form-control" name="repeat_pass">
+                        <label class="multilang signup_email" text="signup_email"></label>
+                        <input type="text" class="form-control" id="email" name="email">
+                        <label class="multilang signup_password" text="signup_password"></label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <label class="multilang signup_password_repeat" text="signup_password_repeat"></label>
+                        <input type="password" class="form-control" id="password_v" name="repeat_pass">
                     </fieldset>
                     <fieldset>
                         <label class="multilang" text="signup_person_title"></label>
                         <div class="field switch">
-                            <input type="radio" id="mr" name="title"  checked />
-                            <label for="mr" class="cb-enable selected"><span>Mr</span></label>
-                            <input type="radio" id="mrs" name="title" />
+                            <input type="radio" id="mr" name="title" checked value="mr"/>
+                            <label for="mr" class="cb-enable selected" ><span>Mr</span></label>
+                            <input type="radio" id="mrs" name="title" value="mrs"/>
                             <label for="mrs" class="cb-disable"><span>Mrs</span></label>
                         </div>
                         <label class="multilang" text="signup_name"></label>
                         <input class="form-control" name="name">
                         <label class="multilang" text="signup_surname"></label>
                         <input type="text" class="form-control" name="surname">
-                        <label class="multilang" text="signup_birtday"></label>
+                        <label class="multilang signup_birtday" text="signup_birtday"></label>
                         <input type="text" class="form-control" name="birtday" id="birthday" placeholder="dd/mm/yyyy">
                     </fieldset>
                     <fieldset>
                         <label class="multilang" text="signup_contact_home_address"></label>
                         <input class="form-control" name="h_address ">
-                        <label class="multilang" text="signup_contact_home_postal_code"></label>
-                        <input class="form-control" name="h_zip">
+                        <label class="multilang signup_contact_home_postal_code" text="signup_contact_home_postal_code"></label>
+                        <input class="form-control" id="home_zip" name="home_zip">
                         <label class="multilang" text="signup_contact_home_city"></label>
                         <input type="text" class="form-control" name="city">
                         <label class="multilang" text="signup_contact_home_country"></label>
-                        <input type="text" class="form-control" name="country">
+                        <input type="text" class="form-control" id="country" name="country">
                         <label class="multilang" text="signup_contact_home_phone"></label>
                         <input type="text" class="form-control phone" name="h_phone">
                         <label class="multilang" text="signup_contact_cell_phone"></label>
@@ -55,6 +55,7 @@
                         <input type="text" class="form-control" name="j_address">
                     </fieldset>
                         <input type="submit" class="btn btn-default" value="S'inscrire"/>
+                        <span class="prevent_submit"></span>
                 </form>
                 {{if (err !== 'None') { }}
                 {{=err.message}};
@@ -65,129 +66,9 @@
 </div>
 {{- include footer.html }}
 </body>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
-<script>
-    var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
-    var onDataLoaded = function () {
-        //$('#login_submit_btn').click(login);
-        register();
-        selectorJob();
-        runSwitch();
-        $(".phone").mask("+ (99) 99-999-99-99");
-        $("#birthday").mask("99/99/9999");
-        $("#birthday").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true, yearRange: "1920:2012"});
-    }
-    var login = function () {
-        var testInputData = function (email, passwd) {
-            var res;
-            if (!emailRE.test(email)) {
-                res = {};
-                res.emailError = "Wrong email format";
-            }
-            if (!passRE.test(passwd)) {
-                if (!res) {
-                    res = {};
-                }
-                res.passwordError = "Wrong password format";
-            }
-            return res;
-        }
-        var showEmailError = function (error) {
-            $('#email_sign_in').addClass('has-error');
-            $('#email_error_div').text(error);
-        }
-        var showPasswordError = function (error) {
-            $('#password_sign_in').addClass('has-error');
-            $('#password_error_div').text(error);
-        }
-        $('#email_sign_in').removeClass('has-error');
-        $('#password_sign_in').removeClass('has-error');
-        $('#email_error_div').text('');
-        $('#password_error_div').text('');
-        var email = $('#email').val();
-        var pwd = $('#password').val();
-        var test_res = testInputData(email, pwd);
-        if (test_res) {
-            if (test_res.emailError) {
-                showEmailError(test_res.emailError);
-            }
-            if (test_res.passwordError) {
-                showPasswordError(test_res.passwordError);
-            }
-        } else {
-            pwd = CryptoJS.SHA1(pwd).toString();
-            $('#register_form').block({
-                message: "Loading..."
-            });
-            $.post('/auth', {
-                username: email,
-                password: pwd
-            }, function (data) {
-                $('#register_form').unblock();
-                if (data.err) {
-                    if (data.err.field === 'email') {
-                        showEmailError(data.err.error_message);
-                    } else if (data.err.field === 'pass') {
-                        showPasswordError(data.err.error_message);
-                    } else if (data.err.field === 'general') {
-                        showModalError(data.err.error_message);
-                    }
-                } else if (data.redirect) {
-                    document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
-                }
-            });
-        }
-    }
-
-    var register = function(){
-        $("#register_form").submit(function(e) {
-            e.preventDefault();
-
-            var $form = $(this);
-
-            //TO DO Email Check, Password Check, SHA Password
-
-            $.post('/signup', $(this).serialize(), function (data) {
-                $('#register_form').unblock();
-                if (data.err) {
-                    //TO DO
-                } else if (data.redirect) {
-                    //TO DO
-                }
-            });
-        });
-    }
-
-    var selectorJob = function(){
-
-        $("#job_title").autocomplete({
-            source: selectArray('.js-select-sector'),
-            minLength:0
-        }).focus(function(){
-                    //Use the below line instead of triggering keydown
-                    $(this).autocomplete("search");
-                }).autocomplete("widget").addClass("fixed-height");
-    }
-
-    var runSwitch = function(){
-
-        $(".cb-enable").click(function(){
-            var parent = $(this).parents('.switch');
-            $('.cb-disable',parent).removeClass('selected');
-            $(this).addClass('selected');
-            $('.checkbox',parent).attr('checked', true);
-        });
-        $(".cb-disable").click(function(){
-            var parent = $(this).parents('.switch');
-            $('.cb-enable',parent).removeClass('selected');
-            $(this).addClass('selected');
-            $('.checkbox',parent).attr('checked', false);
-        });
-    }
-
-</script>
 {{- include scripts.html}}
 <script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script>
 <script src="/js/profileSelects.js" type="text/javascript"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+<script src="/js/registerCheck.js" type="text/javascript"></script>
 </html>

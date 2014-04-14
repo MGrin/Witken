@@ -27,8 +27,22 @@
     overflow: auto;
 }
 
+#register_form .prevent_submit{
+    position: relative;
+    left: 6%;
+    color: #FF0000;
+}
+
 #radioset > label{
     margin: 7px 0 2px 0;
+}
+
+.error{
+    border: 1px solid #FF0000;
+}
+
+.normal{
+    border: 1px solid #CCCCCC;
 }
 
 .cb-enable, .cb-disable, .cb-enable span, .cb-disable span {
