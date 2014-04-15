@@ -62,10 +62,8 @@ var userSchema = mongoose.Schema({
         job_title: String,
         work_address: String
     },
-    online_test: {
-        type: Object,
-        default: undefined
-    }
+    online_test: Object,
+    online_test_done: {type: Boolean}
 });
 
 userSchema.methods.validPassword = function(p) {
@@ -75,24 +73,31 @@ userSchema.methods.validPassword = function(p) {
     return selled_hash === this.password;
 }
 
-userSchema.methods.startOnlineTest = function () {
+userSchema.methods.startOnlineTest = function (cb) {
     if (this.online_test && !this.online_test.done ) {
         //TODO Test was already started, need to restart??
+        //Check the start time and delete user or redirect to a test
+        //For now - redirect to a new test, so no changes in database
+        cb();
     } else {
         // Test is starting for the first time
-        //TODO
         this.online_test = {
-            start_date: new Date(),
-            done: false
+            start_date: new Date()
         }
-        this.save();
+        this.online_test_done = false;
+        this.save(cb);
     }
 }
 
-userSchema.methods.stopOnlineTest = function (testData) {
-    if(!testData) throw new Exception('BAD THING');
-    this.online_test.done = true;
+userSchema.methods.isOnlineTestDone = function () {
+    return this.online_test && this.online_test_done;
+}
+
+userSchema.methods.stopOnlineTest = function (testData, cb) {
+    if(!testData) throw new Error('BAD THING');
+    this.online_test_done = true;
     //TODO send data to CentralTest
+    this.save(cb);
 }
 
 userSchema.methods.generatePublicObject = function() {

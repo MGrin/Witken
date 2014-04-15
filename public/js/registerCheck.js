@@ -168,7 +168,7 @@ $(document).ready(function(){
                 if (data.err) {
                     //TO DO
                 } else if (data.redirect) {
-                    //TO DO
+                    document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
                 }
             });
             return true;
