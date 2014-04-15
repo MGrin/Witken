@@ -81,6 +81,7 @@ var examen = {
 }
 
 var login = {
+    login_title: "Login",
     login_submit: "Login",
     login_password: "Password",
     login_register: "Register on Witken",

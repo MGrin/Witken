@@ -122,6 +122,7 @@ var examen = {
 }
 
 var login = {
+    login_title: "Authentification",
     login_submit: "S'identifier",
     login_password: "Mot de passe",
     login_register: "S'inscrire sur Witken",
