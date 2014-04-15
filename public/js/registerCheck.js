@@ -164,6 +164,7 @@ $(document).ready(function(){
 
             $.post('/signup', $(this).serialize(), function (data) {
                 $('#register_form').unblock();
+                
                 if (data.err) {
                     //TO DO
                 } else if (data.redirect) {

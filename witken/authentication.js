@@ -45,19 +45,19 @@ exports.init = function(_user, _utils) {
 exports.authenticate = function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
         if (err) {
+            console.log('Error on auth');
             return res.send(new utils.ClientError('general', err));
         }
         if (!user) {
-            return res.send(new utils.ServerError(info));
+            console.log('No user found');
+            return res.send(info);
         }
         req.logIn(user, function(err) {
-            if (err) {
-                return res.send(new utils.ClientError('general', err));
-            }
-            data.redirect = {
-                path: '/profile'
-            }
-            return res.send(data);
+            // if (err) {
+            //     console.log('Error on logIn');
+            //     return res.send(new utils.ClientError('general', err));
+            // }
+            return res.send({redirect: {path: '/profile'}});
         });
     })(req, res, next);
 }
@@ -78,12 +78,10 @@ exports.signup = function(req, res) {
 
         user.create(data, function(err, us){
             if(err){
-                throw new utils.DatabaseError('User', err);
-                return res.send(new utils.DatabaseError('User', err));
+                return res.send(err);
             }
             req.user = us;
-            //req.login();
-            return res.redirect('/online_test');
+            return res.send({redirect: {path: '/profile'}});
         });
 
     });

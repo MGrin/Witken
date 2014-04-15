@@ -38,10 +38,12 @@
 	<script>
 		var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+
 		var onDataLoaded = function () {
-			$('#login_submit_btn').click(login);
+			$('#login_submit_btn').click(onLoginClicked);
 		}
-		var login = function () {
+
+		var onLoginClicked = function () {
 			var testInputData = function (email, passwd) {
 				var res;
 				if (!emailRE.test(email)) {
@@ -64,13 +66,16 @@
 				$('#password_sign_in').addClass('has-error');
 				$('#password_error_div').text(error);
 			}
+
 			$('#email_sign_in').removeClass('has-error');
 			$('#password_sign_in').removeClass('has-error');
 			$('#email_error_div').text('');
 			$('#password_error_div').text('');
+
 			var email = $('#email').val();
 			var pwd = $('#password').val();
 			var test_res = testInputData(email, pwd);
+
 			if (test_res) {
 				if (test_res.emailError) {
 					showEmailError(test_res.emailError);
@@ -80,14 +85,11 @@
 				}
 			} else {
 				pwd = CryptoJS.SHA1(pwd).toString();
-				$('#login_form').block({
-					message: "Loading..."
-				});
 				$.post('/auth', {
 					username: email,
 					password: pwd
 				}, function (data) {
-					$('#login_form').unblock();
+					console.log(data);
 					if (data.err) {
 						if (data.err.field === 'email') {
 							showEmailError(data.err.error_message);

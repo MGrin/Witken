@@ -71,6 +71,7 @@ var userSchema = mongoose.Schema({
 userSchema.methods.validPassword = function(p) {
     //TODO is called on each login, so we can check for the online test date
     var selled_hash = userTools.generateHashedPassword(this, p);
+    console.log('Password validation for user ' +this.email+": "+selled_hash+" === "+this.password);
     return selled_hash === this.password;
 }
 
@@ -95,8 +96,12 @@ userSchema.methods.stopOnlineTest = function (testData) {
 }
 
 userSchema.methods.generatePublicObject = function() {
-    //TODO
-    throw new Exception('Failed');
+    return {
+        email: this.email,
+        job: this.job,
+        contact: this.contact,
+        human_data: this.human_data
+    }
 }
 
 var User = mongoose.model('User', userSchema, 'users');
@@ -110,6 +115,8 @@ var create = function(data, callback){
     checkParams(data, function(err){
         if(err) return callback(err);
         console.log(data);
+        var birthdaySplit = data.birthday.split('/');
+        var birthdayDate = new Date(birthdaySplit[2], birthdaySplit[1]-1, birthdaySplit[0]);
         var u = new User({
             email: data.email,
             password: data.password,
@@ -118,24 +125,24 @@ var create = function(data, callback){
                 first_name: data.name,
                 last_name: data.surname,
                 gender: data.gender,
-                birth_date: data.birth_date
+                birth_date: birthdayDate
             },
             contact: {
                 home_phone: data.home_phone,
                 cell_phone: data.cell_phone,
                 home_address: data.home_address,
-                home_postal_code: data.home_postal_code,
-                home_country: data.home_country,
-                home_city: data.home_city,
+                home_postal_code: data.home_zip,
+                home_country: data.country,
+                home_city: data.city,
             },
             job: {
                 job_title: data.job_title,
-                work_address: data.work_address
+                work_address: data.job_address
             }
         });
-
+        u.password = userTools.generateHashedPassword(u, data.password);
         u.save(function(err){
-            if(err) return callback(utils.databaseError('User',err));
+            if(err) return callback(new utils.DatabaseError('User',err));
             //TO DO
             //send email
             callback(null, u);
