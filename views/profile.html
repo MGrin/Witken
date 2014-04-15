@@ -9,85 +9,100 @@
             <div class="row">
                 <div id="central" class="col-lg-8 col-lg-offset-2">
                     <div class="profile col-lg-9 col-md-10 col-sm-10 col-xs-12 silver_light_bg">
-                        <div id="profile-examen" class="profile-content">
-                            <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-                            <p class="link js_redirect_logout pull-right">logout</p>
-                            <br />
-                            <!-- TODO -->
-                        	<!-- Show this div only if user already did online test and was enregistered for examen -->
-                            {{if(user.examen){ }}
-                            <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_1"></span>
-                            <span>{{=user.examen.date.toLocaleDateString()}}</span>
-                            {{ if(user.examen.date.getHours() > 8){ }}
-                            <span class="multilang font-HelveticaNeue" text="profile_text_exam_time_morning"></span>
-                            {{ }else{ }}
-                            <span class="multilang font-HelveticaNeueThin" text="profile_text_exam_time_afternoon"></span>
-                            {{ } }}
-                            <br />
-                            <br />
-                            <span class="yellow_bg padding-10" id="exam_status"></span>
-                            <div class="profile-download-buttons-wrapper bottom-aligned">
-                                <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_convocation">
-                                </div>
-                                <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_horaires_detaile">
-                                </div>
-                            </div>
-                            <!--  -->
-                            {{ }else{ }}
-                            <!-- TODO -->
-                            <!-- Create a cool div for someone who already passed exam -->
-                            <div class="alert alert-danger">
-                                <p>You have already passed the exam!</p>
-                            </div>
-                            <!--  -->
-                            {{ } }}
-                        	<!-- TODO  -->
-                        	<!-- Create a div for a situation where user passed an online test but was not enregistered for the real exam-->
+                    	<!-- user object has the following structure:
+                    	{
+					        email,
+					        job: {
+					        	job_title,
+					        	work_address
+					    	},
+					        contact: {
+					        	home_phone,
+						        cell_phone,
+						        home_address,
+						        home_postal_code,
+						        home_country,
+						        home_city
+					    	},
+					        human_data: {
+						        prefix,
+						        first_name,
+						        last_name,
+						        gender,
+						        birth_date,
+					    	},
+					        state
+						}
 
-                        	<!--  -->
+						State can be 0,1,2,3,4 or 5. You can find details below.
+						Each of this fields can be accessed like {{= user.email}} -->
+                        <div id="profile-examen" class="profile-content">
+                            {{if(user.state === 0){ }}
+                            <!-- User did never start the online test, we should never be here!! -->
+                            	{{-include profile/no-content.html}}
+                            {{ }else if(user.state === 1){ }}
+                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            {{ }else if(user.state === 2){ }}
+                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            {{ }else if(user.state === 3){ }}
+                            <!-- User is registered for the examen -->
+                            {{ }else if(user.state === 4){ }}
+                            <!-- The examen already passed, but no results for the moment. -->
+                            {{ }else if(user.state === 5){ }}
+                            <!-- Results of teh exam are aviable -->
+                            {{ } }}                            
                         </div>
                         <div id="profile-label_and_certificats" class="profile-content hide">
-                            <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
                             {{-include profile/no-content.html}}
+                            {{if(user.state === 0){ }}
+                            <!-- User did never start the online test, we should never be here!! -->
+                            {{ }else if(user.state === 1){ }}
+                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            {{ }else if(user.state === 2){ }}
+                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            {{ }else if(user.state === 3){ }}
+                            <!-- User is registered for the examen -->
+                            {{ }else if(user.state === 4){ }}
+                            <!-- The examen already passed, but no results for the moment. -->
+                            {{ }else if(user.state === 5){ }}
+                            <!-- Results of teh exam are aviable -->
+                            {{ } }}
                         </div>
                         <div id="profile-indexation" class="profile-content hide">
-                            <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-                            <br />
                             <div class="center link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_terms">
-                            </div>
-                            <div class="profile-content-footer">
-                                <p class="font-HelveticaNeueMedium grey_text multilang" text="profile_indexation_insubscription"></p>
-                                <p class="grey_text multilang" text="profile_indexation_insubscription_text"></p>
                             </div>
                         </div>
                         <div id="profile-messages" class="profile-content hide">
-                            <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-                            {{-include profile/no-content.html}}
+                            {{if(user.state === 0){ }}
+                            <!-- User did never start the online test, we should never be here!! -->
+                            	{{-include profile/no-content.html}}
+                            {{ }else if(user.state === 1){ }}
+                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            {{ }else if(user.state === 2){ }}
+                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            {{ }else if(user.state === 3){ }}
+                            <!-- User is registered for the examen -->
+                            {{ }else if(user.state === 4){ }}
+                            <!-- The examen already passed, but no results for the moment. -->
+                            {{ }else if(user.state === 5){ }}
+                            <!-- Results of teh exam are aviable -->
+                            {{ } }}
                         </div>
                         <div id="profile-compte" class="profile-content hide">
-                            <h1>{{=user.human_data.first_name}} {{=user.human_data.last_name}}</h1>
-                            <div class="col-lg-12">
-                                <p class="multilang col-lg-6" text="profile_personnal_number_text"></p>
-                                <p class="col-lg-6">{{=user._id}}</p>
-                            </div>
-                            <div class="col-lg-6 col-lg-offset-0">
-                                <p>{{=user.contact.home_address}}</p>
-                                <p>{{=user.contact.home_postal_code}} {{=user.contact.home_city}}</p>
-                                <p>{{=user.contact.home_country_code}}</p>
-                            </div>
-                            <div class="col-lg-6">
-                                <p>{{=user.email}}</p>
-                                <p>{{=user.contact.cell_phone}}</p>
-                            </div>
-                            <div class="profile-download-buttons-wrapper profile-content-footer">
-                                <div class="link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_personnal_data">
-                                </div>
-                                <div class="link js_redirect_professional_data silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_professional_data">
-                                </div>
-                            </div>
-                            <button class="btn btn-default" data-toggle="modal" data-target="#invitation_modal">
-                                Invite
-                            </button>
+                            {{if(user.state === 0){ }}
+                            <!-- User did never start the online test, we should never be here!! -->
+                            	{{-include profile/no-content.html}}
+                            {{ }else if(user.state === 1){ }}
+                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            {{ }else if(user.state === 2){ }}
+                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            {{ }else if(user.state === 3){ }}
+                            <!-- User is registered for the examen -->
+                            {{ }else if(user.state === 4){ }}
+                            <!-- The examen already passed, but no results for the moment. -->
+                            {{ }else if(user.state === 5){ }}
+                            <!-- Results of teh exam are aviable -->
+                            {{ } }}
                         </div>
                     </div>
                     <div id="profile-menu" class="silver_dark_bg white_text col-lg-3 col-md-2 col-sm-2 hidden-xs">
@@ -110,27 +125,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="modal fade" id="invitation_modal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Invitation</h4>
-                              </div>
-                              <div class="modal-body">
-                                    <div class="form-group login-form" id="email_invite">
-                                        <label>Invite your friend!</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email">
-                                        <span class="help-block" id="email_error_block"></span>
-                                    </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="invite_btn">Invite</button>
-                              </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
             </div>
         </div>
 		{{- include footer.html }}

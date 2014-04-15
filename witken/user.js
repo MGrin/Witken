@@ -62,10 +62,11 @@ var userSchema = mongoose.Schema({
         job_title: String,
         work_address: String
     },
-    online_test: {
-        type: Object,
-        default: undefined
-    }
+    online_test: Object,
+    online_test_done: {type: Boolean},
+    online_test_results: Object,
+    examen: Object,
+    examen_results: Object
 });
 
 userSchema.methods.validPassword = function(p) {
@@ -75,32 +76,68 @@ userSchema.methods.validPassword = function(p) {
     return selled_hash === this.password;
 }
 
-userSchema.methods.startOnlineTest = function () {
+userSchema.methods.startOnlineTest = function (cb) {
     if (this.online_test && !this.online_test.done ) {
         //TODO Test was already started, need to restart??
+        //Check the start time and delete user or redirect to a test
+        //For now - redirect to a new test, so no changes in database
+        cb();
     } else {
         // Test is starting for the first time
-        //TODO
         this.online_test = {
-            start_date: new Date(),
-            done: false
+            start_date: new Date()
         }
-        this.save();
+        this.online_test_done = false;
+        this.save(cb);
     }
 }
 
-userSchema.methods.stopOnlineTest = function (testData) {
-    if(!testData) throw new Exception('BAD THING');
-    this.online_test.done = true;
+userSchema.methods.isOnlineTestStarted = function () {
+    return this.online_test;
+}
+
+userSchema.methods.isOnlineTestDone = function () {
+    return this.online_test && this.online_test_done;
+}
+
+userSchema.methods.stopOnlineTest = function (testData, cb) {
+    if(!testData) throw new Error('BAD THING');
+    this.online_test_done = true;
     //TODO send data to CentralTest
+    this.save(cb);
+}
+
+userSchema.methods.isRegisteredForExamen = function () {
+    return true && this.examen;
+}
+
+userSchema.methods.isExamenDone = function () {
+    return this.examen && this.examen.date < new Date();
+}
+
+userSchema.methods.hasExamenResults = function () {
+    return this.examen && this.examen_results
+}
+
+userSchema.methods.getUserState = function () {
+    var state = 0;
+    if(this.isOnlineTestStarted()) state++; //1: Online test was started, but never finisheds
+    if(this.isOnlineTestDone()) state++; //2: Online test done, but no examen inscription
+    if(this.isRegisteredForExamen()) state++; //3: Registered for examen;
+    if(this.isExamenDone()) state++; //4: Examen already passed, but results are not aviable or user was absent
+    if(this.hasExamenResults()) state++; //5: Examen was done, results are in database
+    return state;
 }
 
 userSchema.methods.generatePublicObject = function() {
+    var state = this.getUserState();
+    
     return {
         email: this.email,
         job: this.job,
         contact: this.contact,
-        human_data: this.human_data
+        human_data: this.human_data,
+        state: state
     }
 }
 

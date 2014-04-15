@@ -90,13 +90,13 @@
 					password: pwd
 				}, function (data) {
 					console.log(data);
-					if (data.err) {
-						if (data.err.field === 'email') {
-							showEmailError(data.err.error_message);
-						} else if (data.err.field === 'pass') {
-							showPasswordError(data.err.error_message);
-						} else if (data.err.field === 'general') {
-							showModalError(data.err.error_message);
+					if (data.content && data.content === 'Error') {
+						if (data.field === 'email') {
+							showEmailError(data.message);
+						} else if (data.field === 'pass') {
+							showPasswordError(data.message);
+						} else if (data.field === 'general') {
+							showModalError(data.message);
 						}
 					} else if (data.redirect) {
 						document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;

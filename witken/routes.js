@@ -38,11 +38,18 @@ var init = function(_eventbrite, _examen, _utils, _user, _email, _invitations) {
 var profile = {};
 
 profile.online_test = function (req, res) {
-    if(req.user){
-        req.user.startOnlineTest();
-        res.render('profile/online_test.html', generateParams(req));
+    var user = req.user;
+
+    if(user){
+        if(user.isOnlineTestDone()){
+            return res.redirect('/profile');
+        }else{
+            user.startOnlineTest(function(){
+                res.render('profile/online_test.html', generateParams(req));
+            });            
+        }
     }else{
-        res.redirect('/login');
+        return res.redirect('/login');
     }
 }
 
@@ -56,24 +63,36 @@ profile.prof_data = function(req, res){
 
 profile.index = function(req, res) {
     if (req.user) {
-        res.render('profile.html', generateParams(req));
+        var user = req.user;
+        if(user.isOnlineTestDone()){
+            res.render('profile.html', generateParams(req));
+        }else{
+            res.redirect('/online_test');
+        }        
     } else {
         res.redirect('/login');
     }
 }
 
 var api = {};
+//POST
 api.online_test = function (req, res) {
     var testData = req.body.testData;
-    if (req.user) {
-        if(testData){
-            req.user.stopOnlineTest(testData);
+    var user = req.user;
+
+    if (user) {        
+        if(user.isOnlineTestDone()){
             res.redirect('/profile');
+        }else if(!testData){
+            return res.send(new utils.ServerError('No test data received'));            
         }else{
-            res.send(new utils.ServerError('No test data received'));
+            user.stopOnlineTest(testData, function(){
+                return res.send({redirect: {path: '/profile'}});
+            });
+            
         }
     } else {
-        res.send(new utils.ServerError('No access'));
+        return res.send(new utils.ServerError('Access denied'));
     }
 }
 
