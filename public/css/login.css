@@ -2,11 +2,16 @@
     position: relative;
     left: 40px;
     margin-bottom: 50px;
+    width: 90%;
 }
 
 #login_form > div, #login_form > button, #login_form > span{
     position: inherit;
     left: 10%;
+}
+
+#login_form > div{
+    width: 90%;
 }
 
 #login_form > button{
@@ -17,7 +22,7 @@
 }
 
 #login_form input{
-    width: 30%;
+    width: 35%;
 }
 
 .inline{
@@ -33,7 +38,7 @@
     position: relative;
     margin-top: 7px;
     float: right;
-    right: 54%;
+    right: 45%;
 }
 
 #login_form > span{
@@ -43,5 +48,5 @@
 #login_form span p{
     position: inherit;
     top: 0.1em;
-    left: 2em;
+    left: 5em;
 }
