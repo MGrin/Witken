@@ -63,7 +63,10 @@ var userSchema = mongoose.Schema({
         work_address: String
     },
     online_test: Object,
-    online_test_done: {type: Boolean}
+    online_test_done: {type: Boolean},
+    online_test_results: Object,
+    examen: Object,
+    examen_results: Object
 });
 
 userSchema.methods.validPassword = function(p) {
@@ -89,6 +92,10 @@ userSchema.methods.startOnlineTest = function (cb) {
     }
 }
 
+userSchema.methods.isOnlineTestStarted = function () {
+    return this.online_test;
+}
+
 userSchema.methods.isOnlineTestDone = function () {
     return this.online_test && this.online_test_done;
 }
@@ -100,12 +107,37 @@ userSchema.methods.stopOnlineTest = function (testData, cb) {
     this.save(cb);
 }
 
+userSchema.methods.isRegisteredForExamen = function () {
+    return true && this.examen;
+}
+
+userSchema.methods.isExamenDone = function () {
+    return this.examen && this.examen.date < new Date();
+}
+
+userSchema.methods.hasExamenResults = function () {
+    return this.examen && this.examen_results
+}
+
+userSchema.methods.getUserState = function () {
+    var state = 0;
+    if(this.isOnlineTestStarted()) state++; //1: Online test was started, but never finisheds
+    if(this.isOnlineTestDone()) state++; //2: Online test done, but no examen inscription
+    if(this.isRegisteredForExamen()) state++; //3: Registered for examen;
+    if(this.isExamenDone()) state++; //4: Examen already passed, but results are not aviable or user was absent
+    if(this.hasExamenResults()) state++; //5: Examen was done, results are in database
+    return state;
+}
+
 userSchema.methods.generatePublicObject = function() {
+    var state = this.getUserState();
+    
     return {
         email: this.email,
         job: this.job,
         contact: this.contact,
-        human_data: this.human_data
+        human_data: this.human_data,
+        state: state
     }
 }
 

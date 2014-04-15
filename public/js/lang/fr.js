@@ -30,6 +30,7 @@ var general = {
     general_registration: "Votre profil",
     general_logout: "Logout",
     general_label: "Label",
+    general_examen: "Examen",
     general_emploi: "Emploi",
     general_indexation: "Indexation",
     general_witken: "Witken",

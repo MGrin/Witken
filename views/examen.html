@@ -34,7 +34,7 @@
                         <p class="multilang" text="examen_description"></p>
                     </div>
                 </div>
-                {{if(user!='None'){ }}
+                {{if(user!='None' && user.state > 1){ }}
                 <div class="card">
                     {{- include examen/inscription.html }}
                 </div>
