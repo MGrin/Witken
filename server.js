@@ -83,7 +83,7 @@ app.get('/logout', routes.logout);
 
 app.get('/', routes.index);
 app.get('/label', routes.label);
-app.get('/examen', routes.examen);
+app.get('/examen', routes.examen.index);
 app.get('/witken', routes.witken);
 
 app.get('/online_test', routes.profile.online_test);
@@ -93,7 +93,7 @@ app.post('/online_test', routes.api.online_test);
 app.get('/profile', routes.profile.index);
 app.get('/profile/prof_data', routes.profile.prof_data);
 
-app.get('/order_confirm', examen.confirm_order);
+app.get('/examenConfirmation', routes.examen.confirm);
 
 
 var port = process.env.PORT || 5000;

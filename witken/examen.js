@@ -83,20 +83,6 @@ examenSchema.methods.addAttendee = function(attendee, callback) {
 
 var Examen = mongoose.model('Examen', examenSchema, 'examens');
 
-var updateExamensList = function(callback) {
-    eventbrite.getEventsList(function(err, events) {
-        if (err) {
-            console.log(err);
-            return callback(err);
-        }
-        events.forEach(function(event) {
-            getExamenFromEventbrite(event, function(err, exam) {
-                return callback(err, exam);
-            });
-        });
-    });
-}
-
 var getValidExamensList = function(callback) {
     Examen.find({
         date: {
@@ -110,73 +96,82 @@ var getValidExamensList = function(callback) {
     })
 }
 
-var getExamenFromEventbrite = function(eb_exam, callback) {
-    Examen.findOne({
-        eb_id: eb_exam.id
-    }, function(err, ex) {
+var extractFromEventbrite = function(eb_exam, callback) {
+    eventbrite.getAttendeesList(eb_exam.id, function(err, attendees) {
         if (err) {
-            return callback(new utils.DatabaseError('Examen', err));
-        }
-
-        if (!ex) {
-            eventbrite.getAttendeesList(eb_exam.id, function(err, attendees) {
-                if (err) {
-                    ex = new Examen({
-                        date: eb_exam.start_date,
-                        venue: eb_exam.venue,
-                        tickets: eb_exam.tickets,
-                        attendees: [],
-                        eb_id: eb_exam.id,
-                        url: eb_exam.url
-                    });
-                    ex.save();
-                    return callback(null, ex);
-                }
-                var emailList = [];
-                for (var i = 0; i < attendees.length; i++) {
-                    emailList.push(attendees[i].email);
-                }
-                var query = {
-                    email: {
-                        $in: emailList
-                    }
-                };
-                user.User.find(query, function(err, uss) {
-                    if (err) {
-                        return callback(new utils.DatabaseError('User', err));
-                    }
-                    if (!uss) {
-                        return callback(new utils.DatabaseError('User', 'No users found'));
-                    }
-                    var attendeeList = [];
-                    for (var i = 0; i < uss.length; i++) {
-                        attendeeList.push(uss[i].generateShortObject());
-                    }
-                    ex = new Examen({
-                        date: eb_exam.start_date,
-                        venue: eb_exam.venue,
-                        tickets: eb_exam.tickets,
-                        attendees: attendeeList,
-                        eb_id: eb_exam.id,
-                        url: eb_exam.url
-                    });
-                    ex.save();
-                    return callback(null, ex);
-                });
+            ex = new Examen({
+                date: eb_exam.start_date,
+                venue: eb_exam.venue,
+                tickets: eb_exam.tickets,
+                attendees: [],
+                eb_id: eb_exam.id,
+                url: eb_exam.url
             });
-        } else {
+            ex.save();
             return callback(null, ex);
         }
+
+        var emailList = [];
+        for (var i = 0; i < attendees.length; i++) {
+            emailList.push(attendees[i].email);
+        }
+
+        var findAttendeeByEmail = function(email, attendees){
+            for (var i = 0; i < attendees.length; i++) {
+                if(attendees[i].email === email) return attendees[i];
+            }
+            return null;
+        }
+
+
+        var query = {
+            email: {
+                $in: emailList
+            }
+        };
+
+        user.User.find(query, function(err, uss) {
+            if (err) {
+                return callback(new utils.DatabaseError('User', err));
+            }
+            if (!uss) {
+                return callback(new utils.DatabaseError('User', 'No users found'));
+            }
+
+            var attendeeList = [];
+            for (var i = 0; i < uss.length; i++) {
+                var attendee = findAttendeeByEmail(uss[i].email, attendees);
+                if(attendee){
+                    attendeeList.push({
+                        orderID: attendee.order_id,
+                        user: uss[i]._id
+                    });
+                }else{
+                    return callback(new utils.ServerError('Failed to get attendee by email: '+uss[i].email));
+                }
+            }
+
+            ex = new Examen({
+                date: eb_exam.start_date,
+                venue: eb_exam.venue,
+                tickets: eb_exam.tickets,
+                attendees: attendeeList,
+                eb_id: eb_exam.id,
+                url: eb_exam.url
+            });
+            ex.save();
+
+            return callback(null, ex);
+        });
     });
 }
 
-var confirm_order = function (req, res) {
+var confirm = function (eid, oid, cb) {
 
 }
 
 exports.init = init;
-exports.updateExamensList = updateExamensList;
 exports.getValidExamensList = getValidExamensList;
 exports.Examen = Examen;
-exports.getExamenFromEventbrite = getExamenFromEventbrite;
-exports.confirm_order = confirm_order;
+exports.extractFromEventbrite = extractFromEventbrite;
+exports.confirm = confirm;

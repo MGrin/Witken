@@ -1,5 +1,5 @@
 var eventbrite;
-var examen_;
+var examens;
 var utils;
 var user;
 var email;
@@ -29,7 +29,7 @@ function generateParams(req) {
 
 var init = function(_eventbrite, _examen, _utils, _user, _email, _invitations) {
     eventbrite = _eventbrite;
-    examen_ = _examen;
+    examens = _examen;
     utils = _utils;
     user = _user;
     invitations = _invitations;
@@ -72,6 +72,35 @@ profile.index = function(req, res) {
     } else {
         res.redirect('/login');
     }
+}
+
+var examen = {};
+examen.index = function(req, res) {
+    var params = generateParams(req);
+    params.err = 'None';
+    params.events = 'None';
+    examens.getValidExamensList(function(err, e) {
+        if (err) {
+            params.err = err;
+        } else {
+            params.events = e;
+        }
+        return res.render('examen.html', params);
+    });
+}
+
+examen.confirm = function (req, res) {
+    var eid = req.query.eid;
+    var oid = req.query.oid;
+    eventbrite.confirmOrder(eid, oid, function (err, userID) {
+        var params = generateParams(req);
+        if(err){
+            params.err = err;
+            res.render('error_page.html', params);
+        }else{
+            //TODO
+        }
+    });
 }
 
 var api = {};
@@ -125,19 +154,7 @@ var label = function(req, res) {
     return res.render('label.html', generateParams(req));
 }
 
-var examen = function(req, res) {
-    var params = generateParams(req);
-    params.err = 'None';
-    params.events = 'None';
-    examen_.getValidExamensList(function(err, e) {
-        if (err) {
-            params.err = err;
-        } else {
-            params.events = e;
-        }
-        return res.render('examen.html', params);
-    });
-}
+
 
 var witken = function(req, res) {
     return res.render('witken.html', generateParams(req));
@@ -150,8 +167,8 @@ exports.login = login;
 exports.logout = logout;
 exports.index = index;
 exports.label = label;
-exports.examen = examen;
 exports.witken = witken;
 
 exports.profile = profile;
+exports.examen = examen;
 exports.api = api;

@@ -66,52 +66,36 @@ var getAttendeesList = function(eventID, callback) {
 }
 
 var confirmOrder = function(eventID, orderID, callback) {
-    var eb_user; //get User Data From Eventbrite
-    var eb_examen; //get Event Data From Eventbrite
+    examen.Examen.findOne({eb_id: eventID}, function(err, exam){
+        if(err) return callback(new utils.DatabaseError('Examen', err));
 
-    getEvent(eventID, function(err, event) {
-        if (err) {
-            return callback(new utils.DatabaseError('Eventbrite', err));
-        }
-        if (!event) {
-            return callback(new utils.ServerError('No event found, please contact us'));
-        }
-        eb_examen = event;
-        getAttendeesList(eventID, function(err, attendees) {
-            if (err) {
-                return callback(err);
-            }
-            for (var i = 0; i < attendees.length; i++) {
-                if (attendees[i].order_id === parseInt(orderID)) {
-                    eb_user = attendees[i];
-                    break;
+        var findOrderID = function (examen, attendees) {
+            for (var i in attendees){
+                if(attendees[i].orderID === parseInt(orderID)){
+                    return callback(null, attendees[i],user);
                 }
             }
-            if (!eb_user) {
-                return callback(new utils.ServerError('No order found, please contact us'));
-            }
+            return callback(new utils.DatabaseError('Eventbrite', 'Could not find your order, please contact us: eid='+eventID+' oid'+orderID));
+        }
 
-            //TODO
-            throw new Exception('Failed');
-            // user.getUserFromEventbrite(eb_user, function(err, us) {
-            //     if (err) {
-            //         return callback(err);
-            //     }
-            //     examen.getExamenFromEventbrite(eb_examen, function(err, ex) {
-            //         if (err) {
-            //             return callback(err);
-            //         }
-            //         us.addExamen(ex.generateShortObject());
-            //         ex.addAttendee(us, function(err, exam) {
-            //             if (err) {
-            //                 return callback(err);
-            //             } else {
-            //                 return callback(null, us);
-            //             }
-            //         });
-            //     });
-            // });
-        });
+        if(!exam){
+            var eb_examen;
+            getEvent(eventID, function(err, event){
+                if(err) return callback(new utils.DatabaseError('Eventbrite', err));
+                if(!event) return callback(new utils.ServerError('No event found, please contact us: eid='+eventID+' oid'+orderID));
+
+                eb_examen = event;
+                examen.extractFromEventbrite(eb_examen, function (err, examen) {
+                    if(err) return callback(err);
+                    findOrderID(examen);
+                });
+            });
+        }else{
+            getAttendeesList(eventID, function(err, attendees){
+                if(err) return callback(err);
+                findOrderID(examen, attendees);
+            });
+        }
     });
 }
 
