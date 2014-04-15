@@ -9,6 +9,33 @@
             <div class="row">
                 <div id="central" class="col-lg-8 col-lg-offset-2">
                     <div class="profile col-lg-9 col-md-10 col-sm-10 col-xs-12 silver_light_bg">
+                    	<!-- user object has the following structure:
+                    	{
+					        email,
+					        job: {
+					        	job_title,
+					        	work_address
+					    	},
+					        contact: {
+					        	home_phone,
+						        cell_phone,
+						        home_address,
+						        home_postal_code,
+						        home_country,
+						        home_city
+					    	},
+					        human_data: {
+						        prefix,
+						        first_name,
+						        last_name,
+						        gender,
+						        birth_date,
+					    	},
+					        state
+						}
+
+						State can be 0,1,2,3,4 or 5. You can find details below.
+						Each of this fields can be accessed like {{= user.email}} -->
                         <div id="profile-examen" class="profile-content">
                             {{if(user.state === 0){ }}
                             <!-- User did never start the online test, we should never be here!! -->
