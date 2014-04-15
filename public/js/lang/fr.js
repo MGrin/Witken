@@ -20,7 +20,7 @@ function getTextForId(text) {
         case 'login':
             return login[text];
         case 'signup':
-            return login[text];
+            return signup[text];
         default:
             return "No text";
     }
@@ -122,8 +122,7 @@ var examen = {
 
 var login = {
     login_submit: "S'identifier",
-    login_email: "S'identifier",
-    login_password: "S'identifier",
+    login_password: "Mot de passe",
     login_register: "S'inscrire sur Witken",
     login_forgotten: "Mot de passe oublié?"
 }
@@ -135,6 +134,7 @@ var signup = {
     signup_person_title: "Titre",
     signup_email: "Email",
     signup_password: "Mot de passe",
+    signup_password_repeat: "Répéter mot de passe",
     signup_gender: "Sexe",
     signup_birtday: "Naissance",
     signup_contact_home_phone: "Téléphone Maison",

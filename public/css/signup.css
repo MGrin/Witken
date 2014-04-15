@@ -2,6 +2,7 @@
     position: relative;
     left: 40px;
     margin-bottom: 50px;
+    width: 90%;
 }
 
 #register_form fieldset{
@@ -19,5 +20,43 @@
 }
 
 #register_form fieldset label{
-    margin: 7px 0 2px 1px;
+    margin: 7px 0 2px 2px;
 }
+
+.fixed-height {
+    max-height: 200px;
+    overflow: auto;
+}
+
+#register_form .prevent_submit{
+    position: relative;
+    left: 6%;
+    color: #FF0000;
+}
+
+#radioset > label{
+    margin: 7px 0 2px 0;
+}
+
+.error{
+    border: 1px solid #FF0000;
+}
+
+.normal{
+    border: 1px solid #CCCCCC;
+}
+
+.cb-enable, .cb-disable, .cb-enable span, .cb-disable span {
+    background-color: #c0c0c0;
+    display: inline-block;
+    border-radius: 3px;
+}
+.cb-enable span, .cb-disable span { line-height: 30px; display: block; background-repeat: no-repeat; font-weight: bold; }
+.cb-enable span { background-position: left -90px; padding: 0 20px; }
+.cb-disable span { background-position: right -180px;padding: 0 20px; }
+.cb-disable.selected { background-position: 0 -30px; }
+.cb-disable.selected span { background-position: right -210px; color: #fff; }
+.cb-enable.selected { background-position: 0 -60px; }
+.cb-enable.selected span { background-position: left -150px; color: #fff; }
+.switch label { cursor: pointer; }
+.switch input { display: none; }
