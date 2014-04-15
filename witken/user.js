@@ -102,26 +102,21 @@ userSchema.methods.generatePublicObject = function() {
 var User = mongoose.model('User', userSchema, 'users');
 
 var checkParams = function (data, cb) {
-
-    if(!data || !(data.email && data.password &&
-            data.prefix && data.first_name && data.last_name &&
-            data.job_title && data.work_address)){
-        return cb(new utils.InputError('general', 'Please, fill all required fields.'));
-    }
-
+    //TODO
     return cb();
 }
 
 var create = function(data, callback){
     checkParams(data, function(err){
         if(err) return callback(err);
+        console.log(data);
         var u = new User({
             email: data.email,
             password: data.password,
             human_data: {
-                prefix: data.prefix,
-                first_name: data.first_name,
-                last_name: data.last_name,
+                prefix: data.title,
+                first_name: data.name,
+                last_name: data.surname,
                 gender: data.gender,
                 birth_date: data.birth_date
             },

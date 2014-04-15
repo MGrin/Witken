@@ -64,7 +64,6 @@ exports.authenticate = function(req, res, next) {
 
 exports.signup = function(req, res) {
     var data = req.body;
-    console.log(data);
     user.User.findOne({
         email: data.email
     }, function(err, us) {
@@ -74,15 +73,16 @@ exports.signup = function(req, res) {
             });
         }
         if (us) {
-            return res.send(new utils.ClientError('email', 'User ' + ureq.body.user.email + ' already exists'));
+            return res.send(new utils.ClientError('email', 'User ' + data.email + ' already exists'));
         }
 
         user.create(data, function(err, us){
             if(err){
+                throw new utils.DatabaseError('User', err);
                 return res.send(new utils.DatabaseError('User', err));
             }
             req.user = us;
-            req.login();
+            //req.login();
             return res.redirect('/online_test');
         });
 
