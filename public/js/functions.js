@@ -58,7 +58,6 @@ $(document).ready(function(){
         bottom : 50% - 28
     });
     var min_height = $('.body_wrapper').height() + 50 + parseInt($('.footer_wrapper').css('padding-top'));
-    console.log(min_height);
     footerPosition();
     $(window).resize(function(){
         footerPosition();

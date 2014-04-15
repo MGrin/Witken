@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+    $("input").each(function() {
+
+        if($(this).attr('type') != 'radio' && $(this).attr('type') != 'submit')
+        $(this).val(sessionStorage.getItem($(this).attr('name')));
+    })
+
     //Set phone format
     $(".phone").mask("+ (99) 99-999-99-99");
 
@@ -10,7 +16,10 @@ $(document).ready(function(){
     //Enable list of jobs autocomplete
     $("#job_title").autocomplete({
         source: selectArray('.js-select-sector'),
-        minLength:0
+        minLength:0,
+        select: function (event, ui) {
+            sessionStorage.setItem($(this).attr('name'), ui.item.value);
+        }
     }).focus(function(){
             //Use the below line instead of triggering keydown
             $(this).autocomplete("search");
@@ -19,10 +28,14 @@ $(document).ready(function(){
     //Enable list of countries autocomplete
     $("#country").autocomplete({
         source: selectArray('.js-select-country'),
-        minLength:0
+        minLength:0,
+        select: function (event, ui) {
+            sessionStorage.setItem($(this).attr('name'), ui.item.value);
+        }
     }).focus(function(){
             //Use the below line instead of triggering keydown
             $(this).autocomplete("search");
+
         }).autocomplete("widget").addClass("fixed-height");
 
     //Enable button set
@@ -53,7 +66,7 @@ $(document).ready(function(){
         }
         else
         {
-            $(".signup_password").html(appendElement("signup_password", ' - <span style="color: red">The password should have at least <strong>8</strong> characters</span>'));
+            $(".signup_password").html(appendElement("signup_password", ' - <span class="error_m">The password should have at least 8 characters</span>'));
             $("#password").removeClass('normal').addClass("error");
         }
     });
@@ -66,7 +79,7 @@ $(document).ready(function(){
 
         if(password_v != password)
         {
-            $(".signup_password_repeat").html(appendElement('signup_password_repeat', ' - <span style="color: red">The passwords don\'t match</span>'));
+            $(".signup_password_repeat").html(appendElement('signup_password_repeat', ' - <span class="error_m">The passwords don\'t match</span>'));
             $("#password_v").removeClass('normal').addClass("error");
         }else{
             $(".signup_password_repeat").html(getTextForId('signup_password_repeat'));
@@ -75,7 +88,7 @@ $(document).ready(function(){
 
         if(password == "" || password == null)
         {
-            $("#status_pv").html('<span style="color: red">Fill in the password field first</span>');
+            $("#status_pv").html('<span class="error_m">Fill in the password field first</span>');
             $("#password_v").removeClass('object_ok'); // if necessary
             $("#password_v").addClass("object_error");
         }
@@ -90,11 +103,29 @@ $(document).ready(function(){
             $("#email").removeClass('normal').addClass("error");
         }
         else if(!emailRE.test(email)){
-            $(".signup_email").html(appendElement("signup_email",' - <span style="color: red">Wrong email format</span>'));
+            $(".signup_email").html(appendElement("signup_email",' - <span class="error_m">Wrong email format</span>'));
             $("#email").removeClass('normal').addClass("error");
         }else{
             $(".signup_email").html(getTextForId("signup_email"));
             $("#email").removeClass('error').addClass("normal");
+
+            //Check if email already exists in the database
+            $.ajax({
+                type: "POST",
+                url: "../signup",
+                data: "email="+ email,
+                success: function(msg){
+
+                    $("#email").ajaxComplete(function(event, request, settings){
+
+                        if(msg != 'OK'){
+
+                            $(".signup_email").html(appendElement("signup_email",' - <span class="error_m">Email already exists</span>'));
+                            $("#email").removeClass('normal').addClass("error");
+                        }
+                    });
+                }
+            });
         }
     });
 
@@ -108,7 +139,7 @@ $(document).ready(function(){
             $(".signup_birtday").html(getTextForId("signup_birtday"));
             $("#birthday").removeClass('error').addClass("normal");
         }else{
-            $(".signup_birtday").html(appendElement("signup_birtday",' - <span style="color: red">Your birthday is out of range</span>'));
+            $(".signup_birtday").html(appendElement("signup_birtday",' - <span class="error_m">Your birthday is out of range</span>'));
             $("#birthday").removeClass('normal').addClass("error");
         }
     })
@@ -136,15 +167,18 @@ $(document).ready(function(){
             $(".signup_contact_home_postal_code").html(getTextForId("signup_contact_home_postal_code"));
             $("#home_zip").removeClass('error').addClass("normal");
         }else{
-            $(".signup_contact_home_postal_code").html(appendElement("signup_contact_home_postal_code",' - <span style="color: red">ZIP Code is too long</span>'));
+            $(".signup_contact_home_postal_code").html(appendElement("signup_contact_home_postal_code",getTextForId("signup_error_zip")));
             $("#home_zip").removeClass('normal').addClass("error");
         }
     })
 
     $('input').change(function(){
 
-        ($(this).val != '')
+        if($(this).val() != '' && !$(this).hasClass( "error" )
+            && ($(this).attr('name') != 'password' && $(this).attr('name') != 'repeat_pass')){
             $(this).removeClass('error').addClass("normal");
+            sessionStorage.setItem($(this).attr('name'), $(this).val());
+        }
     })
 
 
@@ -156,9 +190,10 @@ $(document).ready(function(){
 
         if(document.getElementsByClassName('error').length > 0 && !emptyFields()){
 
-            $(".prevent_submit").html("The registration form is not complete").show().fadeOut(2000);
+            $(".prevent_submit").html(getTextForId("signup_error_incomplete")).show().fadeOut(2000);
             return false; //prevent the submission to go through
         }else{
+            $(this).children(':input[name="repeat_pass"]').attr("disabled", "disabled");
             var pwd = $(this).find('input[name="password"]').val();
             $(this).find('input[name="password"]').val(CryptoJS.SHA1(pwd).toString());
 
@@ -171,6 +206,7 @@ $(document).ready(function(){
                     //TO DO
                 }
             });
+            $('input').removeAttr("disabled");
             return true;
         }
     });
@@ -181,12 +217,15 @@ $(document).ready(function(){
         return getTextForId(element) + text;
     }
 
+    //Check for empty fields which are compulsory
     function emptyFields(){
         var empty = true;
+        var compulsory = ['email', 'password', 'repeat_pass', 'title', 'name', 'surname',
+            'birthday', 'home_address', 'home_zip', 'cell_phone', 'job_title'];
 
         $("input").each(function() {
 
-            if($(this).val() == ''){
+            if(jQuery.inArray($(this).attr('name'), compulsory) != -1 && $(this).val() == ''){
                 $(this).removeClass('normal').addClass("error");
                 empty = false;
             }else{
