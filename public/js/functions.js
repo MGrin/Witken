@@ -65,7 +65,7 @@ $(document).ready(function(){
 
     function footerPosition(){
         var new_height = $(window).height() - $('footer').height();
-        $('#central').height((new_height <= min_height) ? min_height : new_height);
+        $('.body_wrapper').height((new_height <= min_height) ? min_height : new_height);
     }
 
     $(window).scroll(function(){

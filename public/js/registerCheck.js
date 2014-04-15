@@ -66,7 +66,7 @@ $(document).ready(function(){
         }
         else
         {
-            $(".signup_password").html(appendElement("signup_password", ' - <span class="error_m">The password should have at least 8 characters</span>'));
+            $(".signup_password").html(appendElement("signup_password", getTextForId("signup_error_password_short")));
             $("#password").removeClass('normal').addClass("error");
         }
     });
@@ -79,7 +79,7 @@ $(document).ready(function(){
 
         if(password_v != password)
         {
-            $(".signup_password_repeat").html(appendElement('signup_password_repeat', ' - <span class="error_m">The passwords don\'t match</span>'));
+            $(".signup_password_repeat").html(appendElement('signup_password_repeat', getTextForId("signup_error_password_repeat")));
             $("#password_v").removeClass('normal').addClass("error");
         }else{
             $(".signup_password_repeat").html(getTextForId('signup_password_repeat'));
@@ -103,7 +103,7 @@ $(document).ready(function(){
             $("#email").removeClass('normal').addClass("error");
         }
         else if(!emailRE.test(email)){
-            $(".signup_email").html(appendElement("signup_email",' - <span class="error_m">Wrong email format</span>'));
+            $(".signup_email").html(appendElement("signup_email",getTextForId("signup_error_email_format")));
             $("#email").removeClass('normal').addClass("error");
         }else{
             $(".signup_email").html(getTextForId("signup_email"));
@@ -120,7 +120,7 @@ $(document).ready(function(){
 
                         if(msg != 'OK'){
 
-                            $(".signup_email").html(appendElement("signup_email",' - <span class="error_m">Email already exists</span>'));
+                            $(".signup_email").html(appendElement("signup_email",getTextForId("signup_error_email_exists")));
                             $("#email").removeClass('normal').addClass("error");
                         }
                     });
@@ -139,7 +139,7 @@ $(document).ready(function(){
             $(".signup_birtday").html(getTextForId("signup_birtday"));
             $("#birthday").removeClass('error').addClass("normal");
         }else{
-            $(".signup_birtday").html(appendElement("signup_birtday",' - <span class="error_m">Your birthday is out of range</span>'));
+            $(".signup_birtday").html(appendElement("signup_birtday",getTextForId("signup_error_birthday")));
             $("#birthday").removeClass('normal').addClass("error");
         }
     })
@@ -174,7 +174,7 @@ $(document).ready(function(){
 
     $('input').change(function(){
 
-        if($(this).val() != '' && !$(this).hasClass( "error" )
+        if($(this).val() != ''
             && ($(this).attr('name') != 'password' && $(this).attr('name') != 'repeat_pass')){
             $(this).removeClass('error').addClass("normal");
             sessionStorage.setItem($(this).attr('name'), $(this).val());
@@ -225,7 +225,7 @@ $(document).ready(function(){
 
         $("input").each(function() {
 
-            if(jQuery.inArray($(this).attr('name'), compulsory) != -1 && $(this).val() == ''){
+            if((jQuery.inArray($(this).attr('name'), compulsory) != -1 && $(this).val() == '')){
                 $(this).removeClass('normal').addClass("error");
                 empty = false;
             }else{

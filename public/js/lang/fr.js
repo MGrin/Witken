@@ -147,5 +147,10 @@ var signup = {
     signup_job_title: "Titre d'emploi *",
     signup_work_address: "Adresse de travail",
     signup_error_incomplete: "Le formulaire d'inscription n'est pas complète",
-    signup_error_zip: ' - <span class="error_m">Le code postal est trop long</span>'
+    signup_error_zip: ' - <span class="error_m">Le code postal est trop long</span>',
+    signup_error_password_short: ' - <span class="error_m">doit comporter au moins 8 caractères</span>',
+    signup_error_password_repeat: ' - <span class="error_m">Mots de passe ne correspondent pas</span>',
+    signup_error_email_format: ' - <span class="error_m">Format e-mail erroné</span>',
+    signup_error_email_exists: ' - <span class="error_m">Email existe déjà</span>',
+    signup_error_birthday: ' - <span class="error_m">Votre anniversaire est hors de portée</span>'
 }
