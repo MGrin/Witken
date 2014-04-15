@@ -125,7 +125,7 @@ var create = function(data, callback){
                 gender: data.gender,
                 birth_date: data.birth_date
             },
-            contanct: {
+            contact: {
                 home_phone: data.home_phone,
                 cell_phone: data.cell_phone,
                 home_address: data.home_address,

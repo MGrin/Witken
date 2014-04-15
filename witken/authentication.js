@@ -63,8 +63,8 @@ exports.authenticate = function(req, res, next) {
 }
 
 exports.signup = function(req, res) {
-    var data = req.body.user_data;
-
+    var data = req.body;
+    console.log(data);
     user.User.findOne({
         email: data.email
     }, function(err, us) {
