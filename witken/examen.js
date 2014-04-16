@@ -144,7 +144,7 @@ var extractFromEventbrite = function(eb_exam, callback) {
                 if(attendee){
                     attendeeList.push({
                         orderID: attendee.order_id,
-                        user: uss[i]._id
+                        userID: uss[i]._id
                     });
                 }else{
                     return callback(new utils.ServerError('Failed to get attendee by email: '+uss[i].email));

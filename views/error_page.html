@@ -8,7 +8,7 @@
             <div class="card grey_dark_bg card-wrapper">
                 <h1>Oooops! Error in da house =(</h1>
                 {{ if(err!='None'){ }}
-                	<h3>{{- JSON.stringify(err.message) }}</h3>
+                	<h3>{{=err}}</h3>
                 {{ }else{ }}
                 	<h3>Something was wrong, and I have no idea what... Please, try to come back tomorrow!</h3>
                 {{ } }}

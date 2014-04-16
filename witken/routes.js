@@ -95,11 +95,25 @@ examen.confirm = function (req, res) {
     eventbrite.confirmOrder(eid, oid, function (err, userID) {
         var params = generateParams(req);
         if(err){
-            params.err = err;
-            res.render('error_page.html', params);
-        }else{
-            //TODO
+            params.err = err.message || err.error;
+            return res.render('error_page.html', params);
         }
+        if(!userID){
+            console.log('Return userID, you a stupid russian!');
+            params.err = 'User with your email was not found in database, please contact us: eid='+eid+' oid='+oid;
+            return res.render('error_page.html', params);
+        }
+        user.User.findOne({_id: userID}, function(err, u){
+            if(err){
+                params.err = err.message;
+                return res.render('error_page.html', params);
+            }
+            if(!u){
+                return console.log('YOU ARE FUCKING LOOSER!!');
+            }
+            //TODO add examen to user;
+            return res.redirect('/profile');
+        });
     });
 }
 

@@ -69,15 +69,6 @@ var confirmOrder = function(eventID, orderID, callback) {
     examen.Examen.findOne({eb_id: eventID}, function(err, exam){
         if(err) return callback(new utils.DatabaseError('Examen', err));
 
-        var findOrderID = function (examen, attendees) {
-            for (var i in attendees){
-                if(attendees[i].orderID === parseInt(orderID)){
-                    return callback(null, attendees[i],user);
-                }
-            }
-            return callback(new utils.DatabaseError('Eventbrite', 'Could not find your order, please contact us: eid='+eventID+' oid'+orderID));
-        }
-
         if(!exam){
             var eb_examen;
             getEvent(eventID, function(err, event){
@@ -87,13 +78,25 @@ var confirmOrder = function(eventID, orderID, callback) {
                 eb_examen = event;
                 examen.extractFromEventbrite(eb_examen, function (err, examen) {
                     if(err) return callback(err);
-                    findOrderID(examen);
+
+                    for (var i in examen.attendees){
+                        if(examen.attendees[i].orderID === parseInt(orderID)){
+                            return callback(null, examen.attendees[i].userID);
+                        }
+                    }
+                    return callback(new utils.DatabaseError('Eventbrite', 'Could not find your order, please contact us: eid='+eventID+' oid'+orderID));
                 });
             });
         }else{
             getAttendeesList(eventID, function(err, attendees){
                 if(err) return callback(err);
-                findOrderID(examen, attendees);
+                for (var i in attendees){
+                    if(attendees[i].order_id === parseInt(orderID)){
+                        //TODO
+                        return callback(null, attendees[i].userID);
+                    }
+                }
+                return callback(new utils.DatabaseError('Eventbrite', 'Could not find your order, please contact us: eid='+eventID+' oid'+orderID));
             });
         }
     });
