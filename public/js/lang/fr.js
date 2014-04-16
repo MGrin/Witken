@@ -122,6 +122,7 @@ var examen = {
 }
 
 var login = {
+    login_title: "Authentification",
     login_submit: "S'identifier",
     login_password: "Mot de passe",
     login_register: "S'inscrire sur Witken",
@@ -130,20 +131,27 @@ var login = {
 
 var signup = {
     signup_title:"S'inscrire",
-    signup_name: "Prenom",
-    signup_surname: "Nom",
+    signup_name: "Prenom *",
+    signup_surname: "Nom *",
     signup_person_title: "Titre",
-    signup_email: "Email",
-    signup_password: "Mot de passe",
-    signup_password_repeat: "Répéter mot de passe",
-    signup_gender: "Sexe",
-    signup_birtday: "Naissance",
+    signup_email: "Email *",
+    signup_password: "Mot de passe *",
+    signup_password_repeat: "Répéter mot de passe *",
+    signup_gender: "Sexe *",
+    signup_birtday: "Naissance *",
     signup_contact_home_phone: "Téléphone Maison",
-    signup_contact_cell_phone: "Téléphone Natel",
-    signup_contact_home_address: "Adresse du domicile",
-    signup_contact_home_postal_code: "Code postal du domicile",
+    signup_contact_cell_phone: "Téléphone Natel *",
+    signup_contact_home_address: "Adresse du domicile *",
+    signup_contact_home_postal_code: "Code postal du domicile *",
     signup_contact_home_country: "Pays d'origine",
     signup_contact_home_city: "Ville natale",
-    signup_job_title: "Titre d'emploi",
-    signup_work_address: "Adresse de travail"
+    signup_job_title: "Titre d'emploi *",
+    signup_work_address: "Adresse de travail",
+    signup_error_incomplete: "Le formulaire d'inscription n'est pas complète",
+    signup_error_zip: ' - <span class="error_m">Le code postal est trop long</span>',
+    signup_error_password_short: ' - <span class="error_m">doit comporter au moins 8 caractères</span>',
+    signup_error_password_repeat: ' - <span class="error_m">Mots de passe ne correspondent pas</span>',
+    signup_error_email_format: ' - <span class="error_m">Format e-mail erroné</span>',
+    signup_error_email_exists: ' - <span class="error_m">Email existe déjà</span>',
+    signup_error_birthday: ' - <span class="error_m">Votre anniversaire est hors de portée</span>'
 }

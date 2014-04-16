@@ -58,7 +58,6 @@ $(document).ready(function(){
         bottom : 50% - 28
     });
     var min_height = $('.body_wrapper').height() + 50 + parseInt($('.footer_wrapper').css('padding-top'));
-    console.log(min_height);
     footerPosition();
     $(window).resize(function(){
         footerPosition();
@@ -66,7 +65,7 @@ $(document).ready(function(){
 
     function footerPosition(){
         var new_height = $(window).height() - $('footer').height();
-        $('#central').height((new_height <= min_height) ? min_height : new_height);
+        $('.body_wrapper').height((new_height <= min_height) ? min_height : new_height);
     }
 
     $(window).scroll(function(){

@@ -3,21 +3,25 @@ function getTextForId(text) {
     switch (spl[0]) {
     case 'general':
         return general[text];
-        break;
     case 'header':
         return header[text];
-        break;
     case 'footer':
         return footer[text];
-        break;
     case 'index':
         return index[text];
-        break;
     case 'label':
         return label[text];
     case 'examen':
         return examen[text];
-    default:
+    case 'profile':
+        return profile[text];
+    case 'prof':
+        return prof_data[text];
+    case 'login':
+        return login[text];
+    case 'signup':
+        return signup[text];
+        default:
         console.log('problem with texts: ' + spl[0]);
         return "";
     }
@@ -74,4 +78,41 @@ var label = {
 var examen = {
     examen_description: "Erroribus elaboraret delicatissimi pri ne, ut accumsan mnesarchum vel. Choro euripidis eu eam. Per meliore accusam phaedrum te, mel ex affert rationibus constituto. Ad primis option pro, epicurei appareat cu pri. Vis omnes splendide signiferumque eu, vide euripidis te sea. Natum civibus est eu, exerci denique ad qui, eu vim eros senserit. No purto graece nec, iudico tollit quo ut, agam porro mea cu. Has no oratio tantas. Laudem placerat vim ex. Mel an commune detraxit neglegentur. Veritus docendi denique ea quo.",
     examen_inscription_title: "Inscription"
+}
+
+var login = {
+    login_title: "Login",
+    login_submit: "Login",
+    login_password: "Password",
+    login_register: "Register on Witken",
+    login_forgotten: "Forgotten password?"
+}
+
+var signup = {
+    signup_title:"Register",
+    signup_name: "Name *",
+    signup_surname: "Surname *",
+    signup_person_title: "Title",
+    signup_email: "Email *",
+    signup_password: "Password *",
+    signup_password_repeat: "Repeat password *",
+    signup_gender: "Sex *",
+    signup_birtday: "Date of birth *",
+    signup_contact_home_phone: "Home number",
+    signup_contact_cell_phone: "Mobile number *",
+    signup_contact_home_address: "Home address *",
+    signup_contact_home_postal_code: "Home ZIP code *",
+    signup_contact_home_country: "Country",
+    signup_contact_home_city: "City",
+    signup_job_title: "Job title *",
+    signup_work_address: "Work address",
+    signup_error_incomplete: "The registration form is not complete",
+    signup_error_zip: ' - <span class="error_m">The ZIP code is too long</span>',
+    signup_error_password_short: ' - <span class="error_m">The password should have at least 8 characters</span>',
+    signup_error_password_repeat: ' - <span class="error_m">The passwords don\'t match</span>',
+    signup_error_email_format: ' - <span class="error_m">Wrong email format</span>',
+    signup_error_email_exists: ' - <span class="error_m">Email already exists</span>',
+    signup_error_birthday: ' - <span class="error_m">Your birthday is out of range</span>'
+
+
 }
