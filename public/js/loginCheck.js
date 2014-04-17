@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    $("input").each(function() {
+            $(this).val(sessionStorage.getItem($(this).attr('name')));
+    })
+
     $('#login_submit_btn').click(onLoginClicked);
 
     $("input").change(function() {
@@ -56,6 +60,8 @@ var onLoginClicked = function () {
 
     //Test if email and password are of correct format
     if (!testInputData(email, pwd)) {
+        sessionStorage.setItem($('#email').attr('name'), email);
+        sessionStorage.setItem($('#password').attr('name'), pwd);
         pwd = CryptoJS.SHA1(pwd).toString();
         $.post('/auth', {
             username: email,
