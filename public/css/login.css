@@ -50,3 +50,19 @@
     top: 0.1em;
     left: 5em;
 }
+
+.error{
+    border: 1px solid #FF0000;
+}
+
+.error_m{
+    color: red;
+    font-family: HelveticaNeueThin;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight:normal;
+}
+
+.normal{
+    border: 1px solid #CCCCCC;
+}

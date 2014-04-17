@@ -83,9 +83,12 @@ var examen = {
 var login = {
     login_title: "Login",
     login_submit: "Login",
+    login_email: "Email",
     login_password: "Password",
     login_register: "Register on Witken",
-    login_forgotten: "Forgotten password?"
+    login_forgotten: "Forgotten password?",
+    login_error_email: ' - <span class="error_m">Wrong email format</span>',
+    login_error_password: ' - <span class="error_m">Wrong password</span>'
 }
 
 var signup = {

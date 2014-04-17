@@ -175,7 +175,7 @@ $(document).ready(function(){
     $('input').change(function(){
 
         if($(this).val() != ''
-            && ($(this).attr('name') != 'password' && $(this).attr('name') != 'repeat_pass')){
+            && ($(this).attr('name') != 'password' || $(this).attr('name') != 'repeat_pass')){
             $(this).removeClass('error').addClass("normal");
             sessionStorage.setItem($(this).attr('name'), $(this).val());
         }
@@ -210,12 +210,6 @@ $(document).ready(function(){
             return true;
         }
     });
-
-    //Set label text with and without error
-    function appendElement(element, text){
-
-        return getTextForId(element) + text;
-    }
 
     //Check for empty fields which are compulsory
     function emptyFields(){

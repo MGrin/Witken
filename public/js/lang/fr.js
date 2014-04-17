@@ -123,10 +123,13 @@ var examen = {
 
 var login = {
     login_title: "Authentification",
+    login_email: "Email",
     login_submit: "S'identifier",
     login_password: "Mot de passe",
     login_register: "S'inscrire sur Witken",
-    login_forgotten: "Mot de passe oublié?"
+    login_forgotten: "Mot de passe oublié?",
+    login_error_email: ' - <span class="error_m">Format e-mail erroné</span>',
+    login_error_password: ' - <span class="error_m">ne correspondent pas</span>'
 }
 
 var signup = {
