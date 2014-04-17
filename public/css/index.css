@@ -26,8 +26,6 @@
 .index_footer > #labels {
 	background-image: url(../img/label-world.png);
 	background-size: 100%;
-    border-right: 1px solid #C0C0C0;
-    border-left: 1px solid #C0C0C0;
 }
 
 .index_footer > #enterprises {
