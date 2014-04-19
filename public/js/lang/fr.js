@@ -27,8 +27,8 @@ function getTextForId(text) {
 }
 var general = {
     general_decouvrez: "Découvrez",
-    general_registration: "Votre profile",
-    general_logout: "Logout",
+    general_registration: "Votre profil",
+    general_logout: "Déconnecter",
     general_label: "Label",
     general_examen: "Examen",
     general_emploi: "Emploi",
@@ -40,7 +40,7 @@ var general = {
     general_compte: "Compte",
     general_enterprise: "Enterprises",
     general_language_switch: "English",
-    general_language_current: "Francais"
+    general_language_current: "Français"
 };
 
 var header = {
@@ -84,7 +84,7 @@ var prof_data = {
     prof_data_end_time: "A",
     prof_data_studies: "Formation",
     prof_data_material: "Matiere",
-    prof_data_diplome: "Diplome",
+    prof_data_diplome: "Diplôme",
     prof_data_getting_year: "Annee d'obtention",
     prof_data_language: "Langue",
     prof_data_level: "Niveau",

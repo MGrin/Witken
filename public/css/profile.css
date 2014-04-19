@@ -1,5 +1,12 @@
+.profile-wrapper {
+    width: 1100px;
+    margin: 0 auto;
+    height: 100%;
+}
+
 #profile-menu {
     padding: 0;
+    float: right;
 }
 
 #profile-menu li{
@@ -10,8 +17,7 @@
 }
 
 .profile{
-    padding: 0px 40px;
-    padding-bottom: 60px;
+    float: left;
 }
 
 .profile-download-buttons-wrapper, .profile-content-footer{

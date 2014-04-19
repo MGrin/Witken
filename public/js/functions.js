@@ -69,7 +69,8 @@ $(document).ready(function(){
     }
 
     $(window).scroll(function(){
-        if($(document).scrollTop() > 0 && $(window).width() > min_window_width && $('.body_wrapper').height() > 600)
+
+        if($(document).scrollTop() > 0 && $(window).width() > min_window_width)
         {
             if($('.header').data('size') == 'full')
             {

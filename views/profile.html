@@ -4,42 +4,42 @@
 		<link rel="stylesheet" href="/css/profile.css" />
 	</head>
 	<body>
-        <div class="body_wrapper">
+        <div class="body-wrapper">
             {{- include header.html}}
-            <div class="row">
-                <div id="central" class="col-lg-8 col-lg-offset-2">
-                    <div class="profile col-lg-9 col-md-10 col-sm-10 col-xs-12 silver_light_bg">
-                    	<!-- user object has the following structure:
-                    	{
-					        email,
-					        job: {
-					        	job_title,
-					        	work_address
-					    	},
-					        contact: {
-					        	home_phone,
-						        cell_phone,
-						        home_address,
-						        home_postal_code,
-						        home_country,
-						        home_city
-					    	},
-					        human_data: {
-						        prefix,
-						        first_name,
-						        last_name,
-						        gender,
-						        birth_date,
-					    	},
-					        state
-						}
+            <div id="central">
+                <div class="profile-wrapper">
+                    <div class="profile silver_light_bg">
+                        <!-- user object has the following structure:
+                        {
+                            email,
+                            job: {
+                                job_title,
+                                work_address
+                            },
+                            contact: {
+                                home_phone,
+                                cell_phone,
+                                home_address,
+                                home_postal_code,
+                                home_country,
+                                home_city
+                            },
+                            human_data: {
+                                prefix,
+                                first_name,
+                                last_name,
+                                gender,
+                                birth_date,
+                            },
+                            state
+                        }
 
-						State can be 0,1,2,3,4 or 5. You can find details below.
-						Each of this fields can be accessed like {{= user.email}} -->
+                        State can be 0,1,2,3,4 or 5. You can find details below.
+                        Each of this fields can be accessed like {{= user.email}} -->
                         <div id="profile-examen" class="profile-content">
                             {{if(user.state === 0){ }}
                             <!-- User did never start the online test, we should never be here!! -->
-                            	{{-include profile/no-content.html}}
+                                {{-include profile/no-content.html}}
                             {{ }else if(user.state === 1){ }}
                             <!-- User started the online test, but not finished it, here we can have a link to test? -->
                             {{ }else if(user.state === 2){ }}
@@ -50,7 +50,7 @@
                             <!-- The examen already passed, but no results for the moment. -->
                             {{ }else if(user.state === 5){ }}
                             <!-- Results of teh exam are aviable -->
-                            {{ } }}                            
+                            {{ } }}
                         </div>
                         <div id="profile-label_and_certificats" class="profile-content hide">
                             {{-include profile/no-content.html}}
@@ -75,7 +75,7 @@
                         <div id="profile-messages" class="profile-content hide">
                             {{if(user.state === 0){ }}
                             <!-- User did never start the online test, we should never be here!! -->
-                            	{{-include profile/no-content.html}}
+                                {{-include profile/no-content.html}}
                             {{ }else if(user.state === 1){ }}
                             <!-- User started the online test, but not finished it, here we can have a link to test? -->
                             {{ }else if(user.state === 2){ }}
@@ -91,7 +91,7 @@
                         <div id="profile-compte" class="profile-content hide">
                             {{if(user.state === 0){ }}
                             <!-- User did never start the online test, we should never be here!! -->
-                            	{{-include profile/no-content.html}}
+                                {{-include profile/no-content.html}}
                             {{ }else if(user.state === 1){ }}
                             <!-- User started the online test, but not finished it, here we can have a link to test? -->
                             {{ }else if(user.state === 2){ }}
@@ -105,7 +105,7 @@
                             {{ } }}
                         </div>
                     </div>
-                    <div id="profile-menu" class="silver_dark_bg white_text col-lg-3 col-md-2 col-sm-2 hidden-xs">
+                    <div id="profile-menu" class="silver_dark_bg white_text">
                         <ul class="list-unstyled">
                             <li class="profile-menu-item active silver_very_dark_bg link">
                                 <h4 class="multilang" text="general_examen"></h4>
@@ -133,8 +133,6 @@
 	<!-- Probably put this fucking shit in an external file? =( -->
 	<script>
 		var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-		var user = {{-JSON.stringify(user)}};
 
 		var currentPage;
 
@@ -261,4 +259,5 @@
 		}
 	</script>
 	{{- include scripts.html}}
+    <script src="/js/profile.js" type="text/javascript"></script>
 </html>

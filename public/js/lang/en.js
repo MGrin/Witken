@@ -27,16 +27,57 @@ function getTextForId(text) {
     }
 }
 var general = {
-    general_decouvrez: "Découvrez",
-    general_registration: "Votre profil",
+    general_decouvrez: "Explore",
+    general_registration: "Your profile",
     general_logout: "Logout",
     general_label: "Label",
-    general_emploi: "Emploi",
-    general_indexation: "Indexation",
+    general_examen: "Exam",
+    general_emploi: "Job",
+    general_indexation: "Indexing",
     general_witken: "Witken",
-    general_language_switch: "English",
-    general_language_current: "Francais"
+    general_results: "Results",
+    general_label_and_certificats: "Results",
+    general_messages: "Requests",
+    general_compte: "Account",
+    general_enterprise: "Enterprises",
+    general_language_switch: "Français",
+    general_language_current: "English"
 };
+
+var profile = {
+    profile_text_exam_1: "Your exam is planned for",
+    profile_text_exam_time_morning: "from 8:30 to 12:30",
+    profile_text_exam_time_afternoon: "from 13:30 to 16:30",
+    profile_text_convocation: "Meeting",
+    profile_text_horaires_detaile: "Detailed timetable",
+    profile_text_terms: "Terms & conditions",
+    profile_indexation_insubscription: "Unsubscribe",
+    profile_indexation_insubscription_text: "If you would like unsubscribe please send an email to admin@witken.ch",
+    profile_no_content_reason_results: "This information will be active once you have passed your exams",
+    profile_personnal_number_text: "Personal identification number:",
+    profile_personnal_data: "Personal data",
+    profile_professional_data: "Professional data"
+}
+
+var prof_data = {
+    prof_data_sector: "Sector",
+    prof_data_post: "Post",
+    prof_data_hierarchie_level: "Level hierarchy",
+    prof_data_experience_age: "Year(s) of experience",
+    prof_data_experience_prof: "Professional experience",
+    prof_data_enterprise: "Enterprise",
+    prof_data_region: "Region",
+    prof_data_start_time: "From",
+    prof_data_end_time: "To",
+    prof_data_studies: "Formation",
+    prof_data_material: "Subject",
+    prof_data_diplome: "Diploma",
+    prof_data_getting_year: "Year of graduation",
+    prof_data_language: "Language",
+    prof_data_level: "Level",
+    prof_data_informatique: "Computer skills (optional)",
+    prof_data_programm: "Program"
+}
 
 var header = {
     header_label_description_text: "description",
