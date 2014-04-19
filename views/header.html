@@ -9,7 +9,7 @@
             <h3 text="general_registration" class="multilang link js_redirect_login"></h3>
 
             {{ }else{ }}
-            <h3>{{= user.human_data.first_name }} {{= user.human_data.last_name}}</h3>
+            <h3 class="link js_redirect_profile">{{= user.human_data.first_name }} {{= user.human_data.last_name}}</h3>
             <p text="general_registration" class="multilang link js_redirect_profile"></p>
             {{ } }}
         </div>

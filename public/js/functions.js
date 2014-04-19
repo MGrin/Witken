@@ -84,6 +84,15 @@ $(document).ready(function(){
                 }, animation_time);
                 $('.index_header, .logo').stop().animate({'height' : small_height}, animation_time);
                 $('.menu_item small').css('display', 'none');
+                $('.user-content p').css('display', 'none');
+
+                if(user==='None' || user === undefined){
+                    $('.user-content h3').removeClass("menu_item_up");
+                    $('.user-content h3').stop().animate({'bottom' : "0px"}, animation_time);
+                }else{
+                    $('.user-content h3').addClass("menu_item_up");
+                    $('.user-content h3').stop().animate({'bottom' : "13px"}, animation_time);
+                }
                 $('.header').css('left', ($(window).width() - $('.header').width()) / 2);
             }
         }
@@ -102,6 +111,9 @@ $(document).ready(function(){
                 }, animation_time);
                 $('.index_header, .logo').stop().animate({'height' : full_height}, animation_time);
                 $('.menu_item small').css('display', 'block');
+                $('.user-content p').css('display', 'block');
+                $('.user-content h3').removeClass("menu_item_up");
+                $('.user-content h3').stop().animate({'bottom' : "0px"}, animation_time);
             }
         }
     });

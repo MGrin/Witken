@@ -106,6 +106,10 @@ footer table{
     color: #9b9c9e;;
 }
 
+.menu_item_up{
+    position: relative;
+}
+
 #header_label{
     position: relative;
     left: 20px;

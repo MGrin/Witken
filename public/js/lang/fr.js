@@ -27,7 +27,7 @@ function getTextForId(text) {
 }
 var general = {
     general_decouvrez: "Découvrez",
-    general_registration: "Votre profil",
+    general_registration: "Votre profile",
     general_logout: "Logout",
     general_label: "Label",
     general_examen: "Examen",
@@ -35,7 +35,7 @@ var general = {
     general_indexation: "Indexation",
     general_witken: "Witken",
     general_results: "Resultats",
-    general_label_and_certificats: "Label & Certificats",
+    general_label_and_certificats: "Résultats",
     general_messages: "Demandes",
     general_compte: "Compte",
     general_enterprise: "Enterprises",
