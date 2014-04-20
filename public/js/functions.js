@@ -70,7 +70,7 @@ $(document).ready(function(){
 
     $(window).scroll(function(){
 
-        if($(document).scrollTop() > 0 && $(window).width() > min_window_width)
+        if($(document).scrollTop() > 0 && $(window).width() > min_window_width && (document.location.pathname) != '/')
         {
             if($('.header').data('size') == 'full')
             {
