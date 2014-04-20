@@ -37,9 +37,10 @@
                         State can be 0,1,2,3,4 or 5. You can find details below.
                         Each of this fields can be accessed like {{= user.email}} -->
                         <div id="profile-examen" class="profile-content">
+                            {{-include profile/exam-confirmed.html}}
                             {{if(user.state === 0){ }}
+                            {{-include profile/no-content.html}}
                             <!-- User did never start the online test, we should never be here!! -->
-                                {{-include profile/no-content.html}}
                             {{ }else if(user.state === 1){ }}
                             <!-- User started the online test, but not finished it, here we can have a link to test? -->
                             {{ }else if(user.state === 2){ }}
@@ -47,14 +48,16 @@
                             {{ }else if(user.state === 3){ }}
                             <!-- User is registered for the examen -->
                             {{ }else if(user.state === 4){ }}
+                            {{-include profile/exam-passed.html}}
                             <!-- The examen already passed, but no results for the moment. -->
                             {{ }else if(user.state === 5){ }}
-                            <!-- Results of teh exam are aviable -->
+                            <!-- Results of the exam are aviable -->
                             {{ } }}
                         </div>
                         <div id="profile-label_and_certificats" class="profile-content hide">
-                            {{-include profile/no-content.html}}
+                            {{-include profile/result-exam-display.html}}
                             {{if(user.state === 0){ }}
+                            {{-include profile/no-content.html}}
                             <!-- User did never start the online test, we should never be here!! -->
                             {{ }else if(user.state === 1){ }}
                             <!-- User started the online test, but not finished it, here we can have a link to test? -->
@@ -63,6 +66,7 @@
                             {{ }else if(user.state === 3){ }}
                             <!-- User is registered for the examen -->
                             {{ }else if(user.state === 4){ }}
+                            {{-include profile/result-exam-confirmed.html}}
                             <!-- The examen already passed, but no results for the moment. -->
                             {{ }else if(user.state === 5){ }}
                             <!-- Results of teh exam are aviable -->
@@ -89,6 +93,7 @@
                             {{ } }}
                         </div>
                         <div id="profile-compte" class="profile-content hide">
+                            {{-include profile/contact-form.html}}
                             {{if(user.state === 0){ }}
                             <!-- User did never start the online test, we should never be here!! -->
                                 {{-include profile/no-content.html}}

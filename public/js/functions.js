@@ -112,7 +112,7 @@ $(document).ready(function(){
                 }, animation_time);
                 $('.index_header, .logo').stop().animate({'height' : full_height}, animation_time);
                 $('.menu_item small').css('display', 'block');
-                $('.user-content p').css('display', 'block');
+                $('.user-content p').css('display', 'inline-block');
                 $('.user-content h3').removeClass("menu_item_up");
                 $('.user-content h3').stop().animate({'bottom' : "0px"}, animation_time);
             }

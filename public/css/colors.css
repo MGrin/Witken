@@ -33,6 +33,29 @@
     background-image: linear-gradient(to top, rgb(208, 35, 35) 0%, rgb(240, 70, 70) 100%);
 }
 
+.orange_gradient{
+    background-image: -moz-linear-gradient(left, #ffa101, #ffb83c);
+    background-image: -ms-linear-gradient(left, #ffa101, #ffb83c);
+    background-image: -o-linear-gradient(left, #ffa101, #ffb83c);
+    background-image: -webkit-gradient(linear, left top, right top, from(#ffa101), to(#ffb83c));
+    background-image: -webkit-linear-gradient(left, #ffa101, #ffb83c);
+    background-image: linear-gradient(left, #ffa101, #ffb83c);
+}
+
+.gray_gradient{
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        right top,
+        color-stop(0, #DADADA),
+        color-stop(0.67, #EEEEEE)
+    );
+    background-image: -o-linear-gradient(right top, #DADADA 0%, #EEEEEE 67%);
+    background-image: -moz-linear-gradient(right top, #DADADA 0%, #EEEEEE 67%);
+    background-image: -webkit-linear-gradient(right top, #DADADA 0%, #EEEEEE 67%);
+    background-image: -ms-linear-gradient(right top, #DADADA 0%, #EEEEEE 67%);
+}
+
 .yellow_bg {
     background-color: rgb(252, 182, 81);
 }

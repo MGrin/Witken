@@ -8,7 +8,8 @@ function setupOnClickEvents() {
         '.js_redirect_witken' : '/witken',
         '.js_redirect_login' : '/login',
         '.js_redirect_profile' : '/profile',
-        '.js_redirect_signup' : '/signup'
+        '.js_redirect_signup' : '/signup',
+        '.js_redirect_logout' : '/logout'
 
     }
 

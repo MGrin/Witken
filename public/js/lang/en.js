@@ -29,7 +29,7 @@ function getTextForId(text) {
 var general = {
     general_decouvrez: "Explore",
     general_registration: "Your profile",
-    general_logout: "Logout",
+    general_logout: "logout",
     general_label: "Label",
     general_examen: "Exam",
     general_emploi: "Job",
@@ -49,14 +49,29 @@ var profile = {
     profile_text_exam_time_morning: "from 8:30 to 12:30",
     profile_text_exam_time_afternoon: "from 13:30 to 16:30",
     profile_text_convocation: "Meeting",
-    profile_text_horaires_detaile: "Detailed timetable",
+    profile_text_horaires_detaile: "Detailed schedule",
     profile_text_terms: "Terms & conditions",
     profile_indexation_insubscription: "Unsubscribe",
     profile_indexation_insubscription_text: "If you would like unsubscribe please send an email to admin@witken.ch",
     profile_no_content_reason_results: "This information will be active once you have passed your exams",
     profile_personnal_number_text: "Personal identification number:",
     profile_personnal_data: "Personal data",
-    profile_professional_data: "Professional data"
+    profile_professional_data: "Professional data",
+    profile_parrainez_data: "Invite a person",
+    profile_status: "Status: ",
+    profile_confirmed: "Confirmed",
+    profile_personality: "Personality",
+    profile_leadership: "Leadership",
+    profile_exam_passed: "You have already passed your exam",
+    profile_exam_day: "14th May 2014",
+    profile_test_personality: "Personality test",
+    profile_test_leadership: "Leadership test",
+    profile_test_qi: "Iq",
+    profile_test_qe: "Eq",
+    profile_test_co: "Co",
+    profile_test_qi_detail: "Qi = Intelligence quotient",
+    profile_test_qe_detail: "Eq = Emotional quotient",
+    profile_test_co_detail: "Co = Communication"
 }
 
 var prof_data = {

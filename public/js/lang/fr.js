@@ -28,7 +28,7 @@ function getTextForId(text) {
 var general = {
     general_decouvrez: "Découvrez",
     general_registration: "Votre profil",
-    general_logout: "Déconnecter",
+    general_logout: "déconnecter",
     general_label: "Label",
     general_examen: "Examen",
     general_emploi: "Emploi",
@@ -59,17 +59,32 @@ var footer = {
 
 var profile = {
     profile_text_exam_1: "Votre examen est planifie pour le",
-    profile_text_exam_time_morning: "de 8:30 a 12:30",
-    profile_text_exam_time_afternoon: "de 13:30 a 16:30",
+    profile_text_exam_time_morning: "de 8:30 à 12:30",
+    profile_text_exam_time_afternoon: "de 13:30 à 16:30",
     profile_text_convocation: "Convocation",
-    profile_text_horaires_detaile: "Horaires detaile",
+    profile_text_horaires_detaile: "Horaire détaillé",
     profile_text_terms: "Terms & conditions",
     profile_indexation_insubscription: "Désinscription",
     profile_indexation_insubscription_text: "Si vous souhaitez vous désinscrire de notre base de donnée veuillez nous envoyer un courriel à admin@witken.ch",
     profile_no_content_reason_results: "Ces informations s'afficherons des que vos resultats d'examen seront connu",
-    profile_personnal_number_text: "Numero d'intefication personnel:",
+    profile_personnal_number_text: "Numero d'identification personnel:",
     profile_personnal_data: "Données personnel",
-    profile_professional_data: "Données professionel"
+    profile_professional_data: "Données professionel",
+    profile_parrainez_data: "Parrainez un contact",
+    profile_status: "Statut: ",
+    profile_confirmed: "Confirmé",
+    profile_exam_passed: "Vous avez déjà passe votre examen",
+    profile_exam_day: "14 Mai 2014",
+    profile_personality: "Personnalité",
+    profile_leadership: "Leadership",
+    profile_test_personality: "Test de la personnalité",
+    profile_test_leadership: "Test de leadership",
+    profile_test_qi: "Qi",
+    profile_test_qe: "Qe",
+    profile_test_co: "Co",
+    profile_test_qi_detail: "QI = Quotien intellectuel",
+    profile_test_qe_detail: "Qe = Quotien émotionnel",
+    profile_test_co_detail: "Co = Communication"
 }
 
 var prof_data = {

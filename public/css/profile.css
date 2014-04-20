@@ -10,7 +10,7 @@
 }
 
 #profile-menu li{
-    padding: 10px 30px;
+    padding: 15px 30px;
 }
 .profile-menu-item {
     margin-top: 30px;
@@ -33,7 +33,129 @@
 #profile-compte p{
 	padding-top: 10px;
 }
-.no-content-wrapper {
-	margin-top: 100px;
+
+.no-content-wrapper, .outer-wrapper {
+	position: relative;
+    top: 50%;
 }
 
+.inner-wrapper{
+    margin: 40px;
+    font-size: medium;
+}
+
+.margin-40{
+    margin: 40px;
+}
+
+.confirm_block{
+    padding: 11px 20px;
+    padding-bottom: 2px;
+    line-height: 90%;
+    width: 171px;
+}
+
+.contact_data_table{
+    position: relative;
+    margin-top: 40px;
+    left: 5px;
+    line-height: 1px;
+}
+
+.text_block{
+    margin: 40px 0px 25px 0px;
+}
+
+.links_block{
+    position: relative;
+    top: 70px;
+}
+
+.results_block{
+    position: relative;
+    padding: 20px 0px;
+    width: 100%;
+    top: 100px;
+}
+
+.results_block > div{
+    position: relative;
+    top: 3px;
+    left: 22%;
+    margin: 0 auto;
+}
+
+.results_detail_block > p{
+    position: relative;
+    margin-left: 20px;
+}
+
+.result_img_circle{
+    padding: 10px;
+    border: 3px solid #FFFFFF;
+    border-radius: 50%;
+    height: 85px;
+}
+
+#profile-examen > div > div.links_block > div > span{
+    font-size: 16px;
+}
+
+.profile_personnal_number_text{
+    margin-bottom: 30px;
+}
+
+.square_border{
+    margin-left: 30px;
+    padding: 2px;
+    font-size: 22px;
+    border: 2px solid #000000;
+    border-radius: 3px;
+}
+
+.margin-left-120{
+    margin-left: 120px;
+}
+
+.test_qi_block{
+    position: relative;
+    left: 13%;
+    top: 10px;
+}
+
+.test_qi_block > div{
+    margin-left: 70px;
+}
+
+.results_block div div > p{
+    position: relative;
+    bottom: 1px;
+}
+
+.top-200{
+    position: relative;
+    top: 200px;
+}
+
+.top-35{
+    position: relative;
+    top: 35px;
+}
+
+.top-60{
+    position: relative;
+    top: 56px;
+}
+
+.left-14{
+    left: 14% !important;
+}
+
+.padding-top-40{
+    padding-top: 38px;
+}
+
+.padding-top-40 > span{
+    width: 100px;
+    display: inline-block;
+}
