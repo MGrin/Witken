@@ -100,7 +100,6 @@ examen.confirm = function (req, res) {
             return res.render('error_page.html', params);
         }
         if(!userID){
-            console.log('Return userID, you a stupid russian!');
             params.err = 'User with your email was not found in database, please contact us: eid='+eid+' oid='+oid;
             return res.render('error_page.html', params);
         }

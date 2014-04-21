@@ -70,6 +70,7 @@ var confirmOrder = function(eventID, orderID, callback) {
         if(err) return callback(new utils.DatabaseError('Examen', err));
 
         if(!exam){
+            console.log('Examen confirmation: No exam in database, creating new one.');
             var eb_examen;
             getEvent(eventID, function(err, event){
                 if(err) return callback(new utils.DatabaseError('Eventbrite', err));
