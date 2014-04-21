@@ -5,16 +5,19 @@
             <td>
                 <p class="multilang black_text text-left profile_personnal_number_text" text="profile_personnal_number_text"></p>
             </td>
+            <td>
+                <p class="black_text text-left profile_personnal_number_text">{{=user.personnal_id}}</p>
+            </td>
        </tr>
         <tr>
             <td valign="top">
-                <p class="black_text text-left">Chemin de Geneve, 88</p>
-                <p class="black_text text-left">CH-1200 Geneve</p>
-                <p class="black_text text-left">Suisse</p>
+                <p class="black_text text-left">{{=user.contact.home_address || " "}}</p>
+                <p class="black_text text-left">{{=user.contact.home_postal_code}} {{=user.contact.home_city}}</p>
+                <p class="black_text text-left">{{=user.contact.home_country}}</p>
             </td>
             <td valign="top">
-                <p class="black_text text-left">john.smith@witken.ch</p>
-                <p class="black_text text-left">+41 79 958 20 80</p>
+                <p class="black_text text-left">{{=user.email}}</p>
+                <p class="black_text text-left">{{=user.contact.cell_phone}}</p>
             </td>
         </tr>
     </table>

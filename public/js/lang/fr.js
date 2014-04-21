@@ -76,7 +76,6 @@ var profile = {
     profile_confirmed: "Confirmé",
     profile_not_confirmed: "Pas confirmé",
     profile_exam_passed: "Vous avez déjà passe votre examen",
-    profile_exam_day: "14 Mai 2014",
     profile_personality: "Personnalité",
     profile_leadership: "Leadership",
     profile_test_personality: "Test de la personnalité",

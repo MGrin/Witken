@@ -48,6 +48,8 @@ var getEvent = function(id, callback) {
 }
 
 var getAttendeesList = function(eventID, callback) {
+    console.log('Getting attendeees from eventbrite for eventID '+eventID);
+
     eb_client.event_list_attendees({
         id: parseInt(eventID)
     }, function(err, data) {
@@ -60,16 +62,16 @@ var getAttendeesList = function(eventID, callback) {
         for (var i = 0; i < attendees.length; i++) {
             res.push(attendees[i].attendee);
         }
-
         callback(null, res);
     });
 }
 
 var confirmOrder = function(eventID, orderID, callback) {
-    examen.Examen.findOne({eb_id: eventID}, function(err, exam){
+    examen.Examen.findOne({eb_id: eventID}).exec(function(err, exam){
         if(err) return callback(new utils.DatabaseError('Examen', err));
 
         if(!exam){
+            console.log('Examen confirmation: No exam in database, creating new one.');
             var eb_examen;
             getEvent(eventID, function(err, event){
                 if(err) return callback(new utils.DatabaseError('Eventbrite', err));
@@ -81,22 +83,29 @@ var confirmOrder = function(eventID, orderID, callback) {
 
                     for (var i in examen.attendees){
                         if(examen.attendees[i].orderID === parseInt(orderID)){
-                            return callback(null, examen.attendees[i].userID);
+                            user.User.findOne({_id: examen.attendees[i].user}).exec(function (err, u) {
+                                return callback(err, u.email, examen);
+                            });                            
                         }
                     }
                     return callback(new utils.DatabaseError('Eventbrite', 'Could not find your order, please contact us: eid='+eventID+' oid'+orderID));
                 });
             });
         }else{
+            console.log('Examen confirmation: Examen exists in database.');
             getAttendeesList(eventID, function(err, attendees){
                 if(err) return callback(err);
-                for (var i in attendees){
-                    if(attendees[i].order_id === parseInt(orderID)){
-                        //TODO
-                        return callback(null, attendees[i].userID);
+
+                exam.replaceAttendeesArrayBy(attendees, function(err, ex){
+                    if(err) return callback(err);
+
+                    for (var i in attendees){
+                        if(attendees[i].order_id == parseInt(orderID)){                        
+                            return callback(null, attendees[i].email, ex);
+                        }
                     }
-                }
-                return callback(new utils.DatabaseError('Eventbrite', 'Could not find your order, please contact us: eid='+eventID+' oid'+orderID));
+                    return callback(new utils.DatabaseError('Eventbrite', 'Could not find your order, please contact us: eid='+eventID+' oid'+orderID));
+                });
             });
         }
     });
