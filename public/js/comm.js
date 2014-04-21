@@ -9,7 +9,8 @@ function setupOnClickEvents() {
         '.js_redirect_login' : '/login',
         '.js_redirect_profile' : '/profile',
         '.js_redirect_signup' : '/signup',
-        '.js_redirect_logout' : '/logout'
+        '.js_redirect_logout' : '/logout',
+        '.js_redirect_prof_data' : 'profile/prof_data'
 
     }
 

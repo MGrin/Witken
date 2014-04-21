@@ -63,9 +63,10 @@ var profile = {
     profile_text_exam_time_afternoon: "de 13:30 à 16:30",
     profile_text_convocation: "Convocation",
     profile_text_horaires_detaile: "Horaire détaillé",
-    profile_text_terms: "Terms & conditions",
+    profile_text_terms: "Termes & conditions",
+    profile_text_terms_details: "Téléchargés les termes & conditions " +  '<a href="">ici</a>',
     profile_indexation_insubscription: "Désinscription",
-    profile_indexation_insubscription_text: "Si vous souhaitez vous désinscrire de notre base de donnée veuillez nous envoyer un courriel à admin@witken.ch",
+    profile_indexation_insubscription_text: "Si vous souhaitez vous désinscrire de notre base de donnée veuillez nous envoyer un courriel à " +  '<a href="mailto:index@witken.ch?Subject=Désinscription" target="_blank"">index@witken.ch</a>',
     profile_no_content_reason_results: "Ces informations s'afficherons des que vos resultats d'examen seront connu",
     profile_personnal_number_text: "Numero d'identification personnel:",
     profile_personnal_data: "Données personnel",
@@ -73,6 +74,7 @@ var profile = {
     profile_parrainez_data: "Parrainez un contact",
     profile_status: "Statut: ",
     profile_confirmed: "Confirmé",
+    profile_not_confirmed: "Pas confirmé",
     profile_exam_passed: "Vous avez déjà passe votre examen",
     profile_exam_day: "14 Mai 2014",
     profile_personality: "Personnalité",
@@ -84,7 +86,8 @@ var profile = {
     profile_test_co: "Co",
     profile_test_qi_detail: "QI = Quotien intellectuel",
     profile_test_qe_detail: "Qe = Quotien émotionnel",
-    profile_test_co_detail: "Co = Communication"
+    profile_test_co_detail: "Co = Communication",
+    profile_indexation_appear: "Comment j'apparais dans la base de donnée :"
 }
 
 var prof_data = {

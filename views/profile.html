@@ -73,8 +73,7 @@
                             {{ } }}
                         </div>
                         <div id="profile-indexation" class="profile-content hide">
-                            <div class="center link silver_very_dark_bg white_text font-HelveticaNeueThin profile-download-file pull-left" text="profile_text_terms">
-                            </div>
+                            {{-include profile/indexation-show-profile.html}}
                         </div>
                         <div id="profile-messages" class="profile-content hide">
                             {{if(user.state === 0){ }}

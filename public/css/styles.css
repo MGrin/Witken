@@ -166,6 +166,10 @@ footer table{
     font-family: Helvetica Neue;
 }
 
+.font-size-14{
+    font-size: 14px;
+}
+
 .clear_relative{
     top: 0;
     right: 0;

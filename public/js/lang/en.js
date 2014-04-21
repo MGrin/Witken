@@ -51,8 +51,9 @@ var profile = {
     profile_text_convocation: "Meeting",
     profile_text_horaires_detaile: "Detailed schedule",
     profile_text_terms: "Terms & conditions",
+    profile_text_terms_details: "Download terms & conditions from " +  '<a href="">here</a>',
     profile_indexation_insubscription: "Unsubscribe",
-    profile_indexation_insubscription_text: "If you would like unsubscribe please send an email to admin@witken.ch",
+    profile_indexation_insubscription_text: "If you would like unsubscribe please send an email to " + '<a href="mailto:index@witken.ch?Subject=Unsubscribe" target="_blank"">index@witken.ch</a>',
     profile_no_content_reason_results: "This information will be active once you have passed your exams",
     profile_personnal_number_text: "Personal identification number:",
     profile_personnal_data: "Personal data",
@@ -60,6 +61,7 @@ var profile = {
     profile_parrainez_data: "Invite a person",
     profile_status: "Status: ",
     profile_confirmed: "Confirmed",
+    profile_not_confirmed: "Not confirmed",
     profile_personality: "Personality",
     profile_leadership: "Leadership",
     profile_exam_passed: "You have already passed your exam",
@@ -71,7 +73,8 @@ var profile = {
     profile_test_co: "Co",
     profile_test_qi_detail: "Qi = Intelligence quotient",
     profile_test_qe_detail: "Eq = Emotional quotient",
-    profile_test_co_detail: "Co = Communication"
+    profile_test_co_detail: "Co = Communication",
+    profile_indexation_appear: "How I appear in the database :"
 }
 
 var prof_data = {
