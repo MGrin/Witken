@@ -92,6 +92,7 @@ examen.index = function(req, res) {
 examen.confirm = function (req, res) {
     var eid = req.query.eid;
     var oid = req.query.oid;
+    
     eventbrite.confirmOrder(eid, oid, function (err, userID) {
         var params = generateParams(req);
         if(err){
