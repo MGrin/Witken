@@ -144,6 +144,7 @@ var login = {
     login_register: "Register on Witken",
     login_forgotten: "Forgotten password?",
     login_error_email: ' - <span class="error_m">Wrong email format</span>',
+    login_error_email_missing: ' - <span class="error_m">doesn\'t exist</span>',
     login_error_password: ' - <span class="error_m">Wrong password</span>'
 }
 
