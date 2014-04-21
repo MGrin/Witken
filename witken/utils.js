@@ -26,7 +26,7 @@ var DatabaseError = function (database, error) {
         this.content = 'Error';
         this._type = 'database';
         this.database = database;
-        this.error = error;
+        this.message = error;
     }else{
         this = error;
     }

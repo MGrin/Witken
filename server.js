@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 var routes = process.env.APP_COV ? require(__dirname + '/cov/routes.js') : require(__dirname + '/witken/routes.js');
 
 var user = process.env.APP_COV ? require(__dirname + '/cov/user.js') : require(__dirname + '/witken/user.js');

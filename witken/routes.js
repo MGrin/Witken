@@ -93,26 +93,32 @@ examen.confirm = function (req, res) {
     var eid = req.query.eid;
     var oid = req.query.oid;
     
-    eventbrite.confirmOrder(eid, oid, function (err, userID) {
+    eventbrite.confirmOrder(eid, oid, function (err, userEmail, exam) {
         var params = generateParams(req);
         if(err){
             params.err = err.message || err.error;
             return res.render('error_page.html', params);
         }
-        if(!userID){
+        if(!userEmail){
             params.err = 'User with your email was not found in database, please contact us: eid='+eid+' oid='+oid;
             return res.render('error_page.html', params);
         }
-        user.User.findOne({_id: userID}, function(err, u){
+        user.User.findOne({email: userEmail}, function(err, u){
             if(err){
                 params.err = err.message;
                 return res.render('error_page.html', params);
             }
             if(!u){
-                return console.log('YOU ARE FUCKING LOOSER!!');
+                return console.log('User '+userEmail+' was not find in Database, need to create a logic for that');
             }
-            //TODO add examen to user;
-            return res.redirect('/profile');
+            u.registerForExam(exam, function (err) {
+                if (err){
+                    params.err = err.message;
+                    return res.render('error_page.html', params);
+                }
+
+                return res.redirect('/profile');
+            });            
         });
     });
 }

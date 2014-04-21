@@ -138,7 +138,15 @@ userSchema.methods.generatePublicObject = function() {
         contact: this.contact,
         human_data: this.human_data,
         state: state
+    
     }
+}
+
+userSchema.methods.registerForExam = function (examen, cb) {
+    if (!examen) return cb(new utils.ServerError('No examen given to user.registerForExam'));
+    if (this.examen) return cb(new utils.ClientError('general', 'You are already registered for an examen, please contact us.'));
+    this.examen = examen.generatePublicObject();
+    this.save(cb);
 }
 
 var User = mongoose.model('User', userSchema, 'users');
