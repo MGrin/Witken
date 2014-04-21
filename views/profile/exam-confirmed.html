@@ -2,12 +2,25 @@
     <h1>{{= user.human_data.first_name }} {{= user.human_data.last_name}}</h1>
     <div class="text_block">
         <p class="multilang black_text text-left inline" text="profile_text_exam_1"></p>
-        <p class="multilang black_text text-left inline bold" text="profile_exam_day"></p>
-        <p class="multilang black_text text-left inline bold" text="profile_text_exam_time_morning"></p>
+        <p class="black_text text-left inline bold">
+            {{=user.examen.date.getDate()}} {{=month[user.examen.date.getMonth()]}} {{=user.examen.date.getFullYear()}}
+        </p>
+        <p class="multilang black_text text-left inline bold"
+            {{ if(user.examen.date.getUTCHours() > 13){ }}
+                text="profile_text_exam_time_afternoon"
+            {{ }else{ }}
+                text="profile_text_exam_time_morning"
+            {{ } }}></p>
     </div>
     <div class="confirm_block orange_gradient">
         <p class="multilang black_text text-left inline" text="profile_status"></p>
-        <p class="multilang black_text text-left bold inline" text="profile_confirmed"></p>
+        <p class="multilang black_text text-left bold inline"
+            {{ if(user.examen.status==true){ }}
+                text="profile_confirmed"
+            {{ }else{ }}
+                text="profile_not_confirmed"
+            {{ } }}></p>
+        
     </div>
     <div class="links_block">
         <div class="center link silver_very_dark_bg white_text font-HelveticaNeueThin

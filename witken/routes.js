@@ -65,7 +65,13 @@ profile.index = function(req, res) {
     if (req.user) {
         var user = req.user;
         if(user.isOnlineTestDone()){
-            res.render('profile.html', generateParams(req));
+            var params = generateParams(req);
+            if (params.lang === 'fr') {
+                params.month = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Jullet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Devembre'];
+            } else if (params.lang === 'en') {
+                params.month = ['January', 'February', 'Mars', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'Devember'];
+            }
+            res.render('profile.html', params);
         }else{
             res.redirect('/online_test');
         }        

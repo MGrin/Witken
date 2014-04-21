@@ -90,6 +90,9 @@ examenSchema.methods.replaceAttendeesArrayBy = function (attendees, cb) {
         }
 
         thatExam.attendees = attendeeList;
+        if(thatExam.attendees.length >= MIN_NUMBER_ATTENDEES) {
+            thatExam.status = true;
+        }
         thatExam.save(cb);
     });
 }

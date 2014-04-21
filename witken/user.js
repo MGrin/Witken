@@ -137,8 +137,9 @@ userSchema.methods.generatePublicObject = function() {
         job: this.job,
         contact: this.contact,
         human_data: this.human_data,
-        state: state
-    
+        state: state,
+        examen: this.examen,
+        personnal_id: this._id
     }
 }
 
