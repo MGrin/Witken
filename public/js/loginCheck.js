@@ -63,20 +63,28 @@ var onLoginClicked = function () {
         sessionStorage.setItem($('#email').attr('name'), email);
         sessionStorage.setItem($('#password').attr('name'), pwd);
         pwd = CryptoJS.SHA1(pwd).toString();
-        $.post('/auth', {
-            username: email,
-            password: pwd
-        }, function (data) {
-            if (data.content && data.content === 'Error') {
+        $.ajax({
+            url: '/auth',
+            type: "post",
+            data: {
+                username: email,
+                password: pwd
+            } ,
+            success: function(data) {
                 if (data.field === 'email') {
-                    showEmailError(data.message);
-                } else if (data.field === 'pass') {
-                    showPasswordError(data.message);
+                    $(".login_email").html(appendElement("login_email",getTextForId("login_error_email_missing")));
+                    $("#email").removeClass('normal').addClass("error");
+                } else if (data.field === 'password') {
+                    $(".login_password").html(appendElement("login_password",getTextForId("login_error_password")));
+                    $("#password").removeClass('normal').addClass("error");
                 } else if (data.field === 'general') {
-                    showModalError(data.message);
+                    errorNoty('General Server Error');
+                } else if (data.redirect) {
+                    document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
                 }
-            } else if (data.redirect) {
-                document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
+            },
+            error: function(data) {
+                errorNoty('General Server Error');
             }
         });
     }
@@ -86,4 +94,16 @@ var onLoginClicked = function () {
 function appendElement(element, text){
 
     return getTextForId(element) + text;
+}
+
+function errorNoty(text){
+    var l = noty({
+        text: text,
+        type: 'error',
+        dismissQueue: true,
+        layout: 'bottomLeft',
+        theme: 'defaultTheme'
+    });
+
+    setTimeout(function(){l.close()}, 2500);
 }
