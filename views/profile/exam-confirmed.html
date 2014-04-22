@@ -14,12 +14,11 @@
     </div>
     <div class="confirm_block orange_gradient">
         <p class="multilang black_text text-left inline" text="profile_status"></p>
-        <p class="multilang black_text text-left bold inline"
-            {{ if(user.examen.status==true){ }}
-                text="profile_confirmed"
-            {{ }else{ }}
-                text="profile_not_confirmed"
-            {{ } }}></p>
+        {{ if(user.examen.status==true){ }}
+        <p class="multilang black_text text-left bold inline" text="profile_confirmed"></p>
+        {{ }else{ }}
+        <p class="multilang black_text text-left bold inline" text="profile_not_confirmed"></p>
+        {{ } }}
     </div>
     <div class="links_block">
         <div class="center link silver_very_dark_bg white_text font-HelveticaNeueThin
