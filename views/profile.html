@@ -37,7 +37,7 @@
                         State can be 0,1,2,3,4 or 5. You can find details below.
                         Each of this fields can be accessed like {{= user.email}} -->
                         <div id="profile-examen" class="profile-content">
-                            {{-include profile/exam-confirmed.html}}
+                            {{-include profile/exam-ads.html}}
                             {{if(user.state === 0){ }}
                             {{-include profile/no-content.html}}
                             <!-- User did never start the online test, we should never be here!! -->
@@ -46,11 +46,13 @@
                             {{ }else if(user.state === 2){ }}
                             <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
                             {{ }else if(user.state === 3){ }}
+
                             <!-- User is registered for the examen -->
                             {{ }else if(user.state === 4){ }}
                             {{-include profile/exam-passed.html}}
                             <!-- The examen already passed, but no results for the moment. -->
                             {{ }else if(user.state === 5){ }}
+                            {{-include profile/exam-confirmed.html}}
                             <!-- Results of the exam are aviable -->
                             {{ } }}
                         </div>

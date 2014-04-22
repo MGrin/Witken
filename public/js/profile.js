@@ -26,10 +26,12 @@ $(document).ready(function(){
     })
 });
 
+//Remove row based on button row location
 function removeRow(button){
     document.getElementById('messages_table').deleteRow(button.closest("tr").index());
 }
 
+//Add a row to the bottom of the table. EnterpriseName, EmployeesNumber, EnterpriseLocation
 function addRow(name, employee, location){
 
     var row = document.getElementById('messages_table').insertRow(0);
