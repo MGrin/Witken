@@ -76,6 +76,7 @@
                             {{-include profile/indexation-show-profile.html}}
                         </div>
                         <div id="profile-messages" class="profile-content hide">
+                            {{-include profile/messages-exist.html}}
                             {{if(user.state === 0){ }}
                             <!-- User did never start the online test, we should never be here!! -->
                                 {{-include profile/no-content.html}}

@@ -119,3 +119,15 @@ $(document).ready(function(){
         }
     });
 })
+
+var enabled = true;
+
+function disableScroll(){
+    enabled = false;
+    $('body').css('overflow', 'hidden');
+}
+
+function enableScroll(){
+    enabled = true;
+    $('body').css('overflow', 'auto');
+}

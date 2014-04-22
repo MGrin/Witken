@@ -74,7 +74,11 @@ var profile = {
     profile_test_qi_detail: "Qi = Intelligence quotient",
     profile_test_qe_detail: "Eq = Emotional quotient",
     profile_test_co_detail: "Co = Communication",
-    profile_indexation_appear: "How I appear in the database :"
+    profile_indexation_appear: "How I appear in the database :",
+    profile_messages_make_contact: "Getting in touch with an enterprise allows you to see their proposals",
+    profile_refuse: "Decline",
+    profile_accept: "Accept"
+
 }
 
 var prof_data = {

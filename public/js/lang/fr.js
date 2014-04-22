@@ -86,7 +86,10 @@ var profile = {
     profile_test_qi_detail: "QI = Quotien intellectuel",
     profile_test_qe_detail: "Qe = Quotien émotionnel",
     profile_test_co_detail: "Co = Communication",
-    profile_indexation_appear: "Comment j'apparais dans la base de donnée :"
+    profile_indexation_appear: "Comment j'apparais dans la base de donnée :",
+    profile_messages_make_contact: "Rentrer en contact avec une entreprise vous permet de découvrir lors propositions, cela vous engage en rien.",
+    profile_refuse: "Refuser",
+    profile_accept: "Accepter"
 }
 
 var prof_data = {

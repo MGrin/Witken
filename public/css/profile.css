@@ -62,6 +62,80 @@
     line-height: 1px;
 }
 
+.messages_table_block{
+    height: 297px;
+    overflow-y: scroll;
+}
+
+#messages_table{
+    margin-top: 40px;
+    width: 100%;
+    border: 2px solid #A9AFAF;
+}
+
+#messages_table tr{
+    border: 2px solid #A9AFAF;
+    height: 97px;
+}
+
+#messages_table td{
+    width: 50%;
+    line-height: 80%;
+    vertical-align: middle;
+    color: #9b9c9e;
+}
+
+#messages_table td:first-child{
+    padding: 10px 0px 0px 20px;
+    text-align: left;
+}
+
+#messages_table td:last-child{
+    text-align: right;
+    padding-right: 20px;
+}
+
+.profile_refuse_button, .profile_accept_button{
+    display:block;
+    float: right;
+    padding: 10px 30px;
+    border: 1px solid #808080;
+    font-family: HelveticaNeueThin;
+    letter-spacing: 1px;
+}
+
+.profile_refuse_button:after, .profile_accept_button:after{
+    clear: both;
+}
+
+.profile_accept_button{
+    color: #FFFFFF;
+    margin-left: 10px;
+}
+
+.enterprise_name{
+    color: #000000;
+    font-weight: bold;
+}
+
+.make_contact_block{
+    display: block;
+    margin-top: 20px;
+}
+
+.make_contact_block img{
+    float: left;
+    margin-right: 20px;
+}
+
+.make_contact_block h4{
+    line-height: 140%;
+}
+
+.make_contact_block:after{
+    clear: both;
+}
+
 .indexation_block{
     border-collapse: separate;
     overflow: hidden;
