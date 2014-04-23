@@ -68,10 +68,12 @@ var profile = {
     profile_indexation_insubscription: "Désinscription",
     profile_indexation_insubscription_text: "Si vous souhaitez vous désinscrire de notre base de donnée veuillez nous envoyer un courriel à " +  '<a href="mailto:index@witken.ch?Subject=Désinscription" target="_blank"">index@witken.ch</a>',
     profile_no_content_reason_results: "Ces informations s'afficherons des que vos resultats d'examen seront connu",
-    profile_personnal_number_text: "Numero d'identification personnel:",
+    profile_personnal_number_text: "Numero d'identification personnel: ",
     profile_personnal_data: "Données personnel",
     profile_professional_data: "Données professionel",
     profile_parrainez_data: "Parrainez un contact",
+    profile_parrainez_text: "Parrainez un contact dans votre entourage et faites-vous rembourser une partie de votre examen! Pour chaque personne parrainée, recevez jusqu’à 100 CGF (maximum 5 parrainages par personne). Dès que la personne sera inscrite à l’un de nos examens, vous recevrez 20CHF",
+    profile_parrainez_enter: "Entrer une adresse email !",
     profile_status: "Statut: ",
     profile_confirmed: "Confirmé",
     profile_not_confirmed: "Pas confirmé",
@@ -89,7 +91,9 @@ var profile = {
     profile_indexation_appear: "Comment j'apparais dans la base de donnée :",
     profile_messages_make_contact: "Rentrer en contact avec une entreprise vous permet de découvrir lors propositions, cela vous engage en rien.",
     profile_refuse: "Refuser",
-    profile_accept: "Accepter"
+    profile_accept: "Accepter",
+    profile_accept_button_p: "Parrainez",
+    profile_refuse_button_p: "Fermer"
 }
 
 var prof_data = {

@@ -55,10 +55,11 @@ var profile = {
     profile_indexation_insubscription: "Unsubscribe",
     profile_indexation_insubscription_text: "If you would like unsubscribe please send an email to " + '<a href="mailto:index@witken.ch?Subject=Unsubscribe" target="_blank"">index@witken.ch</a>',
     profile_no_content_reason_results: "This information will be active once you have passed your exams",
-    profile_personnal_number_text: "Personal identification number:",
+    profile_personnal_number_text: "Personal identification number: ",
     profile_personnal_data: "Personal data",
     profile_professional_data: "Professional data",
     profile_parrainez_data: "Invite a person",
+    profile_parrainez_text: "Invite a contact in your environment and do you repay a portion of your review! For each invited person, receive up to 100 CHF (maximum 5 referrals per person). As soon as the person is enrolled in one of our reviews, you will receive 20CHF",
     profile_status: "Status: ",
     profile_confirmed: "Confirmed",
     profile_not_confirmed: "Not confirmed",
@@ -77,7 +78,9 @@ var profile = {
     profile_indexation_appear: "How I appear in the database :",
     profile_messages_make_contact: "Getting in touch with an enterprise allows you to see their proposals",
     profile_refuse: "Decline",
-    profile_accept: "Accept"
+    profile_accept: "Accept",
+    profile_accept_button_p: "Invite",
+    profile_refuse_button_p: "Cancel"
 
 }
 
