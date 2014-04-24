@@ -1,0 +1,5 @@
+<html> <head> {{- include head.html}} </head> <body> {{- include header.html}} <div id="central"> <div class="card grey_dark_bg card-wrapper"> <h1>Oooops! Error in da house =(</h1> {{ if(err!='None'){ }} <h3>{{=err}}</h3> {{ }else{ }} <h3>Something was wrong, and I have no idea what... Please, try to come back tomorrow!</h3> {{ } }} </div> </div> {{- include footer.html }} </body> {{- include scripts.html}} <script>
+		var onDataLoaded = function () {
+			
+		}
+	</script> </html>

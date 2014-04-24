@@ -6,3 +6,86 @@
     max-height: 200px;
     overflow: auto;
 }
+
+.three_blocks{
+
+}
+
+.three_blocks div{
+    display: inline-block;
+}
+
+p{
+    font-family: HelveticaNeue;
+    font-size: 15px;
+}
+
+.form-control{
+    width: 230px;
+    margin-right: 20px;
+    height: 34px;
+    overflow: hidden;
+    background: url(../img/arrow_down.png) no-repeat right #FFFFFF;
+    -webkit-appearance: none;
+    border: 0px;
+    border-radius: 0px;
+    font-family: HelveticaNeueThin;
+    letter-spacing: 1px;
+}
+
+.professional-wrapper p{
+    margin-top: 20px;
+}
+
+.professional-wrapper h4{
+    padding: 40px 0px 40px 30px;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.confirm_update{
+}
+
+.confirm_update button{
+    position: relative;
+    left: 75%;
+    margin: 40px 0px 20px 0px;
+    background: #FFFFFF;
+}
+
+#short_data{
+    margin-top: 50px;
+    padding-left: 80px;
+}
+
+#short_data p{
+    margin-top: 20px;
+}
+
+.three_blocks select{
+
+}
+
+.plus_button{
+    margin: 8px 0px 0px 2px;
+}
+
+.js-select-year{
+    width: 110px;
+    text-indent: 14px;
+}
+
+div[id*='level-'] > div.col-lg-offset-2 > div:nth-child(2) > div:nth-child(1) > select{
+    margin-right: 6px;
+}
+
+#studies .js-select-year{
+    width: 230px;
+    text-indent: 82px;
+}
+
+.cancel_icon{
+    position: relative;
+    bottom: 62px;
+    left: 20px;
+}

@@ -5,13 +5,19 @@ var getSelectListFor = function(elem){
 			for(var i=1960; i<(new Date()).getYear()+1900;i++){
 				res+='<option>'+i+'</option>';
 			}
-			res+='<option>maintenant</option>';
-		}else{
+			res+='<option>Maintenant</option>';
+		}else if(elem === '.js-select-year-array'){
+            var res = [];
+            for(var i = 1960; i < (new Date()).getYear() + 1900; i++){
+                res.push("" + i + "");
+            }
+            res.push('Maintenant');
+        }else{
 			selects_fr[elem].forEach(function(opt){
 				res+='<option>'+opt+'</option>';
 			});
 		}
-		return res
+		return res;
 	}else if(current_lang === 'en'){
 		if(elem === 'js-select-year'){
 			for(var i=1960; i<(new Date()).getYear()+1900;i++){

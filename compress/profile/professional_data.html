@@ -1,72 +1,4 @@
-<html>
-	<head>
-		{{- include ../head.html}}
-		<link rel="stylesheet" href="/css/professional.css" />
-	</head>
-	<body>
-		{{- include ../header.html}}
-			<div id="central">
-                <div class="card-wrapper">
-                    <div class="grey_gradient_angle">
-                        <div class="professional-wrapper">
-                            <h1 class="multilang" text="profile_professional_data"></h1>
-                            <div id="short_data">
-                                <div class="">
-                                    <div class="form-group">
-                                        <p class="multilang" text="prof_data_sector"></p>
-                                        <select class="form-control js-select-sector"></select>
-                                    </div>
-                                    <div class="three_blocks">
-                                        <div class="form-group">
-                                            <p class="multilang" text="prof_data_post"></p>
-                                            <select class="form-control js-select-post"></select>
-                                        </div>
-                                        <div class="form-group">
-                                            <p class="multilang" text="prof_data_hierarchie_level"></p>
-                                            <select class="form-control js-select-hierarchie_level"></select>
-                                        </div>
-                                        <div class="form-group">
-                                            <p class="multilang" text="prof_data_experience_age"></p>
-                                            <select class="form-control js-select-experience_age"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="experience">
-                                <h4 class="multilang" text="prof_data_experience_prof"></h4>
-                                <div class="experience-wrapper">
-                                </div>
-                                <div class="addRow"></div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div id="studies">
-                                <h4 class="multilang" text="prof_data_studies"></h4>
-                                <div class="studies-wrapper"></div>
-                                <div class="addRow"></div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div id="language">
-                                <h4 class="multilang" text="prof_data_language"></h4>
-                                <div class="languages-wrapper"></div>
-                                <div class="addRow"></div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div id="informatics">
-                                <h4 class="multilang" text="prof_data_informatique"></h4>
-                                <div class="informatics-wrapper">
-                                </div><div class="addRow"></div>
-                            </div>
-                            <div class="confirm_update">
-                                <button class="form-control btn btn-default" id="sbm_btn">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-			</div>
-		{{- include ../footer.html }}
-	</body>
-	<script src="/js/profileSelects.js"></script>
-	<script>
+<html> <head> {{- include ../head.html}} <link rel="stylesheet" href="/css/professional.css"/> </head> <body> {{- include ../header.html}} <div id="central"> <div class="card-wrapper"> <div class="grey_gradient_angle"> <div class="professional-wrapper"> <h1 class="multilang" text="profile_professional_data"></h1> <div id="short_data"> <div class=""> <div class="form-group"> <p class="multilang" text="prof_data_sector"></p> <input type="text" class="form-control" id="prof_title" name="prof_title"> </div> <div class="form-group"> <p class="multilang" text="prof_data_post"></p> <input type="text" class="form-control" id="prof_poste" name="prof_poste"> </div> <div class="form-group"> <p class="multilang" text="prof_data_hierarchie_level"></p> <input type="text" class="form-control" id="prof_hierarchy" name="prof_hierarchy"> </div> <div class="form-group"> <p class="multilang" text="prof_data_experience_age"></p> <input type="text" class="form-control" id="prof_experience" name="prof_experience"> </div> </div> </div> <div id="experience"> <h4 class="multilang" text="prof_data_experience_prof"></h4> <div class="experience-wrapper"> {{-include ../professional/prof_experience.html}} </div> <div class="addRow"></div> <div class="clearfix"></div> </div> <div id="studies"> <h4 class="multilang" text="prof_data_studies"></h4> <div class="studies-wrapper"></div> <div class="addRow"></div> <div class="clearfix"></div> </div> <div id="language"> <h4 class="multilang" text="prof_data_language"></h4> <div class="languages-wrapper"></div> <div class="addRow"></div> <div class="clearfix"></div> </div> <div id="informatics"> <h4 class="multilang" text="prof_data_informatique"></h4> <div class="informatics-wrapper"> </div><div class="addRow"></div> </div> <button class="form-control btn btn-default" id="sbm_btn">Submit</button> </div> </div> </div> </div> {{- include ../footer.html }} </body> <script src="/js/profileSelects.js"></script> <script>
 
 	var experience_nb = 0;
 	var studies_nb = 0;
@@ -203,34 +135,24 @@
 		
 		$('.addRow').each(function(){
 			$(this).addClass('link');
+			$(this).addClass('col-lg-1');
+			$(this).addClass('col-lg-offset-0');
 			$(this).addClass('circle_button');
 			$(this).addClass('yellow_bg');
-			$(this).html('<h3 class="plus_button font-HelveticaNeueThin">+</h3>');
+			$(this).html('<h3 class="font-HelveticaNeueThin">+</h3>');
 		});
 
 		$('#experience > .addRow').click(function(){
 			addExperienceLevel(++experience_nb);
-            updateClickIcon(function(){
-                experience_nb--;
-            });
 		});
 		$('#studies > .addRow').click(function(){
 			addStudiesLevel(++studies_nb);
-            updateClickIcon(function(){
-                studies_nb--;
-            });
 		});
 		$('#language > .addRow').click(function(){
 			addLanguagesLevel(++languages_nb);
-            updateClickIcon(function(){
-                languages_nb--;
-            });
 		});
 		$('#informatics > .addRow').click(function(){
 			addInformaticsLevel(++informatics_nb);
-            updateClickIcon(function(){
-                informatics_nb--;
-            });
 		});
 
 		selects.forEach(function(elem){
@@ -283,6 +205,7 @@
 		saveValues();
 		$('.studies-wrapper').html($('.studies-wrapper').html()+generateStudiesHTML(nb));
 		$('.studies-wrapper > #level-'+nb+' > .order_number').each(function(){
+			$(this).addClass('col-lg-1');
 			$(this).addClass('circle_button');
 			$(this).addClass('grey_bg');
 		});
@@ -312,6 +235,7 @@
 		saveValues();
 		$('.languages-wrapper').html($('.languages-wrapper').html()+generateLanguagesHTML(nb));
 		$('.languages-wrapper > #level-'+nb+' > .order_number').each(function(){
+			$(this).addClass('col-lg-1');
 			$(this).addClass('circle_button');
 			$(this).addClass('grey_bg');
 		});
@@ -341,6 +265,7 @@
 		saveValues();
 		$('.informatics-wrapper').html($('.informatics-wrapper').html()+generateInformaticsHTML(nb));
 		$('.informatics-wrapper > #level-'+nb+' > .order_number').each(function(){
+			$(this).addClass('col-lg-1');
 			$(this).addClass('circle_button');
 			$(this).addClass('grey_bg');
 		});
@@ -367,68 +292,48 @@
 		});
 	}
 	var generateExperienceHTML = function (nb) {
-
-        var img = (nb != 1) ? '<img src="/img/cancel_icon.png" class="link cancel_icon" height="20" width="20">' : '';
-
 		return '<div id="level-'+nb+'">' +
-                '<div class="order_number col-lg-1" id="order_number">' +
+                '<div class="order_number" id="order_number">' +
                 '<h3 class="font-HelveticaNeueThin">'+nb+'*</h3>' +
-                img +
                 '</div> ' +
                 '<div class="col-lg-offset-2"> ' +
-                '<div class="three_blocks"> ' +
-                '<div class="form-group"> ' +
+                '<div class="row"> ' +
+                '<div class="form-group col-lg-4"> ' +
                 '<p class="multilang" text="prof_data_sector"></p> ' +
                 '<select class="form-control js-select-sector"> </select> ' +
                 '</div> ' +
-                '<div class="form-group"> ' +
+                '<div class="form-group col-lg-4"> ' +
                 '<p class="multilang" text="prof_data_enterprise"></p> ' +
                 '<select class="form-control js-select-enterprise"> </select> ' +
                 '</div> ' +
-                '<div class="form-group"> ' +
+                '<div class="form-group col-lg-4"> ' +
                 '<p class="multilang" text="prof_data_region"></p> ' +
                 '<select class="form-control js-select-region"> </select> ' +
                 '</div> ' +
                 '</div> ' +
-                '<div class="three_blocks"> ' +
-                '<div class="form-group"> ' +
+                '<div class="row"> ' +
+                '<div class="form-group col-lg-2"> ' +
                 '<p class="multilang" text="prof_data_start_time"></p> ' +
                 '<select class="form-control js-select-year" content="start"> </select> ' +
                 '</div> ' +
-                '<div class="form-group"> ' +
+                '<div class="form-group col-lg-2"> ' +
                 '<p class="multilang" text="prof_data_end_time"></p> ' +
                 '<select class="form-control js-select-year" content="end"> </select> ' +
                 '</div> ' +
-                '<div class="form-group"> ' +
+                '<div class="form-group col-lg-4"> ' +
                 '<p class="multilang" text="prof_data_post"></p> ' +
                 '<select class="form-control js-select-post"> </select> ' +
-                '</div> ' +
-                '<div class="form-group"> ' +
-                '<p class="multilang" text="prof_data_hierarchie_level"></p> ' +
-                '<select class="form-control js-select-hierarchie_level"> </select> ' +
-                '</div> ' +
-                '</div> ' +
-                '</div> ' +
-                '</div>'
+                '</div> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_hierarchie_level"></p> <select class="form-control js-select-hierarchie_level"> </select> </div> </div> </div> </div>'
 	}
 	var generateStudiesHTML = function(nb) {
-
-        var img = (nb != 1) ? '<img src="/img/cancel_icon.png" class="link cancel_icon" height="20" width="20">' : '';
-		return '<div id="level-'+nb+'"><div class="order_number col-lg-1"><h3 class="font-HelveticaNeueThin">'+nb+'*</h3>' + img + '</div> <div class="col-lg-offset-2"> <div class="three_blocks"> <div class="form-group"> <p class="multilang" text="prof_data_material"></p> <select class="form-control js-select-material"> </select> </div> <div class="form-group"> <p class="multilang" text="prof_data_diplome"></p> <select class="form-control js-select-diplome"> </select> </div> <div class="form-group"> <p class="multilang" text="prof_data_getting_year"></p> <select class="form-control js-select-year" content="got"> </select> </div> </div> </div></div>'
+		return '<div id="level-'+nb+'"><div class="order_number"><h3 class="font-HelveticaNeueThin">'+nb+'*</h3></div> <div class="col-lg-offset-2"> <div class="row"> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_material"></p> <select class="form-control js-select-material"> </select> </div> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_diplome"></p> <select class="form-control js-select-diplome"> </select> </div> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_getting_year"></p> <select class="form-control js-select-year" content="got"> </select> </div> </div> </div></div>'
 	}
 	var generateLanguagesHTML = function(nb) {
-
-        var img = (nb != 1) ? '<img src="/img/cancel_icon.png" class="link cancel_icon" height="20" width="20">' : '';
-		return '<div id="level-'+nb+'"><div class="order_number col-lg-1"><h3 class="font-HelveticaNeueThin">'+nb+'*</h3>' + img + '</div> <div class="col-lg-offset-2"> <div class="three_blocks"> <div class="form-group"> <p class="multilang" text="prof_data_language"></p> <select class="form-control js-select-language"> </select> </div> <div class="form-group"> <p class="multilang" text="prof_data_level"></p> <select class="form-control js-select-level"> </select> </div> </div> </div></div>';
+		return '<div id="level-'+nb+'"><div class="order_number"><h3 class="font-HelveticaNeueThin">'+nb+'*</h3></div> <div class="col-lg-offset-2"> <div class="row"> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_language"></p> <select class="form-control js-select-language"> </select> </div> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_level"></p> <select class="form-control js-select-level"> </select> </div> </div> </div></div>';
 	}
+
 	var generateInformaticsHTML = function(nb){
-
-        var img = (nb != 1) ? '<img src="/img/cancel_icon.png" class="link cancel_icon" height="20" width="20">' : '';
-		return '<div id="level-'+nb+'"><div class="order_number col-lg-1"><h3 class="font-HelveticaNeueThin">'+nb+'*</h3>' + img + '</div> <div class="col-lg-offset-2"> <div class="three_blocks"> <div class="form-group"> <p class="multilang" text="prof_data_programm"></p> <select class="form-control js-select-programm"> </select> </div> <div class="form-group"> <p class="multilang" text="prof_data_level"></p> <select class="form-control js-select-level"> </select> </div> </div> </div></div>'
+		return '<div id="level-'+nb+'"><div class="order_number"><h3 class="font-HelveticaNeueThin">'+nb+'*</h3></div> <div class="col-lg-offset-2"> <div class="row"> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_programm"></p> <select class="form-control js-select-programm"> </select> </div> <div class="form-group col-lg-4"> <p class="multilang" text="prof_data_level"></p> <select class="form-control js-select-level"> </select> </div> </div> </div></div>'
 	}
 
-	</script>
-	{{- include ../scripts.html}}
-    <script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script>
-    <script src="/js/professional.js" type="text/javascript"></script>
-</html>
+	</script> {{- include ../scripts.html}} <script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script> <script src="/js/professional.js" type="text/javascript"></script> </html>

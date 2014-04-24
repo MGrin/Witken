@@ -1,20 +1,19 @@
 $(document).ready(function(){
 
-    autoComplete("#prof_title", selectFirstItem('.js-select-sector'), '.js-select-sector');
-    autoComplete(".prof_poste", selectFirstItem('.js-select-post'), '.js-select-post');
-    autoComplete(".prof_hierarchy", selectFirstItem('.js-select-hierarchie_level'), '.js-select-hierarchie_level');
-    autoComplete(".prof_experience", selectFirstItem('.js-select-experience_age'), '.js-select-experience_age');
-    autoComplete(".prof_region", selectFirstItem('.js-select-region'), '.js-select-region');
-    autoComplete(".prof_year_begin", selectFirstItem('.js-select-year'), '.js-select-year');
-    autoComplete(".prof_year_end", selectFirstItem('.js-select-year'), '.js-select-year');
+    /*autoComplete("#prof_title", '.js-select-sector');
+    autoComplete(".prof_poste", '.js-select-post');
+    autoComplete(".prof_hierarchy", '.js-select-hierarchie_level');
+    autoComplete(".prof_experience", '.js-select-experience_age');
+    autoComplete(".prof_region", '.js-select-region');
+    autoComplete(".prof_year_begin", '.js-select-year-array');
+    autoComplete("#prof_year_end", '.js-select-region');
 
+    function autoComplete(id, array){
 
-    function autoComplete(id, value, array){
-
+        var value = (array == '.js-select-year-array') ? "1960" : selectFirstItem(array);
         $(id).val(value);
-        console.log($(id).val());
         $(id).autocomplete({
-            source: selectArray(array),
+            source: (array == '.js-select-year-array') ? getSelectListFor(array) : selectArray(array),
             minLength:0,
             select: function (event, ui) {
                 //temp = sessionStorage.setItem($(this).attr('name'), ui.item.value);
@@ -28,5 +27,12 @@ $(document).ready(function(){
                 $(this).val("");
                 $(this).autocomplete("search");
             }).autocomplete("widget").addClass("fixed-height");
-    }
+    }*/
 })
+
+function updateClickIcon(callback){
+    $(".cancel_icon").click(function(){
+        $(this).parent().parent().remove();
+        callback();
+    })
+}

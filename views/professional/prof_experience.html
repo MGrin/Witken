@@ -9,15 +9,15 @@
     </div>
     <div class="form-group col-lg-4">
         <p class="multilang" text="prof_data_region"></p>
-        <input type="text" class="form-control prof_region" name="prof_region">
+        <input type="text" class="form-control" id="prof_region" name="prof_region">
     </div>
     <div class="form-group col-lg-2">
         <p class="multilang" text="prof_data_start_time"></p>
-        <input type="text" class="form-control prof_year_begin" name="prof_year_begin">
+        <input type="text" class="form-control" id="prof_year_begin" name="prof_year_begin">
     </div>
     <div class="form-group col-lg-2">
         <p class="multilang" text="prof_data_end_time"></p>
-        <input type="text" class="form-control prof_year_end" name="prof_year_end">
+        <input type="text" class="form-control" id="prof_year_end" name="prof_year_end">
     </div>
     <div class="form-group col-lg-4">
         <p class="multilang" text="prof_data_post"></p>
@@ -27,3 +27,5 @@
         <p class="multilang" text="prof_data_hierarchie_level"></p>
         <input type="text" class="form-control prof_hierarchy" name="prof_hierarchy">
     </div>
+
+    {{-include ../professional/prof_experience.html}}
