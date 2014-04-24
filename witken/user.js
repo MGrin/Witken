@@ -27,6 +27,19 @@ exports.init = function(_utils, _email, _invitation, _db, error_callback, succes
 var userTools = {
     generateHashedPassword: function(us, pwd) {
         return crypto.createHash('sha1').update(us.password_sel + pwd + us.email).digest('base64');
+    },
+
+    generateUniqueUserID: function(us) {
+        var generate = function () {
+            var id = Math.round(Math.random()*1000000);
+            User.find({personnal_id: id}, function(err, users){
+                if(err) return new utils.ServerError('Failed to verify uniqueness of new userID: '+err);
+                if(users && users.length > 0) return generate();
+                return id;
+            });
+        }
+
+        generate();
     }
 }
 
@@ -43,6 +56,10 @@ var userSchema = mongoose.Schema({
         type: String,
         default: randomstring.generate(10)
     },
+    personnal_id: {
+        type: Number,
+        default: -1
+    }
     human_data: {
         prefix: String,
         first_name: String,
@@ -187,6 +204,7 @@ var create = function(data, callback){
             }
         });
         u.password = userTools.generateHashedPassword(u, data.password);
+        u.personnal_id = userTools.generateUniqueUserID(u);
         u.save(function(err){
             if(err) return callback(new utils.DatabaseError('User',err));
             //TO DO

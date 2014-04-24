@@ -89,7 +89,9 @@ var profile = {
     profile_indexation_appear: "Comment j'apparais dans la base de donnée :",
     profile_messages_make_contact: "Rentrer en contact avec une entreprise vous permet de découvrir lors propositions, cela vous engage en rien.",
     profile_refuse: "Refuser",
-    profile_accept: "Accepter"
+    profile_accept: "Accepter",
+    profile_exam_no_online_test_done: "Le test de Leadership et do Personnalité n'est pas finis!",
+    profile_online_test_link: "Passer les tests de Leadership et de Personnalité"
 }
 
 var prof_data = {
