@@ -71,6 +71,21 @@
     background-image: linear-gradient(to bottom, #919191 0%, #C9C9C9 100%);
 }
 
+.grey_gradient_angle{
+    background-image: -webkit-gradient(
+        linear,
+        right top,
+        left bottom,
+        color-stop(0.5, #BFC9C8),
+        color-stop(1, #E4E8E7)
+    );
+    background-image: -o-linear-gradient(left bottom, #BFC9C8 0%, #E4E8E7 100%);
+    background-image: -moz-linear-gradient(left bottom, #BFC9C8 0%, #E4E8E7 100%);
+    background-image: -webkit-linear-gradient(left bottom, #BFC9C8 0%, #E4E8E7 100%);
+    background-image: -ms-linear-gradient(left bottom, #BFC9C8 0%, #E4E8E7 100%);
+    background-image: linear-gradient(to left bottom, #BFC9C8 0%, #E4E8E7 100%);
+}
+
 .black_gradient_top{
     background-image: -webkit-gradient(
         linear,
@@ -132,4 +147,8 @@
 
 .bronze_bg {
     background-color: rgb(210, 132, 110);
+}
+
+.green_bg{
+    background-color: #38af53;
 }

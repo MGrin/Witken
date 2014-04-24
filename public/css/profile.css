@@ -100,7 +100,7 @@
     padding-right: 20px;
 }
 
-.profile_refuse_button, .profile_accept_button{
+.profile_refuse_button, .profile_accept_button, .profile_accept_button_p, .profile_refuse_button_p{
     display:block;
     float: right;
     padding: 10px 30px;
@@ -109,11 +109,11 @@
     letter-spacing: 1px;
 }
 
-.profile_refuse_button:after, .profile_accept_button:after{
+.profile_refuse_button:after, .profile_accept_button:after, .profile_accept_button_p:after, .profile_refuse_button_p:after{
     clear: both;
 }
 
-.profile_accept_button{
+.profile_accept_button, .profile_accept_button_p{
     color: #FFFFFF;
     margin-left: 10px;
 }
@@ -340,3 +340,89 @@
     width: 100px;
     display: inline-block;
 }
+
+/* Overlay copyright box */
+
+.bgCover{
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.overlayBox{
+    color: #000;
+    font-size: 15px;
+    position: absolute;
+    display: none;
+    width: 700px;
+    height: 400px;
+    z-index: 101;
+}
+
+.overlayContent{
+    margin: 25px;
+}
+
+.overlayContent h1{
+
+}
+
+.overlayContent p{
+    margin-top: 30px;
+}
+
+.overlayContent p:nth-child(3){
+    margin-top: 20px;
+    font-weight: bold;
+    font-family: HelveticaNeue;
+}
+
+.overlayContent input[type="text"]{
+    font-size: 20px;
+    padding-left: 10px;
+    font-family: HelveticaNeueThin;
+    letter-spacing: 1px;
+}
+
+.overlayContent button{
+    position: relative;
+    top: 45px;
+    padding: 5px 25px;
+}
+
+.parrainez_email{
+    width: 100%;
+    border: none;
+    height: 40px;
+}
+
+.closeOverlay img{
+    width: 20px;
+    float: right;
+}
+
+.overlayTop:after{
+    clear: both;
+}
+
+#overlayRewards{
+    margin-top: 40px;
+}
+
+#overlayRewards span{
+    border-radius: 50%;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    line-height: 95%;
+    font-family: HelveticaNeueThin;
+    color: #FFFFFF;
+    padding: 8px 0px;
+    font-size: 13px;
+}
+
+/* END Overlay copyright box */

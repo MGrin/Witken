@@ -102,7 +102,7 @@ $(document).ready(function(){
         if(email == ''){
             $("#email").removeClass('normal').addClass("error");
         }
-        else if(!emailRE.test(email)){
+        else if(!testEmail(email)){
             $(".signup_email").html(appendElement("signup_email",getTextForId("signup_error_email_format")));
             $("#email").removeClass('normal').addClass("error");
         }else{

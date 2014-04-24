@@ -70,7 +70,7 @@ $(document).ready(function(){
 
     $(window).scroll(function(){
 
-        if($(document).scrollTop() > 0 && $(window).width() > min_window_width && (document.location.pathname) != '/')
+        if($(document).scrollTop() > 0 && $(window).width() > min_window_width && (document.location.pathname) != '/' && enabled)
         {
             if($('.header').data('size') == 'full')
             {
@@ -101,20 +101,7 @@ $(document).ready(function(){
         {
             if($('.header').data('size') == 'small')
             {
-                $('.header').data('size','full');
-                $('.header, .index_header').css('position', 'static');
-                $('.header').stop().animate({
-                    height : full_height
-                },animation_time);
-                $('.menu_item').stop().animate({
-                    "padding-top" : "45px",
-                    "height" : full_height
-                }, animation_time);
-                $('.index_header, .logo').stop().animate({'height' : full_height}, animation_time);
-                $('.menu_item small').css('display', 'block');
-                $('.user-content p').css('display', 'inline-block');
-                $('.user-content h3').removeClass("menu_item_up");
-                $('.user-content h3').stop().animate({'bottom' : "0px"}, animation_time);
+                resetHeader(full_height, animation_time);
             }
         }
     });
@@ -122,12 +109,40 @@ $(document).ready(function(){
 
 var enabled = true;
 
+function resetHeader(full_height, animation_time){
+    $('html, body').animate({scrollTop: '0px'}, animation_time);
+    $('.header').data('size','full');
+    $('.header, .index_header').css('position', 'static');
+    $('.header').stop().animate({
+        height : full_height
+    },animation_time);
+    $('.menu_item').stop().animate({
+        "padding-top" : "45px",
+        "height" : full_height
+    }, animation_time);
+    $('.index_header, .logo').stop().animate({'height' : full_height}, animation_time);
+    $('.menu_item small').css('display', 'block');
+    $('.user-content p').css('display', 'inline-block');
+    $('.user-content h3').removeClass("menu_item_up");
+    $('.user-content h3').stop().animate({'bottom' : "0px"}, animation_time);
+}
+
 function disableScroll(){
     enabled = false;
-    $('body').css('overflow', 'hidden');
+    resetHeader('150px', 300);
 }
 
 function enableScroll(){
     enabled = true;
-    $('body').css('overflow', 'auto');
+}
+
+function testEmail(email){
+    var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return emailRE.test(email);
+}
+
+//Set label text with and without error
+function appendElement(element, text){
+
+    return getTextForId(element) + text;
 }

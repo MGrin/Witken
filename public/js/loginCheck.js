@@ -21,13 +21,12 @@ $(document).ready(function(){
 var onLoginClicked = function () {
     var testInputData = function (email, passwd) {
         var res;
-        var emailRE = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         var passRE = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}$/;
 
         if(email == ''){
             $("#email").removeClass('normal').addClass("error");
 
-        } else if (!emailRE.test(email)) {
+        } else if (!testEmail(email)) {
             res = {};
             res.emailError = "Error email";
             $(".login_email").html(appendElement("login_email",getTextForId("login_error_email")));
@@ -88,12 +87,6 @@ var onLoginClicked = function () {
             }
         });
     }
-}
-
-//Set label text with and without error
-function appendElement(element, text){
-
-    return getTextForId(element) + text;
 }
 
 function errorNoty(text){
