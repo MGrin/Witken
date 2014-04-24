@@ -1,5 +1,3 @@
-var mongoose = require('mongoose');
-
 var routes = process.env.APP_COV ? require(__dirname + '/cov/routes.js') : require(__dirname + '/witken/routes.js');
 
 var user = process.env.APP_COV ? require(__dirname + '/cov/user.js') : require(__dirname + '/witken/user.js');
@@ -14,6 +12,8 @@ var label = process.env.APP_COV ? require(__dirname + '/cov/label.js') : require
 var utils = process.env.APP_COV ? require(__dirname + '/cov/utils.js') : require(__dirname + '/witken/utils.js');
 
 var invitation = process.env.APP_COV ? require(__dirname + '/cov/invitations.js') : require(__dirname + '/witken/invitations.js');
+
+var CT = require(__dirname + '/CentralTest/CentralTest.js');
 
 var USER_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
 var EXAMEN_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
@@ -31,10 +31,15 @@ invitation.init(utils, user, email, INVITATION_DB, function error(err) {
 });
 
 auth.init(user, utils);
-user.init(utils, email, invitation, USER_DB, function(err) {
+user.init(utils, email, invitation, CT, USER_DB, function(err) {
     console.log('Failed to connect to User DB');
 }, function() {
     console.log('Connected to User DB');
+
+    user.User.findOne({email: 'mr6r1n@gmail.com'}, function (err, us){
+        if(err) console.log('Failed to load a test user!');
+        else exports.testUser = us;
+    });
 });
 eventbrite.init(utils, examen, user, EVENTBRITE_ORGANIZATION, EVENTBRITE_ORGANIZATION_ID);
 routes.init(eventbrite, examen, utils, user, email, invitation);
@@ -51,6 +56,12 @@ label.init(utils, user, LABEL_DB, function error(err) {
     console.log('Failed to connect to Label DB');
 }, function success() {
     console.log('Connected to Label DB');
+});
+
+CT.init(utils, function error(err) {
+    console.log('Failed to connect to CentralTest WSDL: '+err);
+}, function success() {
+    console.log('Connected to CentralTest WSDL');
 });
 
 
@@ -90,7 +101,7 @@ app.get('/witken', routes.witken);
 
 app.get('/online_test', routes.profile.online_test);
 app.post('/online_test', routes.api.online_test);
-
+app.get('/api/changeOnlineExamStat', routes.api.changeOnlineExamSts);
 
 app.get('/profile', routes.profile.index);
 app.get('/profile/prof_data', routes.profile.prof_data);

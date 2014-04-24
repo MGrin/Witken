@@ -6,15 +6,18 @@ var email;
 var utils;
 var witken_users;
 var invitation;
+var CT;
 
-exports.init = function(_utils, _email, _invitation, _db, error_callback, success_callback) {
-    if (!_utils || !_email || !_db || !error_callback || !success_callback) {
+exports.init = function(_utils, _email, _invitation, _CT, _db, error_callback, success_callback) {
+    if (!_utils || !_email || !_CT || !_db || !error_callback || !success_callback) {
         throw 'Wrong arguments exception!';
         return;
     }
     utils = _utils;
     email = _email;
     invitation = _invitation;
+    CT = _CT;
+
     witken_users = _db;
 
     mongoose.connect(witken_users);
@@ -80,6 +83,7 @@ var userSchema = mongoose.Schema({
         job_title: String,
         work_address: String
     },
+    CentralTest: Object,
     online_test: Object,
     online_test_done: {type: Boolean},
     online_test_results: Object,
@@ -94,19 +98,29 @@ userSchema.methods.validPassword = function(p) {
     return selled_hash === this.password;
 }
 
-userSchema.methods.startOnlineTest = function (cb) {
+userSchema.methods.startOnlineTest = function (lang, cb) {
     if (this.online_test && !this.online_test.done ) {
-        //TODO Test was already started, need to restart??
-        //Check the start time and delete user or redirect to a test
-        //For now - redirect to a new test, so no changes in database
-        cb();
+        cb(null, this);
     } else {
         // Test is starting for the first time
-        this.online_test = {
-            start_date: new Date()
-        }
-        this.online_test_done = false;
-        this.save(cb);
+        var CT_TEST = CT.test.COM_R;
+
+        var thisUser = this;
+
+        CT.test.invite(this, CT_TEST.id, CT_TEST.lang[lang], function (err, test_url) {
+            if (err) return cb(err);
+            if (test_url.indexOf('Invitation already sent on') > -1) {
+                //Invitation was sent to central test, but was not saved in DB
+                return cb(new utils.ServerError('Invitation was sent to Centraltest, but was not saved in DB. please, contact us'));
+            }
+            thisUser.online_test = {
+                start_date: new Date(),
+                url: test_url,
+                lang: lang
+            }
+            thisUser.online_test_done = false;
+            thisUser.save(cb);
+        });
     }
 }
 
@@ -118,10 +132,8 @@ userSchema.methods.isOnlineTestDone = function () {
     return this.online_test && this.online_test_done;
 }
 
-userSchema.methods.stopOnlineTest = function (testData, cb) {
-    if(!testData) throw new Error('BAD THING');
+userSchema.methods.stopOnlineTest = function (cb) {
     this.online_test_done = true;
-    //TODO send data to CentralTest
     this.save(cb);
 }
 
@@ -205,13 +217,18 @@ var create = function(data, callback){
             }
         });
         u.password = userTools.generateHashedPassword(u, data.password);
+
         userTools.generateUniqueUserID(u, function(id){
             u.personnal_id = id;
-            u.save(function(err){
-                if(err) return callback(new utils.DatabaseError('User',err));
-                //TO DO
-                //send email
-                callback(null, u);
+            CT.candidate.add(u, function (err, CT_result) {
+                if (err) return callback(err);
+                u.CentralTest = CT_result;
+                u.save(function(err){
+                    if(err) return callback(new utils.DatabaseError('User',err));
+                    //TO DO
+                    //send email
+                    callback(null, u);
+                });
             });
         });        
     });

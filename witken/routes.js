@@ -42,13 +42,21 @@ var profile = {};
 
 profile.online_test = function (req, res) {
     var user = req.user;
+    var params = generateParams(req);
 
     if(user){
         if(user.isOnlineTestDone()){
             return res.redirect('/profile');
         }else{
-            user.startOnlineTest(function(){
-                res.render('profile/online_test.html', generateParams(req));
+            user.startOnlineTest(params.lang, function(err, u){
+                params.testUrl = 'None';
+                if (err) params.err = err;
+                else {
+                    if (!u.online_test.url) params.err = 'No invitation was sent, please contact us.'
+                    else params.testUrl = u.online_test.url;
+                }
+
+                res.render('profile/online_test.html', params);
             });            
         }
     }else{
@@ -135,20 +143,36 @@ examen.confirm = function (req, res) {
 var api = {};
 //POST
 api.online_test = function (req, res) {
-    var testData = req.body.testData;
+    var status = req.body.status;
     var user = req.user;
 
     if (user) {        
         if(user.isOnlineTestDone()){
             res.redirect('/profile');
-        }else if(!testData){
-            return res.send(new utils.ServerError('No test data received'));            
-        }else{
-            user.stopOnlineTest(testData, function(){
+        }else if(!status){
+            return res.send(new utils.ServerError('No status received'));            
+        }else if(status === 'done'){
+            user.stopOnlineTest(function(){
                 return res.send({redirect: {path: '/profile'}});
-            });
-            
+            });            
+        }else {
+            // TODO
         }
+    } else {
+        return res.send(new utils.ServerError('Access denied'));
+    }
+}
+
+//GET
+api.changeOnlineExamSts = function (req, res) {
+    console.log('TESTING STUFFF!!!');
+    var user = req.user;
+    if (user) {
+        user.online_test_done = false;
+        user.save(function(err, u){
+            if(err) return res.send(new utils.DatabaseError('User', err));
+            return res.redirect('/online_test');
+        });        
     } else {
         return res.send(new utils.ServerError('Access denied'));
     }
