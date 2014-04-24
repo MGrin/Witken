@@ -29,13 +29,13 @@ var userTools = {
         return crypto.createHash('sha1').update(us.password_sel + pwd + us.email).digest('base64');
     },
 
-    generateUniqueUserID: function(us) {
+    generateUniqueUserID: function(us, cb) {
         var generate = function () {
             var id = Math.round(Math.random()*1000000);
             User.find({personnal_id: id}, function(err, users){
                 if(err) return new utils.ServerError('Failed to verify uniqueness of new userID: '+err);
                 if(users && users.length > 0) return generate();
-                return id;
+                return cb(id);
             });
         }
 
@@ -60,7 +60,7 @@ var userSchema = mongoose.Schema({
         type: Number,
         default: -1
     },
-    
+
     human_data: {
         prefix: String,
         first_name: String,
@@ -157,7 +157,7 @@ userSchema.methods.generatePublicObject = function() {
         human_data: this.human_data,
         state: state,
         examen: this.examen,
-        personnal_id: this._id
+        personnal_id: this.personnal_id
     }
 }
 
@@ -178,7 +178,7 @@ var checkParams = function (data, cb) {
 var create = function(data, callback){
     checkParams(data, function(err){
         if(err) return callback(err);
-        console.log(data);
+
         var birthdaySplit = data.birthday.split('/');
         var birthdayDate = new Date(birthdaySplit[2], birthdaySplit[1]-1, birthdaySplit[0]);
         var u = new User({
@@ -205,13 +205,15 @@ var create = function(data, callback){
             }
         });
         u.password = userTools.generateHashedPassword(u, data.password);
-        u.personnal_id = userTools.generateUniqueUserID(u);
-        u.save(function(err){
-            if(err) return callback(new utils.DatabaseError('User',err));
-            //TO DO
-            //send email
-            callback(null, u);
-        });
+        userTools.generateUniqueUserID(u, function(id){
+            u.personnal_id = id;
+            u.save(function(err){
+                if(err) return callback(new utils.DatabaseError('User',err));
+                //TO DO
+                //send email
+                callback(null, u);
+            });
+        });        
     });
 }
 
