@@ -107,7 +107,7 @@ var prof_data = {
     prof_data_enterprise: "Enterprise",
     prof_data_region: "Region",
     prof_data_start_time: "De",
-    prof_data_end_time: "A",
+    prof_data_end_time: "À",
     prof_data_studies: "Formation",
     prof_data_material: "Matiere",
     prof_data_diplome: "Diplôme",

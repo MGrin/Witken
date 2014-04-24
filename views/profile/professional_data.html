@@ -212,24 +212,48 @@
 			addExperienceLevel(++experience_nb);
             updateClickIcon(function(){
                 experience_nb--;
+                var divs = $('.experience-wrapper').children("div");
+                var h3 = $('.experience-wrapper').find("h3");
+                for(var i = 1; i < divs.length; i++){
+                    $(h3[i]).html(i + 1 + '*');
+                    $(divs[i]).attr("id","level-" + (i + 1));
+                }
             });
 		});
 		$('#studies > .addRow').click(function(){
 			addStudiesLevel(++studies_nb);
             updateClickIcon(function(){
                 studies_nb--;
+                var divs = $('.studies-wrapper').children("div");
+                var h3 = $('.studies-wrapper').find("h3");
+                for(var i = 1; i < divs.length; i++){
+                    $(h3[i]).html(i + 1 + '*');
+                    $(divs[i]).attr("id","level-" + (i + 1));
+                }
             });
 		});
 		$('#language > .addRow').click(function(){
 			addLanguagesLevel(++languages_nb);
             updateClickIcon(function(){
                 languages_nb--;
+                var divs = $('.language-wrapper').children("div");
+                var h3 = $('.language-wrapper').find("h3");
+                for(var i = 1; i < divs.length; i++){
+                    $(h3[i]).html(i + 1 + '*');
+                    $(divs[i]).attr("id","level-" + (i + 1));
+                }
             });
 		});
 		$('#informatics > .addRow').click(function(){
 			addInformaticsLevel(++informatics_nb);
             updateClickIcon(function(){
                 informatics_nb--;
+                var divs = $('.informatics-wrapper').children("div");
+                var h3 = $('.informatics-wrapper').find("h3");
+                for(var i = 1; i < divs.length; i++){
+                    $(h3[i]).html(i + 1 + '*');
+                    $(divs[i]).attr("id","level-" + (i + 1));
+                }
             });
 		});
 
