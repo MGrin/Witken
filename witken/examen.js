@@ -150,7 +150,15 @@ var updateExamsInDB = function (cb) {
     eventbrite.getEventsList(function (err, events) {
         if(err && cb) return cb(err);
         for(var i = 0; i < events.length; i ++ ){
-            extractFromEventbrite(events[i], function(){});
+            var eb_exam = events[i];
+
+            Examen.find({eb_id: eb_exam.id}).exec(function (err, exas) {
+                if(err) return new utils.DatabaseError('Examen', err);
+
+                if(!exas || exas.length === 0) {
+                    extractFromEventbrite(eb_exam, function(){});
+                }
+            });            
         }
         if(cb) cb();
     });
