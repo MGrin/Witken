@@ -59,7 +59,8 @@ var userSchema = mongoose.Schema({
     personnal_id: {
         type: Number,
         default: -1
-    }
+    },
+    
     human_data: {
         prefix: String,
         first_name: String,
