@@ -23,6 +23,8 @@ var init = function(_eventbrite, _utils, _user, _db, error_callback, success_cal
     db.on('error', error_callback);
     db.once('open', success_callback);
 
+    setInterval(updateExamsInDB, 1000*60*60*6);
+    updateExamsInDB();
 }
 
 var examenSchema = mongoose.Schema({
@@ -144,12 +146,16 @@ var extractFromEventbrite = function(eb_exam, callback) {
     });
 }
 
-var confirm = function (eid, oid, cb) {
-
+var updateExamsInDB = function (cb) {
+    eventbrite.getEventsList(function (err, events) {
+        if(err && cb) return cb(err);
+        for(var i = 0; i < events.length; i ++ ){
+            extractFromEventbrite(events[i], function(){});
+        }
+        if(cb) cb();
+    });
 }
-
 exports.init = init;
 exports.getValidExamensList = getValidExamensList;
 exports.Examen = Examen;
 exports.extractFromEventbrite = extractFromEventbrite;
-exports.confirm = confirm;
