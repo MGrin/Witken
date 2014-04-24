@@ -5,7 +5,7 @@ var ClientError = function (field, message) {
         this.field = field;
         this.message = message;
     }else{
-        this = message;
+        this.message = message;
     }
     console.log('Client error in '+field+' field: '+JSON.stringify(message));
 }
@@ -16,7 +16,7 @@ var ServerError = function (message) {
         this._type = 'server';
         this.message = message;
     }else{
-        this = message;
+        this.message = message;
     }
     console.log('Server error: '+JSON.stringify(message));
 }
@@ -28,7 +28,7 @@ var DatabaseError = function (database, error) {
         this.database = database;
         this.message = error;
     }else{
-        this = error;
+        this.message = error;
     }
     console.log('Database error in '+database+': '+JSON.stringify(error));
 }

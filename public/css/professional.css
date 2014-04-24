@@ -1,0 +1,8 @@
+.professional-wrapper{
+    padding: 20px 50px;
+}
+
+.fixed-height {
+    max-height: 200px;
+    overflow: auto;
+}

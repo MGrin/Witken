@@ -31,6 +31,11 @@ function selectArray(key){
     return selects_fr[key];
 }
 
+function selectFirstItem(key){
+
+    return selects_fr[key][0];
+}
+
 var selects_fr = {
 	'.js-select-sector': [
 		"Administration publique",

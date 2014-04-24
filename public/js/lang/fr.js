@@ -99,7 +99,7 @@ var profile = {
 var prof_data = {
     prof_data_sector: "Secteur",
     prof_data_post: "Poste",
-    prof_data_hierarchie_level: "Niveau d'hierarchie",
+    prof_data_hierarchie_level: "Niveau hiérarchique",
     prof_data_experience_age: "Annee(s) d'experience",
     prof_data_experience_prof: "Experience profesionnel",
     prof_data_enterprise: "Enterprise",
