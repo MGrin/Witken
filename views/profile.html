@@ -37,79 +37,70 @@
                         State can be 0,1,2,3,4 or 5. You can find details below.
                         Each of this fields can be accessed like {{= user.email}} -->
                         <div id="profile-examen" class="profile-content">
-                            {{-include profile/exam-ads.html}}
                             {{if(user.state === 0){ }}
-                            {{-include profile/no-content.html}}
-                            <!-- User did never start the online test, we should never be here!! -->
+                            	<!-- User did never start the online test, we should never be here!! -->
+                            	{{-include profile/no-content.html}}
                             {{ }else if(user.state === 1){ }}
-                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            	<!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            	{{-include profile/exam-link-online-test.html}}
+                            	<!-- TODO -->
                             {{ }else if(user.state === 2){ }}
-                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            	<!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            	{{-include profile/exam-ads.html}}
                             {{ }else if(user.state === 3){ }}
-
-                            <!-- User is registered for the examen -->
-                            {{ }else if(user.state === 4){ }}
-                            {{-include profile/exam-passed.html}}
-                            <!-- The examen already passed, but no results for the moment. -->
+	                            <!-- User is registered for the examen -->                            
+	                            {{-include profile/exam-confirmed.html}}
+                            {{ }else if(user.state === 4){ }}                            
+	                            <!-- The examen already passed, but no results for the moment. -->                            
+	                            {{-include profile/exam-passed.html}}
                             {{ }else if(user.state === 5){ }}
-                            {{-include profile/exam-confirmed.html}}
-                            <!-- Results of the exam are aviable -->
+                            	<!-- Results of the exam are aviable -->
+                            	<!-- TODO -->
                             {{ } }}
                         </div>
                         <div id="profile-label_and_certificats" class="profile-content hide">
-                            {{-include profile/result-exam-display.html}}
                             {{if(user.state === 0){ }}
-                            {{-include profile/no-content.html}}
-                            <!-- User did never start the online test, we should never be here!! -->
+                            	<!-- User did never start the online test, we should never be here!! -->
+                            	{{-include profile/no-content.html}}
                             {{ }else if(user.state === 1){ }}
-                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            	<!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            	<!-- TODO -->
                             {{ }else if(user.state === 2){ }}
-                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            	<!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            	<!-- TODO -->
                             {{ }else if(user.state === 3){ }}
-                            <!-- User is registered for the examen -->
+                            	<!-- User is registered for the examen -->
+                            	{{-include profile/result-exam-display.html}}
                             {{ }else if(user.state === 4){ }}
-                            {{-include profile/result-exam-confirmed.html}}
-                            <!-- The examen already passed, but no results for the moment. -->
+                            	<!-- The examen already passed, but no results for the moment. -->
+                            	{{-include profile/result-exam-confirmed.html}}                            
                             {{ }else if(user.state === 5){ }}
-                            <!-- Results of teh exam are aviable -->
+                            	<!-- Results of the exam are aviable -->
+                            	<!-- TODO -->
                             {{ } }}
                         </div>
                         <div id="profile-indexation" class="profile-content hide">
                             {{-include profile/indexation-show-profile.html}}
                         </div>
                         <div id="profile-messages" class="profile-content hide">
-                            {{-include profile/messages-exist.html}}
                             {{if(user.state === 0){ }}
-                            <!-- User did never start the online test, we should never be here!! -->
+                            	<!-- User did never start the online test, we should never be here!! -->
                                 {{-include profile/no-content.html}}
                             {{ }else if(user.state === 1){ }}
-                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
+                            	<!-- User started the online test, but not finished it, here we can have a link to test? -->
                             {{ }else if(user.state === 2){ }}
-                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
+                            	<!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
                             {{ }else if(user.state === 3){ }}
-                            <!-- User is registered for the examen -->
+                            	<!-- User is registered for the examen -->
                             {{ }else if(user.state === 4){ }}
-                            <!-- The examen already passed, but no results for the moment. -->
+                            	<!-- The examen already passed, but no results for the moment. -->
                             {{ }else if(user.state === 5){ }}
-                            <!-- Results of teh exam are aviable -->
+                            	<!-- Results of teh exam are aviable -->
+                            	{{-include profile/messages-exist.html}}
                             {{ } }}
                         </div>
                         <div id="profile-compte" class="profile-content hide">
                             {{-include profile/contact-form.html}}
-                            {{if(user.state === 0){ }}
-                            <!-- User did never start the online test, we should never be here!! -->
-                                {{-include profile/no-content.html}}
-                            {{ }else if(user.state === 1){ }}
-                            <!-- User started the online test, but not finished it, here we can have a link to test? -->
-                            {{ }else if(user.state === 2){ }}
-                            <!-- User finished the online test, but did not registered for examen. Before it, user should fill the professionnal data form  -->
-                            {{ }else if(user.state === 3){ }}
-                            <!-- User is registered for the examen -->
-                            {{ }else if(user.state === 4){ }}
-                            <!-- The examen already passed, but no results for the moment. -->
-                            {{ }else if(user.state === 5){ }}
-                            <!-- Results of teh exam are aviable -->
-                            {{ } }}
                         </div>
                     </div>
                     <div id="profile-menu" class="silver_dark_bg white_text">
@@ -148,6 +139,7 @@
 			document.location.href = document.location.origin + '/logout' + '?lang=' + current_lang;
 			});
 			bindOnClickEventForContentClass('.js_redirect_professional_data', '/profile/prof_data');
+			bindOnClickEventForContentClass('.js-online-test', '/online_test');
 			if ($(window).width() >= normal_screen) {
 				$('#profile-menu').css('left', 10);
 				$('.profile').css('left', 10);
@@ -196,14 +188,6 @@
 			showProfilePage(currentPage);
 			bindOnClickEventForMenuItems();
 			setupDownloadsLinks();
-			{{ if(user.examen) { }}
-				var params = {
-					exam_id: {{= user.examen.eb_id}}
-				};
-				$.get('/api/exam_sts', params, function (data) {
-					$('#exam_status').html('<span class="font-HelveticaNeueThin">Status : </span>' + (data.status ? 'Confirme' : 'Pas confirme'));
-				});
-			{{ } }}
 		};
 	
 		function setupDownloadsLinks() {
