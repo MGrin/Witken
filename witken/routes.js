@@ -24,6 +24,9 @@ function generateParams(req) {
         par.user = req.user.generatePublicObject();
     }
 
+    // debug mode
+    par.debug_mode = process.env.DEBUG;
+
     return par;
 }
 
