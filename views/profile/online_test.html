@@ -6,25 +6,39 @@
 		{{- include ../header.html}}
 		<div id="central">
             <div class="card grey_dark_bg card-wrapper">
-                <h1>Online test from central test should be here =(</h1>
-                <button class="btn btn-default" id="online_test_submit_btn">Continue</button>
+                {{ if(err!='None'){ }}
+                	<div class="alert alert-danger">
+        				<p>Error: {{=err.message}}</p>
+    				</div>
+    			{{ } else if(testUrl!='None'){ }}
+    				<iframe src="{{=testUrl}}" style="width: 100%; height: 100%"></iframe>
+    				<!-- This button is just for tests!!! -->
+    				<button class="btn btn-default" style="margin-left: 200px; margin-top: 20px;" id="online_test_submit_btn">Manually set online test status to "Done". only for testing! You could change it in your profile</button>
+    			{{ } else { }}
+    				<div class="alert alert-danger">
+        				<p>That is bad. No testURL, no Error... Kind of very bad</p>
+    				</div>
+    			{{ } }}
             </div>
         </div>
 		{{- include ../footer.html }}
 	</body>
 	{{- include ../scripts.html}}
 	<script>
-		var onDataLoaded = function () {
-			$('#online_test_submit_btn').click(submitOnlineTestResults);
-		}
-		var submitOnlineTestResults = function () {
-			$.post('/online_test', {testData: 'Some test data here...'}, function (data) {
+		// TODO bind an event on an iframe button!!!
+		// When I did not finish the test (clicked on the CentralTest submit button before answered all question)
+		// iFrame is redirected to a page, where you have #document > html > head > title === 'Central Test'
+
+		// Whe I finished the test and clicked to a button submit, the #document > html > head > title === the string that was here before the button click
+
+		$('#online_test_submit_btn').click(function(){
+			$.post('/online_test', {status: 'done'}, function (data) {
 				if(data.content && data.content === 'Error'){
 					alert(data.message);
 				}else if(data.redirect){
 					document.location.href = document.location.origin + data.redirect.path + '?lang=' + current_lang;
 				}
-			});
-		}
+			})
+		});
 	</script>
 </html>
