@@ -25,7 +25,7 @@ function generateParams(req) {
     }
 
     // debug mode
-    par.debug_mode = process.env.DEBUG;
+    par.debug_mode = process.env.DEBUG?true:false;
 
     return par;
 }
