@@ -1,0 +1,73 @@
+.top_block, .contact_block{
+    text-align: center;
+}
+
+.image_text_card{
+    margin-top: 6em;
+    height: 480px;
+}
+
+.image_text_card h1{
+    font-size: 34px;
+}
+
+.image_side_card{
+    position: relative;
+    top: 2.5em;
+    float: left;
+    height: inherit;
+}
+
+.text_side_card{
+    position: absolute;
+    z-index: 10;
+    padding: 20px;
+    left: 50%;
+    height: 460px;
+    width: 550px;
+    background-color: #FFFFFF;
+}
+
+.text_side_card h1, .text_side_card h4{
+    line-height: 130%;
+}
+
+.text_side_card h4{
+    margin-bottom: 30px;
+}
+
+.bottom_block{
+    margin-top: 8em;
+    width: 100%;
+}
+
+.contact_block{
+    position: relative;
+    float: left;
+    left: 10px;
+}
+
+.contact_yellow{
+    position: relative;
+    top: 10%;
+    float: right;
+    border-radius: 2px;
+    padding: 7px 10px;
+    margin-top: 1.5em;
+    right: 10px;
+}
+
+.contact_yellow img{
+    position: relative;
+    float: left;
+    top: 6px;
+}
+
+.contact_yellow div{
+    position: relative;
+    font-family: HelveticaNeueThin;
+    color: #FFFFFF;
+    text-align: left;
+    left: 14px;
+    padding-right: 20px;
+}
