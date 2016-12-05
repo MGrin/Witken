@@ -15,13 +15,13 @@ var invitation = process.env.APP_COV ? require(__dirname + '/cov/invitations.js'
 
 var CT = require(__dirname + '/CentralTest/CentralTest.js');
 
-var USER_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
-var EXAMEN_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
-var INVITATION_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
-var LABEL_DB = 'mongodb://witkenDB:witkenDB2013WitKen@ds031319.mongolab.com:31319/witken';
+var USER_DB;
+var EXAMEN_DB';
+var INVITATION_DB';
+var LABEL_DB';
 
-var EVENTBRITE_ORGANIZATION = "MGSDD";
-var EVENTBRITE_ORGANIZATION_ID = 5669656715;
+var EVENTBRITE_ORGANIZATION;
+var EVENTBRITE_ORGANIZATION_ID;
 
 email.init();
 invitation.init(utils, user, email, INVITATION_DB, function error(err) {
